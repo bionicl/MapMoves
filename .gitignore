@@ -19,3 +19,11 @@
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
+
+Assets/JsonDotNet/
+
+Assets/JsonDotNet\.meta
+
+Assets/Resources/
+
+Assets/Resources\.meta
