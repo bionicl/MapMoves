@@ -12,24 +12,28 @@ public class ActivityUI : MonoBehaviour {
 	public Text Header;
 	public Text Subheader;
 	public Color[] activitesColor;
+	public Text endTimeText;
+	public int[] moveHeights = {30, 40, 60};
+	public int[] placeHeights = {60, 70, 80};
 
 	public ActivityType? type;
-	public int distance;
+	public double distance;
 	public float time;
 	public string placename;
+	public DateTime endTime;
 
-	public void Setup(ActivityType? type, int distance, float time, string placename = null) {
+	public void Setup(ActivityType? type, double distance, float time, DateTime endTime, string placename = null) {
 		this.type = type;
 		this.distance = distance;
 		this.time = time;
 		this.placename = placename;
+		this.endTime = endTime;
 
 		TimeSpan t = TimeSpan.FromSeconds(this.time);
 		SetSize(t);
-			
+		endTimeText.text = string.Format("{0}:{1}", this.endTime.Hour.ToString().PadLeft(2, '0'), this.endTime.Minute.ToString().PadLeft(2, '0'));
+
 		string timeShort = string.Format("{0}min ", t.Minutes);
-
-
 		if (type == null) {
 			place.SetActive(true);
 			move.gameObject.SetActive(false);
@@ -46,14 +50,14 @@ public class ActivityUI : MonoBehaviour {
 		}
 	}
 
-	public void AddToExisting(int distance, float time) {
-		Debug.Log("Distance before: " + this.distance);
+	public void AddToExisting(double distance, float time, DateTime endTime) {
 		this.distance += distance;
-		Debug.Log("Distance after: " + this.distance);
 		this.time += time;
+		this.endTime = endTime;
 
 		TimeSpan t = TimeSpan.FromSeconds(this.time);
 		SetSize(t);
+		endTimeText.text = string.Format("{0}:{1}", this.endTime.Hour.ToString().PadLeft(2, '0'), this.endTime.Minute.ToString().PadLeft(2, '0'));
 
 		string timeShort = string.Format("{0}min ", t.Minutes);
 		if (type == null) {
@@ -66,21 +70,16 @@ public class ActivityUI : MonoBehaviour {
 	}
 
 	void SetSize(TimeSpan t) {
-		if (this.type == null) {
-			if (t.Minutes < 10)
-				GetComponent<RectTransform>().sizeDelta = new Vector2(0, 60);
-			else if (t.Minutes < 30)
-				GetComponent<RectTransform>().sizeDelta = new Vector2(0, 70);
-			else
-				GetComponent<RectTransform>().sizeDelta = new Vector2(0, 80);
-		} else {
-			if (t.Minutes < 10)
-				GetComponent<RectTransform>().sizeDelta = new Vector2(0, 30);
-			else if (t.Minutes < 30)
-				GetComponent<RectTransform>().sizeDelta = new Vector2(0, 40);
-			else
-				GetComponent<RectTransform>().sizeDelta = new Vector2(0, 60);
-		}
+		int[] height = moveHeights;
+		if (this.type == null)
+			height = placeHeights;
+		
+		if (t.Minutes < 10)
+			GetComponent<RectTransform>().sizeDelta = new Vector2(0, height[0]);
+		else if (t.Minutes < 30)
+			GetComponent<RectTransform>().sizeDelta = new Vector2(0, height[1]);
+		else
+			GetComponent<RectTransform>().sizeDelta = new Vector2(0, height[2]);
 	}
 
 	public void DestroyActivity() {
