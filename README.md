@@ -8,10 +8,11 @@ Simple app to check Moves app history in Unity.
 4. Run the app
 
 ### Current features:
-- Display Moves story data
+- Display Moves story data with summary
 - Use right/left arrows to switch days
 
 ### Planned features:
+- Moves API integration
 - Calendar view to change day
 - Activity charts
 - Activity filters

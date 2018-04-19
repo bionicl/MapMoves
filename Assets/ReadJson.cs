@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum ActivityType {
 	walking,
@@ -85,25 +86,55 @@ public class ReadJson : MonoBehaviour {
 	[HideInInspector]
 	public List<ActivityUI> activitiesList;
 
+	public Text[] selectedDayDateText;
+	public Animator animator;
+	float startHoldingTime;
+
 	public Dictionary<DateTime, MovesJson> days = new Dictionary<DateTime, MovesJson>();
 	public DateTime selectedDay;
+	public DateTime? firstDate;
+	public DateTime lastDate;
 
 	void Awake() {
 		instance = this;
 	}
-
 	void Start() {
 		LoadFiles();
 		CheckIfCanDraw();
 	}
 
-	private void Update() {
-		if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-			selectedDay = selectedDay.Subtract(new TimeSpan(1, 0, 0, 0));
-			CheckIfCanDraw();
-		} else if (Input.GetKeyDown(KeyCode.RightArrow)) {
-			selectedDay = selectedDay.AddDays(1);
-			CheckIfCanDraw();
+	void Update() {
+		CheckArrows();
+	}
+
+	// KeySwitching
+	void CheckArrows() {
+		if (Input.GetKey(KeyCode.LeftArrow)) {
+			if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+				startHoldingTime = Time.timeSinceLevelLoad;
+				selectedDay = selectedDay.AddDays(-1);
+				CheckIfCanDraw(false);
+			}
+			if (Time.timeSinceLevelLoad - startHoldingTime >= 4f) {
+				selectedDay = selectedDay.AddDays(-2);
+				CheckIfCanDraw(false);
+			} else if (Time.timeSinceLevelLoad - startHoldingTime >= 0.5f) {
+				selectedDay = selectedDay.AddDays(-1);
+				CheckIfCanDraw(false);
+			}
+		} else if (Input.GetKey(KeyCode.RightArrow)) {
+			if (Input.GetKeyDown(KeyCode.RightArrow)) {
+				startHoldingTime = Time.timeSinceLevelLoad;
+				selectedDay = selectedDay.AddDays(1);
+				CheckIfCanDraw();
+			}
+			if (Time.timeSinceLevelLoad - startHoldingTime >= 4f) {
+				selectedDay = selectedDay.AddDays(2);
+				CheckIfCanDraw(false);
+			} else if (Time.timeSinceLevelLoad - startHoldingTime >= 0.5f) {
+				selectedDay = selectedDay.AddDays(1);
+				CheckIfCanDraw();
+			}
 		}
 	}
 
@@ -112,33 +143,59 @@ public class ReadJson : MonoBehaviour {
 		TextAsset jsonData = Resources.Load("storyline") as TextAsset;
 		string text = "{ day: " + jsonData.text + "}";
 		FullStoryLine m = JsonConvert.DeserializeObject<FullStoryLine>(text);
-		Debug.Log("OK2");
 		foreach (var item in m.day) {
-			Debug.Log("Loaded day " + item.date);
 			DateTime timelineDay = ReturnSimpleDate(item.date);
 			MovesJson temp = new MovesJson();
 			if (!days.TryGetValue(timelineDay, out temp)) {
 				days.Add(timelineDay, item);
 				selectedDay = timelineDay;
+				if (firstDate == null)
+					firstDate = timelineDay;
+				lastDate = timelineDay;
 			}
+			PlacesRanking.instance.AnalyseDay(item);
 		}
+		PlacesRanking.instance.SortAndDisplay();
 	}
 
 	// Drawing Timeline
-	void CheckIfCanDraw() {
-		MovesJson timeline = new MovesJson();
-		bool loaded = days.TryGetValue(selectedDay, out timeline);
-		if (loaded) {
-			foreach (Transform child in historySpawn.gameObject.transform) {
-				Destroy(child.gameObject);
+	void CheckIfCanDraw(bool rightDirection = true) {
+		StopAllCoroutines();
+		bool loaded = false;
+		while (loaded == false) {
+			MovesJson timeline = new MovesJson();
+			loaded = days.TryGetValue(selectedDay, out timeline);
+			if (loaded) {
+				foreach (Transform child in historySpawn.gameObject.transform) {
+					if (child.gameObject.GetComponent<ActivityUI>() != null)
+						Destroy(child.gameObject);
+				}
+				activitiesList.Clear();
+				DrawTimeline(timeline);
+			} else {
+				if (selectedDay == lastDate.AddDays(1))
+					selectedDay = selectedDay.AddDays(-1);
+				else if (selectedDay == firstDate.Value.AddDays(-1))
+					selectedDay = selectedDay.AddDays(1);
+				else {
+					if (rightDirection) {
+						selectedDay = selectedDay.AddDays(1);
+					} else {
+						selectedDay = selectedDay.AddDays(-1);
+					}
+				}
 			}
-			activitiesList.Clear();
-			DrawTimeline(timeline);
-		} else {
-			Debug.Log("Can't find day!");
 		}
 	}
 	void DrawTimeline(MovesJson m) {
+		animator.SetTrigger("Refresh");
+		foreach (var item in selectedDayDateText) {
+			item.text = ReturnSimpleDate(m.date).ToString("dd MMMMM yyyy");
+		}
+		StartCoroutine(RenderAfterTime(m));
+	}
+	IEnumerator RenderAfterTime(MovesJson m) {
+		yield return new WaitForSeconds(0.3f);
 		foreach (var item in m.segments) {
 			if (item.place == null) {
 				for (int i = 0; i < item.activities.Length; i++) {
@@ -197,5 +254,4 @@ public class ReadJson : MonoBehaviour {
 			Convert.ToInt32(date.Substring(4, 2)),
 			Convert.ToInt32(date.Substring(6, 2)));
 	}
-
 }
