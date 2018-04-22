@@ -566,7 +566,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 799098763}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -73.72098, y: 0, z: 0}
+  m_LocalPosition: {x: -94.02774, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2127403382}
@@ -834,7 +834,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1433522475}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 162.40752, y: -0.000015258789, z: 0}
+  m_LocalPosition: {x: 182.68375, y: -0.000015258789, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 637090571}
@@ -843,7 +843,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 162.40752, y: -0.000015070969}
+  m_AnchoredPosition: {x: 182.68375, y: -0.000015070969}
   m_SizeDelta: {x: 400, y: 200}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1433522477
@@ -954,7 +954,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1764345208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -193.37138, y: 0, z: 0}
+  m_LocalPosition: {x: -213.67815, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1371052591}
@@ -1176,6 +1176,7 @@ GameObject:
   - component: {fileID: 2127403379}
   - component: {fileID: 2127403383}
   - component: {fileID: 2127403384}
+  - component: {fileID: 2127403385}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1247,8 +1248,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2127403378}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 628, y: 555, z: 0}
-  m_LocalScale: {x: 2.0181818, y: 2.0181818, z: 2.0181818}
+  m_LocalPosition: {x: 628, y: 521, z: 0}
+  m_LocalScale: {x: 1.8945454, y: 1.8945454, z: 1.8945454}
   m_Children:
   - {fileID: 1764345209}
   - {fileID: 799098764}
@@ -1291,6 +1292,105 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d554274c60ce5499d9b762c36a20c782, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2127403385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2127403378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b2e831054f64be5a91407b8f604056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icons:
+  - name: Shopping & Retail
+    icon: {fileID: 21300000, guid: 3a935cad5d6bd4058b5f7cd4d6b14d58, type: 3}
+  - name: Train Station
+    icon: {fileID: 21300000, guid: 547b2f85338e540f99ff2f1977741de5, type: 3}
+  - name: Art School
+    icon: {fileID: 21300000, guid: 3f147c38f68cc40fe95b1ecf01d78155, type: 3}
+  - name: Media/News Company
+    icon: {fileID: 21300000, guid: 4f849d61980814ea391605ccac64a202, type: 3}
+  - name: City
+    icon: {fileID: 21300000, guid: 40ddbda4cd4024af892a0d26e894bcab, type: 3}
+  - name: Driving School
+    icon: {fileID: 21300000, guid: 3f147c38f68cc40fe95b1ecf01d78155, type: 3}
+  - name: Fast Food Restaurant
+    icon: {fileID: 21300000, guid: 668f47649a9e54b4bb65a95493cf5f45, type: 3}
+  - name: Performance Art Theatre
+    icon: {fileID: 21300000, guid: 7a6c6b144536b4a039b469898e6e20ae, type: 3}
+  - name: American Restaurant
+    icon: {fileID: 21300000, guid: fc8434647c04b482d8fe0e46c9596632, type: 3}
+  - name: Printing Service
+    icon: {fileID: 21300000, guid: 592f0e9e3b8364bd194fa768c49418c0, type: 3}
+  - name: Polish Restaurant
+    icon: {fileID: 21300000, guid: fc8434647c04b482d8fe0e46c9596632, type: 3}
+  - name: Park
+    icon: {fileID: 21300000, guid: 3af2d5083c8b24c9d91388a80ba83d2e, type: 3}
+  - name: Shopping Mall
+    icon: {fileID: 21300000, guid: 3a935cad5d6bd4058b5f7cd4d6b14d58, type: 3}
+  - name: Restaurant
+    icon: {fileID: 21300000, guid: fc8434647c04b482d8fe0e46c9596632, type: 3}
+  - name: Charter Bus Service
+    icon: {fileID: 21300000, guid: 547b2f85338e540f99ff2f1977741de5, type: 3}
+  - name: Movie Theater
+    icon: {fileID: 21300000, guid: 7a6c6b144536b4a039b469898e6e20ae, type: 3}
+  - name: Street
+    icon: {fileID: 21300000, guid: 40ddbda4cd4024af892a0d26e894bcab, type: 3}
+  - name: Apartment & Condo Building
+    icon: {fileID: 21300000, guid: 51c534ab448604a66a72d29aa562e744, type: 3}
+  - name: Chicken Joint
+    icon: {fileID: 21300000, guid: 668f47649a9e54b4bb65a95493cf5f45, type: 3}
+  - name: Food & Beverage Company
+    icon: {fileID: 21300000, guid: fc8434647c04b482d8fe0e46c9596632, type: 3}
+  - name: Kebab Shop
+    icon: {fileID: 21300000, guid: 668f47649a9e54b4bb65a95493cf5f45, type: 3}
+  - name: Public Service
+    icon: {fileID: 21300000, guid: 40ddbda4cd4024af892a0d26e894bcab, type: 3}
+  - name: Region
+    icon: {fileID: 21300000, guid: 40ddbda4cd4024af892a0d26e894bcab, type: 3}
+  - name: Library
+    icon: {fileID: 21300000, guid: 3f147c38f68cc40fe95b1ecf01d78155, type: 3}
+  - name: Clothing Store
+    icon: {fileID: 21300000, guid: 3a935cad5d6bd4058b5f7cd4d6b14d58, type: 3}
+  - name: Bus Station
+    icon: {fileID: 21300000, guid: 547b2f85338e540f99ff2f1977741de5, type: 3}
+  - name: Big Box Retailer
+    icon: {fileID: 21300000, guid: 3a935cad5d6bd4058b5f7cd4d6b14d58, type: 3}
+  - name: Sandwich Shop
+    icon: {fileID: 21300000, guid: 668f47649a9e54b4bb65a95493cf5f45, type: 3}
+  - name: College & University
+    icon: {fileID: 21300000, guid: 3f147c38f68cc40fe95b1ecf01d78155, type: 3}
+  - name: Transit Hub
+    icon: {fileID: 21300000, guid: 547b2f85338e540f99ff2f1977741de5, type: 3}
+  - name: Audio Visual Equipment Store
+    icon: {fileID: 21300000, guid: 3a935cad5d6bd4058b5f7cd4d6b14d58, type: 3}
+  - name: Professional Service
+    icon: {fileID: 21300000, guid: 51c534ab448604a66a72d29aa562e744, type: 3}
+  - name: Horse-Drawn Carriage Service
+    icon: {fileID: 21300000, guid: 547b2f85338e540f99ff2f1977741de5, type: 3}
+  - name: Transportation Service
+    icon: {fileID: 21300000, guid: 547b2f85338e540f99ff2f1977741de5, type: 3}
+  - name: Electronics Store
+    icon: {fileID: 21300000, guid: 3a935cad5d6bd4058b5f7cd4d6b14d58, type: 3}
+  - name: Railway Station
+    icon: {fileID: 21300000, guid: 547b2f85338e540f99ff2f1977741de5, type: 3}
+  - name: Hospital
+    icon: {fileID: 21300000, guid: bc4975afe26ef4e24819f9eee1d577c2, type: 3}
+  - name: Turkish Restaurant
+    icon: {fileID: 21300000, guid: fc8434647c04b482d8fe0e46c9596632, type: 3}
+  - name: Grocery Store
+    icon: {fileID: 21300000, guid: 3a935cad5d6bd4058b5f7cd4d6b14d58, type: 3}
+  - name: Public Square / Plaza
+    icon: {fileID: 21300000, guid: 40ddbda4cd4024af892a0d26e894bcab, type: 3}
+  - name: Bar
+    icon: {fileID: 21300000, guid: fc8434647c04b482d8fe0e46c9596632, type: 3}
+  - name: Vegetarian/Vegan Restaurant
+    icon: {fileID: 21300000, guid: fc8434647c04b482d8fe0e46c9596632, type: 3}
+  - name: Airport
+    icon: {fileID: 21300000, guid: 2b3335b6f5b724d129af6b3a465e8909, type: 3}
+  fbAccessToken: 
 --- !u!1 &2145530774
 GameObject:
   m_ObjectHideFlags: 0

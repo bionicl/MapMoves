@@ -10,11 +10,12 @@ Simple app to check Moves app history in Unity.
 ### Current features:
 - Display Moves story data with summary
 - Use right/left arrows to switch days
+- Activity charts
 
 ### Planned features:
+- Places icons from FacebookAPI
 - Moves API integration
 - Calendar view to change day
-- Activity charts
 - Activity filters
 - Favourite/Top visited places
 - **Map with route points**

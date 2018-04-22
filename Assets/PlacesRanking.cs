@@ -33,7 +33,7 @@ public class PlacesRanking : MonoBehaviour {
 	public void SortAndDisplay() {
 		placesRanking = placesRanking.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 		foreach (KeyValuePair<long, int> item in placesRanking) {
-			Debug.Log(places[item.Key].name + "(" + places[item.Key].type +") - " + placesRanking[item.Key]);
+			//Debug.Log(places[item.Key].name + "(" + places[item.Key].type +") - " + placesRanking[item.Key]);
 		}
 	}
 }

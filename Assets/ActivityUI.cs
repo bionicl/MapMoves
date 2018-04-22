@@ -27,6 +27,7 @@ public class ActivityUI : MonoBehaviour {
 	public string placename;
 	public DateTime endTime;
 	public PlaceType? placeType;
+	public string placeFbId;
 
 	string[] activityTypeText = {
 		"Walk",
@@ -44,13 +45,17 @@ public class ActivityUI : MonoBehaviour {
 
 	public Sprite[] icons; 
 
-	public void Setup(ActivityType? type, double distance, float time, DateTime endTime, string placename = null, PlaceType? placeType = null) {
+	public void Setup(ActivityType? type, double distance, float time, DateTime endTime, MovesJson.SegmentsInfo.PlaceInfo placeInfo) {
 		this.type = type;
 		this.distance = distance;
 		this.time = time;
-		this.placename = placename;
-		this.endTime = endTime;
-		this.placeType = placeType;
+		if (placeInfo != null) {
+			this.placename = placeInfo.name;
+			this.endTime = endTime;
+			this.placeType = placeInfo.type;
+			if (placeType == PlaceType.facebook)
+				placeFbId = placeInfo.facebookPlaceId;
+		}
 
 		TimeSpan t = TimeSpan.FromSeconds(this.time);
 		SetSize(t);
@@ -74,6 +79,9 @@ public class ActivityUI : MonoBehaviour {
 				placeIcon.sprite = icons[2];
 			else
 				placeIcon.sprite = icons[1];
+			if (placeType == PlaceType.facebook) {
+				FacebookPlaces.instance.GetPlaceCategory(placeFbId, placeIcon);
+			}
 			
 		} else {
 			place.SetActive(false);

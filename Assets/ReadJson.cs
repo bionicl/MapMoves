@@ -240,18 +240,18 @@ public class ReadJson : MonoBehaviour {
 					foreach (var item2 in item.activities) {
 						distance += item2.distance;
 					}
-				SpawnActivity(null, distance, CalculateTime(item.startTime, item.endTime), ReturnDateTime(item.endTime), item.place.name, item.place.type);
+				SpawnActivity(null, distance, CalculateTime(item.startTime, item.endTime), ReturnDateTime(item.endTime), item.place);
 			}
 		}
 		ValidateIfNoReapeted();
 	}
-	void SpawnActivity(ActivityType? type, double distance, float time, DateTime endTime, string placeName = null, PlaceType? placeType = null) {
+	void SpawnActivity(ActivityType? type, double distance, float time, DateTime endTime, MovesJson.SegmentsInfo.PlaceInfo placeInfo = null) {
 		GameObject activity = Instantiate(activityPrefab, historySpawn.transform.position, historySpawn.transform.rotation);
 		RectTransform activityRect = activity.GetComponent<RectTransform>();
 		activity.transform.SetParent(historySpawn.transform);
 		activityRect.localScale = activityRect.lossyScale;
 		activitiesList.Add(activity.GetComponent<ActivityUI>());
-		activity.GetComponent<ActivityUI>().Setup(type, distance, time, endTime, placeName, placeType);
+		activity.GetComponent<ActivityUI>().Setup(type, distance, time, endTime, placeInfo);
 	}
 	void ValidateIfNoReapeted() {
 		for (int i = 0; i < activitiesList.Count - 1; i++) {
