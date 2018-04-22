@@ -154,8 +154,10 @@ public class ReadJson : MonoBehaviour {
 				lastDate = timelineDay;
 			}
 			PlacesRanking.instance.AnalyseDay(item);
+			ChartUI.instance.CheckMaxCalories(item);
 		}
 		PlacesRanking.instance.SortAndDisplay();
+		ChartUI.instance.SetupCharts();
 	}
 
 	// Drawing Timeline
