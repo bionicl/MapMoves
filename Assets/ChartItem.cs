@@ -4,20 +4,24 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ChartItem : MonoBehaviour {
+	public static ChartItem selectedChart;
 
 	int sum;
 	int walkingSum;
 	int cyclingSum;
 	int otherSum;
 
+	public Image background;
 	public RectTransform walking;
 	public RectTransform cycling;
 	public RectTransform other;
 
+	DayClass day;
 	MovesJson.SummaryInfo[] summary;
 
-	public void Setup (MovesJson.SummaryInfo[] summary) {
-		this.summary = summary;
+	public void Setup (DayClass day) {
+		this.day = day;
+		this.summary = day.day.summary;
 		AddSums();
 		SetHeight();
 	}
@@ -61,5 +65,20 @@ public class ChartItem : MonoBehaviour {
 			float heightOther = ChartUI.instance.heightPerCalorie * otherSum;
 			other.sizeDelta = new Vector2(20, heightOther + heightSum);
 		}
+	}
+
+	public void Select() {
+		if (selectedChart != null)
+			selectedChart.Deselect();
+		background.enabled = true;
+		selectedChart = this;
+	}
+
+	public void Deselect() {
+		background.enabled = false;
+	}
+
+	public void JumpToClickedChart() {
+		ReadJson.instance.ChangeDay(day.date);
 	}
 }

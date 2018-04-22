@@ -30,15 +30,22 @@ public class ChartUI : MonoBehaviour {
 		}
 	}
 
+	public void CheckChartSelected() {
+		DayClass selectedDay = new DayClass();
+		ReadJson.instance.days.TryGetValue(ReadJson.instance.selectedDay, out selectedDay);
+		selectedDay.chart.Select();
+	}
 	public void SetupCharts() {
 		heightPerCalorie = (float)barsHeight / (float)maxCalories;
 		foreach (var item in ReadJson.instance.days) {
-			if (item.Value.summary != null) {
+			if (item.Value.day.summary != null) {
 				GameObject chart = Instantiate(chartItemPrefab, transform.position, transform.rotation);
 				RectTransform rectT = chart.GetComponent<RectTransform>();
-				rectT.localScale = rectT.lossyScale;
 				chart.transform.SetParent(transform);
-				chart.GetComponent<ChartItem>().Setup(item.Value.summary);
+				rectT.localScale = rectT.lossyScale;
+				ChartItem chartItem = chart.GetComponent<ChartItem>();
+				chartItem.Setup(item.Value);
+				item.Value.chart = chartItem;
 			}
 		}
 	}

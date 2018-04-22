@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class ActivityUI : MonoBehaviour {
 
 	public GameObject place;
+	public Image placeIcon;
 	public Image move;
 	public Text Header;
 	public Text Subheader;
@@ -16,37 +17,74 @@ public class ActivityUI : MonoBehaviour {
 	public int[] moveHeights = {30, 40, 60};
 	public int[] placeHeights = {60, 70, 80};
 
+	public Text MoveType;
+	public Text MoveTime;
+	public Text MoveMinText;
+
 	public ActivityType? type;
 	public double distance;
 	public float time;
 	public string placename;
 	public DateTime endTime;
+	public PlaceType? placeType;
 
-	public void Setup(ActivityType? type, double distance, float time, DateTime endTime, string placename = null) {
+	string[] activityTypeText = {
+		"Walk",
+		"Transport",
+		"Cycling",
+		"Train",
+		"Dancing",
+		"Bus",
+		"Tram",
+		"Running",
+		"Car",
+		"Underground",
+		"Airplane"
+	};
+
+	public Sprite[] icons; 
+
+	public void Setup(ActivityType? type, double distance, float time, DateTime endTime, string placename = null, PlaceType? placeType = null) {
 		this.type = type;
 		this.distance = distance;
 		this.time = time;
 		this.placename = placename;
 		this.endTime = endTime;
+		this.placeType = placeType;
 
 		TimeSpan t = TimeSpan.FromSeconds(this.time);
 		SetSize(t);
 		endTimeText.text = string.Format("{0}:{1}", this.endTime.Hour.ToString().PadLeft(2, '0'), this.endTime.Minute.ToString().PadLeft(2, '0'));
 
-		string timeShort = string.Format("{0}min ", t.Minutes);
+		string timeShort = string.Format("{0}", t.Minutes);
 		if (type == null) {
 			place.SetActive(true);
 			move.gameObject.SetActive(false);
 			Header.text = placename;
-			Subheader.text = timeShort;
-			if (distance >= 100)
-				Subheader.text += distance.ToString() + "m";
+			Subheader.gameObject.SetActive(false);
+			//Subheader.text = timeShort;
+			MoveType.gameObject.SetActive(false);
+			MoveTime.gameObject.SetActive(false);
+			MoveMinText.gameObject.SetActive(false);
+			//if (distance >= 100)
+			//	Subheader.text += distance.ToString() + "m";
+			if (placeType == PlaceType.home)
+				placeIcon.sprite = icons[0];
+			else if (placeType == PlaceType.school)
+				placeIcon.sprite = icons[2];
+			else
+				placeIcon.sprite = icons[1];
+			
 		} else {
 			place.SetActive(false);
 			move.gameObject.SetActive(true);
 			move.color = activitesColor[(int)type];
-			Header.gameObject.SetActive(false);
 			Subheader.text = timeShort + distance.ToString() + "m";
+			Header.gameObject.SetActive(false);
+			Subheader.gameObject.SetActive(false);
+			MoveType.text = activityTypeText[(int)type.Value];
+			MoveType.color = activitesColor[(int)type];
+			MoveTime.text = timeShort;
 		}
 	}
 

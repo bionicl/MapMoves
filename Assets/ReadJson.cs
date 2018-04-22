@@ -19,6 +19,15 @@ public enum ActivityType {
 	airplane
 }
 
+public enum PlaceType {
+	school,
+	facebook,
+	home,
+	work,
+	user,
+	unknown
+}
+
 public class FullStoryLine {
 	public MovesJson[] day;
 }
@@ -59,7 +68,7 @@ public class MovesJson {
 			public long id;
 			public LocationInfo location;
 			public string name;
-			public string type;
+			public PlaceType type;
 			public string facebookPlaceId;
 		}
 
@@ -78,6 +87,23 @@ public class MovesJson {
 	public double caloriesIdle;
 }
 
+public class DayClass {
+	public DateTime date;
+	public MovesJson day;
+	public ChartItem chart;
+	public int dayNumber;
+
+	public DayClass(DateTime date, MovesJson day, int number) {
+		this.date = date;
+		this.day = day;
+		dayNumber = number;
+	}
+
+	public DayClass() {
+		
+	}
+}
+
 public class ReadJson : MonoBehaviour {
 	public static ReadJson instance;
 
@@ -90,7 +116,7 @@ public class ReadJson : MonoBehaviour {
 	public Animator animator;
 	float startHoldingTime;
 
-	public Dictionary<DateTime, MovesJson> days = new Dictionary<DateTime, MovesJson>();
+	public Dictionary<DateTime, DayClass> days = new Dictionary<DateTime, DayClass>();
 	public DateTime selectedDay;
 	public DateTime? firstDate;
 	public DateTime lastDate;
@@ -107,7 +133,7 @@ public class ReadJson : MonoBehaviour {
 		CheckArrows();
 	}
 
-	// KeySwitching
+	// SwitchingDays
 	void CheckArrows() {
 		if (Input.GetKey(KeyCode.LeftArrow)) {
 			if (Input.GetKeyDown(KeyCode.LeftArrow)) {
@@ -137,17 +163,21 @@ public class ReadJson : MonoBehaviour {
 			}
 		}
 	}
+	public void ChangeDay(DateTime day) {
+		selectedDay = day;
+		CheckIfCanDraw();
+	}
 
 	// Loading json files
 	void LoadFiles() {
 		TextAsset jsonData = Resources.Load("storyline") as TextAsset;
 		string text = "{ day: " + jsonData.text + "}";
 		FullStoryLine m = JsonConvert.DeserializeObject<FullStoryLine>(text);
+		int dayNumber = 0;
 		foreach (var item in m.day) {
 			DateTime timelineDay = ReturnSimpleDate(item.date);
-			MovesJson temp = new MovesJson();
-			if (!days.TryGetValue(timelineDay, out temp)) {
-				days.Add(timelineDay, item);
+			if (!days.ContainsKey(timelineDay) && item.summary != null) {
+				days.Add(timelineDay, new DayClass(timelineDay, item, dayNumber++));
 				selectedDay = timelineDay;
 				if (firstDate == null)
 					firstDate = timelineDay;
@@ -165,7 +195,7 @@ public class ReadJson : MonoBehaviour {
 		StopAllCoroutines();
 		bool loaded = false;
 		while (loaded == false) {
-			MovesJson timeline = new MovesJson();
+			DayClass timeline = new DayClass();
 			loaded = days.TryGetValue(selectedDay, out timeline);
 			if (loaded) {
 				foreach (Transform child in historySpawn.gameObject.transform) {
@@ -173,7 +203,7 @@ public class ReadJson : MonoBehaviour {
 						Destroy(child.gameObject);
 				}
 				activitiesList.Clear();
-				DrawTimeline(timeline);
+				DrawTimeline(timeline.day);
 			} else {
 				if (selectedDay == lastDate.AddDays(1))
 					selectedDay = selectedDay.AddDays(-1);
@@ -194,6 +224,7 @@ public class ReadJson : MonoBehaviour {
 		foreach (var item in selectedDayDateText) {
 			item.text = ReturnSimpleDate(m.date).ToString("dd MMMMM yyyy");
 		}
+		ChartUI.instance.CheckChartSelected();
 		StartCoroutine(RenderAfterTime(m));
 	}
 	IEnumerator RenderAfterTime(MovesJson m) {
@@ -209,18 +240,18 @@ public class ReadJson : MonoBehaviour {
 					foreach (var item2 in item.activities) {
 						distance += item2.distance;
 					}
-				SpawnActivity(null, distance, CalculateTime(item.startTime, item.endTime), ReturnDateTime(item.endTime), item.place.name);
+				SpawnActivity(null, distance, CalculateTime(item.startTime, item.endTime), ReturnDateTime(item.endTime), item.place.name, item.place.type);
 			}
 		}
 		ValidateIfNoReapeted();
 	}
-	void SpawnActivity(ActivityType? type, double distance, float time, DateTime endTime, string placeName = null) {
+	void SpawnActivity(ActivityType? type, double distance, float time, DateTime endTime, string placeName = null, PlaceType? placeType = null) {
 		GameObject activity = Instantiate(activityPrefab, historySpawn.transform.position, historySpawn.transform.rotation);
 		RectTransform activityRect = activity.GetComponent<RectTransform>();
 		activity.transform.SetParent(historySpawn.transform);
 		activityRect.localScale = activityRect.lossyScale;
 		activitiesList.Add(activity.GetComponent<ActivityUI>());
-		activity.GetComponent<ActivityUI>().Setup(type, distance, time, endTime, placeName);
+		activity.GetComponent<ActivityUI>().Setup(type, distance, time, endTime, placeName, placeType);
 	}
 	void ValidateIfNoReapeted() {
 		for (int i = 0; i < activitiesList.Count - 1; i++) {
