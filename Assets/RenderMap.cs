@@ -2,14 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum FilterTypes {
+	walking,
+	cycling,
+	running,
+	transport
+}
+
 public class RenderMap : MonoBehaviour {
 	public static RenderMap instance;
 
 	public GameObject LinePrefab;
 	public GameObject PlacePrefab;
 
+	List<GameObject>[] filterLines = new List<GameObject>[4];
+
 	void Awake() {
 		instance = this;
+		for (int i = 0; i < filterLines.Length; i++) {
+			filterLines[i] = new List<GameObject>();
+		}
 	}
 
 	public void RenderDay(MovesJson day) {
@@ -29,13 +41,23 @@ public class RenderMap : MonoBehaviour {
 						lineTempGo.transform.SetParent(gameObject.transform);
 						lineTempGo.name = item2.activity.ToString();
 						LineRenderer lineTemp = lineTempGo.GetComponent<LineRenderer>();
+
+						// Set Line points 
 						List<Vector3> positions = new List<Vector3>();
-						foreach (var item3 in item2.trackPoints) {
+						foreach (var item3 in item2.trackPoints)
 							positions.Add(new Vector3(item3.lon * 10, item3.lat * 10));
-						}
 						Vector3[] positionsArray = positions.ToArray();
 						lineTemp.positionCount = positionsArray.Length;
 						lineTemp.SetPositions(positions.ToArray());
+
+						// Set lines color
+						Material material = lineTempGo.GetComponent<Renderer>().material;
+						Color color = ReadJson.colors[(int)item2.activity];
+						color.a = 0.3f;
+						material.SetColor("_TintColor", color);
+
+						// Add line to filters
+						AddToFilterList(item2.activity, lineTempGo);
 					}
 				}
 			}
@@ -43,9 +65,26 @@ public class RenderMap : MonoBehaviour {
 		Debug.Log("RenderDay End");
 	}
 
+	void AddToFilterList(ActivityType activity, GameObject line) {
+		if (activity == ActivityType.walking)
+			filterLines[0].Add(line);
+		else if (activity == ActivityType.cycling)
+			filterLines[1].Add(line);
+		else if (activity == ActivityType.running)
+			filterLines[2].Add(line);
+		else
+			filterLines[3].Add(line);
+	}
+
 	void Clear() {
 		foreach (Transform child in gameObject.transform) {
 			Destroy(child.gameObject);
+		}
+	}
+
+	public void ChangeFilter(FilterTypes filterType, bool state) {
+		foreach (var item in filterLines[(int)filterType]) {
+			item.SetActive(state);
 		}
 	}
 }

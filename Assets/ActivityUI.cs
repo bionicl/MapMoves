@@ -12,7 +12,6 @@ public class ActivityUI : MonoBehaviour {
 	public Image move;
 	public Text Header;
 	public Text Subheader;
-	public Color[] activitesColor;
 	public Text endTimeText;
 	public int[] moveHeights = {30, 40, 60};
 	public int[] placeHeights = {60, 70, 80};
@@ -86,12 +85,12 @@ public class ActivityUI : MonoBehaviour {
 		} else {
 			place.SetActive(false);
 			move.gameObject.SetActive(true);
-			move.color = activitesColor[(int)type];
+			move.color = ReadJson.colors[(int)type];
 			Subheader.text = timeShort + distance.ToString() + "m";
 			Header.gameObject.SetActive(false);
 			Subheader.gameObject.SetActive(false);
 			MoveType.text = activityTypeText[(int)type.Value];
-			MoveType.color = activitesColor[(int)type];
+			MoveType.color = ReadJson.colors[(int)type];
 			MoveTime.text = timeShort;
 		}
 	}

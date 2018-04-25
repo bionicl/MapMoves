@@ -106,11 +106,13 @@ public class DayClass {
 
 public class ReadJson : MonoBehaviour {
 	public static ReadJson instance;
+	public static Color[] colors;
 
 	public RectTransform historySpawn;
 	public GameObject activityPrefab;
 	[HideInInspector]
 	public List<ActivityUI> activitiesList;
+	public Color[] activitesColor;
 
 	public Text[] selectedDayDateText;
 	public Animator animator;
@@ -123,6 +125,7 @@ public class ReadJson : MonoBehaviour {
 
 	void Awake() {
 		instance = this;
+		colors = activitesColor;
 	}
 	void Start() {
 		LoadFiles();
@@ -185,6 +188,7 @@ public class ReadJson : MonoBehaviour {
 			}
 			PlacesRanking.instance.AnalyseDay(item);
 			ChartUI.instance.CheckMaxCalories(item);
+			RenderMap.instance.RenderDay(item);
 		}
 		PlacesRanking.instance.SortAndDisplay();
 		ChartUI.instance.SetupCharts();
@@ -229,7 +233,6 @@ public class ReadJson : MonoBehaviour {
 	}
 	IEnumerator RenderAfterTime(MovesJson m) {
 		yield return new WaitForSeconds(0.3f);
-		RenderMap.instance.RenderDay(m);
 		foreach (var item in m.segments) {
 			if (item.place == null) {
 				for (int i = 0; i < item.activities.Length; i++) {
