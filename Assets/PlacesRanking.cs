@@ -7,7 +7,7 @@ public class PlaceGroup {
 	public Place mapObject;
 	public ActivityUI timelineObject;
 	public MovesJson.SegmentsInfo.PlaceInfo placeInfo;
-	public Sprite icon;
+	public int icon;
 	public int timesVisited;
 
 	public PlaceGroup() {
@@ -15,7 +15,7 @@ public class PlaceGroup {
 	}
 	public PlaceGroup (MovesJson.SegmentsInfo.PlaceInfo placeinfo) {
 		this.placeInfo = placeinfo;  
-		GlobalVariables.inst.SetIcon(placeinfo, (Sprite sprite) => RefreshIcons(sprite));
+		GlobalVariables.inst.SetIcon(placeinfo, (int sprite) => RefreshIcons(sprite));
 	}
 
 	public void AddMapObject(Place mapObject) {
@@ -41,21 +41,27 @@ public class PlaceGroup {
 		mapObjectPosition.z = multiply;
 		mapObject.transform.position = mapObjectPosition;
 	}
-	void RefreshIcons(Sprite sprite) {
+	public void RefreshIcons(int sprite) {
 		icon = sprite;
 		if (mapObject != null) {
-			mapObject.icon.sprite = icon;
+			mapObject.icon.sprite = FacebookPlaces.instance.iconsImages[icon];
 		}
 		if (timelineObject != null) {
-			timelineObject.placeIcon.sprite = icon;
+			timelineObject.placeIcon.sprite = FacebookPlaces.instance.iconsImages[icon];
 		}
 	}
 	void RefreshIcons() {
 		if (mapObject != null) {
-			mapObject.icon.sprite = icon;
+			mapObject.icon.sprite = FacebookPlaces.instance.iconsImages[icon];
 		}
 		if (timelineObject != null) {
-			timelineObject.placeIcon.sprite = icon;
+			timelineObject.placeIcon.sprite = FacebookPlaces.instance.iconsImages[icon];
+		}
+	}
+
+	public Sprite IconSprite {
+		get {
+			return FacebookPlaces.instance.iconsImages[icon];
 		}
 	}
 }
@@ -93,6 +99,15 @@ public class PlacesRanking : MonoBehaviour {
 		PlaceGroup thisPlace = new PlaceGroup();
 		if (places.TryGetValue(place.id, out thisPlace)) {
 			thisPlace.AddMapObject(mapObject);
+			return thisPlace;
+		} else
+			return null;
+	}
+
+	public PlaceGroup FindPlace(MovesJson.SegmentsInfo.PlaceInfo place, ActivityUI timelineObject) {
+		PlaceGroup thisPlace = new PlaceGroup();
+		if (places.TryGetValue(place.id, out thisPlace)) {
+			thisPlace.AddTimelineObject(timelineObject);
 			return thisPlace;
 		} else
 			return null;

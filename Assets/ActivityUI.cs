@@ -27,6 +27,7 @@ public class ActivityUI : MonoBehaviour {
 	public DateTime endTime;
 	public PlaceType? placeType;
 	public string placeFbId;
+	public PlaceGroup placeGroup;
 
 	string[] activityTypeText = {
 		"Walk",
@@ -47,6 +48,7 @@ public class ActivityUI : MonoBehaviour {
 		this.distance = distance;
 		this.time = time;
 		if (placeInfo != null) {
+			placeGroup = PlacesRanking.instance.FindPlace(placeInfo, this);
 			this.placename = placeInfo.name;
 			this.endTime = endTime;
 			this.placeType = placeInfo.type;
@@ -70,7 +72,7 @@ public class ActivityUI : MonoBehaviour {
 			MoveMinText.gameObject.SetActive(false);
 			//if (distance >= 100)
 			//	Subheader.text += distance.ToString() + "m";
-			GlobalVariables.inst.SetIcon(placeInfo, placeIcon);
+			placeIcon.sprite = placeGroup.IconSprite;
 		} else {
 			place.SetActive(false);
 			move.gameObject.SetActive(true);

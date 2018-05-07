@@ -15,25 +15,25 @@ public class GlobalVariables : MonoBehaviour {
 
 	Image targetImg;
 	public void SetIcon(MovesJson.SegmentsInfo.PlaceInfo place, SpriteRenderer image) {
-		LoadIcon(place, (Sprite sprite) => image.sprite = sprite);
+		LoadIcon(place, (int sprite) => image.sprite = FacebookPlaces.instance.iconsImages[sprite]);
 	}
 
 	public void SetIcon(MovesJson.SegmentsInfo.PlaceInfo place, Image image) {
-		LoadIcon(place, (Sprite sprite) => image.sprite = sprite);
+		LoadIcon(place, (int sprite) => image.sprite = FacebookPlaces.instance.iconsImages[sprite]);
 	}
 
-	public void SetIcon(MovesJson.SegmentsInfo.PlaceInfo place, Action<Sprite> action) {
-		LoadIcon(place, (Sprite sprite) => action.Invoke(sprite));
+	public void SetIcon(MovesJson.SegmentsInfo.PlaceInfo place, Action<int> action) {
+		LoadIcon(place, (int sprite) => action.Invoke(sprite));
 	}
 
-	void LoadIcon(MovesJson.SegmentsInfo.PlaceInfo place, Action<Sprite> action) {
+	void LoadIcon(MovesJson.SegmentsInfo.PlaceInfo place, Action<int> action) {
 		PlaceType placeType = place.type;
 		if (placeType == PlaceType.home)
-			action.Invoke(icons[0]);
+			action.Invoke(4);
 		else if (placeType == PlaceType.school)
-			action.Invoke(icons[2]);
+			action.Invoke(9);
 		else
-			action.Invoke(icons[1]);
+			action.Invoke(6);
 		if (placeType == PlaceType.facebook) {
 			FacebookPlaces.instance.GetPlaceCategory(place.facebookPlaceId, targetImg);
 		}

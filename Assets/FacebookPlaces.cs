@@ -18,14 +18,16 @@ public class FacebookApiResponse {
 [Serializable]
 public class SpecialIcons {
 	public string name;
-	public Sprite icon;
+	public int iconId;
 }
 
 public class FacebookPlaces : MonoBehaviour {
 	public static FacebookPlaces instance;
 
 	public SpecialIcons[] icons;
+	public Sprite[] iconsImages;
 	Dictionary<string, int> placesMemory = new Dictionary<string, int>();
+	Dictionary<string, int> customIcons = new Dictionary<string, int>();
 
 	// In future versions Facebook API login dialog will be implemented
 	public string fbAccessToken;
@@ -41,7 +43,7 @@ public class FacebookPlaces : MonoBehaviour {
 	IEnumerator GetText(string placeId, Image image) {
 		int number = 0;
 		if (placesMemory.TryGetValue(placeId, out number)) {
-			image.sprite = icons[number].icon;
+			image.sprite = iconsImages[icons[number].iconId];
 		} else {
 			string address = "https://graph.facebook.com/v2.12/" + placeId + "?fields=category_list&access_token=" + fbAccessToken;
 			using (UnityWebRequest www = UnityWebRequest.Get(address)) {
@@ -62,7 +64,7 @@ public class FacebookPlaces : MonoBehaviour {
 		for (int i = 0; i < icons.Length; i++) {
 			if (icons[i].name == m.category_list[0].name) {
 				if (image != null) {
-					image.sprite = icons[i].icon;
+					image.sprite = iconsImages[icons[i].iconId];
 				}
 				placesMemory.Add(placeId, i);
 				return true;

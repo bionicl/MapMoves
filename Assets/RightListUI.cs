@@ -11,10 +11,18 @@ public class RightListUI : MonoBehaviour {
 	public Animator animator;
 	public PlaceGroup place;
 
+	public RectTransform iconsSpawn;
+	public GameObject iconBoxPrefab;
+	List<IconBox> customIcons = new List<IconBox>();
+
 	bool opened = false;
 
 	void Awake() {
 		instance = this;
+	}
+
+	void Start() {
+		SetupIcons();
 	}
 
 	public void Close() {
@@ -31,6 +39,34 @@ public class RightListUI : MonoBehaviour {
 		}
 		this.place = place;
 		placeName.text = place.placeInfo.name;
-		placeIcon.sprite = place.icon;
+		placeIcon.sprite = FacebookPlaces.instance.iconsImages[place.icon];
+		ChangeSelectedIcon(place.icon);
+	}
+
+	void ChangeSelectedIcon(int id) {
+		foreach (var item in customIcons) {
+			item.MarkAsDeselected();
+		}
+		customIcons[id].MarkAsSelected();
+	}
+
+	void SetupIcons() {
+		int count = 0;
+		foreach (var item in FacebookPlaces.instance.iconsImages) {
+			GameObject tempIcon = Instantiate(iconBoxPrefab, transform.position, transform.rotation);
+			tempIcon.transform.SetParent(iconsSpawn);
+			tempIcon.transform.localScale = tempIcon.transform.lossyScale;
+			tempIcon.SetActive(true);
+			IconBox tempIconBox = tempIcon.GetComponent<IconBox>();
+			tempIconBox.SetupIcon(item, count);
+			customIcons.Add(tempIconBox);
+			count++;
+		}
+	}
+
+	public void IconClicked(int id) {
+		ChangeSelectedIcon(id);
+		place.RefreshIcons(id);
+		placeIcon.sprite = FacebookPlaces.instance.iconsImages[place.icon];
 	}
 }
