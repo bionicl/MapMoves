@@ -7,7 +7,8 @@ public enum FilterTypes {
 	walking,
 	cycling,
 	running,
-	transport
+	transport,
+	place
 }
 
 public class RenderMap : MonoBehaviour {
@@ -48,6 +49,7 @@ public class RenderMap : MonoBehaviour {
 				finalPos.z = -3;
 				placeTemp.transform.position = finalPos;
 				placeTemp.name = item.place.name;
+				placeTemp.GetComponent<Place>().SetupPlace(item.place);
 				alreadyRenderedPlaces.Add(item.place.id);
 			} else if (item.place == null) {
 				foreach (var item2 in item.activities) {
@@ -98,8 +100,12 @@ public class RenderMap : MonoBehaviour {
 	}
 
 	public void ChangeFilter(FilterTypes filterType, bool state) {
-		foreach (var item in filterLines[(int)filterType]) {
-			item.SetActive(state);
+		if (filterType == FilterTypes.place) {
+			loactionsGO.SetActive(state);
+		} else {
+			foreach (var item in filterLines[(int)filterType]) {
+				item.SetActive(state);
+			}
 		}
 	}
 }

@@ -42,8 +42,6 @@ public class ActivityUI : MonoBehaviour {
 		"Airplane"
 	};
 
-	public Sprite[] icons; 
-
 	public void Setup(ActivityType? type, double distance, float time, DateTime endTime, MovesJson.SegmentsInfo.PlaceInfo placeInfo) {
 		this.type = type;
 		this.distance = distance;
@@ -72,16 +70,7 @@ public class ActivityUI : MonoBehaviour {
 			MoveMinText.gameObject.SetActive(false);
 			//if (distance >= 100)
 			//	Subheader.text += distance.ToString() + "m";
-			if (placeType == PlaceType.home)
-				placeIcon.sprite = icons[0];
-			else if (placeType == PlaceType.school)
-				placeIcon.sprite = icons[2];
-			else
-				placeIcon.sprite = icons[1];
-			if (placeType == PlaceType.facebook) {
-				FacebookPlaces.instance.GetPlaceCategory(placeFbId, placeIcon);
-			}
-			
+			GlobalVariables.inst.SetIcon(placeInfo, placeIcon);
 		} else {
 			place.SetActive(false);
 			move.gameObject.SetActive(true);

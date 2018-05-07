@@ -28,8 +28,9 @@ public class FilterButton : MonoBehaviour {
 	}
 
 	void RefreshButton(bool isOnStart = false) {
-		if (!isOnStart)
+		if (!isOnStart) {
 			RenderMap.instance.ChangeFilter(filterType, isOn);
+		}
 		if (isOn)
 			image.color = ReadJson.colors[colorId];
 		else
