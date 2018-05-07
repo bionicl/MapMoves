@@ -185,10 +185,10 @@ public class ReadJson : MonoBehaviour {
 				if (firstDate == null)
 					firstDate = timelineDay;
 				lastDate = timelineDay;
+				PlacesRanking.instance.AnalyseDay(item);
+				ChartUI.instance.CheckMaxCalories(item);
+				RenderMap.instance.RenderDay(item);
 			}
-			PlacesRanking.instance.AnalyseDay(item);
-			ChartUI.instance.CheckMaxCalories(item);
-			RenderMap.instance.RenderDay(item);
 		}
 		PlacesRanking.instance.SortAndDisplay();
 		ChartUI.instance.SetupCharts();
@@ -285,7 +285,7 @@ public class ReadJson : MonoBehaviour {
 		DateTime b = ReturnDateTime(end);
 		return (float)b.Subtract(a).TotalSeconds;
 	}
-	DateTime ReturnSimpleDate(string date) {
+	public static DateTime ReturnSimpleDate(string date) {
 		return new DateTime(
 			Convert.ToInt32(date.Substring(0, 4)),
 			Convert.ToInt32(date.Substring(4, 2)),
