@@ -269,7 +269,7 @@ public class ReadJson : MonoBehaviour {
 	}
 
 	// Helpers
-	DateTime ReturnDateTime(string stringTime) {
+	public static DateTime ReturnDateTime(string stringTime) {
 		DateTime a = new DateTime(
 			Convert.ToInt32(stringTime.Substring(0, 4)),
 			Convert.ToInt32(stringTime.Substring(4, 2)),

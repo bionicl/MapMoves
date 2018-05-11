@@ -17,6 +17,8 @@ public class RenderMap : MonoBehaviour {
 	public GameObject LinePrefab;
 	public GameObject PlacePrefab;
 
+	public float mapScale = 1f;
+
 	List<GameObject>[] filterLines = new List<GameObject>[4];
 	Dictionary<DateTime, GameObject> filterDays = new Dictionary<DateTime, GameObject>();
 	GameObject loactionsGO;
@@ -32,7 +34,41 @@ public class RenderMap : MonoBehaviour {
 		loactionsGO.transform.SetSiblingIndex(1);
 	}
 
+	void Update() {
+		if (Input.GetKeyDown(KeyCode.UpArrow) || Input.mouseScrollDelta.y > 0) {
+			if (mapScale <= 1.6f)
+				mapScale -= 0.1f;
+			else if (mapScale <= 5.6f)
+				mapScale -= 0.5f;
+			else
+				mapScale -= 1.5f;
+			if (mapScale < 0.1f)
+				mapScale = 0.1f;
+			UpdateMapSize();
+		} else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.mouseScrollDelta.y < 0) {
+			if (mapScale >= 5.6f)
+				mapScale += 1.5f;
+			else if (mapScale >= 1.6f)
+				mapScale += 0.5f;
+			else
+				mapScale += 0.1f;
+			UpdateMapSize();
+		}
+	}
+
+	public void UpdateMapSize() {
+		GetComponent<Camera>().orthographicSize = mapScale;
+		PlacesRanking.instance.ChangePlacesSize(mapScale);
+		foreach (var item in renderedLines) {
+			if (mapScale < 1) {
+				item.widthMultiplier = 0.004f + (mapScale - 1) * 0.004f;
+			} else 
+				item.widthMultiplier = 0.004f;
+		}
+	}
+
 	List<long> alreadyRenderedPlaces = new List<long>();
+	List<LineRenderer> renderedLines = new List<LineRenderer>();
 	public void RenderDay(MovesJson day) {
 		GameObject dateGO = Instantiate(new GameObject(), transform.position, transform.rotation);
 		dateGO.transform.SetParent(gameObject.transform);
@@ -40,7 +76,7 @@ public class RenderMap : MonoBehaviour {
 		filterDays.Add(ReadJson.ReturnSimpleDate(day.date), dateGO);
 
 		foreach (var item in day.segments) {
-			if (item.place != null && !alreadyRenderedPlaces.Contains(item.place.id)) {
+			if (item.place != null && !alreadyRenderedPlaces.Contains(item.place.id) && item.place.name != null) {
 				Vector2 position = Conversion.LatLonToMeters(item.place.location.lat, item.place.location.lon);
 				Vector3 finalPos = new Vector3(position.x, position.y, 0);
 				GameObject placeTemp = Instantiate(PlacePrefab, finalPos, transform.rotation);
@@ -76,6 +112,7 @@ public class RenderMap : MonoBehaviour {
 
 						// Add line to filters
 						AddToFilterList(item2.activity, lineTempGo);
+						renderedLines.Add(lineTemp);
 					}
 				}
 			}

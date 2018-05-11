@@ -10,6 +10,9 @@ public class RightListUI : MonoBehaviour {
 	public Image placeIcon;
 	public Animator animator;
 	public PlaceGroup place;
+	public Text placeVisitedTimes;
+	public Text placeLastVisited;
+	public CanvasGroup[] hours;
 
 	public RectTransform iconsSpawn;
 	public GameObject iconBoxPrefab;
@@ -40,7 +43,10 @@ public class RightListUI : MonoBehaviour {
 		this.place = place;
 		placeName.text = place.placeInfo.name;
 		placeIcon.sprite = FacebookPlaces.instance.iconsImages[place.icon];
+		placeVisitedTimes.text = string.Format("Place visited {0} times", place.timesVisited);
+		placeLastVisited.text = string.Format("Last visited {0}", place.lastVisited.ToShortDateString());
 		ChangeSelectedIcon(place.icon);
+		place.DisplayTimes(hours);
 	}
 
 	void ChangeSelectedIcon(int id) {

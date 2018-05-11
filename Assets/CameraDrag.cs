@@ -19,7 +19,7 @@ public class CameraDrag : MonoBehaviour {
 
 		Vector3 mouseMove = dragMouseOrigin - Input.mousePosition;
 
-		transform.position = dragOrigin + mouseMove * (3.555f / Screen.width);
+		transform.position = dragOrigin + mouseMove * (3.555f / Screen.width) * RenderMap.instance.mapScale;
 	}
 
 

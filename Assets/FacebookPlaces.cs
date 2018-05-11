@@ -36,14 +36,14 @@ public class FacebookPlaces : MonoBehaviour {
 		instance = this;
 	}
 
-	public void GetPlaceCategory(string placeId, Image image) {
-		StartCoroutine(GetText(placeId, image));
+	public void GetPlaceCategory(string placeId, Action<int> action) {
+		StartCoroutine(GetText(placeId, action));
 	}
 
-	IEnumerator GetText(string placeId, Image image) {
+	IEnumerator GetText(string placeId, Action<int> action) {
 		int number = 0;
 		if (placesMemory.TryGetValue(placeId, out number)) {
-			image.sprite = iconsImages[icons[number].iconId];
+			action.Invoke(icons[number].iconId);
 		} else {
 			string address = "https://graph.facebook.com/v2.12/" + placeId + "?fields=category_list&access_token=" + fbAccessToken;
 			using (UnityWebRequest www = UnityWebRequest.Get(address)) {
@@ -53,20 +53,19 @@ public class FacebookPlaces : MonoBehaviour {
 					Debug.Log(www.error);
 				} else {
 					FacebookApiResponse m = JsonConvert.DeserializeObject<FacebookApiResponse>(www.downloadHandler.text);
-					if (!FindIcon(placeId, m, image))
+					if (!FindIcon(placeId, m, action))
 						Debug.Log(m.category_list[0].name);
 				}
 			}
 		}
 	}
 
-	bool FindIcon(string placeId, FacebookApiResponse m, Image image) {
+	bool FindIcon(string placeId, FacebookApiResponse m, Action<int> action) {
 		for (int i = 0; i < icons.Length; i++) {
 			if (icons[i].name == m.category_list[0].name) {
-				if (image != null) {
-					image.sprite = iconsImages[icons[i].iconId];
-				}
-				placesMemory.Add(placeId, i);
+				action.Invoke(icons[i].iconId);
+				if (!placesMemory.ContainsKey(placeId))
+					placesMemory.Add(placeId, i);
 				return true;
 			}
 		}

@@ -35,7 +35,7 @@ public class GlobalVariables : MonoBehaviour {
 		else
 			action.Invoke(6);
 		if (placeType == PlaceType.facebook) {
-			FacebookPlaces.instance.GetPlaceCategory(place.facebookPlaceId, targetImg);
+			FacebookPlaces.instance.GetPlaceCategory(place.facebookPlaceId, action);
 		}
 		
 	}
