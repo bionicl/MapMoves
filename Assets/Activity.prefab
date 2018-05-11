@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 224165227414091912}
   - component: {fileID: 222006047858654036}
   - component: {fileID: 114602558850753674}
+  - component: {fileID: 114159820007300824}
   m_Layer: 5
   m_Name: Place
   m_TagString: Untagged
@@ -248,18 +249,6 @@ MonoBehaviour:
   move: {fileID: 114835745792818750}
   Header: {fileID: 114444736863936146}
   Subheader: {fileID: 114694360950270390}
-  activitesColor:
-  - {r: 0, g: 0.8352941, b: 0.3529412, a: 1}
-  - {r: 0.5176471, g: 0.5176471, b: 0.5176471, a: 1}
-  - {r: 0, g: 0.8039216, b: 0.9254902, a: 1}
-  - {r: 0.5176471, g: 0.5176471, b: 0.5176471, a: 1}
-  - {r: 0.95456386, g: 0.17647058, b: 1, a: 1}
-  - {r: 0.5176471, g: 0.5176471, b: 0.5176471, a: 1}
-  - {r: 0.5176471, g: 0.5176471, b: 0.5176471, a: 1}
-  - {r: 0.9529412, g: 0.1764706, b: 1, a: 1}
-  - {r: 0.5176471, g: 0.5176471, b: 0.5176471, a: 1}
-  - {r: 0.5176471, g: 0.5176471, b: 0.5176471, a: 1}
-  - {r: 0.5176471, g: 0.5176471, b: 0.5176471, a: 1}
   endTimeText: {fileID: 114729428059762294}
   moveHeights: 1e000000280000003c000000
   placeHeights: 320000003200000046000000
@@ -269,10 +258,7 @@ MonoBehaviour:
   distance: 0
   time: 0
   placename: 
-  icons:
-  - {fileID: 21300000, guid: 33450a062b8724618b498a8af1754bc4, type: 3}
-  - {fileID: 21300000, guid: a0d4b6930363e4e53a5918e711890e49, type: 3}
-  - {fileID: 21300000, guid: 3f147c38f68cc40fe95b1ecf01d78155, type: 3}
+  placeFbId: 
 --- !u!114 &114092676173276318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -306,6 +292,58 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 7
+--- !u!114 &114159820007300824
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1968563039070408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 114602558850753674}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114089621755831614}
+        m_MethodName: ClickOnPlace
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114277105777075346
 MonoBehaviour:
   m_ObjectHideFlags: 1

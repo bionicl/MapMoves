@@ -56,14 +56,13 @@ public class RenderMap : MonoBehaviour {
 		}
 	}
 
-	public void UpdateMapSize() {
+	public void UpdateMapSize(float? newMapScale = null) {
+		if (newMapScale.HasValue)
+			mapScale = newMapScale.Value;
 		GetComponent<Camera>().orthographicSize = mapScale;
 		PlacesRanking.instance.ChangePlacesSize(mapScale);
 		foreach (var item in renderedLines) {
-			if (mapScale < 1) {
-				item.widthMultiplier = 0.004f + (mapScale - 1) * 0.004f;
-			} else 
-				item.widthMultiplier = 0.004f;
+			item.widthMultiplier = 0.006f + (mapScale - 1) * 0.006f;
 		}
 	}
 

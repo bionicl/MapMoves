@@ -32,6 +32,8 @@ public class RightListUI : MonoBehaviour {
 		if (opened) {
 			opened = false;
 			animator.SetTrigger("Close");
+			if (Place.currentlySelected != null)
+				Place.currentlySelected.Deselect();
 		}
 	}
 

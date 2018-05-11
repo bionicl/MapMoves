@@ -118,6 +118,15 @@ public class ActivityUI : MonoBehaviour {
 			GetComponent<RectTransform>().sizeDelta = new Vector2(0, height[2]);
 	}
 
+	public void ClickOnPlace() {
+		Vector3 cameraPos = placeGroup.mapObject.gameObject.transform.position;
+		cameraPos.z = -40;
+		Camera.main.transform.position = cameraPos;
+		RenderMap.instance.UpdateMapSize(0.3f);
+		RightListUI.instance.NewPlace(placeGroup);
+		placeGroup.mapObject.Select();
+	}
+
 	public void DestroyActivity() {
 		ReadJson.instance.activitiesList.Remove(this);
 		Destroy(gameObject);

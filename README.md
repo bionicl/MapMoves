@@ -15,6 +15,8 @@ Simple app to check Moves app history in Unity.
 - Custom places icons (not saved between sessions yet);
 
 ### Planned features:
+- scrolling/moving blocked on canvas
+- week days view
 - Moves API integration
 - Calendar view to change day
 - Activity charts
@@ -22,7 +24,6 @@ Simple app to check Moves app history in Unity.
 - **Map with route points**
 	- Date range filters
 	- Save range filter as event
-	- 
 
 [1]:	https://assetstore.unity.com/packages/tools/input-management/json-net-for-unity-11347
 [2]:	http://moves-app.com

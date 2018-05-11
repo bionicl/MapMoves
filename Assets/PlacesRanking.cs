@@ -58,6 +58,10 @@ public class PlaceGroup {
 			finalZoom = 0.31f;
 		finalZoom *= scaleNormal;
 		mapObject.transform.localScale = new Vector3(finalZoom, finalZoom, 1f);
+
+		if (mapObject != null) {
+			mapObject.ChangeIconVisible(zoom);
+		}
 	}
 	public void RefreshIcons(int sprite) {
 		icon = sprite;
