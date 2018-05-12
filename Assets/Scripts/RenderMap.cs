@@ -36,26 +36,28 @@ public class RenderMap : MonoBehaviour {
 	}
 
 	void Update() {
-		if (Input.GetKeyDown(KeyCode.UpArrow) || Input.mouseScrollDelta.y > 0) {
-			if (mapScale <= 1f)
-				mapScale -= 0.15f;
-			else if (mapScale <= 4f)
-				mapScale -= 1f;
-			else
-				mapScale -= 2f;
-			if (mapScale < 0.1f)
-				mapScale = 0.1f;
-			Debug.Log("Map scale: " + mapScale);
-			UpdateMapSize();
-		} else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.mouseScrollDelta.y < 0) {
-			if (mapScale > 4f)
-				mapScale += 2f;
-			else if (mapScale > 1f)
-				mapScale += 1f;
-			else
-				mapScale += 0.15f;
-			Debug.Log("Map scale: " + mapScale);
-			UpdateMapSize();
+		if (GlobalVariables.inst.mapControls) {
+			if (Input.GetKeyDown(KeyCode.UpArrow) || Input.mouseScrollDelta.y > 0) {
+				if (mapScale <= 1f)
+					mapScale -= 0.15f;
+				else if (mapScale <= 4f)
+					mapScale -= 1f;
+				else
+					mapScale -= 2f;
+				if (mapScale < 0.1f)
+					mapScale = 0.1f;
+				Debug.Log("Map scale: " + mapScale);
+				UpdateMapSize();
+			} else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.mouseScrollDelta.y < 0) {
+				if (mapScale > 4f)
+					mapScale += 2f;
+				else if (mapScale > 1f)
+					mapScale += 1f;
+				else
+					mapScale += 0.15f;
+				Debug.Log("Map scale: " + mapScale);
+				UpdateMapSize();
+			}
 		}
 	}
 

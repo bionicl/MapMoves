@@ -9,9 +9,18 @@ public class GlobalVariables : MonoBehaviour {
 
 	public Sprite[] icons;
 	public Color accentColor;
+	public bool mapControls = true;
 
 	void Awake() {
 		inst = this;
+	}
+
+	public void MouseEnter() {
+		mapControls = true;
+	}
+
+	public void MouseExit() {
+		mapControls = false;
 	}
 
 	Image targetImg;

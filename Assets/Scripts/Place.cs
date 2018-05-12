@@ -9,9 +9,11 @@ public class Place : MonoBehaviour {
 	public SpriteRenderer circle;
 	public SpriteRenderer icon;
 	public PlaceGroup place;
+	public TextMesh text;
 
 	public void SetupPlace(MovesJson.SegmentsInfo.PlaceInfo placeInfo) {
 		place = PlacesRanking.instance.FindPlace(placeInfo, this);
+		text.text = place.placeInfo.name;
 	}
 
 	void OnMouseDown() {
@@ -27,6 +29,7 @@ public class Place : MonoBehaviour {
 		} else {
 			icon.gameObject.SetActive(true);
 		}
+		text.gameObject.SetActive(zoom <= 0.15f);
 		currentColor.a = alpha;
 		circle.color = currentColor;
 	}
