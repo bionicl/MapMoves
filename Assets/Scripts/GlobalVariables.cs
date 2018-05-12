@@ -18,15 +18,12 @@ public class GlobalVariables : MonoBehaviour {
 	public void SetIcon(MovesJson.SegmentsInfo.PlaceInfo place, SpriteRenderer image) {
 		LoadIcon(place, (int sprite) => image.sprite = FacebookPlaces.instance.iconsImages[sprite]);
 	}
-
 	public void SetIcon(MovesJson.SegmentsInfo.PlaceInfo place, Image image) {
 		LoadIcon(place, (int sprite) => image.sprite = FacebookPlaces.instance.iconsImages[sprite]);
 	}
-
 	public void SetIcon(MovesJson.SegmentsInfo.PlaceInfo place, Action<int> action) {
 		LoadIcon(place, (int sprite) => action.Invoke(sprite));
 	}
-
 	void LoadIcon(MovesJson.SegmentsInfo.PlaceInfo place, Action<int> action) {
 		PlaceType placeType = place.type;
 		if (placeType == PlaceType.home)
@@ -39,5 +36,13 @@ public class GlobalVariables : MonoBehaviour {
 			FacebookPlaces.instance.GetPlaceCategory(place.facebookPlaceId, action);
 		}
 		
+	}
+
+	public void MoveCamera(Vector3 position) {
+		Vector3 cameraPos = position;
+		cameraPos.z = -40;
+		cameraPos.x -= 160 * (3.555f / Screen.width) * RenderMap.instance.mapScale;
+		cameraPos.y -= 34 * (3.555f / Screen.width) * RenderMap.instance.mapScale;
+		Camera.main.transform.position = cameraPos;
 	}
 }

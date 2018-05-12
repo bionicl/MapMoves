@@ -119,9 +119,7 @@ public class ActivityUI : MonoBehaviour {
 	}
 
 	public void ClickOnPlace() {
-		Vector3 cameraPos = placeGroup.mapObject.gameObject.transform.position;
-		cameraPos.z = -40;
-		Camera.main.transform.position = cameraPos;
+		GlobalVariables.inst.MoveCamera(placeGroup.mapObject.gameObject.transform.position);
 		RenderMap.instance.UpdateMapSize(0.3f);
 		RightListUI.instance.NewPlace(placeGroup);
 		placeGroup.mapObject.Select();

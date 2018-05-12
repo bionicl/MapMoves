@@ -16,6 +16,7 @@ public class RenderMap : MonoBehaviour {
 
 	public GameObject LinePrefab;
 	public GameObject PlacePrefab;
+	public Material[] materials;
 
 	public float mapScale = 1f;
 
@@ -36,22 +37,24 @@ public class RenderMap : MonoBehaviour {
 
 	void Update() {
 		if (Input.GetKeyDown(KeyCode.UpArrow) || Input.mouseScrollDelta.y > 0) {
-			if (mapScale <= 1.6f)
-				mapScale -= 0.1f;
-			else if (mapScale <= 5.6f)
-				mapScale -= 0.5f;
+			if (mapScale <= 1f)
+				mapScale -= 0.15f;
+			else if (mapScale <= 4f)
+				mapScale -= 1f;
 			else
-				mapScale -= 1.5f;
+				mapScale -= 2f;
 			if (mapScale < 0.1f)
 				mapScale = 0.1f;
+			Debug.Log("Map scale: " + mapScale);
 			UpdateMapSize();
 		} else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.mouseScrollDelta.y < 0) {
-			if (mapScale >= 5.6f)
-				mapScale += 1.5f;
-			else if (mapScale >= 1.6f)
-				mapScale += 0.5f;
+			if (mapScale > 4f)
+				mapScale += 2f;
+			else if (mapScale > 1f)
+				mapScale += 1f;
 			else
-				mapScale += 0.1f;
+				mapScale += 0.15f;
+			Debug.Log("Map scale: " + mapScale);
 			UpdateMapSize();
 		}
 	}
@@ -103,11 +106,7 @@ public class RenderMap : MonoBehaviour {
 						lineTemp.SetPositions(positions.ToArray());
 
 						// Set lines color
-						Material material = lineTempGo.GetComponent<Renderer>().material;
-						Color color = ReadJson.colors[(int)item2.activity]; 
-						Debug.Log(item2.activity == ActivityType.walking);
-						color.a = 0.3f;
-						material.SetColor("_Color", color);
+						lineTempGo.GetComponent<Renderer>().material = SetMaterial(item2.activity);
 
 						// Add line to filters
 						AddToFilterList(item2.activity, lineTempGo);
@@ -115,6 +114,19 @@ public class RenderMap : MonoBehaviour {
 					}
 				}
 			}
+		}
+	}
+
+	Material SetMaterial(ActivityType activity) {
+		switch (activity) {
+			case ActivityType.walking:
+				return materials[0];
+			case ActivityType.cycling:
+				return materials[1];
+			case ActivityType.running:
+				return materials[2];
+			default:
+				return materials[3];
 		}
 	}
 

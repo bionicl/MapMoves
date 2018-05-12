@@ -53,9 +53,18 @@ public class PlaceGroup {
 	public void SetZoomSize(float zoom) {
 		float zoomMultipler = -1 * (1 - zoom);
 		float finalZoom = (1 + zoomMultipler);
-		Debug.Log(finalZoom);
-		if (finalZoom < 0.31f)
-			finalZoom = 0.31f;
+		if (finalZoom < 0.4f && zoom <= 2.5f)
+			finalZoom = 0.4f;
+		else if (zoom >= 2.5f){
+			float smallSize = 0.4f - (float)zoomMultipler / 100;
+			smallSize *= 10;
+			if (finalZoom >= smallSize ) {
+				finalZoom = smallSize;
+			}
+		}
+		if (zoom >= 14) {
+			finalZoom = 2.5f;
+		}
 		finalZoom *= scaleNormal;
 		mapObject.transform.localScale = new Vector3(finalZoom, finalZoom, 1f);
 
@@ -177,13 +186,14 @@ public class PlacesRanking : MonoBehaviour {
 		maxValue = ranking.First().Value;
 		if (maxValue > theBiggestPlaceVisits)
 			maxValue = theBiggestPlaceVisits;
-		foreach (KeyValuePair<PlaceGroup, int> item in ranking) {
+		/*foreach (KeyValuePair<PlaceGroup, int> item in ranking) {
 			Debug.Log(item.Key.placeInfo.name + "(" + 
 			          item.Key.placeInfo.type +") - " + item.Value.ToString());
-		}
+		}*/
 		foreach (var item in places.Values) {
 			item.RefreshSize();
 		}
+		GlobalVariables.inst.MoveCamera(ranking.First().Key.mapObject.transform.position);
 	}
 	public void ChangePlacesSize(float mapSize) {
 		foreach (var item in places) {
