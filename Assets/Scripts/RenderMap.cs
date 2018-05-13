@@ -166,6 +166,7 @@ public static class Conversion {
 	private const int EarthRadius = 6378137; //no seams with globe example
 	private const float InitialResolution = 2 * (float)Math.PI * EarthRadius / TileSize;
 	private const float OriginShift = 2 * (float)Math.PI * EarthRadius / 2;
+	private const float multiplayer = 10000;
 
 	public static Vector2 LatLonToMeters(Vector2 latLon) {
 		return LatLonToMeters(latLon.x, latLon.y);
@@ -175,6 +176,13 @@ public static class Conversion {
 		float posx = lon * OriginShift / 180;
 		float posy = (float)Math.Log(Math.Tan((90 + lat) * (float)Math.PI / 360)) / ((float)Math.PI / 180);
 		posy = posy * OriginShift / 180;
-		return new Vector2(posx / 10000, posy / 10000);
+		return new Vector2(posx / multiplayer, posy / multiplayer);
+	}
+
+	public static Vector2 MetersToLatLon(Vector2 m) {
+		var vx = (m.x * multiplayer / OriginShift) * 180;
+		var vy = (m.y * multiplayer / OriginShift) * 180;
+		vy = 180 / (float)Math.PI * (2 * (float)Math.Atan(Math.Exp(vy * (float)Math.PI / 180)) - (float)Math.PI / 2);
+		return new Vector2(vy, vx);
 	}
 }

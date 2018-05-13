@@ -49,6 +49,11 @@ public class RightListUI : MonoBehaviour {
 		placeLastVisited.text = string.Format("Last visited {0}", place.lastVisited.ToShortDateString());
 		ChangeSelectedIcon(place.icon);
 		place.DisplayTimes(hours);
+
+		Vector3 tempPos = place.mapObject.transform.position;
+		Vector2 metersPos = Conversion.MetersToLatLon(new Vector2(tempPos.x, tempPos.y));
+		Debug.Log(string.Format("http://maps.googleapis.com/maps/api/staticmap?center={0},{1}&zoom=12&size=600x600&key=MYKEY", metersPos.x, metersPos.y));
+
 	}
 
 	void ChangeSelectedIcon(int id) {
