@@ -13,6 +13,7 @@ public class RightListUI : MonoBehaviour {
 	public Text placeVisitedTimes;
 	public Text placeLastVisited;
 	public CanvasGroup[] hours;
+	public CanvasGroup[] weekDays;
 
 	public RectTransform iconsSpawn;
 	public GameObject iconBoxPrefab;
@@ -49,6 +50,7 @@ public class RightListUI : MonoBehaviour {
 		placeLastVisited.text = string.Format("Last visited {0}", place.lastVisited.ToShortDateString());
 		ChangeSelectedIcon(place.icon);
 		place.DisplayTimes(hours);
+		place.DisplayWeekDays(weekDays);
 
 		Vector3 tempPos = place.mapObject.transform.position;
 		Vector2 metersPos = Conversion.MetersToLatLon(new Vector2(tempPos.x, tempPos.y));

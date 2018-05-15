@@ -13,6 +13,7 @@ public class PlaceGroup {
 	public float scaleNormal = 0.1f;
 	public DateTime lastVisited;
 	public int[] hourSplit = new int[24];
+	public int[] weekDaysSplit = new int[7];
 
 	public PlaceGroup() {
 		
@@ -107,6 +108,23 @@ public class PlaceGroup {
 					hourSplit[i]++;
 			}
 		}
+
+		int weekDay = CheckIfMondayFirst((int)timeStart.DayOfWeek);
+		weekDaysSplit[weekDay]++;
+		int weekDay2 = CheckIfMondayFirst((int)timeStop.DayOfWeek);
+		if (weekDay != weekDay2) {
+			weekDaysSplit[weekDay2]++;
+		}
+	}
+
+	int CheckIfMondayFirst(int dayOfWeek) {
+		if (!GlobalVariables.inst.firstWeekMonday)
+			return dayOfWeek;
+		int output = dayOfWeek;
+		output--;
+		if (output == -1)
+			output = 6;
+		return output;
 	}
 
 	public void DisplayTimes(CanvasGroup[] hours) {
@@ -116,6 +134,16 @@ public class PlaceGroup {
 			alpha *= 0.95f;
 			alpha += 0.05f;
 			hours[i].alpha = alpha;
+		}
+	}
+
+	public void DisplayWeekDays(CanvasGroup[] weekDays) {
+		float maxWeekDay = weekDaysSplit.Max();
+		for (int i = 0; i < 7; i++) {
+			float alpha = ((float)weekDaysSplit[i] / maxWeekDay);
+			alpha *= 0.95f;
+			alpha += 0.05f;
+			weekDays[i].alpha = alpha;
 		}
 	}
 
