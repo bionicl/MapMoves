@@ -195,7 +195,6 @@ public class PlacesRanking : MonoBehaviour {
 		} else
 			return null;
 	}
-
 	public PlaceGroup FindPlace(MovesJson.SegmentsInfo.PlaceInfo place, ActivityUI timelineObject) {
 		PlaceGroup thisPlace = new PlaceGroup();
 		if (places.TryGetValue(place.id, out thisPlace)) {
@@ -203,6 +202,17 @@ public class PlacesRanking : MonoBehaviour {
 			return thisPlace;
 		} else
 			return null;
+	}
+
+	// Searching
+	public List<PlaceGroup> FindStartingWith(string text) {
+		List<PlaceGroup> output = new List<PlaceGroup>();
+		foreach (var item in places) {
+			string placeName = item.Value.placeInfo.name.ToLower();
+			if (placeName.StartsWith(text.ToLower()))
+				output.Add(item.Value);
+		}
+		return output;
 	}
 
 	public void SortAndDisplay() {

@@ -119,10 +119,7 @@ public class ActivityUI : MonoBehaviour {
 	}
 
 	public void ClickOnPlace() {
-		GlobalVariables.inst.MoveCamera(placeGroup.mapObject.gameObject.transform.position);
-		RenderMap.instance.UpdateMapSize(0.3f);
 		RightListUI.instance.NewPlace(placeGroup);
-		placeGroup.mapObject.Select();
 	}
 
 	public void DestroyActivity() {

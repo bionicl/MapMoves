@@ -14,6 +14,8 @@ public class RightListUI : MonoBehaviour {
 	public Text placeLastVisited;
 	public CanvasGroup[] hours;
 	public CanvasGroup[] weekDays;
+	public GameObject[] placeAddressGroup;
+	public Text placeAddress;
 
 	public RectTransform iconsSpawn;
 	public GameObject iconBoxPrefab;
@@ -38,10 +40,15 @@ public class RightListUI : MonoBehaviour {
 		}
 	}
 
-	public void NewPlace(PlaceGroup place) {
+	public void NewPlace(PlaceGroup place, bool clickedOnMap = false) {
 		if (!opened) {
 			animator.SetTrigger("Open");
 			opened = true;
+		}
+		if (!clickedOnMap) {
+			GlobalVariables.inst.MoveCamera(place.mapObject.gameObject.transform.position);
+			RenderMap.instance.UpdateMapSize(0.3f);
+			place.mapObject.Select();
 		}
 		this.place = place;
 		placeName.text = place.placeInfo.name;
@@ -56,6 +63,7 @@ public class RightListUI : MonoBehaviour {
 		Vector2 metersPos = Conversion.MetersToLatLon(new Vector2(tempPos.x, tempPos.y));
 		Debug.Log(string.Format("http://maps.googleapis.com/maps/api/staticmap?center={0},{1}&zoom=12&size=600x600&key=MYKEY", metersPos.x, metersPos.y));
 
+		TryToGetAddress();
 	}
 
 	void ChangeSelectedIcon(int id) {
@@ -77,6 +85,16 @@ public class RightListUI : MonoBehaviour {
 			customIcons.Add(tempIconBox);
 			count++;
 		}
+	}
+	void TryToGetAddress() {
+		placeAddressGroup[0].SetActive(false);
+		placeAddressGroup[1].SetActive(false);
+		GoogleLocationApi.instance.GetPlaceAddress(place, AddressRecieved);
+	}
+	void AddressRecieved(string address) {
+		placeAddressGroup[0].SetActive(true);
+		placeAddressGroup[1].SetActive(true);
+		placeAddress.text = address;
 	}
 
 	public void IconClicked(int id) {

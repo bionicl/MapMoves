@@ -36,7 +36,7 @@ public class Place : MonoBehaviour {
 
 	public void Select() {
 		if (currentlySelected != this) {
-			RightListUI.instance.NewPlace(place);
+			RightListUI.instance.NewPlace(place, true);
 			if (currentlySelected != null)
 				currentlySelected.Deselect();
 			currentlySelected = this;
