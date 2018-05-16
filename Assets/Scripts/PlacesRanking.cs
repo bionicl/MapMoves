@@ -214,6 +214,15 @@ public class PlacesRanking : MonoBehaviour {
 		}
 		return output;
 	}
+	public List<PlaceGroup> FindContaining(string text, List<PlaceGroup> startingList) {
+		List<PlaceGroup> output = new List<PlaceGroup>();
+		foreach (var item in places) {
+			string placeName = item.Value.placeInfo.name.ToLower();
+			if (placeName.Contains(text.ToLower()) && !startingList.Contains(item.Value))
+				output.Add(item.Value);
+		}
+		return output;
+	}
 
 	public void SortAndDisplay() {
 		Dictionary<PlaceGroup, int> ranking = new Dictionary<PlaceGroup, int>();

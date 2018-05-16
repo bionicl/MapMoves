@@ -27,12 +27,25 @@ public class SearchField : MonoBehaviour {
 		inputField.Select();
 		stopSearchingArea.SetActive(true);
 		searchSuggestionsGroup.SetActive(false);
+
+		RightListUI.instance.Close();
 	}
 
 	// Esc/Dismiss
 	void Update() {
-		if (inSearchMode && Input.GetKey(KeyCode.Escape))
+		if (!inSearchMode && (Input.GetKey(KeyCode.LeftCommand) || Input.GetKey(KeyCode.RightCommand)) && Input.GetKey(KeyCode.F))
+			StartSearching();
+		if (!inSearchMode)
+			return;
+		if (Input.GetKey(KeyCode.Escape))
 			StopSearching();
+		else if (Input.GetKeyDown(KeyCode.DownArrow)) {
+			SearchSuggestion.DownArrow(suggestion);
+		} else if (Input.GetKeyDown(KeyCode.UpArrow)) {
+			SearchSuggestion.UpArrow(suggestion);
+		} else if (Input.GetKeyDown(KeyCode.Return)) {
+			SearchSuggestion.selected.ClickOnPlace();
+		}
 	}
 	public void StopSearching() {
 		inSearchMode = false;
@@ -48,6 +61,7 @@ public class SearchField : MonoBehaviour {
 
 	// Typing suggestions
 	public void TypingSuggestions(string text) {
+		SearchSuggestion.ResetSelection();
 		if (text == "") {
 			searchSuggestionsGroup.SetActive(false);
 			return;
@@ -58,11 +72,19 @@ public class SearchField : MonoBehaviour {
 	}
 	void RecalcualteSuggestions(string text) {
 		List<PlaceGroup> output = PlacesRanking.instance.FindStartingWith(text);
+		List<PlaceGroup> outputContaining = new List<PlaceGroup>();
 		output.OrderBy(o => o.timesVisited).ToList();
+		if (output.Count < 5) {
+			outputContaining = PlacesRanking.instance.FindContaining(text, output);
+		}
+		int containingIndex = 0;
 		for (int i = 0; i < 5; i++) {
 			if (i < output.Count)
 				suggestion[i].SetupSuggestion(output[i], this);
-			else
+			else if (containingIndex < outputContaining.Count){
+				suggestion[i].SetupSuggestion(outputContaining[containingIndex], this);
+				containingIndex++;
+			} else
 				suggestion[i].SetupSuggestion();
 		}
 	}

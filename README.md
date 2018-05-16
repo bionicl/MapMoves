@@ -13,7 +13,7 @@ Simple app to check Moves app history in Unity.
 - Activity filters
 - Places icons from FacebookAPI (waiting for app review)
 - Custom places icons (not saved between sessions yet);
-
+- Places search
 ### Planned features:
 - week days view
 - Moves API integration
