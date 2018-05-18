@@ -30,12 +30,11 @@ public class RenderMap : MonoBehaviour {
 			filterLines[i] = new List<GameObject>();
 		}
 		loactionsGO = Instantiate(new GameObject(), new Vector3(0, 0, 0), transform.rotation);
-		//loactionsGO.transform.SetParent(gameObject.transform);
 		loactionsGO.name = "Loactions";
 		loactionsGO.transform.SetSiblingIndex(1);
 	}
 
-	void Update() {
+	void Update()  {
 		if (GlobalVariables.inst.mapControls) {
 			if (Input.mouseScrollDelta.y > 0) {
 				if (mapScale <= 1f)
@@ -149,6 +148,7 @@ public class RenderMap : MonoBehaviour {
 		}
 	}
 
+	// Filters
 	public void ChangeFilter(FilterTypes filterType, bool state) {
 		if (filterType == FilterTypes.place) {
 			loactionsGO.SetActive(state);
@@ -156,6 +156,12 @@ public class RenderMap : MonoBehaviour {
 			foreach (var item in filterLines[(int)filterType]) {
 				item.SetActive(state);
 			}
+		}
+	}
+	public void ChangeDaysRangeFilter(DateTime startDay, DateTime endDay) {
+		foreach (var item in filterDays) {
+			bool isNotActive = item.Key < startDay || item.Key > endDay;
+			item.Value.SetActive(!isNotActive);
 		}
 	}
 }

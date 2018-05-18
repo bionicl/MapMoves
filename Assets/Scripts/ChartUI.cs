@@ -11,6 +11,7 @@ public class ChartUI : MonoBehaviour {
 	public int maxCalories;
 	[HideInInspector]
 	public float heightPerCalorie;
+	public GameObject spawnGameObject;
 
 
 	public GameObject chartItemPrefab;
@@ -39,9 +40,9 @@ public class ChartUI : MonoBehaviour {
 		heightPerCalorie = (float)barsHeight / (float)maxCalories;
 		foreach (var item in ReadJson.instance.days) {
 			if (item.Value.day.summary != null) {
-				GameObject chart = Instantiate(chartItemPrefab, transform.position, transform.rotation);
+				GameObject chart = Instantiate(chartItemPrefab, spawnGameObject.transform.position, spawnGameObject.transform.rotation);
 				RectTransform rectT = chart.GetComponent<RectTransform>();
-				chart.transform.SetParent(transform);
+				chart.transform.SetParent(spawnGameObject.transform);
 				rectT.localScale = rectT.lossyScale;
 				ChartItem chartItem = chart.GetComponent<ChartItem>();
 				chartItem.Setup(item.Value);

@@ -139,36 +139,42 @@ public class ReadJson : MonoBehaviour {
 	// SwitchingDays
 	void CheckArrows() {
 		if (Input.GetKey(KeyCode.LeftArrow)) {
-			if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-				startHoldingTime = Time.timeSinceLevelLoad;
-				selectedDay = selectedDay.AddDays(-1);
-				CheckIfCanDraw(false);
-			}
-			if (Time.timeSinceLevelLoad - startHoldingTime >= 4f) {
-				selectedDay = selectedDay.AddDays(-2);
-				CheckIfCanDraw(false);
-			} else if (Time.timeSinceLevelLoad - startHoldingTime >= 0.5f) {
-				selectedDay = selectedDay.AddDays(-1);
-				CheckIfCanDraw(false);
-			}
+			ChangeLeft();
 		} else if (Input.GetKey(KeyCode.RightArrow)) {
-			if (Input.GetKeyDown(KeyCode.RightArrow)) {
-				startHoldingTime = Time.timeSinceLevelLoad;
-				selectedDay = selectedDay.AddDays(1);
-				CheckIfCanDraw();
-			}
-			if (Time.timeSinceLevelLoad - startHoldingTime >= 4f) {
-				selectedDay = selectedDay.AddDays(2);
-				CheckIfCanDraw(false);
-			} else if (Time.timeSinceLevelLoad - startHoldingTime >= 0.5f) {
-				selectedDay = selectedDay.AddDays(1);
-				CheckIfCanDraw();
-			}
+			ChangeRight();
 		}
 	}
 	public void ChangeDay(DateTime day) {
 		selectedDay = day;
 		CheckIfCanDraw();
+	}
+	public void ChangeRight() {
+		if (Input.GetKeyDown(KeyCode.RightArrow)) {
+			startHoldingTime = Time.timeSinceLevelLoad;
+			selectedDay = selectedDay.AddDays(1);
+			CheckIfCanDraw();
+		}
+		if (Time.timeSinceLevelLoad - startHoldingTime >= 4f) {
+			selectedDay = selectedDay.AddDays(2);
+			CheckIfCanDraw(false);
+		} else if (Time.timeSinceLevelLoad - startHoldingTime >= 0.5f) {
+			selectedDay = selectedDay.AddDays(1);
+			CheckIfCanDraw();
+		}
+	}
+	public void ChangeLeft() {
+		if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+			startHoldingTime = Time.timeSinceLevelLoad;
+			selectedDay = selectedDay.AddDays(-1);
+			CheckIfCanDraw(false);
+		}
+		if (Time.timeSinceLevelLoad - startHoldingTime >= 4f) {
+			selectedDay = selectedDay.AddDays(-2);
+			CheckIfCanDraw(false);
+		} else if (Time.timeSinceLevelLoad - startHoldingTime >= 0.5f) {
+			selectedDay = selectedDay.AddDays(-1);
+			CheckIfCanDraw(false);
+		}
 	}
 
 	// Loading json files
@@ -190,6 +196,7 @@ public class ReadJson : MonoBehaviour {
 				RenderMap.instance.RenderDay(item);
 			}
 		}
+		//RenderMap.instance.ChangeDaysRangeFilter(new DateTime(2018, 03, 01), new DateTime(2018, 03, 10));
 		PlacesRanking.instance.SortAndDisplay();
 		ChartUI.instance.SetupCharts();
 	}

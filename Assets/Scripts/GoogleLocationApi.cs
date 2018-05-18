@@ -52,9 +52,18 @@ public class GoogleLocationApi : MonoBehaviour {
 
 	void Awake() {
 		instance = this;
+		TryToLoadApi();
 	}
 
-	public string apiKey;
+	void TryToLoadApi() {
+		UnityEngine.Object textFile;
+		textFile = Resources.Load("API/googleApi");
+		TextAsset temp = textFile as TextAsset;
+		apiKey = temp.text;
+		Debug.Log(apiKey);
+	}
+
+	string apiKey;
 
 	public void GetPlaceAddress(PlaceGroup place, Action<string> action) {
 		StopAllCoroutines();

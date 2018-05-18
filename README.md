@@ -1,5 +1,7 @@
 Simple app to check Moves app history in Unity.
 
+![][image-1]
+
 ### How to install:
 
 1. Download Unity project
@@ -8,14 +10,13 @@ Simple app to check Moves app history in Unity.
 4. Run the app
 
 ### Current features:
-- Display Moves story data with summary
-- Use right/left arrows to switch days
+- Display Moves storyline data with summary
+- Display map with all path drawn
 - Activity filters
-- Places icons from FacebookAPI (waiting for app review)
-- Custom places icons (not saved between sessions yet);
+- Activity history display
+- Detailed place info (place address, visiting hours, visiting weekdays, custom icons)
 - Places search
 ### Planned features:
-- week days view
 - Moves API integration
 - Calendar view to change day
 - Activity charts
@@ -24,5 +25,11 @@ Simple app to check Moves app history in Unity.
 	- Date range filters
 	- Save range filter as event
 
+### Used APIs:
+- Google maps api to get location address.  
+	Create file `Assets/Resources/API/GoogleApi.txt` and paste your Google Geocoding API key there
+
 [1]:	https://assetstore.unity.com/packages/tools/input-management/json-net-for-unity-11347
 [2]:	http://moves-app.com
+
+[image-1]:	https://i.imgur.com/GffRi2B.png
