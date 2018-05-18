@@ -6,6 +6,7 @@ public class ChartUI : MonoBehaviour {
 	public static ChartUI instance;
 
 	public int barsHeight;
+	public int heightToDisplayStats;
 
 	[HideInInspector]
 	public int maxCalories;

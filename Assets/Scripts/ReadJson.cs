@@ -123,6 +123,9 @@ public class ReadJson : MonoBehaviour {
 	public DateTime? firstDate;
 	public DateTime lastDate;
 
+	[Header("Summary")]
+	public GameObject summaryPrefab;
+
 	void Awake() {
 		instance = this;
 		colors = activitesColor;
@@ -210,7 +213,7 @@ public class ReadJson : MonoBehaviour {
 			loaded = days.TryGetValue(selectedDay, out timeline);
 			if (loaded) {
 				foreach (Transform child in historySpawn.gameObject.transform) {
-					if (child.gameObject.GetComponent<ActivityUI>() != null)
+					if (child.gameObject.GetComponent<ActivityUI>() != null || child.gameObject.GetComponent<SummaryItem>() != null)
 						Destroy(child.gameObject);
 				}
 				activitiesList.Clear();
@@ -240,6 +243,13 @@ public class ReadJson : MonoBehaviour {
 	}
 	IEnumerator RenderAfterTime(MovesJson m) {
 		yield return new WaitForSeconds(0.3f);
+
+		// Summary
+		foreach (var item in m.summary) {
+			SpawnSummary(item);
+		}
+
+		// ActivityUI
 		foreach (var item in m.segments) {
 			if (item.place == null) {
 				for (int i = 0; i < item.activities.Length; i++) {
@@ -255,6 +265,15 @@ public class ReadJson : MonoBehaviour {
 			}
 		}
 		ValidateIfNoReapeted();
+	}
+	void SpawnSummary(MovesJson.SummaryInfo summary) {
+		if (summary.group == "transport")
+			return;
+		GameObject summaryObject = Instantiate(summaryPrefab, historySpawn.transform.position, historySpawn.transform.rotation);
+		RectTransform summaryObjectRect = summaryObject.GetComponent<RectTransform>();
+		summaryObject.transform.SetParent(historySpawn.transform);
+		summaryObjectRect.localScale = summaryObjectRect.lossyScale;
+		summaryObject.GetComponent<SummaryItem>().Setup(summary);
 	}
 	void SpawnActivity(ActivityType? type, double distance, float time, DateTime endTime, MovesJson.SegmentsInfo.PlaceInfo placeInfo = null) {
 		GameObject activity = Instantiate(activityPrefab, historySpawn.transform.position, historySpawn.transform.rotation);

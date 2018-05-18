@@ -11,10 +11,20 @@ public class ChartItem : MonoBehaviour {
 	int cyclingSum;
 	int otherSum;
 
+	int walkingDistance;
+	int cyclingDistance;
+
 	public Image background;
 	public RectTransform walking;
 	public RectTransform cycling;
 	public RectTransform other;
+
+	public GameObject walkingIcon;
+	public GameObject cyclingIcon;
+	public GameObject otherIcon;
+
+	public Text walkingText;
+	public Text cyclingText;
 
 	DayClass day;
 	MovesJson.SummaryInfo[] summary;
@@ -29,11 +39,13 @@ public class ChartItem : MonoBehaviour {
 	void AddSums() {
 		foreach (var item in summary) {
 			sum += (int)item.calories;
-			if (item.activity == ActivityType.walking)
+			if (item.activity == ActivityType.walking) {
 				walkingSum += (int)item.calories;
-			else if (item.activity == ActivityType.cycling)
+				walkingDistance += (int)item.distance;
+			} else if (item.activity == ActivityType.cycling) {
 				cyclingSum += (int)item.calories;
-			else if (item.activity == ActivityType.running || item.activity == ActivityType.dancing)
+				cyclingDistance += (int)item.distance;
+			} else if (item.activity == ActivityType.running || item.activity == ActivityType.dancing)
 				otherSum += (int)item.calories;
 		}
 	}
@@ -47,6 +59,12 @@ public class ChartItem : MonoBehaviour {
 			float heightWalking = ChartUI.instance.heightPerCalorie * walkingSum;
 			walking.sizeDelta = new Vector2(20, heightWalking);
 			heightSum += heightWalking;
+
+			if (heightWalking >= ChartUI.instance.heightToDisplayStats) {
+				walkingIcon.SetActive(true);
+				walkingText.gameObject.SetActive(true);
+				walkingText.text = ConvertToKm(walkingDistance);
+			}
 		}
 
 		// Cycling
@@ -56,6 +74,12 @@ public class ChartItem : MonoBehaviour {
 			float heightCycling = ChartUI.instance.heightPerCalorie * cyclingSum;
 			cycling.sizeDelta = new Vector2(20, heightCycling + heightSum);
 			heightSum += heightCycling;
+
+			if (heightCycling >= ChartUI.instance.heightToDisplayStats) {
+				cyclingIcon.SetActive(true);
+				cyclingText.gameObject.SetActive(true);
+				cyclingText.text = ConvertToKm(cyclingDistance);
+			}
 		}
 
 		// Other
@@ -64,7 +88,16 @@ public class ChartItem : MonoBehaviour {
 		} else {
 			float heightOther = ChartUI.instance.heightPerCalorie * otherSum;
 			other.sizeDelta = new Vector2(20, heightOther + heightSum);
+
+			if (heightOther >= ChartUI.instance.heightToDisplayStats) {
+				otherIcon.SetActive(true);
+			}
 		}
+	}
+
+	public static string ConvertToKm(int meters) {
+		float km = (float)meters / 1000;
+		return Mathf.Round(km).ToString() + "km";
 	}
 
 	public void Select() {
