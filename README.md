@@ -19,7 +19,6 @@ Simple app to check Moves app history in Unity.
 ### Planned features:
 - Moves API integration
 - Calendar view to change day
-- Activity charts
 - Favourite/Top visited places
 - **Map with route points**
 	- Date range filters
@@ -32,4 +31,4 @@ Simple app to check Moves app history in Unity.
 [1]:	https://assetstore.unity.com/packages/tools/input-management/json-net-for-unity-11347
 [2]:	http://moves-app.com
 
-[image-1]:	https://i.imgur.com/GffRi2B.png
+[image-1]:	https://i.imgur.com/mEemcu6.png
