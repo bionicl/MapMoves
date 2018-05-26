@@ -60,10 +60,9 @@ public class GoogleLocationApi : MonoBehaviour {
 		textFile = Resources.Load("API/googleApi");
 		TextAsset temp = textFile as TextAsset;
 		apiKey = temp.text;
-		Debug.Log(apiKey);
 	}
 
-	string apiKey;
+	public string apiKey;
 
 	public void GetPlaceAddress(PlaceGroup place, Action<string> action) {
 		StopAllCoroutines();
