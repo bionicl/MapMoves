@@ -68,6 +68,7 @@ public class RenderMap : MonoBehaviour {
 		foreach (var item in renderedLines) {
 			item.widthMultiplier = 0.006f + (mapScale - 1) * 0.006f;
 		}
+		GoogleMapDisplay.instance.ChangeMapZoom();
 	}
 
 	List<long> alreadyRenderedPlaces = new List<long>();
