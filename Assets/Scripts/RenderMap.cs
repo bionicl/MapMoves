@@ -37,24 +37,12 @@ public class RenderMap : MonoBehaviour {
 	void Update()  {
 		if (GlobalVariables.inst.mapControls) {
 			if (Input.mouseScrollDelta.y > 0) {
-				if (mapScale <= 1f)
-					mapScale -= 0.15f;
-				else if (mapScale <= 4f)
-					mapScale -= 1f;
-				else
-					mapScale -= 2f;
-				if (mapScale < 0.1f)
-					mapScale = 0.1f;
-				Debug.Log("Map scale: " + mapScale);
+				mapScale /= 1.5f;
+				if (mapScale < 0.125f)
+					mapScale = 0.125f;
 				UpdateMapSize();
 			} else if (Input.mouseScrollDelta.y < 0) {
-				if (mapScale > 4f)
-					mapScale += 2f;
-				else if (mapScale > 1f)
-					mapScale += 1f;
-				else
-					mapScale += 0.15f;
-				Debug.Log("Map scale: " + mapScale);
+				mapScale *= 1.5f;
 				UpdateMapSize();
 			}
 		}

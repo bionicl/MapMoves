@@ -12,7 +12,9 @@ public class CameraDrag : MonoBehaviour {
 			return;
 		}
 
-		if (!Input.GetMouseButton(0) || !GlobalVariables.inst.mapControls) return;
+		if (!Input.GetMouseButton(0) || !GlobalVariables.inst.mapControls) {
+			return;
+		}
 
 		//Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - dragOrigin);
 		//Vector3 move = new Vector3(pos.x * dragSpeed, pos.y * dragSpeed, 0);
@@ -20,6 +22,8 @@ public class CameraDrag : MonoBehaviour {
 		Vector3 mouseMove = dragMouseOrigin - Input.mousePosition;
 
 		transform.position = dragOrigin + mouseMove * (3.555f / Screen.width) * RenderMap.instance.mapScale;
+
+		GoogleMapDisplay.instance.MapMoved();
 	}
 
 

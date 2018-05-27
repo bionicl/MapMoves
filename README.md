@@ -16,13 +16,13 @@ Simple app to check Moves app history in Unity.
 - Activity history display
 - Detailed place info (place address, visiting hours, visiting weekdays, custom icons)
 - Places search
+- Google maps integration
 ### Planned features:
 - Moves API integration
 - Calendar view to change day
 - Favourite/Top visited places
-- **Map with route points**
-	- Date range filters
-	- Save range filter as event
+- Date range filters
+- Save range filter as event
 
 ### Used APIs:
 - Google maps api to get location address.  
