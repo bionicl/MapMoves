@@ -100,6 +100,7 @@ public class GoogleMapDisplay : MonoBehaviour {
 		GameObject tempGo = Instantiate(tilePrefab, tempPos, transform.rotation);
 		tempGo.GetComponent<SpriteRenderer>().sprite = sprite;
 		tempGo.transform.SetParent(mapTilesGroups[request.groupId].transform);
+		tempGo.transform.SetAsLastSibling();
 		tempGo.transform.localScale = new Vector3(request.tileSize, request.tileSize, 1);
 	}
 	OneRequest CalculateMapZoom() {

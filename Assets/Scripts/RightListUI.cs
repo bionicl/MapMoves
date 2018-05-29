@@ -46,8 +46,8 @@ public class RightListUI : MonoBehaviour {
 			opened = true;
 		}
 		if (!clickedOnMap) {
-			GlobalVariables.inst.MoveCamera(place.mapObject.gameObject.transform.position);
 			RenderMap.instance.UpdateMapSize(0.3f);
+			GlobalVariables.inst.MoveCamera(place.mapObject.gameObject.transform.position);
 			place.mapObject.Select();
 		}
 		this.place = place;

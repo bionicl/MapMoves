@@ -23,6 +23,7 @@ Simple app to check Moves app history in Unity.
 - Favourite/Top visited places
 - Date range filters
 - Save range filter as event
+- Maps display optimisation
 
 ### Used APIs:
 - Google maps api to get location address.  

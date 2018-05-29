@@ -49,6 +49,12 @@ public class GlobalVariables : MonoBehaviour {
 		
 	}
 
+	public Vector3 TransformToCenter(Vector3 position) {
+		Vector3 newPos = position;
+		newPos.x += 160 * (3.555f / Screen.width) * RenderMap.instance.mapScale;
+		newPos.y += 34 * (3.555f / Screen.width) * RenderMap.instance.mapScale;
+		return newPos;
+	}
 	public void MoveCamera(Vector3 position) {
 		Vector3 cameraPos = position;
 		cameraPos.z = -40;
