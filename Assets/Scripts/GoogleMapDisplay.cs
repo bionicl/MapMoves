@@ -89,7 +89,7 @@ public class GoogleMapDisplay : MonoBehaviour {
 			yield return www;
 
 			Sprite sprite = Sprite.Create(www.texture,
-										  new Rect(0, 0, 600, 600),
+										  new Rect(0, 0, 640, 640),
 										  new Vector2(0.5f, 0.5f));
 			action.Invoke(sprite, request);
 		}
@@ -123,7 +123,7 @@ public class GoogleMapDisplay : MonoBehaviour {
 	string ReturnApiUrl(OneRequest request) {
 		Vector3 tempPos = request.position;
 		Vector2 metersPos = Conversion.MetersToLatLon(new Vector2(tempPos.x, tempPos.y));
-		string output = string.Format("http://maps.googleapis.com/maps/api/staticmap?center={0},{1}&zoom={2}&size=600x600&key={3}{4}", metersPos.x, metersPos.y, request.zoomLevel, GoogleLocationApi.instance.apiKey, style);
+		string output = string.Format("http://maps.googleapis.com/maps/api/staticmap?center={0},{1}&zoom={2}&size=640x640&key={3}{4}", metersPos.x, metersPos.y, request.zoomLevel, GoogleLocationApi.instance.apiKey, style);
 		Debug.Log(output);
 		return output;
 	}

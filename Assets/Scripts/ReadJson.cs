@@ -131,6 +131,7 @@ public class ReadJson : MonoBehaviour {
 		colors = activitesColor;
 	}
 	void Start() {
+		PlacesSave.Load();
 		LoadFiles();
 		CheckIfCanDraw();
 	}

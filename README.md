@@ -17,6 +17,7 @@ Simple app to check Moves app history in Unity.
 - Detailed place info (place address, visiting hours, visiting weekdays, custom icons)
 - Places search
 - Google maps integration
+- Press `S` to save places icons
 ### Planned features:
 - Moves API integration
 - Calendar view to change day

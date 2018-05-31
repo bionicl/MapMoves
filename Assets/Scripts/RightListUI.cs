@@ -97,5 +97,6 @@ public class RightListUI : MonoBehaviour {
 		ChangeSelectedIcon(id);
 		place.RefreshIcons(id);
 		placeIcon.sprite = FacebookPlaces.instance.iconsImages[place.icon];
+		PlacesSave.IconChange(place.placeInfo.id, id);
 	}
 }

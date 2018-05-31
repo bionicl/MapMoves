@@ -46,6 +46,11 @@ public class RenderMap : MonoBehaviour {
 				UpdateMapSize();
 			}
 		}
+
+		if (Input.GetKeyDown(KeyCode.S)) {
+			PlacesSave.Save();
+		}
+
 	}
 
 	public void UpdateMapSize(float? newMapScale = null) {

@@ -43,8 +43,15 @@ public class GlobalVariables : MonoBehaviour {
 			action.Invoke(9);
 		else
 			action.Invoke(6);
-		if (placeType == PlaceType.facebook) {
-			FacebookPlaces.instance.GetPlaceCategory(place.facebookPlaceId, action);
+
+		int? customIcon = PlacesSave.FindIcon(place.id);
+		if (customIcon == null) {
+			if (placeType == PlaceType.facebook) {
+				action += (int obj) => PlacesSave.IconChange(place.id, obj);
+				FacebookPlaces.instance.GetPlaceCategory(place.facebookPlaceId, action);
+			}
+		} else {
+			action.Invoke(customIcon.Value);
 		}
 		
 	}
