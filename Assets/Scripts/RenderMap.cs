@@ -38,8 +38,8 @@ public class RenderMap : MonoBehaviour {
 		if (GlobalVariables.inst.mapControls) {
 			if (Input.mouseScrollDelta.y > 0) {
 				mapScale /= 1.5f;
-				if (mapScale < 0.125f)
-					mapScale = 0.125f;
+				if (mapScale < 0.0625f)
+					mapScale = 0.0625f;
 				UpdateMapSize();
 			} else if (Input.mouseScrollDelta.y < 0) {
 				mapScale *= 1.5f;

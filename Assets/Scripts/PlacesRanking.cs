@@ -54,7 +54,11 @@ public class PlaceGroup {
 	public void SetZoomSize(float zoom) {
 		float zoomMultipler = -1 * (1 - zoom);
 		float finalZoom = (1 + zoomMultipler);
-		if (finalZoom < 0.4f && zoom <= 2.5f)
+		if (zoom <= 0.0626f)
+			finalZoom = 0.18f;
+		else if (zoom <= 0.126f)
+			finalZoom = 0.3f;
+		else if (finalZoom < 0.4f && zoom <= 2.5f)
 			finalZoom = 0.4f;
 		else if (zoom >= 2.5f){
 			float smallSize = 0.4f - (float)zoomMultipler / 100;

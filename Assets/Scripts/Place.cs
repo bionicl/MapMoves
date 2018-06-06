@@ -5,7 +5,6 @@ using UnityEngine;
 public class Place : MonoBehaviour {
 	public static Place currentlySelected;
 
-
 	public SpriteRenderer circle;
 	public SpriteRenderer icon;
 	public PlaceGroup place;
@@ -29,7 +28,7 @@ public class Place : MonoBehaviour {
 		} else {
 			icon.gameObject.SetActive(true);
 		}
-		text.gameObject.SetActive(zoom <= 0.15f);
+		text.gameObject.SetActive(zoom <= 0.12f);
 		currentColor.a = alpha;
 		circle.color = currentColor;
 	}

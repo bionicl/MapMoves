@@ -25,6 +25,7 @@ Simple app to check Moves app history in Unity.
 - Date range filters
 - Save range filter as event
 - Maps display optimisation
+- GPX support
 
 ### Used APIs:
 - Google maps api to get location address.  
