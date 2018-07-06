@@ -81,7 +81,7 @@ public class ActivityUI : MonoBehaviour {
 			Subheader.text = timeShort + distance.ToString() + "m";
 			Header.gameObject.SetActive(false);
 			Subheader.gameObject.SetActive(false);
-			MoveType.text = activityTypeText[(int)type.Value];
+			MoveType.text = activityTypeText[(int)type.Value] + "  ";
 			MoveType.color = ReadJson.colors[(int)type];
 			MoveTime.text = timeShort;
 		}
@@ -107,9 +107,14 @@ public class ActivityUI : MonoBehaviour {
 	}
 
 	void SetSize(TimeSpan t) {
+
 		int[] height = moveHeights;
-		if (this.type == null)
+		if (this.type == null) {
 			height = placeHeights;
+			//Debug
+			GetComponent<RectTransform>().sizeDelta = new Vector2(0, 36);
+			return;
+		}
 		
 		if (t.Minutes < 10)
 			GetComponent<RectTransform>().sizeDelta = new Vector2(0, height[0]);
