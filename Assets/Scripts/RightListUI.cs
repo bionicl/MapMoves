@@ -52,7 +52,8 @@ public class RightListUI : MonoBehaviour {
 		}
 		this.place = place;
 		placeName.text = place.placeInfo.name;
-		placeIcon.sprite = FacebookPlaces.instance.iconsImages[place.icon];
+		if (placeIcon != null)
+			placeIcon.sprite = FacebookPlaces.instance.iconsImages[place.icon];
 		placeVisitedTimes.text = string.Format("Place visited {0} times", place.timesVisited);
 		placeLastVisited.text = string.Format("Last visited {0}", place.lastVisited.ToShortDateString());
 		ChangeSelectedIcon(place.icon);
