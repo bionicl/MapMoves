@@ -7,8 +7,8 @@ public class RightListUI : MonoBehaviour {
 	public static RightListUI instance;
 
 	public Text placeName;
-	public Image placeIcon;
 	public Animator animator;
+	public Image placeIcon;
 	public PlaceGroup place;
 	public Text placeVisitedTimes;
 	public Text placeLastVisited;
@@ -21,8 +21,6 @@ public class RightListUI : MonoBehaviour {
 	public GameObject iconBoxPrefab;
 	List<IconBox> customIcons = new List<IconBox>();
 
-	bool opened = false;
-
 	void Awake() {
 		instance = this;
 	}
@@ -31,26 +29,28 @@ public class RightListUI : MonoBehaviour {
 		SetupIcons();
 	}
 
-	public void Close() {
-		if (opened) {
-			opened = false;
-			animator.SetTrigger("Close");
-			if (Place.currentlySelected != null)
-				Place.currentlySelected.Deselect();
-		}
-	}
-
 	public void NewPlace(PlaceGroup place, bool clickedOnMap = false) {
-		if (!opened) {
-			animator.SetTrigger("Open");
-			opened = true;
+		bool wait = true;
+		if (TopBar.instance.currentTab == 2)
+			animator.SetTrigger("Change");
+		else {
+			wait = false;
+			TopBar.instance.SwitchTab(2);
 		}
+		StopAllCoroutines();
+		
+
 		if (!clickedOnMap) {
 			RenderMap.instance.UpdateMapSize(0.3f);
 			GlobalVariables.inst.MoveCamera(place.mapObject.gameObject.transform.position);
 			place.mapObject.Select();
 		}
 		this.place = place;
+		StartCoroutine(AfterAnimationChange(wait));
+	}
+	IEnumerator AfterAnimationChange(bool wait = true) {
+		if (wait)
+			yield return new WaitForSeconds(0.1f);
 		placeName.text = place.placeInfo.name;
 		if (placeIcon != null)
 			placeIcon.sprite = FacebookPlaces.instance.iconsImages[place.icon];
