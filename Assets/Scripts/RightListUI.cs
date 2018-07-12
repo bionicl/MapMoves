@@ -12,14 +12,15 @@ public class RightListUI : MonoBehaviour {
 	public PlaceGroup place;
 	public Text placeVisitedTimes;
 	public Text placeLastVisited;
-	public CanvasGroup[] hours;
-	public CanvasGroup[] weekDays;
+	public RectTransform[] hours;
+	public RectTransform[] weekDays;
 	public GameObject[] placeAddressGroup;
 	public Text placeAddress;
 
 	public RectTransform iconsSpawn;
 	public GameObject iconBoxPrefab;
 	List<IconBox> customIcons = new List<IconBox>();
+	public int maxChartHeight = 28;
 
 	void Awake() {
 		instance = this;
@@ -57,8 +58,8 @@ public class RightListUI : MonoBehaviour {
 		placeVisitedTimes.text = string.Format("Place visited {0} times", place.timesVisited);
 		placeLastVisited.text = string.Format("Last visited {0}", place.lastVisited.ToShortDateString());
 		ChangeSelectedIcon(place.icon);
-		place.DisplayTimes(hours);
-		place.DisplayWeekDays(weekDays);
+		place.DisplayTimes(hours, maxChartHeight);
+		place.DisplayWeekDays(weekDays, maxChartHeight);
 
 		TryToGetAddress();
 	}

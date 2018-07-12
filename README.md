@@ -19,13 +19,12 @@ Simple app to check Moves app history in Unity.
 - Google maps integration
 - Press `S` to save places icons
 ### Planned features:
-- Moves API integration
+- Support for Arc app GPX
 - Calendar view to change day
 - Favourite/Top visited places
 - Date range filters
 - Save range filter as event
 - Maps display optimisation
-- GPX support
 
 ### Used APIs:
 - Google maps api to get location address.  
@@ -34,4 +33,4 @@ Simple app to check Moves app history in Unity.
 [1]:	https://assetstore.unity.com/packages/tools/input-management/json-net-for-unity-11347
 [2]:	http://moves-app.com
 
-[image-1]:	https://i.imgur.com/mEemcu6.png
+[image-1]:	https://i.imgur.com/CUnrJNt.png

@@ -131,23 +131,23 @@ public class PlaceGroup {
 		return output;
 	}
 
-	public void DisplayTimes(CanvasGroup[] hours) {
+	public void DisplayTimes(RectTransform[] hours, int maxHeight) {
 		float maxHours = hourSplit.Max();
 		for (int i = 0; i < 24; i++) {
-			float alpha = ((float)hourSplit[i] / maxHours);
-			alpha *= 0.95f;
-			alpha += 0.05f;
-			hours[i].alpha = alpha;
+			float height = ((float)hourSplit[i] / maxHours);
+			height *= (float)maxHeight;
+			hours[i].sizeDelta = new Vector2(hours[0].sizeDelta.x, height);
 		}
 	}
 
-	public void DisplayWeekDays(CanvasGroup[] weekDays) {
+	public void DisplayWeekDays(RectTransform[] weekDays, int maxHeight) {
 		float maxWeekDay = weekDaysSplit.Max();
 		for (int i = 0; i < 7; i++) {
-			float alpha = ((float)weekDaysSplit[i] / maxWeekDay);
-			alpha *= 0.95f;
-			alpha += 0.05f;
-			weekDays[i].alpha = alpha;
+			float height = ((float)weekDaysSplit[i] / maxWeekDay);
+			height *= (float)maxHeight;
+			height *= 0.95f;
+			height += 0.05f * maxHeight;
+			weekDays[i].sizeDelta = new Vector2(weekDays[0].sizeDelta.x, height);
 		}
 	}
 
