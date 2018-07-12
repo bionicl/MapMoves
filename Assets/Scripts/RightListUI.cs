@@ -7,21 +7,20 @@ public class RightListUI : MonoBehaviour {
 	public static RightListUI instance;
 
 	public Text placeName;
-	public Image placeIcon;
 	public Animator animator;
+	public Image placeIcon;
 	public PlaceGroup place;
 	public Text placeVisitedTimes;
 	public Text placeLastVisited;
-	public CanvasGroup[] hours;
-	public CanvasGroup[] weekDays;
+	public RectTransform[] hours;
+	public RectTransform[] weekDays;
 	public GameObject[] placeAddressGroup;
 	public Text placeAddress;
 
 	public RectTransform iconsSpawn;
 	public GameObject iconBoxPrefab;
 	List<IconBox> customIcons = new List<IconBox>();
-
-	bool opened = false;
+	public int maxChartHeight = 28;
 
 	void Awake() {
 		instance = this;
@@ -31,33 +30,36 @@ public class RightListUI : MonoBehaviour {
 		SetupIcons();
 	}
 
-	public void Close() {
-		if (opened) {
-			opened = false;
-			animator.SetTrigger("Close");
-			if (Place.currentlySelected != null)
-				Place.currentlySelected.Deselect();
-		}
-	}
-
 	public void NewPlace(PlaceGroup place, bool clickedOnMap = false) {
-		if (!opened) {
-			animator.SetTrigger("Open");
-			opened = true;
+		bool wait = true;
+		if (TopBar.instance.currentTab == 2)
+			animator.SetTrigger("Change");
+		else {
+			wait = false;
+			TopBar.instance.SwitchTab(2);
 		}
+		StopAllCoroutines();
+		
+
 		if (!clickedOnMap) {
 			RenderMap.instance.UpdateMapSize(0.3f);
 			GlobalVariables.inst.MoveCamera(place.mapObject.gameObject.transform.position);
 			place.mapObject.Select();
 		}
 		this.place = place;
+		StartCoroutine(AfterAnimationChange(wait));
+	}
+	IEnumerator AfterAnimationChange(bool wait = true) {
+		if (wait)
+			yield return new WaitForSeconds(0.1f);
 		placeName.text = place.placeInfo.name;
-		placeIcon.sprite = FacebookPlaces.instance.iconsImages[place.icon];
+		if (placeIcon != null)
+			placeIcon.sprite = FacebookPlaces.instance.iconsImages[place.icon];
 		placeVisitedTimes.text = string.Format("Place visited {0} times", place.timesVisited);
 		placeLastVisited.text = string.Format("Last visited {0}", place.lastVisited.ToShortDateString());
 		ChangeSelectedIcon(place.icon);
-		place.DisplayTimes(hours);
-		place.DisplayWeekDays(weekDays);
+		place.DisplayTimes(hours, maxChartHeight);
+		place.DisplayWeekDays(weekDays, maxChartHeight);
 
 		TryToGetAddress();
 	}

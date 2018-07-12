@@ -8,7 +8,7 @@ public class SearchField : MonoBehaviour {
 
 	public GameObject[] searchHelp;
 	public InputField inputField;
-	public Animator activityAnimator;
+	//public Animator activityAnimator;
 	public GameObject stopSearchingArea;
 	public GameObject searchSuggestionsGroup;
 	public SearchSuggestion[] suggestion;
@@ -21,14 +21,12 @@ public class SearchField : MonoBehaviour {
 		foreach (var item in searchHelp) {
 			item.SetActive(false);
 		}
-		activityAnimator.SetTrigger("StartSearching");
+		//activityAnimator.SetTrigger("StartSearching");
 		inputField.text = "";
 		inputField.gameObject.SetActive(true);
 		inputField.Select();
 		stopSearchingArea.SetActive(true);
 		searchSuggestionsGroup.SetActive(false);
-
-		RightListUI.instance.Close();
 	}
 
 	// Esc/Dismiss
@@ -52,7 +50,7 @@ public class SearchField : MonoBehaviour {
 		foreach (var item in searchHelp) {
 			item.SetActive(true);
 		}
-		activityAnimator.SetTrigger("StopSearching");
+		//activityAnimator.SetTrigger("StopSearching");
 		inputField.gameObject.SetActive(false);
 		inputField.Select();
 		stopSearchingArea.SetActive(false);

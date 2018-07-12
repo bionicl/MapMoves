@@ -22,7 +22,18 @@ public class SummaryItem : MonoBehaviour {
 		SetupColors();
 	}
 
+	public static string FirstLetterUpper(string text) {
+		string output = text.Substring(0, 1).ToUpper();
+		output += text.Substring(1);
+		return output;
+	}
+
 	void SetupIcon() {
+		activityImage.gameObject.SetActive(false);
+		activityTitle.gameObject.SetActive(true);
+		activityTitle.text = FirstLetterUpper(summary.activity.ToString());
+		return;
+
 		switch (summary.activity) {
 			case ActivityType.walking:
 				activityImage.sprite = icons[0];
