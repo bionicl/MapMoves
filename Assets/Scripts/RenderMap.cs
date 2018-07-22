@@ -8,7 +8,12 @@ public enum FilterTypes {
 	cycling,
 	running,
 	transport,
-	place
+	place,
+	car,
+	bus,
+	train,
+	plane,
+	otherTransport
 }
 
 public class RenderMap : MonoBehaviour {
@@ -20,7 +25,7 @@ public class RenderMap : MonoBehaviour {
 
 	public float mapScale = 1f;
 
-	List<GameObject>[] filterLines = new List<GameObject>[4];
+	List<GameObject>[] filterLines = new List<GameObject>[10];
 	Dictionary<DateTime, GameObject> filterDays = new Dictionary<DateTime, GameObject>();
 	GameObject loactionsGO;
 
@@ -120,20 +125,46 @@ public class RenderMap : MonoBehaviour {
 				return materials[1];
 			case ActivityType.running:
 				return materials[2];
-			default:
+			case ActivityType.car:
 				return materials[3];
+			case ActivityType.bus:
+				return materials[4];
+			case ActivityType.train:
+				return materials[5];
+			case ActivityType.airplane:
+				return materials[6];
+			default:
+				return materials[7];
 		}
 	}
 
 	void AddToFilterList(ActivityType activity, GameObject line) {
-		if (activity == ActivityType.walking)
-			filterLines[0].Add(line);
-		else if (activity == ActivityType.cycling)
-			filterLines[1].Add(line);
-		else if (activity == ActivityType.running)
-			filterLines[2].Add(line);
-		else
-			filterLines[3].Add(line);
+		switch (activity) {
+			case ActivityType.walking:
+				filterLines[0].Add(line);
+				break;
+			case ActivityType.cycling:
+				filterLines[1].Add(line);
+				break;
+			case ActivityType.running:
+				filterLines[2].Add(line);
+				break;
+			case ActivityType.car:
+				filterLines[5].Add(line);
+				break;
+			case ActivityType.bus:
+				filterLines[6].Add(line);
+				break;
+			case ActivityType.train:
+				filterLines[7].Add(line);
+				break;
+			case ActivityType.airplane:
+				filterLines[8].Add(line);
+				break;
+			default:
+				filterLines[9].Add(line);
+				break;
+		}
 	}
 
 	void Clear() {

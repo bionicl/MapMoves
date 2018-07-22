@@ -6,17 +6,17 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public enum ActivityType {
-	walking,
-	transport,
-	cycling,
-	train,
-	dancing,
-	bus,
-	tram,
-	running,
-	car,
-	underground,
-	airplane
+	walking,	//00D55A	0
+	transport,	//FBE7B1	1
+	cycling,	//00CDEC	2
+	train,		//FF802D	3
+	dancing,	//F32DFF	4
+	bus,		//F43838	5
+	tram,		//FF802D	6
+	running,	//F32DFF	7
+	car,		//FFC52D	8
+	underground,//FF802D	9
+	airplane	//6033EE	10
 }
 
 public enum PlaceType {
