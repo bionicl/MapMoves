@@ -11,7 +11,7 @@ public class FilterButton : MonoBehaviour {
 	Button button;
 	public Color disabledColor;
 
-	bool isOn = true;
+	public bool isOn = true;
 
 	void Awake() {
 		image = GetComponent<Image>();
