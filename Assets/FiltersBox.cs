@@ -34,4 +34,11 @@ public class FiltersBox : MonoBehaviour {
 			RenderMap.instance.ChangeFilter(FilterTypes.otherTransport, false);
 		}
 	}
+
+	public void ColorsSwitch(bool colorsEnabled) {
+		RenderMap.instance.ChangeFilterColor(!colorsEnabled);
+		foreach (var item in filterButtons) {
+			item.ChangeButtonColor(!colorsEnabled);
+		}
+	}
 }

@@ -12,6 +12,7 @@ public class FilterButton : MonoBehaviour {
 	public Color disabledColor;
 
 	public bool isOn = true;
+	bool unifiedColor;
 
 	void Awake() {
 		image = GetComponent<Image>();
@@ -27,13 +28,27 @@ public class FilterButton : MonoBehaviour {
 		RefreshButton();
 	}
 
+	public void ChangeButtonColor(bool unifiedColor) {
+		this.unifiedColor = unifiedColor;
+		RefreshButton(true);
+	}
+
 	void RefreshButton(bool isOnStart = false) {
 		if (!isOnStart) {
 			RenderMap.instance.ChangeFilter(filterType, isOn);
 		}
-		if (isOn)
-			image.color = ReadJson.colors[colorId];
-		else
+		if (isOn) {
+			if (unifiedColor)
+				image.color = ReadJson.colors[8];
+			else {
+				if (filterType == FilterTypes.place)
+					image.color = ReadJson.PlaceColor;
+				else
+					image.color = ReadJson.colors[colorId];
+			}
+		} else
 			image.color = disabledColor;
 	}
+
+
 }

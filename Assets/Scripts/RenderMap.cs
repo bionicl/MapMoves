@@ -138,6 +138,27 @@ public class RenderMap : MonoBehaviour {
 		}
 	}
 
+	Material SetMaterial(int filterLine) {
+		switch (filterLine) {
+			case 0:
+				return materials[0];
+			case 1:
+				return materials[1];
+			case 2:
+				return materials[2];
+			case 5:
+				return materials[3];
+			case 6:
+				return materials[4];
+			case 7:
+				return materials[5];
+			case 8:
+				return materials[6];
+			default:
+				return materials[7];
+		}
+	}
+
 	void AddToFilterList(ActivityType activity, GameObject line) {
 		switch (activity) {
 			case ActivityType.walking:
@@ -180,6 +201,24 @@ public class RenderMap : MonoBehaviour {
 		} else {
 			foreach (var item in filterLines[(int)filterType]) {
 				item.SetActive(state);
+			}
+		}
+	}
+	public void ChangeFilterColor(bool isUnified) {
+		if (isUnified) {
+			for (int i = 5; i < 10; i++) {
+				foreach (var item in filterLines[i]) {
+					item.GetComponent<Renderer>().material = materials[3];
+				}
+			}
+		} else {
+			for (int i = 5; i < 10; i++) {
+				foreach (var item in filterLines[i]) {
+					item.GetComponent<Renderer>().material = SetMaterial(i);
+				}
+			}
+			foreach (var item in filterLines) {
+				
 			}
 		}
 	}

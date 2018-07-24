@@ -9,6 +9,7 @@ public class GlobalVariables : MonoBehaviour {
 
 	public Sprite[] icons;
 	public Color accentColor;
+	public Color disabledColor;
 	public bool firstWeekMonday = true;
 	[HideInInspector]
 	public bool mapControls = true;

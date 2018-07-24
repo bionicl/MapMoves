@@ -107,12 +107,14 @@ public class DayClass {
 public class ReadJson : MonoBehaviour {
 	public static ReadJson instance;
 	public static Color[] colors;
+	public static Color PlaceColor;
 
 	public RectTransform historySpawn;
 	public GameObject activityPrefab;
 	[HideInInspector]
 	public List<ActivityUI> activitiesList;
 	public Color[] activitesColor;
+	public Color placeColor;
 
 	public Text[] selectedDayDateText;
 	public Animator animator;
@@ -129,6 +131,7 @@ public class ReadJson : MonoBehaviour {
 	void Awake() {
 		instance = this;
 		colors = activitesColor;
+		PlaceColor = placeColor;
 	}
 	void Start() {
 		PlacesSave.Load();
