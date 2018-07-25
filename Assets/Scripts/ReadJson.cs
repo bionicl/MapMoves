@@ -194,19 +194,22 @@ public class ReadJson : MonoBehaviour {
 		string[] paths = StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, false);
 		foreach (var item in paths) {
 			string tempItem = item.Replace("file://", "").Replace("%20", " ");
-			if (item.ToLower().EndsWith("gpx"))
-				Debug.Log("GPX file!");
-			else if (item.ToLower().EndsWith("json")) {
+			if (item.ToLower().EndsWith("gpx")) {
+				//Debug.Log("GPX file!\nLoading...");
+				//Debug.Log(Bionicl.ArcExportConverter.ConvertGpxToJson("test", 80));
+				string jsonData = File.ReadAllText(tempItem);
+				LoadFiles(Bionicl.ArcExportConverter.ConvertGpxToJson(jsonData, 80));
+			} else if (item.ToLower().EndsWith("json")) {
 				Debug.Log("Json file!\nLoading...");
-				LoadFiles(tempItem);
+				string jsonData = File.ReadAllText(tempItem);
+				LoadFiles(jsonData);
 			}
 				
 		}
 	}
 
 	// Loading json files
-	void LoadFiles(string path) {
-		string jsonData = File.ReadAllText(path);
+	void LoadFiles(string jsonData) {
 		string text = "{ day: " + jsonData + "}";
 		FullStoryLine m = JsonConvert.DeserializeObject<FullStoryLine>(text);
 		int dayNumber = 0;
