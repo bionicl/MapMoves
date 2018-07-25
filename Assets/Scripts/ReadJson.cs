@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using SFB;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public enum ActivityType {
 	walking,	//00D55A	0
@@ -135,7 +137,7 @@ public class ReadJson : MonoBehaviour {
 	}
 	void Start() {
 		PlacesSave.Load();
-		LoadFiles();
+		OpenFileDialog();
 		CheckIfCanDraw();
 	}
 
@@ -184,10 +186,28 @@ public class ReadJson : MonoBehaviour {
 		}
 	}
 
+	void OpenFileDialog() {
+		var extensions = new[] {
+			new ExtensionFilter("Arc app GPX or Moves json", "gpx", "json")
+		};
+
+		string[] paths = StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, false);
+		foreach (var item in paths) {
+			string tempItem = item.Replace("file://", "").Replace("%20", " ");
+			if (item.ToLower().EndsWith("gpx"))
+				Debug.Log("GPX file!");
+			else if (item.ToLower().EndsWith("json")) {
+				Debug.Log("Json file!\nLoading...");
+				LoadFiles(tempItem);
+			}
+				
+		}
+	}
+
 	// Loading json files
-	void LoadFiles() {
-		TextAsset jsonData = Resources.Load("storyline") as TextAsset;
-		string text = "{ day: " + jsonData.text + "}";
+	void LoadFiles(string path) {
+		string jsonData = File.ReadAllText(path);
+		string text = "{ day: " + jsonData + "}";
 		FullStoryLine m = JsonConvert.DeserializeObject<FullStoryLine>(text);
 		int dayNumber = 0;
 		foreach (var item in m.day) {
