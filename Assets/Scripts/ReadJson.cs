@@ -2,21 +2,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using SFB;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public enum ActivityType {
-	walking,
-	transport,
-	cycling,
-	train,
-	dancing,
-	bus,
-	tram,
-	running,
-	car,
-	underground,
-	airplane
+	walking,	//00D55A	0
+	transport,	//FBE7B1	1
+	cycling,	//00CDEC	2
+	train,		//FF802D	3
+	dancing,	//F32DFF	4
+	bus,		//F43838	5
+	tram,		//FF802D	6
+	running,	//F32DFF	7
+	car,		//FFC52D	8
+	underground,//FF802D	9
+	airplane	//6033EE	10
 }
 
 public enum PlaceType {
@@ -107,12 +109,14 @@ public class DayClass {
 public class ReadJson : MonoBehaviour {
 	public static ReadJson instance;
 	public static Color[] colors;
+	public static Color PlaceColor;
 
 	public RectTransform historySpawn;
 	public GameObject activityPrefab;
 	[HideInInspector]
 	public List<ActivityUI> activitiesList;
 	public Color[] activitesColor;
+	public Color placeColor;
 
 	public Text[] selectedDayDateText;
 	public Animator animator;
@@ -126,14 +130,22 @@ public class ReadJson : MonoBehaviour {
 	[Header("Summary")]
 	public GameObject summaryPrefab;
 
+	[Header("Uploaded files")]
+	public List<string> uploadedFiles;
+	public FilesBox filesBox;
+
 	void Awake() {
 		instance = this;
 		colors = activitesColor;
+		PlaceColor = placeColor;
 	}
 	void Start() {
 		PlacesSave.Load();
-		LoadFiles();
-		CheckIfCanDraw();
+		OpenFileDialog();
+		if (uploadedFiles.Count > 0) {
+			filesBox.SetupTexts(uploadedFiles);
+			CheckIfCanDraw();
+		}
 	}
 
 	void Update() {
@@ -181,10 +193,47 @@ public class ReadJson : MonoBehaviour {
 		}
 	}
 
+
+	// Opening files
+	void OpenFileDialog() {
+		var extensions = new[] {
+			new ExtensionFilter("Arc app GPX or Moves json", "gpx", "json")
+		};
+
+		string[] paths = StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, true);
+		foreach (var item in paths) {
+			string tempItem = item.Replace("file://", "").Replace("%20", " ");
+			if (item.ToLower().EndsWith("gpx")) {
+				//Debug.Log("GPX file!\nLoading...");
+				//Debug.Log(Bionicl.ArcExportConverter.ConvertGpxToJson("test", 80));
+				uploadedFiles.Add(GetFileName(tempItem));
+				string jsonData = File.ReadAllText(tempItem);
+				LoadFiles(Bionicl.ArcExportConverter.ConvertGpxToJson(jsonData, 80));
+			} else if (item.ToLower().EndsWith("json")) {
+				Debug.Log("Json file!\nLoading...");
+				uploadedFiles.Add(GetFileName(tempItem));
+				string jsonData = File.ReadAllText(tempItem);
+				LoadFiles(jsonData);
+			}
+				
+		}
+	}
+	string GetFileName(string path) {
+		string output = "";
+		for (int i = 0; i < path.Length; i++) {
+			if (path[i] == '/') {
+				output = "";
+			} else {
+				output += path[i];
+			}
+		}
+		Debug.Log("File name: " + output);
+		return output;
+	}
+
 	// Loading json files
-	void LoadFiles() {
-		TextAsset jsonData = Resources.Load("storyline") as TextAsset;
-		string text = "{ day: " + jsonData.text + "}";
+	void LoadFiles(string jsonData) {
+		string text = "{ day: " + jsonData + "}";
 		FullStoryLine m = JsonConvert.DeserializeObject<FullStoryLine>(text);
 		int dayNumber = 0;
 		foreach (var item in m.day) {

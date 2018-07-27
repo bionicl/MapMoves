@@ -1,4 +1,4 @@
-Simple app to check Moves app history in Unity.
+Simple app to check **Moves app & Arc app** history in Unity.
 
 ![][image-1]
 
@@ -9,17 +9,18 @@ Simple app to check Moves app history in Unity.
 3. Export your data from [Moves website][2] (Sign in -\> Export data), then move `json/full/storyline.json` from downloaded package into `Assets/Resources` folder of Unity project
 4. Run the app
 
+**Builded Release soon!**
+
 ### Current features:
 - Display Moves storyline data with summary
 - Display map with all path drawn
 - Activity filters
 - Activity history display
 - Detailed place info (place address, visiting hours, visiting weekdays, custom icons)
-- Places search
 - Google maps integration
 - Press `S` to save places icons
-### Planned features:
 - Support for Arc app GPX
+### Planned features:
 - Calendar view to change day
 - Favourite/Top visited places
 - Date range filters
