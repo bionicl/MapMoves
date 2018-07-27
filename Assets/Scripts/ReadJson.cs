@@ -130,6 +130,10 @@ public class ReadJson : MonoBehaviour {
 	[Header("Summary")]
 	public GameObject summaryPrefab;
 
+	[Header("Uploaded files")]
+	public List<string> uploadedFiles;
+	public FilesBox filesBox;
+
 	void Awake() {
 		instance = this;
 		colors = activitesColor;
@@ -138,7 +142,10 @@ public class ReadJson : MonoBehaviour {
 	void Start() {
 		PlacesSave.Load();
 		OpenFileDialog();
-		CheckIfCanDraw();
+		if (uploadedFiles.Count > 0) {
+			filesBox.SetupTexts(uploadedFiles);
+			CheckIfCanDraw();
+		}
 	}
 
 	void Update() {
@@ -186,26 +193,42 @@ public class ReadJson : MonoBehaviour {
 		}
 	}
 
+
+	// Opening files
 	void OpenFileDialog() {
 		var extensions = new[] {
 			new ExtensionFilter("Arc app GPX or Moves json", "gpx", "json")
 		};
 
-		string[] paths = StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, false);
+		string[] paths = StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, true);
 		foreach (var item in paths) {
 			string tempItem = item.Replace("file://", "").Replace("%20", " ");
 			if (item.ToLower().EndsWith("gpx")) {
 				//Debug.Log("GPX file!\nLoading...");
 				//Debug.Log(Bionicl.ArcExportConverter.ConvertGpxToJson("test", 80));
+				uploadedFiles.Add(GetFileName(tempItem));
 				string jsonData = File.ReadAllText(tempItem);
 				LoadFiles(Bionicl.ArcExportConverter.ConvertGpxToJson(jsonData, 80));
 			} else if (item.ToLower().EndsWith("json")) {
 				Debug.Log("Json file!\nLoading...");
+				uploadedFiles.Add(GetFileName(tempItem));
 				string jsonData = File.ReadAllText(tempItem);
 				LoadFiles(jsonData);
 			}
 				
 		}
+	}
+	string GetFileName(string path) {
+		string output = "";
+		for (int i = 0; i < path.Length; i++) {
+			if (path[i] == '/') {
+				output = "";
+			} else {
+				output += path[i];
+			}
+		}
+		Debug.Log("File name: " + output);
+		return output;
 	}
 
 	// Loading json files
