@@ -12,9 +12,13 @@ public class CheckUIScale : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	void Start () {
-		if (Screen.dpi >= 190)
+	void Start() {
+#if (UNITY_EDITOR)
+		return;
+#endif
+		if (Screen.dpi >= 190) {
 			canvas.scaleFactor = 2.6f;
+		}
 	}
 	
 	// Update is called once per frame

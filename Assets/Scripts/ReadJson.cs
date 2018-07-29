@@ -24,6 +24,7 @@ public enum ActivityType {
 public enum PlaceType {
 	school,
 	facebook,
+	foursquare,
 	home,
 	work,
 	user,
@@ -72,6 +73,7 @@ public class MovesJson {
 			public string name;
 			public PlaceType type;
 			public string facebookPlaceId;
+			public string foursquareId;
 		}
 
 		public string startTime;
@@ -208,7 +210,7 @@ public class ReadJson : MonoBehaviour {
 				//Debug.Log(Bionicl.ArcExportConverter.ConvertGpxToJson("test", 80));
 				uploadedFiles.Add(GetFileName(tempItem));
 				string jsonData = File.ReadAllText(tempItem);
-				LoadFiles(Bionicl.ArcExportConverter.ConvertGpxToJson(jsonData, 80));
+				LoadFiles(TealFire.ArcExportConverter.ConvertGpxToJson(jsonData, 80));
 			} else if (item.ToLower().EndsWith("json")) {
 				Debug.Log("Json file!\nLoading...");
 				uploadedFiles.Add(GetFileName(tempItem));
