@@ -518,11 +518,11 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 93497562}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -71.71922, y: -341.92307, z: 0}
+  m_LocalPosition: {x: -71.71922, y: -384.3846, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1197122675}
-  m_RootOrder: 9
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -1507,12 +1507,12 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 199425746}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.550003, y: -421.76923, z: 0}
+  m_LocalPosition: {x: 1.550003, y: -363.15384, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2129109461}
   m_Father: {fileID: 1197122675}
-  m_RootOrder: 12
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2463,7 +2463,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 384800659}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 119.33002, y: 0.12402344, z: 0}
+  m_LocalPosition: {x: 119.330025, y: 0.12402344, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2127403382}
@@ -4148,7 +4148,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 565950011}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 461.84695, y: 295.10773, z: 0}
+  m_LocalPosition: {x: 248.00076, y: 197.41539, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1881068476}
@@ -6046,7 +6046,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 715392269}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.180008, y: 168.43271, z: 0}
+  m_LocalPosition: {x: 18.180008, y: 70.74039, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1202556823}
@@ -6400,7 +6400,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 803260321}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -18.5, z: 0}
+  m_LocalPosition: {x: 0, y: -18.499992, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1371052591}
@@ -7240,11 +7240,11 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 888889402}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -57.10384, y: -400.53845, z: 0}
+  m_LocalPosition: {x: -68.6423, y: -341.92307, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1197122675}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -7294,7 +7294,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Custom icon
+  m_Text: Category
 --- !u!222 &888889406
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7328,7 +7328,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 897516546}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.05000305, y: 287.4327, z: 0}
+  m_LocalPosition: {x: 0.05000305, y: 189.74039, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1059206952}
@@ -7901,7 +7901,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 967983572}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -184.81567, z: 0}
+  m_LocalPosition: {x: 0, y: -184.81561, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1602435184}
@@ -8798,7 +8798,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1144076161}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 119.829956, y: -231.57268, z: 0}
+  m_LocalPosition: {x: 119.82997, y: -133.88037, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1340324852}
@@ -9130,7 +9130,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1197122674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.025032043, y: 322.3115, z: 0}
+  m_LocalPosition: {x: 0.025032043, y: 224.61917, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 211861403}
@@ -9142,10 +9142,10 @@ RectTransform:
   - {fileID: 1288939094}
   - {fileID: 574856545}
   - {fileID: 1345978255}
-  - {fileID: 93497566}
-  - {fileID: 2050212667}
   - {fileID: 888889403}
   - {fileID: 199425747}
+  - {fileID: 93497566}
+  - {fileID: 2050212667}
   m_Father: {fileID: 1602435184}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9823,7 +9823,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1371052590}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.1500015, y: 322.3621, z: 0}
+  m_LocalPosition: {x: 1.1500015, y: 224.6578, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1051724950}
@@ -9835,7 +9835,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.1500001, y: -0.070617676}
+  m_AnchoredPosition: {x: 1.1500001, y: -0.08258057}
   m_SizeDelta: {x: 0, y: 449}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1371052592
@@ -10113,7 +10113,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1433522475}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 454.37775, y: 60, z: 0}
+  m_LocalPosition: {x: 240.49077, y: 60, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 637090571}
@@ -10122,7 +10122,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 454.37775, y: 60}
+  m_AnchoredPosition: {x: 240.49077, y: 60}
   m_SizeDelta: {x: 400, y: 150}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1433522477
@@ -11032,7 +11032,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1616544792}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.000015258789, y: 289.43774, z: 0}
+  m_LocalPosition: {x: 0.000015258789, y: 191.74542, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2119123834}
@@ -11893,7 +11893,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1764345208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -455.09692, y: 0.12503052, z: 0}
+  m_LocalPosition: {x: -241.25075, y: 0.12501526, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 157423044}
@@ -12812,7 +12812,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1861917361}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 458.97696, y: 268.2077, z: 0}
+  m_LocalPosition: {x: 245.13077, y: 170.5154, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1659316461}
@@ -13940,11 +13940,11 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2050212663}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -64.79615, y: -371.23077, z: 0}
+  m_LocalPosition: {x: -64.79615, y: -413.69232, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1197122675}
-  m_RootOrder: 10
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -13991,7 +13991,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2063773714}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 458.977, y: 268.2031, z: 0}
+  m_LocalPosition: {x: 245.1308, y: 170.51077, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 59370673}
@@ -14137,7 +14137,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2078342590}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.07500458, y: 287.4327, z: 0}
+  m_LocalPosition: {x: 0.07500458, y: 189.74039, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2102326051}
@@ -14585,7 +14585,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2127403378}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 745, y: 419, z: 0}
+  m_LocalPosition: {x: 467, y: 292, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_Children:
   - {fileID: 187655526}
@@ -14651,6 +14651,98 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d554274c60ce5499d9b762c36a20c782, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCategories:
+  - name: Transport
+    icon: {fileID: 0}
+    color: {r: 1, g: 0.59607846, b: 0, a: 1}
+  - name: Shopping
+    icon: {fileID: 21300000, guid: 50958204b75cb454ba75d34e822e72d1, type: 3}
+    color: {r: 0.8980392, g: 0.10980392, b: 0.13725491, a: 1}
+  - name: Public place
+    icon: {fileID: 0}
+    color: {r: 0.6117647, g: 0.15294118, b: 0.6901961, a: 1}
+  - name: Food
+    icon: {fileID: 0}
+    color: {r: 0.24705882, g: 0.31764707, b: 0.70980394, a: 1}
+  - name: Private place
+    icon: {fileID: 0}
+    color: {r: 0.011764706, g: 0.6627451, b: 0.95686275, a: 1}
+  - name: Health
+    icon: {fileID: 21300000, guid: 00dbe8c9733ce44da9c73dcfae9c6694, type: 3}
+    color: {r: 0, g: 0.5882353, b: 0.53333336, a: 1}
+  - name: Services
+    icon: {fileID: 0}
+    color: {r: 0.14509805, g: 0.60784316, b: 0.14117648, a: 1}
+  - name: Education
+    icon: {fileID: 0}
+    color: {r: 0.8039216, g: 0.8627451, b: 0.22352941, a: 1}
+  - name: Entertainment
+    icon: {fileID: 0}
+    color: {r: 0.4745098, g: 0.33333334, b: 0.28235295, a: 1}
+  - name: Uncategorized
+    icon: {fileID: 0}
+    color: {r: 0.3764706, g: 0.49019608, b: 0.54509807, a: 1}
+  categories:
+  - name: Airport
+    category: 0
+    smallIcon: {fileID: 21300000, guid: 6f8ab4e3cf4b34440be65d0065dfd733, type: 3}
+    bigIcon: {fileID: 21300000, guid: 79c0ca8837ca748e0b83782d0a2629cd, type: 3}
+  - name: Store
+    category: 1
+    smallIcon: {fileID: 21300000, guid: 375fd008006e94c5086d17748daa41b6, type: 3}
+    bigIcon: {fileID: 21300000, guid: 50958204b75cb454ba75d34e822e72d1, type: 3}
+  - name: Official building
+    category: 2
+    smallIcon: {fileID: 21300000, guid: 1bfc3ea7bb5af4a35bd6a4a8aebd757c, type: 3}
+    bigIcon: {fileID: 21300000, guid: 6381e99fc41f840eaa277ea572d284c0, type: 3}
+  - name: Fastfood
+    category: 3
+    smallIcon: {fileID: 21300000, guid: 59f2531b163af4d9daf2ef4ec6f18cf4, type: 3}
+    bigIcon: {fileID: 21300000, guid: 0b9880804e2a8434a88aca5382011e84, type: 3}
+  - name: Home
+    category: 8
+    smallIcon: {fileID: 21300000, guid: d48020e3c50a04b5ea2bfc0994e16a1f, type: 3}
+    bigIcon: {fileID: 21300000, guid: a3dc345ecdddb4fb28852756461f5c48, type: 3}
+  - name: Hospital
+    category: 5
+    smallIcon: {fileID: 21300000, guid: 075b878febe3d472c8773d767fc90df4, type: 3}
+    bigIcon: {fileID: 21300000, guid: 00dbe8c9733ce44da9c73dcfae9c6694, type: 3}
+  - name: Marker
+    category: 9
+    smallIcon: {fileID: 21300000, guid: 8a5013245c8ea4d02a7f5a7e26f45085, type: 3}
+    bigIcon: {fileID: 21300000, guid: 7c79a7098a286405f862c8ec86e1666a, type: 3}
+  - name: Petrol station
+    category: 6
+    smallIcon: {fileID: 21300000, guid: 3cb26600cc3d548bba13db8f99150c51, type: 3}
+    bigIcon: {fileID: 21300000, guid: df8a8131918a945de811710b3c75c34c, type: 3}
+  - name: Printing house
+    category: 6
+    smallIcon: {fileID: 21300000, guid: 84cb762b9b8ec46d582300fab547c5bd, type: 3}
+    bigIcon: {fileID: 21300000, guid: 33ef049645cf8433f92ecf8ce51db066, type: 3}
+  - name: School
+    category: 7
+    smallIcon: {fileID: 21300000, guid: 3444d29c26df04ac08a616f7cc4ab854, type: 3}
+    bigIcon: {fileID: 21300000, guid: 4529c36710f1e4e97b72f293b54e8ba7, type: 3}
+  - name: Restaurant
+    category: 3
+    smallIcon: {fileID: 21300000, guid: 77a5527d657eb44ff878302325eb60fd, type: 3}
+    bigIcon: {fileID: 21300000, guid: 9cba623421bb5408db333baafbee061c, type: 3}
+  - name: Cinema
+    category: 4
+    smallIcon: {fileID: 21300000, guid: 2b31ac9b8c4b44f4db61e3ea76e0394c, type: 3}
+    bigIcon: {fileID: 21300000, guid: 07f51f92be2a84b27a06a4ec5bb3f524, type: 3}
+  - name: Theater
+    category: 4
+    smallIcon: {fileID: 21300000, guid: 4e21c273afae342b5b7c0e585df32861, type: 3}
+    bigIcon: {fileID: 21300000, guid: 0583e876b1489403f90b70a7edaebd71, type: 3}
+  - name: Train station
+    category: 0
+    smallIcon: {fileID: 21300000, guid: b4c45a8d79ab44afcbfe212cda9d2e14, type: 3}
+    bigIcon: {fileID: 21300000, guid: a45d3c9a9fb6744f3b73f2544c934e57, type: 3}
+  - name: Park
+    category: 2
+    smallIcon: {fileID: 21300000, guid: 26c95bc27074948c1adc94882f8fa254, type: 3}
+    bigIcon: {fileID: 21300000, guid: 7c79a7098a286405f862c8ec86e1666a, type: 3}
   theBiggestPlaceVisits: 80
   maxValue: 0
 --- !u!114 &2127403385
@@ -14664,116 +14756,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b2e831054f64be5a91407b8f604056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icons:
-  - name: Shopping & Retail
-    iconId: 1
-  - name: Train Station
-    iconId: 13
-  - name: Art School
-    iconId: 9
-  - name: Media/News Company
-    iconId: 7
-  - name: City
-    iconId: 2
-  - name: Driving School
-    iconId: 9
-  - name: Fast Food Restaurant
-    iconId: 3
-  - name: Performance Art Theatre
-    iconId: 12
-  - name: American Restaurant
-    iconId: 10
-  - name: Printing Service
-    iconId: 8
-  - name: Polish Restaurant
-    iconId: 10
-  - name: Park
-    iconId: 14
-  - name: Shopping Mall
-    iconId: 1
-  - name: Restaurant
-    iconId: 10
-  - name: Charter Bus Service
-    iconId: 13
-  - name: Movie Theater
-    iconId: 12
-  - name: Street
-    iconId: 2
-  - name: Apartment & Condo Building
-    iconId: 11
-  - name: Chicken Joint
-    iconId: 3
-  - name: Food & Beverage Company
-    iconId: 10
-  - name: Kebab Shop
-    iconId: 3
-  - name: Public Service
-    iconId: 2
-  - name: Region
-    iconId: 2
-  - name: Library
-    iconId: 9
-  - name: Clothing Store
-    iconId: 1
-  - name: Bus Station
-    iconId: 13
-  - name: Big Box Retailer
-    iconId: 1
-  - name: Sandwich Shop
-    iconId: 3
-  - name: College & University
-    iconId: 9
-  - name: Transit Hub
-    iconId: 13
-  - name: Audio Visual Equipment Store
-    iconId: 1
-  - name: Professional Service
-    iconId: 11
-  - name: Horse-Drawn Carriage Service
-    iconId: 13
-  - name: Transportation Service
-    iconId: 13
-  - name: Electronics Store
-    iconId: 1
-  - name: Railway Station
-    iconId: 13
-  - name: Hospital
-    iconId: 5
-  - name: Turkish Restaurant
-    iconId: 10
-  - name: Grocery Store
-    iconId: 1
-  - name: Public Square / Plaza
-    iconId: 2
-  - name: Bar
-    iconId: 10
-  - name: Vegetarian/Vegan Restaurant
-    iconId: 10
-  - name: Airport
-    iconId: 0
-  - name: Home
-    iconId: 4
-  - name: School
-    iconId: 9
-  - name: User
-    iconId: 6
-  iconsImages:
-  - {fileID: 21300000, guid: 2b3335b6f5b724d129af6b3a465e8909, type: 3}
-  - {fileID: 21300000, guid: 3a935cad5d6bd4058b5f7cd4d6b14d58, type: 3}
-  - {fileID: 21300000, guid: 40ddbda4cd4024af892a0d26e894bcab, type: 3}
-  - {fileID: 21300000, guid: 668f47649a9e54b4bb65a95493cf5f45, type: 3}
-  - {fileID: 21300000, guid: 33450a062b8724618b498a8af1754bc4, type: 3}
-  - {fileID: 21300000, guid: bc4975afe26ef4e24819f9eee1d577c2, type: 3}
-  - {fileID: 21300000, guid: a0d4b6930363e4e53a5918e711890e49, type: 3}
-  - {fileID: 21300000, guid: 4f849d61980814ea391605ccac64a202, type: 3}
-  - {fileID: 21300000, guid: 592f0e9e3b8364bd194fa768c49418c0, type: 3}
-  - {fileID: 21300000, guid: 3f147c38f68cc40fe95b1ecf01d78155, type: 3}
-  - {fileID: 21300000, guid: fc8434647c04b482d8fe0e46c9596632, type: 3}
-  - {fileID: 21300000, guid: 51c534ab448604a66a72d29aa562e744, type: 3}
-  - {fileID: 21300000, guid: 7a6c6b144536b4a039b469898e6e20ae, type: 3}
-  - {fileID: 21300000, guid: 547b2f85338e540f99ff2f1977741de5, type: 3}
-  - {fileID: 21300000, guid: 3af2d5083c8b24c9d91388a80ba83d2e, type: 3}
-  fbAccessToken: 
 --- !u!114 &2127403386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14786,9 +14768,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icons:
-  - {fileID: 21300000, guid: 33450a062b8724618b498a8af1754bc4, type: 3}
-  - {fileID: 21300000, guid: a0d4b6930363e4e53a5918e711890e49, type: 3}
-  - {fileID: 21300000, guid: 3f147c38f68cc40fe95b1ecf01d78155, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   accentColor: {r: 0, g: 0.7058824, b: 0.8156863, a: 1}
   disabledColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   firstWeekMonday: 1

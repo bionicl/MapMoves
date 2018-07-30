@@ -63,7 +63,7 @@ public class RightListUI : MonoBehaviour {
 			yield return new WaitForSeconds(0.1f);
 		placeName.text = place.placeInfo.name;
 		if (placeIcon != null)
-			placeIcon.sprite = FacebookPlaces.instance.iconsImages[place.icon];
+			placeIcon.sprite = PlacesRanking.instance.categories[place.icon].smallIcon;
 		placeVisitedTimes.text = string.Format("Place visited {0} times", place.timesVisited);
 		placeLastVisited.text = string.Format("Last visited {0}", place.lastVisited.ToShortDateString());
 		ChangeSelectedIcon(place.icon);
@@ -82,13 +82,13 @@ public class RightListUI : MonoBehaviour {
 
 	void SetupIcons() {
 		int count = 0;
-		foreach (var item in FacebookPlaces.instance.iconsImages) {
+		foreach (var item in PlacesRanking.instance.categories) {
 			GameObject tempIcon = Instantiate(iconBoxPrefab, transform.position, transform.rotation);
 			tempIcon.transform.SetParent(iconsSpawn);
 			tempIcon.transform.localScale = tempIcon.transform.lossyScale;
 			tempIcon.SetActive(true);
 			IconBox tempIconBox = tempIcon.GetComponent<IconBox>();
-			tempIconBox.SetupIcon(item, count);
+			tempIconBox.SetupIcon(item.smallIcon, count, item.Category.color);
 			customIcons.Add(tempIconBox);
 			count++;
 		}
@@ -108,7 +108,7 @@ public class RightListUI : MonoBehaviour {
 		ChangeSelectedIcon(id);
 		place.RefreshIcons(id);
 		if (placeIcon != null)
-			placeIcon.sprite = FacebookPlaces.instance.iconsImages[place.icon];
+			placeIcon.sprite = PlacesRanking.instance.categories[place.icon].smallIcon;
 		PlacesSave.IconChange(place.placeInfo.id, id);
 		savePlacesAfterReload = true;
 	}

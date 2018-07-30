@@ -26,12 +26,11 @@ public class GlobalVariables : MonoBehaviour {
 		mapControls = false;
 	}
 
-	Image targetImg;
 	public void SetIcon(MovesJson.SegmentsInfo.PlaceInfo place, SpriteRenderer image) {
-		LoadIcon(place, (int sprite) => image.sprite = FacebookPlaces.instance.iconsImages[sprite]);
+		LoadIcon(place, (int sprite) => image.sprite = PlacesRanking.instance.categories[sprite].smallIcon);
 	}
 	public void SetIcon(MovesJson.SegmentsInfo.PlaceInfo place, Image image) {
-		LoadIcon(place, (int sprite) => image.sprite = FacebookPlaces.instance.iconsImages[sprite]);
+		LoadIcon(place, (int sprite) => image.sprite = PlacesRanking.instance.categories[sprite].smallIcon);
 	}
 	public void SetIcon(MovesJson.SegmentsInfo.PlaceInfo place, Action<int> action) {
 		LoadIcon(place, (int sprite) => action.Invoke(sprite));
@@ -46,12 +45,7 @@ public class GlobalVariables : MonoBehaviour {
 			action.Invoke(6);
 
 		int? customIcon = PlacesSave.FindIcon(place.id);
-		if (customIcon == null) {
-			if (placeType == PlaceType.facebook) {
-				action += (int obj) => PlacesSave.IconChange(place.id, obj);
-				FacebookPlaces.instance.GetPlaceCategory(place.facebookPlaceId, action);
-			}
-		} else {
+		if (customIcon != null) {
 			action.Invoke(customIcon.Value);
 		}
 		
