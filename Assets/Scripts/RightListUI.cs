@@ -22,6 +22,8 @@ public class RightListUI : MonoBehaviour {
 	List<IconBox> customIcons = new List<IconBox>();
 	public int maxChartHeight = 28;
 
+	bool savePlacesAfterReload = false;
+
 	void Awake() {
 		instance = this;
 	}
@@ -31,6 +33,13 @@ public class RightListUI : MonoBehaviour {
 	}
 
 	public void NewPlace(PlaceGroup place, bool clickedOnMap = false) {
+
+		// Save places
+		if (savePlacesAfterReload) {
+			savePlacesAfterReload = false;
+			PlacesSave.Save();
+		}
+
 		bool wait = true;
 		if (TopBar.instance.currentTab == 2)
 			animator.SetTrigger("Change");
@@ -98,7 +107,9 @@ public class RightListUI : MonoBehaviour {
 	public void IconClicked(int id) {
 		ChangeSelectedIcon(id);
 		place.RefreshIcons(id);
-		placeIcon.sprite = FacebookPlaces.instance.iconsImages[place.icon];
+		if (placeIcon != null)
+			placeIcon.sprite = FacebookPlaces.instance.iconsImages[place.icon];
 		PlacesSave.IconChange(place.placeInfo.id, id);
+		savePlacesAfterReload = true;
 	}
 }
