@@ -29,7 +29,9 @@ Simple app to check **Moves app & Arc app** history in Unity.
 
 ### Used APIs:
 - Google maps api to get location address.  
-	Create file `Assets/Resources/API/GoogleApi.txt` and paste your Google Geocoding API key there
+	Create file `Assets/Resources/API/googleApi.txt` and paste your Google Geocoding API key there
+- MapBox access token for static maps images  
+	Create files `Assets/Resources/API/mapBoxApi.txt` and paste your MapBox Access token
 
 [1]:	https://assetstore.unity.com/packages/tools/input-management/json-net-for-unity-11347
 [2]:	http://moves-app.com

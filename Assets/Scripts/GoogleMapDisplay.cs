@@ -44,6 +44,7 @@ public class GoogleMapDisplay : MonoBehaviour {
 	List<Vector2>[] donePositions = new List<Vector2>[17];
 
 	public float timeMarginAfterMove = 0.2f;
+	public bool useGoogleMaps = false;
 	float timeSinceLastRefresh;
 	bool checkForLastRefresh = true;
 
@@ -117,10 +118,10 @@ public class GoogleMapDisplay : MonoBehaviour {
 		int yGrid = (int)(y / request.tileSize / 6.4f) + 1;
 		Vector2 tempVector = new Vector2(xGrid, yGrid);
 		if (donePositions[request.zoomLevel].Contains(tempVector)) {
-			Debug.Log("Already drawn, skipping");
+			//Debug.Log("Already drawn, skipping");
 			return false;
 		} else {
-			Debug.Log(string.Format("x: {0}  y: {1}", xGrid, yGrid));
+			//Debug.Log(string.Format("x: {0}  y: {1}", xGrid, yGrid));
 			request.position.x = (float)xGrid * request.tileSize * 6.4f;
 			request.position.y = (float)yGrid * request.tileSize * 6.4f;
 			donePositions[request.zoomLevel].Add(tempVector);
@@ -182,7 +183,11 @@ public class GoogleMapDisplay : MonoBehaviour {
 	string ReturnApiUrl(OneRequest request) {
 		Vector3 tempPos = request.position;
 		Vector2 metersPos = Conversion.MetersToLatLon(new Vector2(tempPos.x, tempPos.y));
-		string output = string.Format("http://maps.googleapis.com/maps/api/staticmap?center={0},{1}&zoom={2}&size=640x640&key={3}{4}", metersPos.x, metersPos.y, request.zoomLevel, GoogleLocationApi.instance.apiKey, style);
+		string output = "";
+		if (useGoogleMaps)
+			output = string.Format("http://maps.googleapis.com/maps/api/staticmap?center={0},{1}&zoom={2}&size=640x640&key={3}{4}", metersPos.x, metersPos.y, request.zoomLevel, GoogleLocationApi.instance.apiKey, style);
+		else
+			output = string.Format("https://api.mapbox.com/styles/v1/bionicl/cjbfocd42b59q2rqasdw3ezwb/static/{1},{0},{2},0,0/640x640?access_token={3}", metersPos.x, metersPos.y, request.zoomLevel-1, GoogleLocationApi.instance.mapBoxApiKey);
 		return output;
 	}
 }
