@@ -14,11 +14,11 @@ public enum PlaceMainCategoryEnum {
 	Shopping,
 	PublicPlace,
 	Food,
-	Entertainment,
+	PrivatePlace,
 	Health,
 	Services,
 	Education,
-	PrivatePlace,
+	Entertainment,
 	Uncategorized
 }
 
@@ -28,6 +28,8 @@ public class PlaceCategory {
 	public PlaceMainCategoryEnum category;
 	public Sprite smallIcon;
 	public Sprite bigIcon;
+	[HideInInspector]
+	public int id;
 
 	public PlaceMainCategory Category {
 		get {

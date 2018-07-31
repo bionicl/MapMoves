@@ -15,6 +15,12 @@ public class PlaceGroup {
 	public int[] hourSplit = new int[24];
 	public int[] weekDaysSplit = new int[7];
 
+	public PlaceCategory Category {
+		get {
+			return PlacesRanking.instance.categories[icon];
+		}
+	}
+
 	public PlaceGroup() {
 
 	}

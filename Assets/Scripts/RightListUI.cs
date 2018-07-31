@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -83,7 +84,15 @@ public class RightListUI : MonoBehaviour {
 		foreach (var item in customIcons) {
 			item.MarkAsDeselected();
 		}
-		customIcons[id].MarkAsSelected();
+
+		int finalId = id;;
+		for (int i = 0; i < customIcons.Count; i++) {
+			if (customIcons[i].iconId == id) {
+				finalId = i;
+				break;
+			}
+		}
+		customIcons[finalId].MarkAsSelected();
 
 		// Current category
 		PlaceCategory category = PlacesRanking.instance.categories[id];
@@ -95,13 +104,15 @@ public class RightListUI : MonoBehaviour {
 
 	void SetupIcons() {
 		int count = 0;
-		foreach (var item in PlacesRanking.instance.categories) {
+		PlaceCategory[] tempCategories = PlacesRanking.instance.categories;
+		tempCategories = tempCategories.OrderBy(c => c.category).ToArray();
+		foreach (var item in tempCategories) {
 			GameObject tempIcon = Instantiate(iconBoxPrefab, transform.position, transform.rotation);
 			tempIcon.transform.SetParent(iconsSpawn);
 			tempIcon.transform.localScale = tempIcon.transform.lossyScale;
 			tempIcon.SetActive(true);
 			IconBox tempIconBox = tempIcon.GetComponent<IconBox>();
-			tempIconBox.SetupIcon(item.smallIcon, count, item.Category.color);
+			tempIconBox.SetupIcon(item.smallIcon, item.id, item.Category.color);
 			customIcons.Add(tempIconBox);
 			count++;
 		}

@@ -18,7 +18,10 @@ public class PlacesRanking : MonoBehaviour {
 
 	void Awake() {
 		instance = this;
-		categories = categories.OrderBy(c => c.category).ToArray();
+		for (int i = 0; i < categories.Length; i++) {
+			categories[i].id = i;
+		}
+		//categories = categories.OrderBy(c => c.category).ToArray();
 	}
 
 	public void AnalyseDay(MovesJson day) {
