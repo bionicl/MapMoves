@@ -22,6 +22,12 @@ public class RightListUI : MonoBehaviour {
 	List<IconBox> customIcons = new List<IconBox>();
 	public int maxChartHeight = 28;
 
+	[Header("Current category")]
+	public Image currentCatIcon;
+	public Image currentCatCircle;
+	public Text currentCatText;
+	public Text currentCatTextMain;
+
 	bool savePlacesAfterReload = false;
 
 	void Awake() {
@@ -78,6 +84,13 @@ public class RightListUI : MonoBehaviour {
 			item.MarkAsDeselected();
 		}
 		customIcons[id].MarkAsSelected();
+
+		// Current category
+		PlaceCategory category = PlacesRanking.instance.categories[id];
+		currentCatCircle.color = category.Category.color;
+		currentCatIcon.sprite = category.bigIcon;
+		currentCatText.text = category.name;
+		currentCatTextMain.text = category.Category.name;
 	}
 
 	void SetupIcons() {
