@@ -12,9 +12,11 @@ public class IconBox : MonoBehaviour {
 	[HideInInspector]
 	public int iconId;
 
-	public void SetupIcon(Sprite icon, int id) {
+	public void SetupIcon(Sprite icon, int id, Color boxColor) {
 		this.icon.sprite = icon;
-		box.color = unselectedColor;
+		Color tempColor = boxColor;
+		tempColor.a = 0.75f;
+		box.color = tempColor;
 		iconId = id;
 	}
 
@@ -23,10 +25,14 @@ public class IconBox : MonoBehaviour {
 	}
 
 	public void MarkAsSelected() {
-		box.color = selectedColor;
+		Color tempColor = box.color;
+		tempColor.a = 1;
+		box.color = tempColor;
 	}
 
 	public void MarkAsDeselected() {
-		box.color = unselectedColor;
+		Color tempColor = box.color;
+		tempColor.a = 0.5f;
+		box.color = tempColor;
 	}
 }

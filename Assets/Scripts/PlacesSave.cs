@@ -33,6 +33,9 @@ public class PlacesSave : MonoBehaviour {
 		}
 	}
 
+	void OnApplicationQuit() {
+		Save();
+	}
 
 	public static void Load() {
 		string destination = Application.persistentDataPath + "/save.dat";
@@ -65,7 +68,7 @@ public class PlacesSave : MonoBehaviour {
 		BinaryFormatter bf = new BinaryFormatter();
 		bf.Serialize(file, iconSaves);
 		file.Close();
-		Debug.Log("Saved!");
+		Debug.Log("Places saved!");
 	}
 
 	public static int? FindIcon(long placeId) {

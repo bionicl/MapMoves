@@ -63,6 +63,9 @@ public class ActivityUI : MonoBehaviour {
 		string timeShort = string.Format("{0}", t.Minutes);
 		if (type == null) {
 			place.SetActive(true);
+			//place.GetComponent<Image>().color = placeGroup.Category.Category.color;
+			//place.GetComponent<Image>().color = Color.white;
+			//placeIcon.color = new Color(50, 50, 50);
 			move.gameObject.SetActive(false);
 			Header.text = placename;
 			Subheader.gameObject.SetActive(false);
