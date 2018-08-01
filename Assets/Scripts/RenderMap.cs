@@ -48,6 +48,9 @@ public class RenderMap : MonoBehaviour {
 				UpdateMapSize();
 			} else if (Input.mouseScrollDelta.y < 0) {
 				mapScale *= 1.5f;
+				if (mapScale > 64)
+					mapScale = 127;
+				Debug.Log(mapScale);
 				UpdateMapSize();
 			}
 		}
@@ -73,7 +76,6 @@ public class RenderMap : MonoBehaviour {
 		filterDays.Add(ReadJson.ReturnSimpleDate(day.date), dateGO);
 
 		foreach (var item in day.segments) {
-			Debug.Log("New place!");
 			if (item.place != null && !alreadyRenderedPlaces.Contains(item.place.id)) {
 				Vector2 position = Conversion.LatLonToMeters(item.place.location.lat, item.place.location.lon);
 				Vector3 finalPos = new Vector3(position.x, position.y, 0);

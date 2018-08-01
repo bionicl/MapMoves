@@ -128,7 +128,8 @@ public class ActivityUI : MonoBehaviour {
 	}
 
 	public void ClickOnPlace() {
-		RightListUI.instance.NewPlace(placeGroup);
+		if (placename != null)
+			RightListUI.instance.NewPlace(placeGroup);
 	}
 
 	public void DestroyActivity() {

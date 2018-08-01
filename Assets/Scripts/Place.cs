@@ -11,7 +11,6 @@ public class Place : MonoBehaviour {
 	public TextMesh text;
 
 	public void SetupPlace(MovesJson.SegmentsInfo.PlaceInfo placeInfo) {
-		Debug.Log("New place! " + placeInfo.name);
 		place = PlacesRanking.instance.FindPlace(placeInfo, this);
 		if (placeInfo.name == null)
 			text.text = "???";
@@ -37,9 +36,10 @@ public class Place : MonoBehaviour {
 		circle.color = currentColor;
 	}
 
-	public void Select() {
+	public void Select(bool clickedFromActivityUI = false) {
 		if (currentlySelected != this) {
-			RightListUI.instance.NewPlace(place, true);
+			if (!clickedFromActivityUI)
+				RightListUI.instance.NewPlace(place, true);
 			if (currentlySelected != null)
 				currentlySelected.Deselect();
 			currentlySelected = this;
