@@ -73,7 +73,8 @@ public class RenderMap : MonoBehaviour {
 		filterDays.Add(ReadJson.ReturnSimpleDate(day.date), dateGO);
 
 		foreach (var item in day.segments) {
-			if (item.place != null && !alreadyRenderedPlaces.Contains(item.place.id) && item.place.name != null) {
+			Debug.Log("New place!");
+			if (item.place != null && !alreadyRenderedPlaces.Contains(item.place.id)) {
 				Vector2 position = Conversion.LatLonToMeters(item.place.location.lat, item.place.location.lon);
 				Vector3 finalPos = new Vector3(position.x, position.y, 0);
 				GameObject placeTemp = Instantiate(PlacePrefab, finalPos, transform.rotation);
@@ -81,7 +82,10 @@ public class RenderMap : MonoBehaviour {
 				finalPos = placeTemp.transform.position;
 				finalPos.z = -3;
 				placeTemp.transform.position = finalPos;
-				placeTemp.name = item.place.name;
+				if (item.place.name == null)
+					placeTemp.name = "???";
+				else
+					placeTemp.name = item.place.name;
 				placeTemp.GetComponent<Place>().SetupPlace(item.place);
 				alreadyRenderedPlaces.Add(item.place.id);
 			} else if (item.place == null) {

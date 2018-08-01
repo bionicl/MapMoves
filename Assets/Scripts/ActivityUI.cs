@@ -75,7 +75,7 @@ public class ActivityUI : MonoBehaviour {
 			MoveMinText.gameObject.SetActive(false);
 			//if (distance >= 100)
 			//	Subheader.text += distance.ToString() + "m";
-			if (placeGroup.placeInfo != null)
+			if (placeGroup != null && placeGroup.placeInfo != null)
 				placeIcon.sprite = placeGroup.IconSprite;
 		} else {
 			place.SetActive(false);

@@ -68,7 +68,10 @@ public class RightListUI : MonoBehaviour {
 	IEnumerator AfterAnimationChange(bool wait = true) {
 		if (wait)
 			yield return new WaitForSeconds(0.1f);
-		placeName.text = place.placeInfo.name;
+		if (place.placeInfo.name == null)
+			placeName.text = "???";
+		else
+			placeName.text = place.placeInfo.name;
 		if (placeIcon != null)
 			placeIcon.sprite = PlacesRanking.instance.categories[place.icon].smallIcon;
 		placeVisitedTimes.text = string.Format("Place visited {0} times", place.timesVisited);

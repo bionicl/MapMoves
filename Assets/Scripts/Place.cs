@@ -11,8 +11,12 @@ public class Place : MonoBehaviour {
 	public TextMesh text;
 
 	public void SetupPlace(MovesJson.SegmentsInfo.PlaceInfo placeInfo) {
+		Debug.Log("New place! " + placeInfo.name);
 		place = PlacesRanking.instance.FindPlace(placeInfo, this);
-		text.text = place.placeInfo.name;
+		if (placeInfo.name == null)
+			text.text = "???";
+		else
+			text.text = place.placeInfo.name;
 	}
 
 	void OnMouseDown() {
