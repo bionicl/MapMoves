@@ -26,7 +26,9 @@ public class PlacesRanking : MonoBehaviour {
 
 	public void AnalyseDay(MovesJson day) {
 		foreach (var item in day.segments) {
-			if (item.place != null && item.place.name != null) {
+			if (item.place != null) {
+				if (item.place.name == null)
+					item.place.name = "???";
 				AddOrSetupRanking(item.place, day, item);
 			}
 		}

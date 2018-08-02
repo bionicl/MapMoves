@@ -12,7 +12,10 @@ public class Place : MonoBehaviour {
 
 	public void SetupPlace(MovesJson.SegmentsInfo.PlaceInfo placeInfo) {
 		place = PlacesRanking.instance.FindPlace(placeInfo, this);
-		text.text = place.placeInfo.name;
+		if (placeInfo.name == null)
+			text.text = "???";
+		else
+			text.text = place.placeInfo.name;
 	}
 
 	void OnMouseDown() {
@@ -33,9 +36,10 @@ public class Place : MonoBehaviour {
 		circle.color = currentColor;
 	}
 
-	public void Select() {
+	public void Select(bool clickedFromActivityUI = false) {
 		if (currentlySelected != this) {
-			RightListUI.instance.NewPlace(place, true);
+			if (!clickedFromActivityUI)
+				RightListUI.instance.NewPlace(place, true);
 			if (currentlySelected != null)
 				currentlySelected.Deselect();
 			currentlySelected = this;
