@@ -13,7 +13,7 @@ public enum FilterTypes {
 	bus,
 	train,
 	plane,
-	otherTransport
+	otherTransport,
 }
 
 public class RenderMap : MonoBehaviour {
