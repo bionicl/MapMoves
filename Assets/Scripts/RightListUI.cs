@@ -44,7 +44,7 @@ public class RightListUI : MonoBehaviour {
 		// Save places
 		if (savePlacesAfterReload) {
 			savePlacesAfterReload = false;
-			PlacesSave.Save();
+			SaveSystem.Save();
 		}
 
 		bool wait = true;

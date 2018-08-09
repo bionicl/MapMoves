@@ -136,4 +136,8 @@ public class ActivityUI : MonoBehaviour {
 		ReadJson.instance.activitiesList.Remove(this);
 		Destroy(gameObject);
 	}
+
+	public void HideClicked(bool hide) {
+		
+	}
 }

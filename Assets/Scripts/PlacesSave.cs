@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
+
 
 [System.Serializable]
 public class PlaceIconSave {
@@ -33,42 +32,8 @@ public class PlacesSave : MonoBehaviour {
 		}
 	}
 
-	void OnApplicationQuit() {
-		Save();
-	}
-
-	public static void Load() {
-		string destination = Application.persistentDataPath + "/save.dat";
-		Debug.Log(destination);
-		FileStream file;
-
-		if (File.Exists(destination))
-			file = File.OpenRead(destination);
-		else {
-			Debug.LogError("File not found");
-			return;
-		}
-
-		BinaryFormatter bf = new BinaryFormatter();
-		List<PlaceIconSave> data = (List<PlaceIconSave>)bf.Deserialize(file);
-		file.Close();
-
-		iconSaves = data;
-		//iconSaves = (List<PlaceIconSave>)JsonConvert.DeserializeObject(data);
-	}
-	public static void Save() {
-		string destination = Application.persistentDataPath + "/save.dat";
-		FileStream file;
-
-		if (File.Exists(destination))
-			file = File.OpenWrite(destination);
-		else
-			file = File.Create(destination);
-
-		BinaryFormatter bf = new BinaryFormatter();
-		bf.Serialize(file, iconSaves);
-		file.Close();
-		Debug.Log("Places saved!");
+	public static void LoadCategories(List<PlaceIconSave> save) {
+		iconSaves = save;
 	}
 
 	public static int? FindIcon(long placeId) {

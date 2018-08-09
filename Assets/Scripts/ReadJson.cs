@@ -111,6 +111,7 @@ public enum PlaceType {
 public class FullStoryLine {
 	public MovesJson[] day;
 }
+[Serializable]
 public class MovesJson {
 	
 	public class SummaryInfo {
@@ -219,7 +220,7 @@ public class ReadJson : MonoBehaviour {
 		PlaceColor = placeColor;
 	}
 	void Start() {
-		PlacesSave.Load();
+		SaveSystem.Load();
 		OpenFileDialog();
 		if (uploadedFiles.Count > 0) {
 			filesBox.SetupTexts(uploadedFiles);
