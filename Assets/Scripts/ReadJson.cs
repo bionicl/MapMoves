@@ -205,6 +205,7 @@ public class ReadJson : MonoBehaviour {
 	public List<ActivityUI> activitiesList;
 	public Color[] activitesColor;
 	public Color placeColor;
+	public GameObject blankPlaceholder;
 
 	public Text[] selectedDayDateText;
 	public Animator animator;
@@ -231,11 +232,13 @@ public class ReadJson : MonoBehaviour {
 	void Start() {
 		SaveSystem.Load();
 		//OpenFileDialog();
+		blankPlaceholder.SetActive(true);
 		if (uploadedFiles.Count > 0) {
 			CalculationAfterLoadedFiles(false);
 			filesBox.SetupTexts(uploadedFiles);
 			CheckIfCanDraw();
 		}
+
 	}
 
 	void Update() {
@@ -302,6 +305,8 @@ public class ReadJson : MonoBehaviour {
 		FilesBox.instance.SetupTexts(uploadedFiles);
 		SaveSystem.Save();
 		PlacesSave.Clear();
+		blankPlaceholder.SetActive(true);
+		TopBar.instance.Clear();
 	}
 
 	// Opening files
@@ -364,8 +369,8 @@ public class ReadJson : MonoBehaviour {
 				daysToDraw.Add(item);
 			}
 		}
-
-
+		if (daysToDraw.Count == 0)
+			return;
 		foreach (var item in daysToDraw) {
 			PlacesRanking.instance.AnalyseDay(item.day);
 			ChartUI.instance.CheckMaxCalories(item.day);
@@ -378,6 +383,8 @@ public class ReadJson : MonoBehaviour {
 		lastDate = days.Keys.Max();
 		selectedDay = lastDate;
 		daysToDraw.Clear();
+
+		blankPlaceholder.SetActive(false);
 	}
 
 	// Drawing Timeline
