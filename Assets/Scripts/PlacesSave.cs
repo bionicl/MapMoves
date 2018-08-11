@@ -52,4 +52,8 @@ public class PlacesSave : MonoBehaviour {
 		}
 		return null;
 	}
+
+	public static void Clear() {
+		iconSaves.Clear();
+	}
 }

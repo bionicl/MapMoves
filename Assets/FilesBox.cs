@@ -4,9 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class FilesBox : MonoBehaviour {
+	public static FilesBox instance;
 
 	public GameObject fileNamePrefab;
 	public GameObject textSpawner;
+
+	void Awake() {
+		instance = this;
+	}
 
 	public void SetupTexts(List<string> files) {
 		for (int i = 0; i < textSpawner.transform.childCount; i++) {

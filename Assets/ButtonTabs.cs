@@ -31,4 +31,8 @@ public class ButtonTabs : MonoBehaviour {
 			currentlyOpened = id;
 		}
 	}
+
+	public void Save() {
+		SaveSystem.Save();
+	}
 }

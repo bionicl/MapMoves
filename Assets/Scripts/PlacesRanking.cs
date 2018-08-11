@@ -83,6 +83,10 @@ public class PlacesRanking : MonoBehaviour {
 		return output;
 	}
 
+	public void Clear() {
+		places.Clear();
+	}
+
 	public void SortAndDisplay() {
 		Dictionary<PlaceGroup, int> ranking = new Dictionary<PlaceGroup, int>();
 		foreach (var item in places) {

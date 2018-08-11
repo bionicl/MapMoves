@@ -188,10 +188,19 @@ public class RenderMap : MonoBehaviour {
 		}
 	}
 
-	void Clear() {
+	public void Clear() {
 		foreach (Transform child in gameObject.transform) {
 			Destroy(child.gameObject);
 		}
+		foreach (Transform child in loactionsGO.transform) {
+			Destroy(child.gameObject);
+		}
+		foreach (var item in filterLines) {
+			item.Clear();
+		}
+		filterDays.Clear();
+		alreadyRenderedPlaces.Clear();
+		renderedLines.Clear();
 	}
 
 	// Filters

@@ -244,6 +244,8 @@ public class ReadJson : MonoBehaviour {
 
 	// SwitchingDays
 	void CheckArrows() {
+		if (days.Count <= 3)
+			return;
 		if (Input.GetKey(KeyCode.LeftArrow)) {
 			ChangeLeft();
 		} else if (Input.GetKey(KeyCode.RightArrow)) {
@@ -283,12 +285,23 @@ public class ReadJson : MonoBehaviour {
 		}
 	}
 
+	// Files UI
 	public void OpenMoreFilesButton() {
 		OpenFileDialog();
 		if (uploadedFiles.Count > 0) {
 			filesBox.SetupTexts(uploadedFiles);
 			CheckIfCanDraw();
 		}
+	}
+	public void RestartFiles() {
+		days.Clear();
+		RenderMap.instance.Clear();
+		PlacesRanking.instance.Clear();
+		dayNumber = 0;
+		uploadedFiles.Clear();
+		FilesBox.instance.SetupTexts(uploadedFiles);
+		SaveSystem.Save();
+		PlacesSave.Clear();
 	}
 
 	// Opening files
