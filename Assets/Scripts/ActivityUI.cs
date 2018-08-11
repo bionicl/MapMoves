@@ -128,7 +128,7 @@ public class ActivityUI : MonoBehaviour {
 	}
 
 	public void ClickOnPlace() {
-		if (placename != null)
+		if (placename != null && placeGroup != null)
 			RightListUI.instance.NewPlace(placeGroup);
 	}
 

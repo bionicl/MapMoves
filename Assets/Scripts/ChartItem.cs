@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
 public class ChartItem : MonoBehaviour {
 	public static ChartItem selectedChart;
 

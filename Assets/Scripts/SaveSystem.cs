@@ -6,12 +6,16 @@ using System;
 
 [Serializable]
 class SaveData {
-	public List<MovesJson> loadedJson;
+	public Dictionary<DateTime, DayClass> loadedJson;
 	public List<PlaceIconSave> placesSave;
+	public List<string> uploadedFiles;
+	public int dayNumber;
 
-	public SaveData(List<MovesJson> loadedJson, List<PlaceIconSave> placesSave) {
-		this.loadedJson = loadedJson;
+	public SaveData(ReadJson main, List<PlaceIconSave> placesSave, List<string> uploadedFiles) {
+		this.loadedJson = main.days;
 		this.placesSave = placesSave;
+		this.uploadedFiles = uploadedFiles;
+		this.dayNumber = main.dayNumber;
 	}
 }
 
@@ -25,7 +29,7 @@ public class SaveSystem
 	}
 
 	public static void Load() {
-		string destination = Application.persistentDataPath + "/save.dat";
+		string destination = Application.persistentDataPath + "/save2.dat";
 		FileStream file;
 
 		if (File.Exists(destination))
@@ -40,12 +44,16 @@ public class SaveSystem
 		file.Close();
 
 		PlacesSave.LoadCategories(data.placesSave);
+		ReadJson.instance.uploadedFiles = data.uploadedFiles;
+		ReadJson.instance.days = data.loadedJson;
 	}
 
 	public static void Save() {
 		// Setup
-		string destination = Application.persistentDataPath + "/save.dat";
-		SaveData saveData = new SaveData(new List<MovesJson>(), PlacesSave.iconSaves);
+		string destination = Application.persistentDataPath + "/save2.dat";
+		SaveData saveData = new SaveData(ReadJson.instance,
+		                                 PlacesSave.iconSaves,
+		                                 ReadJson.instance.uploadedFiles);
 
 		// Open/Create file
 		FileStream file;

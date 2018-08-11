@@ -6,6 +6,7 @@ using SFB;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using System.Linq;
 
 public enum ActivityType {
 	walking,	//00D55A	0
@@ -113,7 +114,7 @@ public class FullStoryLine {
 }
 [Serializable]
 public class MovesJson {
-	
+	[Serializable]
 	public class SummaryInfo {
 		public double distance;
 		public double duration;
@@ -122,8 +123,11 @@ public class MovesJson {
 		public string group;
 		public ActivityType activity;
 	}
+	[Serializable]
 	public class SegmentsInfo {
+		[Serializable]
 		public class ActivitiesInfo {
+			[Serializable]
 			public class TrackPointsInfo {
 				public string time;
 				public float lon;
@@ -141,7 +145,9 @@ public class MovesJson {
 			public string group;
 			public ActivityType activity;
 		}
+		[Serializable]
 		public class PlaceInfo {
+			[Serializable]
 			public class LocationInfo {
 				public float lon;
 				public float lat;
@@ -169,10 +175,11 @@ public class MovesJson {
 	public double caloriesIdle;
 }
 
+[Serializable]
 public class DayClass {
 	public DateTime date;
 	public MovesJson day;
-	public ChartItem chart;
+	//public ChartItem chart;
 	public int dayNumber;
 
 	public DayClass(DateTime date, MovesJson day, int number) {
@@ -214,6 +221,7 @@ public class ReadJson : MonoBehaviour {
 	[Header("Uploaded files")]
 	public List<string> uploadedFiles;
 	public FilesBox filesBox;
+	List<DayClass> daysToDraw = new List<DayClass>();
 
 	void Awake() {
 		instance = this;
@@ -222,8 +230,9 @@ public class ReadJson : MonoBehaviour {
 	}
 	void Start() {
 		SaveSystem.Load();
-		OpenFileDialog();
+		//OpenFileDialog();
 		if (uploadedFiles.Count > 0) {
+			CalculationAfterLoadedFiles(false);
 			filesBox.SetupTexts(uploadedFiles);
 			CheckIfCanDraw();
 		}
@@ -278,6 +287,7 @@ public class ReadJson : MonoBehaviour {
 		OpenFileDialog();
 		if (uploadedFiles.Count > 0) {
 			filesBox.SetupTexts(uploadedFiles);
+			CheckIfCanDraw();
 		}
 	}
 
@@ -302,7 +312,9 @@ public class ReadJson : MonoBehaviour {
 				string jsonData = File.ReadAllText(tempItem);
 				LoadFiles(jsonData);
 			}
-				
+		}
+		if (daysToDraw.Count > 0) {
+			CalculationAfterLoadedFiles();
 		}
 	}
 	string GetFileName(string path) {
@@ -319,26 +331,40 @@ public class ReadJson : MonoBehaviour {
 	}
 
 	// Loading json files
+	public int dayNumber;
 	void LoadFiles(string jsonData) {
 		string text = "{ day: " + jsonData + "}";
 		FullStoryLine m = JsonConvert.DeserializeObject<FullStoryLine>(text);
-		int dayNumber = 0;
 		foreach (var item in m.day) {
 			DateTime timelineDay = ReturnSimpleDate(item.date);
 			if (!days.ContainsKey(timelineDay) && item.summary != null) {
-				days.Add(timelineDay, new DayClass(timelineDay, item, dayNumber++));
-				selectedDay = timelineDay;
-				if (firstDate == null)
-					firstDate = timelineDay;
-				lastDate = timelineDay;
-				PlacesRanking.instance.AnalyseDay(item);
-				ChartUI.instance.CheckMaxCalories(item);
-				RenderMap.instance.RenderDay(item);
+				DayClass tempDay = new DayClass(timelineDay, item, dayNumber++);
+				days.Add(timelineDay, tempDay);
+				daysToDraw.Add(tempDay);
 			}
 		}
 		//RenderMap.instance.ChangeDaysRangeFilter(new DateTime(2018, 03, 01), new DateTime(2018, 03, 10));
+	}
+	void CalculationAfterLoadedFiles(bool daysToDrawLoaded = true) {
+		if (!daysToDrawLoaded) {
+			foreach (var item in days.Values) {
+				daysToDraw.Add(item);
+			}
+		}
+
+
+		foreach (var item in daysToDraw) {
+			PlacesRanking.instance.AnalyseDay(item.day);
+			ChartUI.instance.CheckMaxCalories(item.day);
+			RenderMap.instance.RenderDay(item.day);
+		}
 		PlacesRanking.instance.SortAndDisplay();
 		ChartUI.instance.SetupCharts();
+
+		firstDate = days.Keys.Min();
+		lastDate = days.Keys.Max();
+		selectedDay = lastDate;
+		daysToDraw.Clear();
 	}
 
 	// Drawing Timeline

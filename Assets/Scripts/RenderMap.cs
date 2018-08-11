@@ -50,7 +50,6 @@ public class RenderMap : MonoBehaviour {
 				mapScale *= 1.5f;
 				if (mapScale > 64)
 					mapScale = 127;
-				Debug.Log(mapScale);
 				UpdateMapSize();
 			}
 		}

@@ -13,6 +13,7 @@ public class ButtonTabs : MonoBehaviour {
 		foreach (var item in tabs) {
 			item.SetActive(false);
 		}
+		Open(1);
 	}
 
 	public void Open(int id) {
