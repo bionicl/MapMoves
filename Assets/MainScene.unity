@@ -3595,7 +3595,7 @@ Prefab:
     - target: {fileID: 224765645928447170, guid: 103d1f8304bdb41bea27bcf9b447795c,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 224765645928447170, guid: 103d1f8304bdb41bea27bcf9b447795c,
         type: 2}
@@ -14107,7 +14107,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Import location data from moves or Arc app
+  m_Text: Import location data from Moves or Arc app
 --- !u!222 &1859588819
 CanvasRenderer:
   m_ObjectHideFlags: 0

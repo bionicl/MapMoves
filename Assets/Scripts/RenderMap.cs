@@ -22,8 +22,10 @@ public class RenderMap : MonoBehaviour {
 	public GameObject LinePrefab;
 	public GameObject PlacePrefab;
 	public Material[] materials;
+	public float targetMapScale;
 
 	public float mapScale = 1f;
+	float timeSinceLastZoom;
 
 	List<GameObject>[] filterLines = new List<GameObject>[10];
 	Dictionary<DateTime, GameObject> filterDays = new Dictionary<DateTime, GameObject>();
@@ -31,6 +33,7 @@ public class RenderMap : MonoBehaviour {
 
 	void Awake() {
 		instance = this;
+		targetMapScale = GetComponent<Camera>().orthographicSize;
 		for (int i = 0; i < filterLines.Length; i++) {
 			filterLines[i] = new List<GameObject>();
 		}
@@ -40,7 +43,8 @@ public class RenderMap : MonoBehaviour {
 	}
 
 	void Update()  {
-		if (GlobalVariables.inst.mapControls) {
+		timeSinceLastZoom += Time.deltaTime;
+		if (GlobalVariables.inst.mapControls && timeSinceLastZoom >= 0.03f) {
 			if (Input.mouseScrollDelta.y > 0) {
 				mapScale /= 1.5f;
 				if (mapScale < 0.0625f)
@@ -53,12 +57,20 @@ public class RenderMap : MonoBehaviour {
 				UpdateMapSize();
 			}
 		}
+		if (targetMapScale != Camera.main.orthographicSize) {
+			if (targetMapScale > Camera.main.orthographicSize) {
+				Camera.main.orthographicSize += (targetMapScale - Camera.main.orthographicSize) / 3.5f;
+			} else if (targetMapScale < Camera.main.orthographicSize) {
+				Camera.main.orthographicSize -= (Camera.main.orthographicSize - targetMapScale) / 3.5f;
+			}
+		}
 	}
 
 	public void UpdateMapSize(float? newMapScale = null) {
+		timeSinceLastZoom = 0;
 		if (newMapScale.HasValue)
 			mapScale = newMapScale.Value;
-		GetComponent<Camera>().orthographicSize = mapScale;
+		targetMapScale = mapScale;
 		PlacesRanking.instance.ChangePlacesSize(mapScale);
 		foreach (var item in renderedLines) {
 			item.widthMultiplier = 0.006f + (mapScale - 1) * 0.006f;

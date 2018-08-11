@@ -58,7 +58,7 @@ public class ActivityUI : MonoBehaviour {
 
 		TimeSpan t = TimeSpan.FromSeconds(this.time);
 		SetSize(t);
-		endTimeText.text = string.Format("{0}:{1}", this.endTime.Hour.ToString().PadLeft(2, '0'), this.endTime.Minute.ToString().PadLeft(2, '0'));
+		endTimeText.text = endTime.ToString("HH:mm");
 
 		string timeShort = string.Format("{0}", t.Minutes);
 		if (type == null) {
