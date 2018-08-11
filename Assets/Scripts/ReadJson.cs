@@ -191,6 +191,7 @@ public class ReadJson : MonoBehaviour {
 	public static Color[] colors;
 	public static Color PlaceColor;
 
+	[Header("Day timeline")]
 	public RectTransform historySpawn;
 	public GameObject activityPrefab;
 	[HideInInspector]
@@ -273,6 +274,12 @@ public class ReadJson : MonoBehaviour {
 		}
 	}
 
+	public void OpenMoreFilesButton() {
+		OpenFileDialog();
+		if (uploadedFiles.Count > 0) {
+			filesBox.SetupTexts(uploadedFiles);
+		}
+	}
 
 	// Opening files
 	void OpenFileDialog() {

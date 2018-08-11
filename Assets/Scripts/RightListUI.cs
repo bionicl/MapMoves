@@ -54,20 +54,14 @@ public class RightListUI : MonoBehaviour {
 			wait = false;
 			TopBar.instance.SwitchTab(2);
 		}
-		Debug.Log("Wait1: " + wait);
 		StopAllCoroutines();
-		Debug.Log("Wait2: " + wait);
 
 		if (!clickedOnMap) {
-			Debug.Log("Wait3: " + wait);
 			RenderMap.instance.UpdateMapSize(0.3f);
 			GlobalVariables.inst.MoveCamera(place.mapObject.gameObject.transform.position);
 			place.mapObject.Select(true);
-			Debug.Log("Wait4: " + wait);
 		}
-		Debug.Log("Wait5: " + wait);
 		this.place = place;
-		Debug.Log("Wait6: " + wait);
 		if (wait)
 			StartCoroutine(AfterAnimationChange());
 		else
