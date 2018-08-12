@@ -58,7 +58,7 @@ public class ActivityUI : MonoBehaviour {
 
 		TimeSpan t = TimeSpan.FromSeconds(this.time);
 		SetSize(t);
-		endTimeText.text = string.Format("{0}:{1}", this.endTime.Hour.ToString().PadLeft(2, '0'), this.endTime.Minute.ToString().PadLeft(2, '0'));
+		endTimeText.text = endTime.ToString("HH:mm");
 
 		string timeShort = string.Format("{0}", t.Minutes);
 		if (type == null) {
@@ -128,12 +128,16 @@ public class ActivityUI : MonoBehaviour {
 	}
 
 	public void ClickOnPlace() {
-		if (placename != null)
+		if (placename != null && placeGroup != null)
 			RightListUI.instance.NewPlace(placeGroup);
 	}
 
 	public void DestroyActivity() {
 		ReadJson.instance.activitiesList.Remove(this);
 		Destroy(gameObject);
+	}
+
+	public void HideClicked(bool hide) {
+		
 	}
 }

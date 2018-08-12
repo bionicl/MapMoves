@@ -37,4 +37,9 @@ public class TopBar : MonoBehaviour {
 		selectedTab.Select();
 		currentTab = id;
 	}
+
+	public void Clear() {
+		SwitchTab(1);
+		tabButtons[2].GetComponent<Button>().interactable = false;
+	}
 }

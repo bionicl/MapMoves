@@ -35,7 +35,7 @@ public class ChartUI : MonoBehaviour {
 	public void CheckChartSelected() {
 		DayClass selectedDay = new DayClass();
 		ReadJson.instance.days.TryGetValue(ReadJson.instance.selectedDay, out selectedDay);
-		selectedDay.chart.Select();
+		//selectedDay.chart.Select();
 	}
 	public void SetupCharts() {
 		heightPerCalorie = (float)barsHeight / (float)maxCalories;
@@ -47,7 +47,7 @@ public class ChartUI : MonoBehaviour {
 				rectT.localScale = rectT.lossyScale;
 				ChartItem chartItem = chart.GetComponent<ChartItem>();
 				chartItem.Setup(item.Value);
-				item.Value.chart = chartItem;
+				//item.Value.chart = chartItem;
 			}
 		}
 	}

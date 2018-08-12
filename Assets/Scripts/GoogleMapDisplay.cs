@@ -75,7 +75,7 @@ public class GoogleMapDisplay : MonoBehaviour {
 	void CheckIfRenderMap() {
 		timeSinceLastRefresh += Time.deltaTime;
 		if (timeSinceLastRefresh > timeMarginAfterMove && checkForLastRefresh) {
-			RenderMap();
+			RenderMapTiles();
 			checkForLastRefresh = false;
 		}
 	}
@@ -83,7 +83,7 @@ public class GoogleMapDisplay : MonoBehaviour {
 		timeSinceLastRefresh = 0;
 		checkForLastRefresh = true;
 	}
-	void RenderMap() {
+	void RenderMapTiles() {
 		OneRequest request = CalculateMapZoom();
 		CreateAdditionalRequests(request);
 		if (ChangeToGridPosition(request))
@@ -131,7 +131,7 @@ public class GoogleMapDisplay : MonoBehaviour {
 
 	// Disable smaller maps
 	public void ChangeMapZoom() {
-		float userMapScale = Camera.main.orthographicSize;
+		float userMapScale = RenderMap.instance.targetMapScale;
 		for (int i = 0; i < zoomLevelTiers.Length; i++) {
 			//Debug.Log(zoomLevelTiers.Length - i - 1);
 			mapTilesGroups[i].SetActive(userMapScale < zoomLevelTiers[i].x);
@@ -167,7 +167,7 @@ public class GoogleMapDisplay : MonoBehaviour {
 		int groupId = 0;
 		int zoomLevel = 0;
 
-		float userMapScale = Camera.main.orthographicSize;
+		float userMapScale = RenderMap.instance.targetMapScale;
 		for (int i = 0; i < zoomLevelTiers.Length; i++) {
 			if (userMapScale <= zoomLevelTiers[i].x) {
 				zoomLevel = (int)zoomLevelTiers[i].y;
