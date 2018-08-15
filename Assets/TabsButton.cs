@@ -7,22 +7,21 @@ public class TabsButton : MonoBehaviour {
 
 	[HideInInspector]
 	public Button button;
-	[HideInInspector]
 	public Image image;
 	public Text text;
 
+	public Sprite unSelectedSprite;
+	public Sprite selectedSprite;
+
 	void Awake() {
 		button = GetComponent<Button>();
-		image = GetComponent<Image>();
 	}
 
 	public void Enable() {
-		text.color = Color.white;
-		image.color = GlobalVariables.inst.accentColor;
+		image.sprite = selectedSprite;
 	}
 
 	public void Disable() {
-		text.color = GlobalVariables.inst.disabledColor;
-		image.color = Color.white;
+		image.sprite = unSelectedSprite;
 	}
 }

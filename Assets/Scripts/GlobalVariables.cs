@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class GlobalVariables : MonoBehaviour {
 	public static GlobalVariables inst;
 
-	public Sprite[] icons;
 	public Color accentColor;
 	public Color disabledColor;
 	public bool firstWeekMonday = true;

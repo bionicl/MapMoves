@@ -34,12 +34,15 @@ public class ButtonTabs : MonoBehaviour {
 	}
 
 	public void Save() {
-		SaveSystem.Save();
-		saveButtonText.text = "Saved!";
+		saveButtonText.gameObject.SetActive(true);
+		saveButtonText.text = "Saving...";
 		StartCoroutine(RevertAfterTime());
 	}
 	IEnumerator RevertAfterTime() {
+		yield return new WaitForEndOfFrame();
+		SaveSystem.Save();
+		saveButtonText.text = "Saved!";
 		yield return new WaitForSeconds(1.5f);
-		saveButtonText.text = "Save";
+		saveButtonText.gameObject.SetActive(false);
 	}
 }
