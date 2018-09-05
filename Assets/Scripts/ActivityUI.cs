@@ -71,8 +71,10 @@ public class ActivityUI : MonoBehaviour {
 			//placeIcon.color = new Color(50, 50, 50);
 			move.gameObject.SetActive(false);
 			Header.text = placename;
-			Subheader.gameObject.SetActive(false);
-			//Subheader.text = timeShort;
+			Subheader.gameObject.SetActive(true);
+			Subheader.text = placeGroup.Category.Category.name;
+			Subheader.text += " - " + String.Format("{0}:{1}", Mathf.Round(Convert.ToSingle(t.TotalHours)), Convert.ToSingle(t.Minutes).ToString().PadLeft(2, '0'));
+			Subheader.text += "<size=7> min</size>";
 			MoveType.gameObject.SetActive(false);
 			MoveTime.gameObject.SetActive(false);
 			MoveMinText.gameObject.SetActive(false);
