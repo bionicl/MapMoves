@@ -1,4 +1,4 @@
-Check your **Moves app & Arc app** history in Unity.
+Check your **Moves app & Arc app** history on Map!
 
 ![][image-1]
 

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CheckUIScale : MonoBehaviour {
 
 	CanvasScaler canvas;
+	public bool retinaEnabled = true;
 
 	private void Awake() {
 		canvas = GetComponent<CanvasScaler>();
@@ -16,7 +17,7 @@ public class CheckUIScale : MonoBehaviour {
 #if (UNITY_EDITOR)
 		return;
 #endif
-		if (Screen.dpi >= 190) {
+		if (Screen.dpi >= 190 && retinaEnabled) {
 			canvas.scaleFactor = 2.6f;
 		}
 	}

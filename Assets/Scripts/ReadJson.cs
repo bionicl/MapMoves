@@ -316,6 +316,7 @@ public class ReadJson : MonoBehaviour {
 		};
 
 		string[] paths = StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, true);
+		Debug.Log("Starting loading...");
 		foreach (var item in paths) {
 			string tempItem = item.Replace("file://", "").Replace("%20", " ");
 			if (item.ToLower().EndsWith("gpx")) {

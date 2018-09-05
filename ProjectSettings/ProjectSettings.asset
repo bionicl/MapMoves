@@ -65,7 +65,7 @@ PlayerSettings:
   androidBlitType: 0
   defaultIsFullScreen: 0
   defaultIsNativeResolution: 1
-  macRetinaSupport: 1
+  macRetinaSupport: 0
   runInBackground: 0
   captureSingleScreen: 0
   muteOtherAudioSources: 0
