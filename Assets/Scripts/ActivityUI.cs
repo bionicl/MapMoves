@@ -121,7 +121,6 @@ public class ActivityUI : MonoBehaviour {
 			height = placeHeights;
 			//Debug
 			if (t.TotalMinutes >= 75) {
-				Debug.Log("Color place!");
 				placeBoxColor.gameObject.SetActive(true);
 				placeBoxColor.color = placeGroup.Category.Category.color;
 			}

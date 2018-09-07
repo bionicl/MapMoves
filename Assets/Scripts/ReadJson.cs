@@ -460,6 +460,8 @@ public class ReadJson : MonoBehaviour {
 		summaryObject.GetComponent<SummaryItem>().Setup(summary);
 	}
 	void SpawnActivity(ActivityType? type, double distance, float time, DateTime endTime, MovesJson.SegmentsInfo.PlaceInfo placeInfo = null) {
+		if (time < 60)
+			return;
 		GameObject activity = Instantiate(activityPrefab, historySpawn.transform.position, historySpawn.transform.rotation);
 		RectTransform activityRect = activity.GetComponent<RectTransform>();
 		activity.transform.SetParent(historySpawn.transform);
