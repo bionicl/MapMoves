@@ -18,10 +18,12 @@ public class CalendarButton : MonoBehaviour {
 	}
 
 	public void Select() {
-		selectImage.enabled = true;
-		if (cuttentlySelected != null)
-			cuttentlySelected.Deselect();
-		cuttentlySelected = this;
+		if (cuttentlySelected != this) {
+			selectImage.enabled = true;
+			if (cuttentlySelected != null)
+				cuttentlySelected.Deselect();
+			cuttentlySelected = this;
+		}
 	}
 
 	public void Clicked() {

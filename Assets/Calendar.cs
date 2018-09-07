@@ -11,6 +11,7 @@ public class Calendar : MonoBehaviour {
 	public CalendarButton[] calendarButtons;
 	DateTime currentMonth;
 	public Text monthText;
+	public VerticalLayoutGroup activityList;
 
 	// Use this for initialization
 	void Awake () {
@@ -33,14 +34,22 @@ public class Calendar : MonoBehaviour {
 		calendarButtons[date.Day - 1].Select();
 	}
 
+	public void ResetActivityListPadding() {
+		activityList.padding.top = 64;
+		LayoutRebuilder.MarkLayoutForRebuild(activityList.GetComponent<RectTransform>());
+	}
+
 	void ChangeMonth(DateTime newDate) {
+		Debug.Log("Changing date to " + newDate);
 		currentMonth = newDate;
 		int daysInMonth = DateTime.DaysInMonth(newDate.Year, newDate.Month);
 		for (int i = 0; i < 31; i++) {
-			DateTime tempDay = new DateTime(newDate.Year, newDate.Month, i + 1);
 			calendarButtons[i].gameObject.SetActive(i < daysInMonth);
-			calendarButtons[i].button.interactable = ReadJson.instance.days.ContainsKey(tempDay);
-			calendarButtons[i].Setup(tempDay);
+			if (i < daysInMonth) {
+				DateTime tempDay = new DateTime(newDate.Year, newDate.Month, i + 1);
+				calendarButtons[i].button.interactable = ReadJson.instance.days.ContainsKey(tempDay);
+				calendarButtons[i].Setup(tempDay);
+			}
 		}
 
 		DateTime firstDate = new DateTime(newDate.Year, newDate.Month, 1);
@@ -58,6 +67,7 @@ public class Calendar : MonoBehaviour {
 
 	public void ChangeDay(DateTime changedDate) {
 		ReadJson.instance.ChangeDay(changedDate);
+		activityList.padding.top = 240;
 	}
 
 }

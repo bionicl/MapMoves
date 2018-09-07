@@ -38,4 +38,4 @@ Check your **Moves app & Arc app** history on Map!
 [1]:	https://github.com/bionicl/MapMoves/releases
 [2]:	https://assetstore.unity.com/packages/tools/input-management/json-net-for-unity-11347
 
-[image-1]:	https://i.imgur.com/N5gReJk.jpg
+[image-1]:	https://i.imgur.com/hcXWvBf.png

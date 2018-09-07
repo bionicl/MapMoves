@@ -134,7 +134,6 @@ public class ActivityUI : MonoBehaviour {
 			GetComponent<RectTransform>().sizeDelta = new Vector2(0, height[2]);
 		else
 			GetComponent<RectTransform>().sizeDelta = new Vector2(0, height[3]);
-		Debug.Log(GetComponent<RectTransform>().sizeDelta.ToString());
 	}
 
 	public void ClickOnPlace() {

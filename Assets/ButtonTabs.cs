@@ -4,11 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ButtonTabs : MonoBehaviour {
+	public static ButtonTabs instance;
 
 	public TabsButton[] buttons;
 	public GameObject[] tabs;
 	int? currentlyOpened;
 	public Text saveButtonText;
+
+	void Awake() {
+		instance = this;
+	}
 
 	void Start () {
 		foreach (var item in tabs) {
@@ -18,6 +23,10 @@ public class ButtonTabs : MonoBehaviour {
 	}
 
 	public void Open(int id) {
+		if (currentlyOpened == 3) {
+			Calendar.instance.ResetActivityListPadding();
+		}
+
 		if (currentlyOpened == id) {
 			buttons[id].Disable();
 			tabs[id].SetActive(false);
@@ -47,5 +56,10 @@ public class ButtonTabs : MonoBehaviour {
 		saveButtonText.text = "Saved!";
 		yield return new WaitForSeconds(1.5f);
 		saveButtonText.gameObject.SetActive(false);
+	}
+
+	public void ClearCalendarView() {
+		if (currentlyOpened == 3)
+			Open(3);
 	}
 }

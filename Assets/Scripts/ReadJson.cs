@@ -206,6 +206,7 @@ public class ReadJson : MonoBehaviour {
 	public Color[] activitesColor;
 	public Color placeColor;
 	public GameObject blankPlaceholder;
+	public GameObject dateTimeArrows;
 
 	public Text[] selectedDayDateText;
 	public Animator animator;
@@ -233,6 +234,7 @@ public class ReadJson : MonoBehaviour {
 		SaveSystem.Load();
 		//OpenFileDialog();
 		blankPlaceholder.SetActive(true);
+		dateTimeArrows.SetActive(false);
 		if (uploadedFiles.Count > 0) {
 			CalculationAfterLoadedFiles(false);
 			filesBox.SetupTexts(uploadedFiles);
@@ -308,6 +310,7 @@ public class ReadJson : MonoBehaviour {
 		SaveSystem.Save();
 		PlacesSave.Clear();
 		blankPlaceholder.SetActive(true);
+		dateTimeArrows.SetActive(false);
 		TopBar.instance.Clear();
 	}
 
@@ -388,6 +391,7 @@ public class ReadJson : MonoBehaviour {
 		daysToDraw.Clear();
 
 		blankPlaceholder.SetActive(false);
+		dateTimeArrows.SetActive(true);
 	}
 
 	// Drawing Timeline

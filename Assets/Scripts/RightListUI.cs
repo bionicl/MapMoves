@@ -40,6 +40,7 @@ public class RightListUI : MonoBehaviour {
 	}
 
 	public void NewPlace(PlaceGroup place, bool clickedOnMap = false) {
+		ButtonTabs.instance.ClearCalendarView();
 
 		// Save places
 		if (savePlacesAfterReload) {
