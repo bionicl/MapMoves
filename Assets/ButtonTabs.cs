@@ -23,6 +23,9 @@ public class ButtonTabs : MonoBehaviour {
 			tabs[id].SetActive(false);
 			currentlyOpened = null;
 		} else {
+			if (id == 3) {
+				Calendar.instance.OnCalendarEnable();
+			}
 			if (currentlyOpened.HasValue) {
 				buttons[currentlyOpened.Value].Disable();
 				tabs[currentlyOpened.Value].SetActive(false);

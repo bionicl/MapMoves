@@ -251,8 +251,10 @@ public class ReadJson : MonoBehaviour {
 			return;
 		if (Input.GetKey(KeyCode.LeftArrow)) {
 			ChangeLeft();
+			Calendar.instance.SetDay(selectedDay);
 		} else if (Input.GetKey(KeyCode.RightArrow)) {
 			ChangeRight();
+			Calendar.instance.SetDay(selectedDay);
 		}
 	}
 	public void ChangeDay(DateTime day) {

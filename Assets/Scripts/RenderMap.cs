@@ -25,11 +25,13 @@ public class RenderMap : MonoBehaviour {
 	public float targetMapScale;
 
 	public float mapScale = 1f;
+	public int maxMetersForShortPath = 3000;
 	float timeSinceLastZoom;
 
 	List<GameObject>[] filterLines = new List<GameObject>[10];
 	Dictionary<DateTime, GameObject> filterDays = new Dictionary<DateTime, GameObject>();
 	GameObject loactionsGO;
+	List<GameObject> shortPaths = new List<GameObject>();
 
 	void Awake() {
 		instance = this;
@@ -123,6 +125,8 @@ public class RenderMap : MonoBehaviour {
 						// Add line to filters
 						AddToFilterList(item2.activity, lineTempGo);
 						renderedLines.Add(lineTemp);
+						if (item2.distance < maxMetersForShortPath)
+							shortPaths.Add(lineTempGo);
 					}
 				}
 			}
@@ -248,6 +252,21 @@ public class RenderMap : MonoBehaviour {
 			bool isNotActive = item.Key < startDay || item.Key > endDay;
 			item.Value.SetActive(!isNotActive);
 		}
+	}
+
+	public void EnableShortPaths() {
+		foreach (var item in shortPaths) {
+			item.SetActive(true);
+		}
+	}
+	public void DisableShortPaths() {
+		foreach (var item in shortPaths) {
+			item.SetActive(false);
+		}
+	}
+
+	public void TryCollect() {
+		GC.Collect();
 	}
 }
 

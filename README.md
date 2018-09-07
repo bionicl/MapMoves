@@ -10,7 +10,6 @@ Check your **Moves app & Arc app** history on Map!
 - Detailed place info (place address, visiting hours, visiting weekdays, custom icons)
 
 ### Features on the way:
-- Calendar view to change day
 - Favourite/Top visited places
 - Date range filters
 
