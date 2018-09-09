@@ -14,6 +14,7 @@ public class CalendarButton : MonoBehaviour {
 	public DateTime date;
 
 	public void Deselect() {
+		cuttentlySelected = null;
 		selectImage.enabled = false;
 	}
 

@@ -40,7 +40,6 @@ public class Calendar : MonoBehaviour {
 	}
 
 	void ChangeMonth(DateTime newDate) {
-		Debug.Log("Changing date to " + newDate);
 		currentMonth = newDate;
 		int daysInMonth = DateTime.DaysInMonth(newDate.Year, newDate.Month);
 		for (int i = 0; i < 31; i++) {
@@ -68,6 +67,20 @@ public class Calendar : MonoBehaviour {
 	public void ChangeDay(DateTime changedDate) {
 		ReadJson.instance.ChangeDay(changedDate);
 		activityList.padding.top = 240;
+	}
+
+	public void MoveCalendar(bool right) {
+		int addValue = -1;
+		if (right)
+			addValue = 1;
+		ChangeMonth(currentMonth.AddMonths(addValue));
+		if (currentMonth.Year == ReadJson.instance.selectedDay.Year &&
+		    currentMonth.Month == ReadJson.instance.selectedDay.Month) {
+			calendarButtons[ReadJson.instance.selectedDay.Day - 1].Select();
+		} else {
+			if (CalendarButton.cuttentlySelected != null)
+			CalendarButton.cuttentlySelected.Deselect();
+		}
 	}
 
 }

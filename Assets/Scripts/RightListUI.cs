@@ -66,7 +66,6 @@ public class RightListUI : MonoBehaviour {
 	}
 
 	void TasksAfterWaiting() {
-		Debug.Log("WOW");
 		placeName.text = place.placeInfo.name;
 		if (placeIcon != null)
 			placeIcon.sprite = PlacesRanking.instance.categories[place.icon].smallIcon;
