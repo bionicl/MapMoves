@@ -29,8 +29,6 @@ public class RightListUI : MonoBehaviour {
 	public Text currentCatText;
 	public Text currentCatTextMain;
 
-	bool savePlacesAfterReload = false;
-
 	void Awake() {
 		instance = this;
 	}
@@ -41,12 +39,6 @@ public class RightListUI : MonoBehaviour {
 
 	public void NewPlace(PlaceGroup place, bool clickedOnMap = false) {
 		ButtonTabs.instance.ClearCalendarView();
-
-		// Save places
-		if (savePlacesAfterReload) {
-			savePlacesAfterReload = false;
-			SaveSystem.Save();
-		}
 
 		bool wait = true;
 		if (TopBar.instance.currentTab == 2)
@@ -141,6 +133,5 @@ public class RightListUI : MonoBehaviour {
 		if (placeIcon != null)
 			placeIcon.sprite = PlacesRanking.instance.categories[place.icon].smallIcon;
 		PlacesSave.IconChange(place.placeInfo.id, id);
-		savePlacesAfterReload = true;
 	}
 }
