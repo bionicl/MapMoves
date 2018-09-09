@@ -9,13 +9,15 @@ class SaveData {
 	public Dictionary<DateTime, DayClass> loadedJson;
 	public List<PlaceIconSave> placesSave;
 	public List<string> uploadedFiles;
+	public Dictionary<long, string> placesAddressSave;
 	public int dayNumber;
 
-	public SaveData(ReadJson main, List<PlaceIconSave> placesSave, List<string> uploadedFiles) {
+	public SaveData(ReadJson main, List<PlaceIconSave> placesSave, List<string> uploadedFiles, Dictionary<long, string> placesAddressSave) {
 		this.loadedJson = main.days;
 		this.placesSave = placesSave;
 		this.uploadedFiles = uploadedFiles;
 		this.dayNumber = main.dayNumber;
+		this.placesAddressSave = placesAddressSave;
 	}
 }
 
@@ -46,6 +48,8 @@ public class SaveSystem
 		PlacesSave.LoadCategories(data.placesSave);
 		ReadJson.instance.uploadedFiles = data.uploadedFiles;
 		ReadJson.instance.days = data.loadedJson;
+		if (data.placesAddressSave != null)
+			GoogleLocationApi.instance.placesAddressSave = data.placesAddressSave;
 	}
 
 	public static void Save() {
@@ -53,7 +57,8 @@ public class SaveSystem
 		string destination = Application.persistentDataPath + "/save2.dat";
 		SaveData saveData = new SaveData(ReadJson.instance,
 		                                 PlacesSave.iconSaves,
-		                                 ReadJson.instance.uploadedFiles);
+		                                 ReadJson.instance.uploadedFiles,
+		                                 GoogleLocationApi.instance.placesAddressSave);
 
 		// Open/Create file
 		FileStream file;

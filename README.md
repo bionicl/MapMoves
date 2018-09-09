@@ -1,4 +1,4 @@
-Check your **Moves app & Arc app** history in Unity.
+Check your **Moves app & Arc app** history on Map!
 
 ![][image-1]
 
@@ -10,7 +10,6 @@ Check your **Moves app & Arc app** history in Unity.
 - Detailed place info (place address, visiting hours, visiting weekdays, custom icons)
 
 ### Features on the way:
-- Calendar view to change day
 - Favourite/Top visited places
 - Date range filters
 
@@ -39,4 +38,4 @@ Check your **Moves app & Arc app** history in Unity.
 [1]:	https://github.com/bionicl/MapMoves/releases
 [2]:	https://assetstore.unity.com/packages/tools/input-management/json-net-for-unity-11347
 
-[image-1]:	https://i.imgur.com/N5gReJk.jpg
+[image-1]:	https://i.imgur.com/hcXWvBf.png

@@ -50,8 +50,11 @@ public class GoogleLocationApiResponse {
 public class GoogleLocationApi : MonoBehaviour {
 	public static GoogleLocationApi instance;
 
+	public Dictionary<long, string> placesAddressSave = new Dictionary<long, string>();
+
 	void Awake() {
 		instance = this;
+		placesAddressSave = new Dictionary<long, string>();
 		TryToLoadApi();
 	}
 
@@ -71,7 +74,10 @@ public class GoogleLocationApi : MonoBehaviour {
 
 	public void GetPlaceAddress(PlaceGroup place, Action<string> action) {
 		StopAllCoroutines();
-		StartCoroutine(GetAddress(place, action));
+		if (placesAddressSave.ContainsKey(place.placeInfo.id)) {
+			action.Invoke(placesAddressSave[place.placeInfo.id]);
+		} else
+			StartCoroutine(GetAddress(place, action));
 	}
 
 	IEnumerator GetAddress(PlaceGroup place, Action<string> action) {
@@ -87,12 +93,19 @@ public class GoogleLocationApi : MonoBehaviour {
 				Debug.Log(www.error);
 			} else {
 				GoogleLocationApiResponse m = JsonConvert.DeserializeObject<GoogleLocationApiResponse>(www.downloadHandler.text);
-				if (m.results.Length > 0)
+				if (m.results.Length > 0) {
 					action.Invoke(m.results[0].formatted_address);
+					SaveAddressToList(place.placeInfo.id, m.results[0].formatted_address);
+				}
 			}
 		}
 	}
 
+	void SaveAddressToList(long placeId, string address) {
+		if (!placesAddressSave.ContainsKey(placeId)) {
+			placesAddressSave.Add(placeId, address);
+		}
+	}
 	
 	// Update is called once per frame
 	void Update () {

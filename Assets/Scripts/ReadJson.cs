@@ -206,6 +206,7 @@ public class ReadJson : MonoBehaviour {
 	public Color[] activitesColor;
 	public Color placeColor;
 	public GameObject blankPlaceholder;
+	public GameObject dateTimeArrows;
 
 	public Text[] selectedDayDateText;
 	public Animator animator;
@@ -233,6 +234,7 @@ public class ReadJson : MonoBehaviour {
 		SaveSystem.Load();
 		//OpenFileDialog();
 		blankPlaceholder.SetActive(true);
+		dateTimeArrows.SetActive(false);
 		if (uploadedFiles.Count > 0) {
 			CalculationAfterLoadedFiles(false);
 			filesBox.SetupTexts(uploadedFiles);
@@ -251,8 +253,10 @@ public class ReadJson : MonoBehaviour {
 			return;
 		if (Input.GetKey(KeyCode.LeftArrow)) {
 			ChangeLeft();
+			Calendar.instance.SetDay(selectedDay);
 		} else if (Input.GetKey(KeyCode.RightArrow)) {
 			ChangeRight();
+			Calendar.instance.SetDay(selectedDay);
 		}
 	}
 	public void ChangeDay(DateTime day) {
@@ -306,6 +310,7 @@ public class ReadJson : MonoBehaviour {
 		SaveSystem.Save();
 		PlacesSave.Clear();
 		blankPlaceholder.SetActive(true);
+		dateTimeArrows.SetActive(false);
 		TopBar.instance.Clear();
 	}
 
@@ -316,6 +321,7 @@ public class ReadJson : MonoBehaviour {
 		};
 
 		string[] paths = StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, true);
+		Debug.Log("Starting loading...");
 		foreach (var item in paths) {
 			string tempItem = item.Replace("file://", "").Replace("%20", " ");
 			if (item.ToLower().EndsWith("gpx")) {
@@ -385,6 +391,7 @@ public class ReadJson : MonoBehaviour {
 		daysToDraw.Clear();
 
 		blankPlaceholder.SetActive(false);
+		dateTimeArrows.SetActive(true);
 	}
 
 	// Drawing Timeline
@@ -459,6 +466,8 @@ public class ReadJson : MonoBehaviour {
 		summaryObject.GetComponent<SummaryItem>().Setup(summary);
 	}
 	void SpawnActivity(ActivityType? type, double distance, float time, DateTime endTime, MovesJson.SegmentsInfo.PlaceInfo placeInfo = null) {
+		if (time < 60)
+			return;
 		GameObject activity = Instantiate(activityPrefab, historySpawn.transform.position, historySpawn.transform.rotation);
 		RectTransform activityRect = activity.GetComponent<RectTransform>();
 		activity.transform.SetParent(historySpawn.transform);

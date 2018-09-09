@@ -28,6 +28,7 @@ public class ActivityUI : MonoBehaviour {
 	public PlaceType? placeType;
 	public string placeFbId;
 	public PlaceGroup placeGroup;
+	public Image placeBoxColor;
 
 	string[] activityTypeText = {
 		"Walk",
@@ -57,19 +58,23 @@ public class ActivityUI : MonoBehaviour {
 		}
 
 		TimeSpan t = TimeSpan.FromSeconds(this.time);
+		placeBoxColor.gameObject.SetActive(false);
 		SetSize(t);
 		endTimeText.text = endTime.ToString("HH:mm");
 
 		string timeShort = string.Format("{0}", t.Minutes);
 		if (type == null) {
 			place.SetActive(true);
+
 			//place.GetComponent<Image>().color = placeGroup.Category.Category.color;
 			//place.GetComponent<Image>().color = Color.white;
 			//placeIcon.color = new Color(50, 50, 50);
 			move.gameObject.SetActive(false);
 			Header.text = placename;
-			Subheader.gameObject.SetActive(false);
-			//Subheader.text = timeShort;
+			Subheader.gameObject.SetActive(true);
+			Subheader.text = placeGroup.Category.Category.name;
+			Subheader.text += " - " + String.Format("{0}:{1}", Mathf.Round(Convert.ToSingle(t.TotalHours)), Convert.ToSingle(t.Minutes).ToString().PadLeft(2, '0'));
+			Subheader.text += "<size=7> min</size>";
 			MoveType.gameObject.SetActive(false);
 			MoveTime.gameObject.SetActive(false);
 			MoveMinText.gameObject.SetActive(false);
@@ -115,16 +120,20 @@ public class ActivityUI : MonoBehaviour {
 		if (this.type == null) {
 			height = placeHeights;
 			//Debug
-			GetComponent<RectTransform>().sizeDelta = new Vector2(0, 36);
-			return;
+			if (t.TotalMinutes >= 75) {
+				placeBoxColor.gameObject.SetActive(true);
+				placeBoxColor.color = placeGroup.Category.Category.color;
+			}
 		}
-		
-		if (t.Minutes < 10)
+
+		if (t.TotalMinutes < 10)
 			GetComponent<RectTransform>().sizeDelta = new Vector2(0, height[0]);
-		else if (t.Minutes < 30)
+		else if (t.TotalMinutes < 30)
 			GetComponent<RectTransform>().sizeDelta = new Vector2(0, height[1]);
-		else
+		else if (t.TotalMinutes < 60)
 			GetComponent<RectTransform>().sizeDelta = new Vector2(0, height[2]);
+		else
+			GetComponent<RectTransform>().sizeDelta = new Vector2(0, height[3]);
 	}
 
 	public void ClickOnPlace() {

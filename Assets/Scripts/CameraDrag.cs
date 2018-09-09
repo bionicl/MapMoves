@@ -9,6 +9,7 @@ public class CameraDrag : MonoBehaviour {
 		if (Input.GetMouseButtonDown(0) && GlobalVariables.inst.mapControls) {
 			dragOrigin = transform.position;
 			dragMouseOrigin = Input.mousePosition;
+			ButtonTabs.instance.ClearCalendarView();
 			return;
 		}
 
