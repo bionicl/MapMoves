@@ -12,11 +12,13 @@ public class SearchField : MonoBehaviour {
 	public GameObject stopSearchingArea;
 	public GameObject searchSuggestionsGroup;
 	public SearchSuggestion[] suggestion;
+	public Animator animator;
 
 	bool inSearchMode = false;
 
 	// Start animation
 	public void StartSearching() {
+		animator.SetTrigger("Open");
 		inSearchMode = true;
 		foreach (var item in searchHelp) {
 			item.SetActive(false);
@@ -46,6 +48,7 @@ public class SearchField : MonoBehaviour {
 		}
 	}
 	public void StopSearching() {
+		animator.SetTrigger("Close");
 		inSearchMode = false;
 		foreach (var item in searchHelp) {
 			item.SetActive(true);
