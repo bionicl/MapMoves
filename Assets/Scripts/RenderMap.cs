@@ -26,6 +26,7 @@ public class RenderMap : MonoBehaviour {
 
 	public float mapScale = 1f;
 	public int maxMetersForShortPath = 3000;
+	public double simplifyMultiplayer = 1;
 	float timeSinceLastZoom;
 
 	List<GameObject>[] filterLines = new List<GameObject>[10];
@@ -42,6 +43,7 @@ public class RenderMap : MonoBehaviour {
 		loactionsGO = Instantiate(new GameObject(), new Vector3(0, 0, 0), transform.rotation);
 		loactionsGO.name = "Loactions";
 		loactionsGO.transform.SetSiblingIndex(1);
+
 	}
 
 	void Update()  {
@@ -82,7 +84,8 @@ public class RenderMap : MonoBehaviour {
 
 	List<long> alreadyRenderedPlaces = new List<long>();
 	List<LineRenderer> renderedLines = new List<LineRenderer>();
-	public void RenderDay(MovesJson day) {
+	public int RenderDay(MovesJson day) {
+		int renderedPoints = 0;
 		GameObject dateGO = Instantiate(new GameObject(), transform.position, transform.rotation);
 		dateGO.transform.SetParent(gameObject.transform);
 		dateGO.name = day.date;
@@ -113,11 +116,14 @@ public class RenderMap : MonoBehaviour {
 
 						// Set Line points 
 						List<Vector3> positions = new List<Vector3>();
-						foreach (var item3 in item2.trackPoints)
+						foreach (var item3 in item2.trackPoints) {
 							positions.Add(Conversion.LatLonToMeters(item3.lat, item3.lon));
+						}
+						positions = SimplifyPath.Simplify(positions, simplifyMultiplayer);
+						renderedPoints += positions.Count;
 						Vector3[] positionsArray = positions.ToArray();
 						lineTemp.positionCount = positionsArray.Length;
-						lineTemp.SetPositions(positions.ToArray());
+						lineTemp.SetPositions(positionsArray);
 
 						// Set lines color
 						lineTempGo.GetComponent<Renderer>().material = SetMaterial(item2.activity);
@@ -131,6 +137,7 @@ public class RenderMap : MonoBehaviour {
 				}
 			}
 		}
+		return renderedPoints;
 	}
 
 	Material SetMaterial(ActivityType activity) {
@@ -265,9 +272,6 @@ public class RenderMap : MonoBehaviour {
 		}
 	}
 
-	public void TryCollect() {
-		GC.Collect();
-	}
 }
 
 public static class Conversion {

@@ -377,11 +377,13 @@ public class ReadJson : MonoBehaviour {
 		}
 		if (daysToDraw.Count == 0)
 			return;
+		long drawnPoints = 0;
 		foreach (var item in daysToDraw) {
 			PlacesRanking.instance.AnalyseDay(item.day);
 			ChartUI.instance.CheckMaxCalories(item.day);
-			RenderMap.instance.RenderDay(item.day);
+			drawnPoints += RenderMap.instance.RenderDay(item.day);
 		}
+		Debug.Log("Drawn points: " + drawnPoints.ToString());
 		PlacesRanking.instance.SortAndDisplay();
 		ChartUI.instance.SetupCharts();
 
