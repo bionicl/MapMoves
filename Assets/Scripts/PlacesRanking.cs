@@ -92,7 +92,10 @@ public class PlacesRanking : MonoBehaviour {
 		foreach (var item in places) {
 			ranking.Add(item.Value, item.Value.timesVisited);
 		}
+		if (ranking.Count == 0)
+			return;
 		ranking = ranking.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+
 		maxValue = ranking.First().Value;
 		if (maxValue > theBiggestPlaceVisits)
 			maxValue = theBiggestPlaceVisits;
