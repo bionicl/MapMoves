@@ -11,12 +11,8 @@ public class SearchSuggestion : MonoBehaviour {
 	SearchField searchField;
 	public Color deselectedColor;
 
-	Text text;
+	public Text text;
 	bool isEnabled = false;
-
-	void Awake() {
-		text = GetComponent<Text>();
-	}
 
 	public void ClickOnPlace() {
 		if (isEnabled) {

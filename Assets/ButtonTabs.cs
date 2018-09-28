@@ -52,6 +52,7 @@ public class ButtonTabs : MonoBehaviour {
 	}
 	IEnumerator RevertAfterTime() {
 		yield return new WaitForEndOfFrame();
+		yield return new WaitForSeconds(1f);
 		SaveSystem.Save();
 		saveButtonText.text = "Saved!";
 		yield return new WaitForSeconds(1.5f);
