@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,7 +41,30 @@ public class ActivityUI : MonoBehaviour {
 		"Running",
 		"Car",
 		"Underground",
-		"Airplane"
+		"Airplane",
+		"Boat",
+		"Escalator",
+		"Ferry",
+		"Funicular",
+		"Motorcycle",
+		"Sailing",
+		"Ccooter",
+		"Cross country skiing",
+		"Downhill skiing",
+		"Golfing",
+		"Kayaking",
+		"Paddling",
+		"Paintball",
+		"Riding",
+		"Roller skiing",
+		"Rollerblading",
+		"Rollerskating",
+		"Rowing",
+		"Skateboarding",
+		"Skating",
+		"Snowboarding",
+		"Snowshoeing",
+		"Wheel chair"
 	};
 
 	public void Setup(ActivityType? type, double distance, float time, DateTime endTime, MovesJson.SegmentsInfo.PlaceInfo placeInfo) {
