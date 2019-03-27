@@ -1,5 +1,5 @@
 ﻿<Properties StartupConfiguration="{EC1AA42A-A762-5113-277B-E7EFE0DD592F}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/FilterButton.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/ButtonTabs.cs">
     <Files>
       <File FileName="Assets/Scripts/ReadArcAppJson.cs" Line="33" Column="20" />
       <File FileName="Assets/Scripts/ReadJson.cs" Line="11" Column="13" />
@@ -8,6 +8,7 @@
       <File FileName="Assets/CheckUIScale.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/RenderMap.cs" Line="2" Column="9" />
       <File FileName="Assets/Scripts/FilterButton.cs" Line="24" Column="2" />
+      <File FileName="Assets/ButtonTabs.cs" Line="68" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
