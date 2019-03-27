@@ -27,6 +27,7 @@ public class RenderMap : MonoBehaviour {
 	public float mapScale = 1f;
 	public int maxMetersForShortPath = 3000;
 	public double simplifyMultiplayer = 1;
+	public double simplifyMultiplayerDetailed;
 	float timeSinceLastZoom;
 
 	List<GameObject>[] filterLines = new List<GameObject>[10];
@@ -119,7 +120,10 @@ public class RenderMap : MonoBehaviour {
 						foreach (var item3 in item2.trackPoints) {
 							positions.Add(Conversion.LatLonToMeters(item3.lat, item3.lon));
 						}
-						positions = SimplifyPath.Simplify(positions, simplifyMultiplayer);
+						if (item2.activity == ActivityType.walking || item2.activity == ActivityType.cycling || item2.activity == ActivityType.running)
+							positions = SimplifyPath.Simplify(positions, simplifyMultiplayerDetailed);
+						else
+							positions = SimplifyPath.Simplify(positions, simplifyMultiplayer);
 						renderedPoints += positions.Count;
 						Vector3[] positionsArray = positions.ToArray();
 						lineTemp.positionCount = positionsArray.Length;

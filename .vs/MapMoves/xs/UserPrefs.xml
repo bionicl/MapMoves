@@ -1,0 +1,21 @@
+﻿<Properties StartupConfiguration="{EC1AA42A-A762-5113-277B-E7EFE0DD592F}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/FilterButton.cs">
+    <Files>
+      <File FileName="Assets/Scripts/ReadArcAppJson.cs" Line="33" Column="20" />
+      <File FileName="Assets/Scripts/ReadJson.cs" Line="11" Column="13" />
+      <File FileName="Assets/Scripts/PlacesRanking.cs" Line="96" Column="11" />
+      <File FileName="Assets/Scripts/ActivityUI.cs" Line="1" Column="1" />
+      <File FileName="Assets/CheckUIScale.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/RenderMap.cs" Line="2" Column="9" />
+      <File FileName="Assets/Scripts/FilterButton.cs" Line="24" Column="2" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.MapMoves PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
