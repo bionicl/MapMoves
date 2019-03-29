@@ -3,15 +3,11 @@ Check your **Moves app & Arc app** history on Map!
 ![][image-1]
 
 ### Features:
-- Display Moves/Arc app storyline data with summary
-- Display map with all path drawn
-- Manage your transport filters with color combinations
-- Activity filters
-- Detailed place info (place address, visiting hours, visiting weekdays, custom icons)
-
-### Features on the way:
-- Favourite/Top visited places
-- Date range filters
+- Import your GPX files from Arc App (and JSON from Moves app) and display them on the large map. Combine weeks, months or event years! 🤯
+- View beautiful timeline of each day with transport details and places
+- View burned calories of each walk/cycling/running! Data based on your weight and height
+- Filter your map display to only show particular activities or transport types
+- Detailed place info - place address, common visiting hours and weekdays, set custom categories (more features based on categories soon!)
 
 ## How to run:
 1. Download [newest release][1]
