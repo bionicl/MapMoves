@@ -45,6 +45,7 @@ public class ButtonTabs : MonoBehaviour {
 		}
 	}
 
+
 	public void Save() {
 		saveButtonText.gameObject.SetActive(true);
 		saveButtonText.text = "Saving...";
@@ -63,4 +64,9 @@ public class ButtonTabs : MonoBehaviour {
 		if (currentlyOpened == 3)
 			Open(3);
 	}
+
+	public void OpenURL(string url) {
+		Application.OpenURL(url);
+	}
+
 }

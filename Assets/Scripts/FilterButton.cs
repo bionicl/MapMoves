@@ -10,6 +10,9 @@ public class FilterButton : MonoBehaviour {
 	Image image;
 	Button button;
 	public Color disabledColor;
+	public Image icon;
+	public Text text;
+	public Image checkIcon;
 
 	public bool isOn = true;
 	bool unifiedColor;
@@ -37,17 +40,23 @@ public class FilterButton : MonoBehaviour {
 		if (!isOnStart) {
 			RenderMap.instance.ChangeFilter(filterType, isOn);
 		}
+		Color colorToSet = Color.white;
 		if (isOn) {
+			checkIcon.gameObject.SetActive(true);
 			if (unifiedColor)
-				image.color = ReadJson.colors[8];
+				colorToSet = ReadJson.colors[8];
 			else {
 				if (filterType == FilterTypes.place)
-					image.color = ReadJson.PlaceColor;
+					colorToSet = ReadJson.PlaceColor;
 				else
-					image.color = ReadJson.colors[colorId];
+					colorToSet = ReadJson.colors[colorId];
 			}
-		} else
-			image.color = disabledColor;
+		} else {
+			colorToSet = disabledColor;
+			checkIcon.gameObject.SetActive(false);
+		}
+		checkIcon.color = colorToSet;
+		icon.color = colorToSet;
 	}
 
 

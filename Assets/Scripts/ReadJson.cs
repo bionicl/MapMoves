@@ -218,6 +218,7 @@ public class ReadJson : MonoBehaviour {
 	public DateTime lastDate;
 
 	[Header("Summary")]
+	public GameObject summariesGO;
 	public GameObject summaryPrefab;
 
 	[Header("Uploaded files")]
@@ -405,7 +406,11 @@ public class ReadJson : MonoBehaviour {
 			loaded = days.TryGetValue(selectedDay, out timeline);
 			if (loaded) {
 				foreach (Transform child in historySpawn.gameObject.transform) {
-					if (child.gameObject.GetComponent<ActivityUI>() != null || child.gameObject.GetComponent<SummaryItem>() != null)
+					if (child.gameObject.GetComponent<ActivityUI>() != null)
+						Destroy(child.gameObject);
+				}
+				foreach (Transform child in summariesGO.transform) {
+					if (child.gameObject.GetComponent<SummaryItem>() != null)
 						Destroy(child.gameObject);
 				}
 				activitiesList.Clear();
@@ -463,7 +468,7 @@ public class ReadJson : MonoBehaviour {
 			return;
 		GameObject summaryObject = Instantiate(summaryPrefab, historySpawn.transform.position, historySpawn.transform.rotation);
 		RectTransform summaryObjectRect = summaryObject.GetComponent<RectTransform>();
-		summaryObject.transform.SetParent(historySpawn.transform);
+		summaryObject.transform.SetParent(summariesGO.transform);
 		summaryObjectRect.localScale = summaryObjectRect.lossyScale;
 		summaryObject.GetComponent<SummaryItem>().Setup(summary);
 	}

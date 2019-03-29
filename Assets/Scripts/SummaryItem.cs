@@ -29,10 +29,8 @@ public class SummaryItem : MonoBehaviour {
 	}
 
 	void SetupIcon() {
-		activityImage.gameObject.SetActive(false);
 		activityTitle.gameObject.SetActive(true);
 		activityTitle.text = FirstLetterUpper(summary.activity.ToString());
-		return;
 
 		switch (summary.activity) {
 			case ActivityType.walking:
@@ -72,8 +70,8 @@ public class SummaryItem : MonoBehaviour {
 		Color color = ReadJson.instance.activitesColor[(int)summary.activity];
 		activityTitle.color = color;
 		activityImage.color = color;
-		distance.color = color;
-		duration.color = color;
-		calories.color = color;
+		//distance.color = color;
+		//duration.color = color;
+		//calories.color = color;
 	}
 }

@@ -27,7 +27,10 @@ public class RenderMap : MonoBehaviour {
 	public float mapScale = 1f;
 	public int maxMetersForShortPath = 3000;
 	public double simplifyMultiplayer = 1;
+	public double simplifyMultiplayerDetailed;
 	float timeSinceLastZoom;
+
+	public bool[] filterState = new bool[10];
 
 	List<GameObject>[] filterLines = new List<GameObject>[10];
 	Dictionary<DateTime, GameObject> filterDays = new Dictionary<DateTime, GameObject>();
@@ -43,7 +46,9 @@ public class RenderMap : MonoBehaviour {
 		loactionsGO = Instantiate(new GameObject(), new Vector3(0, 0, 0), transform.rotation);
 		loactionsGO.name = "Loactions";
 		loactionsGO.transform.SetSiblingIndex(1);
-
+		for (int i = 0; i < filterState.Length; i++) {
+			filterState[i] = true;
+		}
 	}
 
 	void Update()  {
@@ -119,7 +124,10 @@ public class RenderMap : MonoBehaviour {
 						foreach (var item3 in item2.trackPoints) {
 							positions.Add(Conversion.LatLonToMeters(item3.lat, item3.lon));
 						}
-						positions = SimplifyPath.Simplify(positions, simplifyMultiplayer);
+						if (item2.activity == ActivityType.walking || item2.activity == ActivityType.cycling || item2.activity == ActivityType.running)
+							positions = SimplifyPath.Simplify(positions, simplifyMultiplayerDetailed);
+						else
+							positions = SimplifyPath.Simplify(positions, simplifyMultiplayer);
 						renderedPoints += positions.Count;
 						Vector3[] positionsArray = positions.ToArray();
 						lineTemp.positionCount = positionsArray.Length;
@@ -131,6 +139,7 @@ public class RenderMap : MonoBehaviour {
 						// Add line to filters
 						AddToFilterList(item2.activity, lineTempGo);
 						renderedLines.Add(lineTemp);
+						lineTempGo.SetActive(filterState[(int)TranslateActivityToFilter(item2.activity)]);
 						if (item2.distance < maxMetersForShortPath)
 							shortPaths.Add(lineTempGo);
 					}
@@ -231,6 +240,7 @@ public class RenderMap : MonoBehaviour {
 		if (filterType == FilterTypes.place) {
 			loactionsGO.SetActive(state);
 		} else {
+			filterState[(int)filterType] = state;
 			foreach (var item in filterLines[(int)filterType]) {
 				item.SetActive(state);
 			}
@@ -272,6 +282,26 @@ public class RenderMap : MonoBehaviour {
 		}
 	}
 
+	public static FilterTypes TranslateActivityToFilter(ActivityType activity) {
+		switch (activity) {
+			case ActivityType.walking:
+				return FilterTypes.walking;
+			case ActivityType.cycling:
+				return FilterTypes.cycling;
+			case ActivityType.running:
+				return FilterTypes.running;
+			case ActivityType.car:
+				return FilterTypes.car;
+			case ActivityType.bus:
+				return FilterTypes.bus;
+			case ActivityType.train:
+				return FilterTypes.train;
+			case ActivityType.airplane:
+				return FilterTypes.plane;
+			default:
+				return FilterTypes.otherTransport;
+		}
+	}
 }
 
 public static class Conversion {
