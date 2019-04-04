@@ -337,7 +337,6 @@ public class ReadJson : MonoBehaviour {
 			string tempItem = item.Replace("file://", "").Replace("%20", " ");
 
 			if (item.ToLower().EndsWith("gpx")) {
-				uploadedFiles.Add(GetFileName(tempItem));
 				UpdateLoadingText(string.Format("Opening {0} GPX file", fileNumer + "/" + paths.Length));
 				yield return new WaitForSeconds(0.1f);
 				string jsonData = File.ReadAllText(tempItem);
@@ -345,12 +344,12 @@ public class ReadJson : MonoBehaviour {
 				yield return new WaitForSeconds(0.1f);
 				try {
 					LoadFiles(TealFire.ArcExportConverter.ConvertGpxToJson(jsonData, 80));
+					uploadedFiles.Add(GetFileName(tempItem));
 				} catch (Exception ex) {
 					exceptionsWhileLoading.Add("Couldn't open file #" + fileNumer + " : " + tempItem);
 				}
 
 			} else if (item.ToLower().EndsWith("json")) {
-				uploadedFiles.Add(GetFileName(tempItem));
 				UpdateLoadingText(string.Format("Opening {0} JSON file", fileNumer + "/" + paths.Length));
 				yield return new WaitForSeconds(0.1f);
 				string jsonData = File.ReadAllText(tempItem);
@@ -358,6 +357,7 @@ public class ReadJson : MonoBehaviour {
 				yield return new WaitForSeconds(0.1f);
 				try {
 					LoadFiles(jsonData);
+					uploadedFiles.Add(GetFileName(tempItem));
 				} catch (Exception ex) {
 					exceptionsWhileLoading.Add("Couldn't open file #" + fileNumer + " : " + tempItem);
 				}
@@ -370,6 +370,7 @@ public class ReadJson : MonoBehaviour {
 			CalculationAfterLoadedFiles();
 		}
 		UpdateLoadingText("Done!", false);
+		filesBox.SetupTexts(uploadedFiles);
 		yield return new WaitForSeconds(0.5f);
 		if (exceptionsWhileLoading.Count > 0) {
 			loadingDialogText.text = "";
