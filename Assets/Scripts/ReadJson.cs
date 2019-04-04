@@ -298,10 +298,6 @@ public class ReadJson : MonoBehaviour {
 	// Files UI
 	public void OpenMoreFilesButton() {
 		OpenFileDialog();
-		if (uploadedFiles.Count > 0) {
-			filesBox.SetupTexts(uploadedFiles);
-			CheckIfCanDraw();
-		}
 	}
 	public void RestartFiles() {
 		days.Clear();
@@ -368,9 +364,10 @@ public class ReadJson : MonoBehaviour {
 		yield return new WaitForSeconds(0.1f);
 		if (daysToDraw.Count > 0) {
 			CalculationAfterLoadedFiles();
+			filesBox.SetupTexts(uploadedFiles);
+			CheckIfCanDraw(); // Timeline draw
 		}
 		UpdateLoadingText("Done!", false);
-		filesBox.SetupTexts(uploadedFiles);
 		yield return new WaitForSeconds(0.5f);
 		if (exceptionsWhileLoading.Count > 0) {
 			loadingDialogText.text = "";
