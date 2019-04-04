@@ -225,6 +225,8 @@ public class ReadJson : MonoBehaviour {
 	public List<string> uploadedFiles;
 	public FilesBox filesBox;
 	List<DayClass> daysToDraw = new List<DayClass>();
+	public GameObject loadingDialogGo;
+	public Text loadingDialogText;
 
 	void Awake() {
 		instance = this;
@@ -323,25 +325,69 @@ public class ReadJson : MonoBehaviour {
 
 		string[] paths = StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, true);
 		Debug.Log("Starting loading...");
+		StartCoroutine(LoadFilesAsync(paths));
+	}
+	IEnumerator LoadFilesAsync(string[] paths) {
+		loadingDialogGo.SetActive(true);
+		UpdateLoadingText("Starting");
+		yield return new WaitForSeconds(0.5f);
+		int fileNumer = 1;
+		List<string> exceptionsWhileLoading = new List<string>();
 		foreach (var item in paths) {
 			string tempItem = item.Replace("file://", "").Replace("%20", " ");
+
 			if (item.ToLower().EndsWith("gpx")) {
-				//Debug.Log("GPX file!\nLoading...");
-				//Debug.Log(Bionicl.ArcExportConverter.ConvertGpxToJson("test", 80));
 				uploadedFiles.Add(GetFileName(tempItem));
+				UpdateLoadingText(string.Format("Opening {0} GPX file", fileNumer + "/" + paths.Length));
+				yield return new WaitForSeconds(0.1f);
 				string jsonData = File.ReadAllText(tempItem);
-				LoadFiles(TealFire.ArcExportConverter.ConvertGpxToJson(jsonData, 80));
+				UpdateLoadingText(string.Format("Importing {0} GPX file", fileNumer + "/" + paths.Length));
+				yield return new WaitForSeconds(0.1f);
+				try {
+					LoadFiles(TealFire.ArcExportConverter.ConvertGpxToJson(jsonData, 80));
+				} catch (Exception ex) {
+					exceptionsWhileLoading.Add("Couldn't open file #" + fileNumer + " : " + tempItem);
+				}
+
 			} else if (item.ToLower().EndsWith("json")) {
-				Debug.Log("Json file!\nLoading...");
 				uploadedFiles.Add(GetFileName(tempItem));
+				UpdateLoadingText(string.Format("Opening {0} JSON file", fileNumer + "/" + paths.Length));
+				yield return new WaitForSeconds(0.1f);
 				string jsonData = File.ReadAllText(tempItem);
-				LoadFiles(jsonData);
+				UpdateLoadingText(string.Format("Importing {0} JSON file", fileNumer + "/" + paths.Length));
+				yield return new WaitForSeconds(0.1f);
+				try {
+					LoadFiles(jsonData);
+				} catch (Exception ex) {
+					exceptionsWhileLoading.Add("Couldn't open file #" + fileNumer + " : " + tempItem);
+				}
 			}
+			fileNumer++;
 		}
+		UpdateLoadingText("Finishing");
+		yield return new WaitForSeconds(0.1f);
 		if (daysToDraw.Count > 0) {
 			CalculationAfterLoadedFiles();
 		}
+		UpdateLoadingText("Done!", false);
+		yield return new WaitForSeconds(0.5f);
+		if (exceptionsWhileLoading.Count > 0) {
+			loadingDialogText.text = "";
+			foreach (var item in exceptionsWhileLoading) {
+				loadingDialogText.text += item + "\n\n";
+			}
+			yield return new WaitForSeconds(5f);
+		}
+		loadingDialogGo.SetActive(false);
 	}
+
+	void UpdateLoadingText(string updatedText, bool addDots = true) {
+		loadingDialogText.text = updatedText;
+		if (addDots)
+			loadingDialogText.text += "...";
+
+	}
+
 	string GetFileName(string path) {
 		string output = "";
 		for (int i = 0; i < path.Length; i++) {
