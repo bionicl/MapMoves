@@ -11,7 +11,7 @@ public class GlobalVariables : MonoBehaviour {
 	public Color disabledColor;
 	public bool firstWeekMonday = true;
 	[HideInInspector]
-	public bool mapControls = true;
+	public bool mapControls = false;
 
 	void Awake() {
 		inst = this;
@@ -23,6 +23,7 @@ public class GlobalVariables : MonoBehaviour {
 
 	public void MouseExit() {
 		mapControls = false;
+		Debug.Log("Exit");
 	}
 
 	public void SetIcon(MovesJson.SegmentsInfo.PlaceInfo place, SpriteRenderer image) {

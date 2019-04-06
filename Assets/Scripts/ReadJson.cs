@@ -315,6 +315,7 @@ public class ReadJson : MonoBehaviour {
 
 	// Opening files
 	void OpenFileDialog() {
+		CameraDrag.instance.blocked = true;
 		var extensions = new[] {
 			new ExtensionFilter("Arc app GPX or Moves json", "gpx", "json")
 		};
@@ -368,6 +369,8 @@ public class ReadJson : MonoBehaviour {
 			CheckIfCanDraw(); // Timeline draw
 		}
 		UpdateLoadingText("Done!", false);
+		CameraDrag.instance.blocked = false;
+		Debug.Log("UNBLOCKED");
 		yield return new WaitForSeconds(0.5f);
 		if (exceptionsWhileLoading.Count > 0) {
 			loadingDialogText.text = "";
