@@ -230,6 +230,7 @@ public class ReadJson : MonoBehaviour {
 	List<DayClass> daysToDraw = new List<DayClass>();
 	public GameObject loadingDialogGo;
 	public Text loadingDialogText;
+	List<SummaryItem> summaries = new List<SummaryItem>();
 
 	void Awake() {
 		instance = this;
@@ -464,6 +465,7 @@ public class ReadJson : MonoBehaviour {
 						Destroy(child.gameObject);
 				}
 				activitiesList.Clear();
+				summaries.Clear();
 				DrawTimeline(timeline.day, timeline.canChangeWeight);
 			} else {
 				if (selectedDay == lastDate.AddDays(1))
@@ -520,7 +522,9 @@ public class ReadJson : MonoBehaviour {
 		RectTransform summaryObjectRect = summaryObject.GetComponent<RectTransform>();
 		summaryObject.transform.SetParent(summariesGO.transform);
 		summaryObjectRect.localScale = summaryObjectRect.lossyScale;
-		summaryObject.GetComponent<SummaryItem>().Setup(summary, canChangeWeight);
+		SummaryItem summaryItem = summaryObject.GetComponent<SummaryItem>();
+		summaryItem.Setup(summary, canChangeWeight);
+		summaries.Add(summaryItem);
 	}
 	void SpawnActivity(ActivityType? type, double distance, float time, DateTime endTime, MovesJson.SegmentsInfo.PlaceInfo placeInfo = null) {
 		if (time < 60)
@@ -540,6 +544,11 @@ public class ReadJson : MonoBehaviour {
 					activitiesList[i + 1].DestroyActivity();
 				}
 			}
+		}
+	}
+	public void RefreshSummaries(bool weight, bool distance) {
+		foreach (var item in summaries) {
+			item.Refresh();
 		}
 	}
 

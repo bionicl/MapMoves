@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class SummaryItem : MonoBehaviour {
 
 	MovesJson.SummaryInfo summary;
+	bool canChangeWeight;
 
 	public Text activityTitle;
 	public Image activityImage;
@@ -15,11 +16,20 @@ public class SummaryItem : MonoBehaviour {
 	public Text calories;
 	public Sprite[] icons;
 
+	float distanceValue;
+	float caloriesValue;
+
 	public void Setup(MovesJson.SummaryInfo summary, bool canChangeWeight) {
 		this.summary = summary;
+		this.canChangeWeight = canChangeWeight;
+		
 		SetupIcon();
 		SetupTexts(canChangeWeight);
 		SetupColors();
+	}
+
+	public void Refresh() {
+		SetupTexts(canChangeWeight);
 	}
 
 	public static string FirstLetterUpper(string text) {

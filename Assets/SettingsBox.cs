@@ -65,6 +65,6 @@ public class SettingsBox : MonoBehaviour
 			weight = newWeightFloat;
 		else
 			weight = newWeightFloat / 2.2046226f;
-
+		ReadJson.instance.RefreshSummaries(isKg, isMetric);
 	}
 }
