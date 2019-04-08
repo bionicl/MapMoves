@@ -181,11 +181,14 @@ public class DayClass {
 	public MovesJson day;
 	//public ChartItem chart;
 	public int dayNumber;
+	public bool canChangeWeight;
 
-	public DayClass(DateTime date, MovesJson day, int number) {
+
+	public DayClass(DateTime date, MovesJson day, int number, bool canChangeWeight) {
 		this.date = date;
 		this.day = day;
 		dayNumber = number;
+		this.canChangeWeight = canChangeWeight;
 	}
 
 	public DayClass() {
@@ -340,7 +343,7 @@ public class ReadJson : MonoBehaviour {
 				UpdateLoadingText(string.Format("Importing {0} GPX file", fileNumer + "/" + paths.Length));
 				yield return new WaitForSeconds(0.1f);
 				try {
-					LoadFiles(TealFire.ArcExportConverter.ConvertGpxToJson(jsonData, 80));
+					LoadFiles(TealFire.ArcExportConverter.ConvertGpxToJson(jsonData, 1), true);
 					uploadedFiles.Add(GetFileName(tempItem));
 				} catch (Exception ex) {
 					exceptionsWhileLoading.Add("Couldn't open file #" + fileNumer + " : " + tempItem);
@@ -353,7 +356,7 @@ public class ReadJson : MonoBehaviour {
 				UpdateLoadingText(string.Format("Importing {0} JSON file", fileNumer + "/" + paths.Length));
 				yield return new WaitForSeconds(0.1f);
 				try {
-					LoadFiles(jsonData);
+					LoadFiles(jsonData, false);
 					uploadedFiles.Add(GetFileName(tempItem));
 				} catch (Exception ex) {
 					exceptionsWhileLoading.Add("Couldn't open file #" + fileNumer + " : " + tempItem);
@@ -404,13 +407,13 @@ public class ReadJson : MonoBehaviour {
 
 	// Loading json files
 	public int dayNumber;
-	void LoadFiles(string jsonData) {
+	void LoadFiles(string jsonData, bool canChangeWeight) {
 		string text = "{ day: " + jsonData + "}";
 		FullStoryLine m = JsonConvert.DeserializeObject<FullStoryLine>(text);
 		foreach (var item in m.day) {
 			DateTime timelineDay = ReturnSimpleDate(item.date);
 			if (!days.ContainsKey(timelineDay) && item.summary != null) {
-				DayClass tempDay = new DayClass(timelineDay, item, dayNumber++);
+				DayClass tempDay = new DayClass(timelineDay, item, dayNumber++, canChangeWeight);
 				days.Add(timelineDay, tempDay);
 				daysToDraw.Add(tempDay);
 			}
@@ -461,7 +464,7 @@ public class ReadJson : MonoBehaviour {
 						Destroy(child.gameObject);
 				}
 				activitiesList.Clear();
-				DrawTimeline(timeline.day);
+				DrawTimeline(timeline.day, timeline.canChangeWeight);
 			} else {
 				if (selectedDay == lastDate.AddDays(1))
 					selectedDay = selectedDay.AddDays(-1);
@@ -477,20 +480,20 @@ public class ReadJson : MonoBehaviour {
 			}
 		}
 	}
-	void DrawTimeline(MovesJson m) {
+	void DrawTimeline(MovesJson m, bool canChangeWeight) {
 		animator.SetTrigger("Refresh");
 		foreach (var item in selectedDayDateText) {
 			item.text = ReturnSimpleDate(m.date).ToString("dd MMMMM yyyy");
 		}
 		ChartUI.instance.CheckChartSelected();
-		StartCoroutine(RenderAfterTime(m));
+		StartCoroutine(RenderAfterTime(m, canChangeWeight));
 	}
-	IEnumerator RenderAfterTime(MovesJson m) {
+	IEnumerator RenderAfterTime(MovesJson m, bool canChangeWeight) {
 		yield return new WaitForSeconds(0.3f);
 
 		// Summary
 		foreach (var item in m.summary) {
-			SpawnSummary(item);
+			SpawnSummary(item, canChangeWeight);
 		}
 
 		// ActivityUI
@@ -510,14 +513,14 @@ public class ReadJson : MonoBehaviour {
 		}
 		ValidateIfNoReapeted();
 	}
-	void SpawnSummary(MovesJson.SummaryInfo summary) {
+	void SpawnSummary(MovesJson.SummaryInfo summary, bool canChangeWeight) {
 		if (summary.group == "transport")
 			return;
 		GameObject summaryObject = Instantiate(summaryPrefab, historySpawn.transform.position, historySpawn.transform.rotation);
 		RectTransform summaryObjectRect = summaryObject.GetComponent<RectTransform>();
 		summaryObject.transform.SetParent(summariesGO.transform);
 		summaryObjectRect.localScale = summaryObjectRect.lossyScale;
-		summaryObject.GetComponent<SummaryItem>().Setup(summary);
+		summaryObject.GetComponent<SummaryItem>().Setup(summary, canChangeWeight);
 	}
 	void SpawnActivity(ActivityType? type, double distance, float time, DateTime endTime, MovesJson.SegmentsInfo.PlaceInfo placeInfo = null) {
 		if (time < 60)

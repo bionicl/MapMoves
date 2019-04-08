@@ -15,10 +15,10 @@ public class SummaryItem : MonoBehaviour {
 	public Text calories;
 	public Sprite[] icons;
 
-	public void Setup(MovesJson.SummaryInfo summary) {
+	public void Setup(MovesJson.SummaryInfo summary, bool canChangeWeight) {
 		this.summary = summary;
 		SetupIcon();
-		SetupTexts();
+		SetupTexts(canChangeWeight);
 		SetupColors();
 	}
 
@@ -49,10 +49,15 @@ public class SummaryItem : MonoBehaviour {
 				break;
 		}
 	}
-	void SetupTexts() {
+	void SetupTexts(bool canChangeWeight) {
 		if (summary.calories > 1) {
 			calories.gameObject.SetActive(true);
-			calories.text = summary.calories.ToString() + "cal";
+			double caloriesNumber = summary.calories;
+			Debug.Log(SettingsBox.instance.weight);
+			if (canChangeWeight) {
+				caloriesNumber *= SettingsBox.instance.weight;
+			}
+			calories.text = caloriesNumber.ToString() + "cal";
 		}
 		if (summary.distance > 1) {
 			distance.gameObject.SetActive(true);
