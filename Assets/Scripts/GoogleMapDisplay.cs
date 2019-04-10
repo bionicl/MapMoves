@@ -86,8 +86,12 @@ public class GoogleMapDisplay : MonoBehaviour {
 	void RenderMapTiles() {
 		OneRequest request = CalculateMapZoom();
 		CreateAdditionalRequests(request);
-		if (ChangeToGridPosition(request))
-			StartCoroutine(DownloadMap(CreateNewTile, request));
+		if (ChangeToGridPosition(request)) {
+			if (CheckUIScale.isRetina)
+				StartCoroutine(DownloadMapRetina(CreateNewTile, request));
+			else
+				StartCoroutine(DownloadMap(CreateNewTile, request));
+		}
 	}
 	void CreateAdditionalRequests(OneRequest request) {
 		List<OneRequest> requests = new List<OneRequest>();
@@ -104,8 +108,12 @@ public class GoogleMapDisplay : MonoBehaviour {
 		requests[7].ChangePos(false, true, true, false);
 
 		foreach (var item in requests) {
-			if (ChangeToGridPosition(item))
-				StartCoroutine(DownloadMap(CreateNewTile, item));
+			if (ChangeToGridPosition(item)) {
+				if (CheckUIScale.isRetina)
+					StartCoroutine(DownloadMapRetina(CreateNewTile, item));
+				else
+					StartCoroutine(DownloadMap(CreateNewTile, item));
+			}
 		}
 	}
 
@@ -145,10 +153,23 @@ public class GoogleMapDisplay : MonoBehaviour {
 
 		using (WWW www = new WWW(url)) {
 			yield return www;
-
 			Sprite sprite = Sprite.Create(www.texture,
 										  new Rect(0, 0, 640, 640),
 										  new Vector2(0.5f, 0.5f));
+
+			action.Invoke(sprite, request);
+		}
+	}
+
+	IEnumerator DownloadMapRetina(Action<Sprite, OneRequest> action, OneRequest request) {
+		string url = ReturnApiUrl(request);
+
+		using (WWW www = new WWW(url)) {
+			yield return www;
+			Sprite sprite = Sprite.Create(www.texture,
+										  new Rect(0, 0, 1280, 1280),
+										  new Vector2(0.5f, 0.5f), 200);
+
 			action.Invoke(sprite, request);
 		}
 	}
@@ -184,10 +205,13 @@ public class GoogleMapDisplay : MonoBehaviour {
 		Vector3 tempPos = request.position;
 		Vector2 metersPos = Conversion.MetersToLatLon(new Vector2(tempPos.x, tempPos.y));
 		string output = "";
+		string retinaMultiplayer = "";
+		if (CheckUIScale.isRetina)
+			retinaMultiplayer = "@2x";
 		if (useGoogleMaps)
 			output = string.Format("http://maps.googleapis.com/maps/api/staticmap?center={0},{1}&zoom={2}&size=640x640&key={3}{4}", metersPos.x, metersPos.y, request.zoomLevel, GoogleLocationApi.instance.apiKey, style);
 		else
-			output = string.Format("https://api.mapbox.com/styles/v1/bionicl/cjbfocd42b59q2rqasdw3ezwb/static/{1},{0},{2},0,0/640x640?access_token={3}&logo=false&attribution=false", metersPos.x, metersPos.y, request.zoomLevel-1, GoogleLocationApi.instance.mapBoxApiKey);
+			output = string.Format("https://api.mapbox.com/styles/v1/bionicl/cjbfocd42b59q2rqasdw3ezwb/static/{1},{0},{2},0,0/640x640{3}?access_token={4}&logo=false&attribution=false", metersPos.x, metersPos.y, request.zoomLevel-1, retinaMultiplayer, GoogleLocationApi.instance.mapBoxApiKey);
 		return output;
 	}
 }
