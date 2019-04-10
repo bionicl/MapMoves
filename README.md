@@ -1,26 +1,21 @@
 Check your **Moves app & Arc app** history on Map!
 
 ![][image-1]
-
+### [Download newest version][1]
 ### Features:
 - Import your GPX files from Arc App (and JSON from Moves app) and display them on the large map. Combine weeks, months or event years! 🤯
 - View beautiful timeline of each day with transport details and places
-- View burned calories of each walk/cycling/running! Data based on your weight and height
+- View burned calories of each walk/cycling/running!
 - Filter your map display to only show particular activities or transport types
 - Detailed place info - place address, common visiting hours and weekdays, set custom categories (more features based on categories soon!)
-
-### How to run:
-1. Download [newest release][1]
-2. Run and import location data files
-3. Enjoy!
-
-##### App supports currently:
-- JSON timeline from **Moves app**
-- GPX day/month file from **Arc app**
 ### Support project
 Map moves are completely free to use. If you’d like to support the project and suggest new features, you can buy me a coffee ☕️
 [https://www.buymeacoffee.com/bionicl][2]
 Thank you!
+
+##### App supports currently:
+- JSON timeline from **Moves app**
+- GPX day/month file from **Arc app**
 
 ## Development
 ### How to open Unity project:
@@ -39,4 +34,4 @@ Thank you!
 [2]:	https://www.buymeacoffee.com/bionicl "buy me a coffee!"
 [3]:	https://assetstore.unity.com/packages/tools/input-management/json-net-for-unity-11347
 
-[image-1]:	https://i.imgur.com/UF3jN7i.png
+[image-1]:	https://i.imgur.com/NHYylSN.png
