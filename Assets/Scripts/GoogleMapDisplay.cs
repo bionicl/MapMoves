@@ -187,7 +187,7 @@ public class GoogleMapDisplay : MonoBehaviour {
 		if (useGoogleMaps)
 			output = string.Format("http://maps.googleapis.com/maps/api/staticmap?center={0},{1}&zoom={2}&size=640x640&key={3}{4}", metersPos.x, metersPos.y, request.zoomLevel, GoogleLocationApi.instance.apiKey, style);
 		else
-			output = string.Format("https://api.mapbox.com/styles/v1/bionicl/cjbfocd42b59q2rqasdw3ezwb/static/{1},{0},{2},0,0/640x640?access_token={3}", metersPos.x, metersPos.y, request.zoomLevel-1, GoogleLocationApi.instance.mapBoxApiKey);
+			output = string.Format("https://api.mapbox.com/styles/v1/bionicl/cjbfocd42b59q2rqasdw3ezwb/static/{1},{0},{2},0,0/640x640?access_token={3}&logo=false&attribution=false", metersPos.x, metersPos.y, request.zoomLevel-1, GoogleLocationApi.instance.mapBoxApiKey);
 		return output;
 	}
 }

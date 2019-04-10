@@ -63,7 +63,6 @@ public class SummaryItem : MonoBehaviour {
 		if (summary.calories > 1) {
 			calories.gameObject.SetActive(true);
 			double caloriesNumber = summary.calories;
-			Debug.Log(SettingsBox.instance.weight);
 			if (canChangeWeight) {
 				caloriesNumber *= SettingsBox.instance.weight;
 			}
@@ -71,7 +70,10 @@ public class SummaryItem : MonoBehaviour {
 		}
 		if (summary.distance > 1) {
 			distance.gameObject.SetActive(true);
-			distance.text = ChartItem.ConvertToKm((int)summary.distance);
+			if (SettingsBox.instance.isMetric)
+				distance.text = ChartItem.ConvertToKm((int)summary.distance);
+			else
+				distance.text = ChartItem.ConvertToMiles((int)summary.distance);
 		}
 		if (summary.duration > 1) {
 			duration.gameObject.SetActive(true);

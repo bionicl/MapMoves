@@ -41,9 +41,9 @@ public class SettingsBox : MonoBehaviour
 			unitsImperial.image.sprite = selectedOption;
 			this.isMetric = false;
 		}
+		ReadJson.instance.RefreshSummaries(isKg, this.isMetric);
 	}
 	public void ChangeUnitWeight(bool isKg) {
-		Debug.Log("勞");
 		if (isKg && !this.isKg) {
 			unitsKg.image.sprite = selectedOption;
 			unitsLb.image.sprite = unselectedOption;
