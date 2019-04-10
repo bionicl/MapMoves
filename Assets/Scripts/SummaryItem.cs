@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class SummaryItem : MonoBehaviour {
 
 	MovesJson.SummaryInfo summary;
+	bool canChangeWeight;
 
 	public Text activityTitle;
 	public Image activityImage;
@@ -15,11 +16,20 @@ public class SummaryItem : MonoBehaviour {
 	public Text calories;
 	public Sprite[] icons;
 
-	public void Setup(MovesJson.SummaryInfo summary) {
+	float distanceValue;
+	float caloriesValue;
+
+	public void Setup(MovesJson.SummaryInfo summary, bool canChangeWeight) {
 		this.summary = summary;
+		this.canChangeWeight = canChangeWeight;
+		
 		SetupIcon();
-		SetupTexts();
+		SetupTexts(canChangeWeight);
 		SetupColors();
+	}
+
+	public void Refresh() {
+		SetupTexts(canChangeWeight);
 	}
 
 	public static string FirstLetterUpper(string text) {
@@ -49,14 +59,21 @@ public class SummaryItem : MonoBehaviour {
 				break;
 		}
 	}
-	void SetupTexts() {
+	void SetupTexts(bool canChangeWeight) {
 		if (summary.calories > 1) {
-			calories.gameObject.SetActive(true);
-			calories.text = summary.calories.ToString() + "cal";
-		}
+			double caloriesNumber = summary.calories;
+			if (canChangeWeight) {
+				caloriesNumber *= SettingsBox.instance.weight;
+			}
+			calories.text = caloriesNumber.ToString() + "cal";
+		} else
+			calories.text = "- cal";
 		if (summary.distance > 1) {
 			distance.gameObject.SetActive(true);
-			distance.text = ChartItem.ConvertToKm((int)summary.distance);
+			if (SettingsBox.instance.isMetric)
+				distance.text = ChartItem.ConvertToKm((int)summary.distance);
+			else
+				distance.text = ChartItem.ConvertToMiles((int)summary.distance);
 		}
 		if (summary.duration > 1) {
 			duration.gameObject.SetActive(true);

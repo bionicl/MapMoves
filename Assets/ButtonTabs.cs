@@ -23,6 +23,8 @@ public class ButtonTabs : MonoBehaviour {
 	}
 
 	public void Open(int id) {
+		if (id == 3 && ReadJson.instance.uploadedFiles.Count == 0)
+			return;
 		if (currentlyOpened == 3) {
 			Calendar.instance.ResetActivityListPadding();
 		}

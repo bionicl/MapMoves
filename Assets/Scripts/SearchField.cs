@@ -18,6 +18,8 @@ public class SearchField : MonoBehaviour {
 
 	// Start animation
 	public void StartSearching() {
+		if (ReadJson.instance.uploadedFiles.Count == 0)
+			return;
 		animator.SetTrigger("Open");
 		inSearchMode = true;
 		foreach (var item in searchHelp) {

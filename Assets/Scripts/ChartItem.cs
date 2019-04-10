@@ -97,8 +97,24 @@ public class ChartItem : MonoBehaviour {
 	}
 
 	public static string ConvertToKm(int meters) {
-		float km = (float)meters / 1000;
-		return Mathf.Round(km).ToString() + "km";
+		if (meters < 1000) {
+			return (meters/10).ToString() + "0m";
+		} else {
+			float km = (float)meters / 1000;
+			return km.ToString("F1") + "km";
+		}
+
+	}
+
+	public static string ConvertToMiles(int meters) {
+		if (meters < 500) {
+			float feets = (float)meters * 3.2808399f;
+			return Mathf.Round(feets).ToString() + "ft";
+		} else {
+			float miles = (float)meters * 0.000621371192f;
+			return miles.ToString("F1") + "mi";
+		}
+
 	}
 
 	public void Select() {

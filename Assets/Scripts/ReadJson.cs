@@ -181,11 +181,14 @@ public class DayClass {
 	public MovesJson day;
 	//public ChartItem chart;
 	public int dayNumber;
+	public bool canChangeWeight;
 
-	public DayClass(DateTime date, MovesJson day, int number) {
+
+	public DayClass(DateTime date, MovesJson day, int number, bool canChangeWeight) {
 		this.date = date;
 		this.day = day;
 		dayNumber = number;
+		this.canChangeWeight = canChangeWeight;
 	}
 
 	public DayClass() {
@@ -225,6 +228,9 @@ public class ReadJson : MonoBehaviour {
 	public List<string> uploadedFiles;
 	public FilesBox filesBox;
 	List<DayClass> daysToDraw = new List<DayClass>();
+	public GameObject loadingDialogGo;
+	public Text loadingDialogText;
+	List<SummaryItem> summaries = new List<SummaryItem>();
 
 	void Awake() {
 		instance = this;
@@ -296,10 +302,6 @@ public class ReadJson : MonoBehaviour {
 	// Files UI
 	public void OpenMoreFilesButton() {
 		OpenFileDialog();
-		if (uploadedFiles.Count > 0) {
-			filesBox.SetupTexts(uploadedFiles);
-			CheckIfCanDraw();
-		}
 	}
 	public void RestartFiles() {
 		days.Clear();
@@ -317,31 +319,80 @@ public class ReadJson : MonoBehaviour {
 
 	// Opening files
 	void OpenFileDialog() {
+		CameraDrag.instance.blocked = true;
 		var extensions = new[] {
 			new ExtensionFilter("Arc app GPX or Moves json", "gpx", "json")
 		};
 
 		string[] paths = StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, true);
 		Debug.Log("Starting loading...");
+		StartCoroutine(LoadFilesAsync(paths));
+	}
+	IEnumerator LoadFilesAsync(string[] paths) {
+		loadingDialogGo.SetActive(true);
+		UpdateLoadingText("Starting");
+		yield return new WaitForSeconds(0.5f);
+		int fileNumer = 1;
+		List<string> exceptionsWhileLoading = new List<string>();
 		foreach (var item in paths) {
 			string tempItem = item.Replace("file://", "").Replace("%20", " ");
+
 			if (item.ToLower().EndsWith("gpx")) {
-				//Debug.Log("GPX file!\nLoading...");
-				//Debug.Log(Bionicl.ArcExportConverter.ConvertGpxToJson("test", 80));
-				uploadedFiles.Add(GetFileName(tempItem));
+				UpdateLoadingText(string.Format("Opening {0} GPX file", fileNumer + "/" + paths.Length));
+				yield return new WaitForSeconds(0.1f);
 				string jsonData = File.ReadAllText(tempItem);
-				LoadFiles(TealFire.ArcExportConverter.ConvertGpxToJson(jsonData, 80));
+				UpdateLoadingText(string.Format("Importing {0} GPX file", fileNumer + "/" + paths.Length));
+				yield return new WaitForSeconds(0.1f);
+				try {
+					LoadFiles(TealFire.ArcExportConverter.ConvertGpxToJson(jsonData, 1), true);
+					uploadedFiles.Add(GetFileName(tempItem));
+				} catch (Exception ex) {
+					exceptionsWhileLoading.Add("Couldn't open file #" + fileNumer + " : " + tempItem);
+				}
+
 			} else if (item.ToLower().EndsWith("json")) {
-				Debug.Log("Json file!\nLoading...");
-				uploadedFiles.Add(GetFileName(tempItem));
+				UpdateLoadingText(string.Format("Opening {0} JSON file", fileNumer + "/" + paths.Length));
+				yield return new WaitForSeconds(0.1f);
 				string jsonData = File.ReadAllText(tempItem);
-				LoadFiles(jsonData);
+				UpdateLoadingText(string.Format("Importing {0} JSON file", fileNumer + "/" + paths.Length));
+				yield return new WaitForSeconds(0.1f);
+				try {
+					LoadFiles(jsonData, false);
+					uploadedFiles.Add(GetFileName(tempItem));
+				} catch (Exception ex) {
+					exceptionsWhileLoading.Add("Couldn't open file #" + fileNumer + " : " + tempItem);
+				}
 			}
+			fileNumer++;
 		}
+		UpdateLoadingText("Finishing");
+		yield return new WaitForSeconds(0.1f);
 		if (daysToDraw.Count > 0) {
 			CalculationAfterLoadedFiles();
+			filesBox.SetupTexts(uploadedFiles);
+			CheckIfCanDraw(); // Timeline draw
 		}
+		UpdateLoadingText("Done!", false);
+		CameraDrag.instance.blocked = false;
+		Debug.Log("UNBLOCKED");
+		yield return new WaitForSeconds(0.5f);
+		if (exceptionsWhileLoading.Count > 0) {
+			loadingDialogText.text = "";
+			foreach (var item in exceptionsWhileLoading) {
+				loadingDialogText.text += item + "\n\n";
+			}
+			yield return new WaitForSeconds(5f);
+		}
+		loadingDialogGo.SetActive(false);
 	}
+
+	void UpdateLoadingText(string updatedText, bool addDots = true) {
+		loadingDialogText.text = updatedText;
+		if (addDots)
+			loadingDialogText.text += "...";
+
+	}
+
 	string GetFileName(string path) {
 		string output = "";
 		for (int i = 0; i < path.Length; i++) {
@@ -357,13 +408,13 @@ public class ReadJson : MonoBehaviour {
 
 	// Loading json files
 	public int dayNumber;
-	void LoadFiles(string jsonData) {
+	void LoadFiles(string jsonData, bool canChangeWeight) {
 		string text = "{ day: " + jsonData + "}";
 		FullStoryLine m = JsonConvert.DeserializeObject<FullStoryLine>(text);
 		foreach (var item in m.day) {
 			DateTime timelineDay = ReturnSimpleDate(item.date);
 			if (!days.ContainsKey(timelineDay) && item.summary != null) {
-				DayClass tempDay = new DayClass(timelineDay, item, dayNumber++);
+				DayClass tempDay = new DayClass(timelineDay, item, dayNumber++, canChangeWeight);
 				days.Add(timelineDay, tempDay);
 				daysToDraw.Add(tempDay);
 			}
@@ -414,7 +465,8 @@ public class ReadJson : MonoBehaviour {
 						Destroy(child.gameObject);
 				}
 				activitiesList.Clear();
-				DrawTimeline(timeline.day);
+				summaries.Clear();
+				DrawTimeline(timeline.day, timeline.canChangeWeight);
 			} else {
 				if (selectedDay == lastDate.AddDays(1))
 					selectedDay = selectedDay.AddDays(-1);
@@ -430,20 +482,20 @@ public class ReadJson : MonoBehaviour {
 			}
 		}
 	}
-	void DrawTimeline(MovesJson m) {
+	void DrawTimeline(MovesJson m, bool canChangeWeight) {
 		animator.SetTrigger("Refresh");
 		foreach (var item in selectedDayDateText) {
 			item.text = ReturnSimpleDate(m.date).ToString("dd MMMMM yyyy");
 		}
 		ChartUI.instance.CheckChartSelected();
-		StartCoroutine(RenderAfterTime(m));
+		StartCoroutine(RenderAfterTime(m, canChangeWeight));
 	}
-	IEnumerator RenderAfterTime(MovesJson m) {
+	IEnumerator RenderAfterTime(MovesJson m, bool canChangeWeight) {
 		yield return new WaitForSeconds(0.3f);
 
 		// Summary
 		foreach (var item in m.summary) {
-			SpawnSummary(item);
+			SpawnSummary(item, canChangeWeight);
 		}
 
 		// ActivityUI
@@ -463,14 +515,16 @@ public class ReadJson : MonoBehaviour {
 		}
 		ValidateIfNoReapeted();
 	}
-	void SpawnSummary(MovesJson.SummaryInfo summary) {
-		if (summary.group == "transport")
+	void SpawnSummary(MovesJson.SummaryInfo summary, bool canChangeWeight) {
+		if (summary.group == "transport" || summary.duration < 60)
 			return;
 		GameObject summaryObject = Instantiate(summaryPrefab, historySpawn.transform.position, historySpawn.transform.rotation);
 		RectTransform summaryObjectRect = summaryObject.GetComponent<RectTransform>();
 		summaryObject.transform.SetParent(summariesGO.transform);
 		summaryObjectRect.localScale = summaryObjectRect.lossyScale;
-		summaryObject.GetComponent<SummaryItem>().Setup(summary);
+		SummaryItem summaryItem = summaryObject.GetComponent<SummaryItem>();
+		summaryItem.Setup(summary, canChangeWeight);
+		summaries.Add(summaryItem);
 	}
 	void SpawnActivity(ActivityType? type, double distance, float time, DateTime endTime, MovesJson.SegmentsInfo.PlaceInfo placeInfo = null) {
 		if (time < 60)
@@ -490,6 +544,11 @@ public class ReadJson : MonoBehaviour {
 					activitiesList[i + 1].DestroyActivity();
 				}
 			}
+		}
+	}
+	public void RefreshSummaries(bool weight, bool distance) {
+		foreach (var item in summaries) {
+			item.Refresh();
 		}
 	}
 
