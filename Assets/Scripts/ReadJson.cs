@@ -516,7 +516,7 @@ public class ReadJson : MonoBehaviour {
 		ValidateIfNoReapeted();
 	}
 	void SpawnSummary(MovesJson.SummaryInfo summary, bool canChangeWeight) {
-		if (summary.group == "transport")
+		if (summary.group == "transport" || summary.duration < 60)
 			return;
 		GameObject summaryObject = Instantiate(summaryPrefab, historySpawn.transform.position, historySpawn.transform.rotation);
 		RectTransform summaryObjectRect = summaryObject.GetComponent<RectTransform>();

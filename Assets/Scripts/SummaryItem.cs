@@ -61,13 +61,13 @@ public class SummaryItem : MonoBehaviour {
 	}
 	void SetupTexts(bool canChangeWeight) {
 		if (summary.calories > 1) {
-			calories.gameObject.SetActive(true);
 			double caloriesNumber = summary.calories;
 			if (canChangeWeight) {
 				caloriesNumber *= SettingsBox.instance.weight;
 			}
 			calories.text = caloriesNumber.ToString() + "cal";
-		}
+		} else
+			calories.text = "- cal";
 		if (summary.distance > 1) {
 			distance.gameObject.SetActive(true);
 			if (SettingsBox.instance.isMetric)

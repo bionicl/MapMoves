@@ -228,7 +228,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -129.79, y: 27}
+  m_AnchoredPosition: {x: -132, y: 27}
   m_SizeDelta: {x: 251, y: 40.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &23128034
@@ -3002,7 +3002,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: <b>Improve this map</b>
+  m_Text: ' <b>Improve this map</b>'
 --- !u!222 &227121913
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -22973,7 +22973,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 130.99051, y: 60}
+  m_AnchoredPosition: {x: 130.99039, y: 60}
   m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1433522477
