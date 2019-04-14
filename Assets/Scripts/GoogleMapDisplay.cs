@@ -45,6 +45,7 @@ public class GoogleMapDisplay : MonoBehaviour {
 
 	public float timeMarginAfterMove = 0.2f;
 	public bool useGoogleMaps = false;
+	public bool DEBUGDisableMaps;
 	float timeSinceLastRefresh;
 	bool checkForLastRefresh = true;
 
@@ -73,6 +74,8 @@ public class GoogleMapDisplay : MonoBehaviour {
 
 	// Update map after mouse move
 	void CheckIfRenderMap() {
+		if (DEBUGDisableMaps)
+			return;
 		timeSinceLastRefresh += Time.deltaTime;
 		if (timeSinceLastRefresh > timeMarginAfterMove && checkForLastRefresh) {
 			RenderMapTiles();
