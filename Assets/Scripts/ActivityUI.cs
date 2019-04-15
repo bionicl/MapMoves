@@ -23,12 +23,20 @@ public class ActivityUI : MonoBehaviour {
 	public ActivityType? type;
 	public double distance;
 	public float time;
+	public TimeSpan timeSpan;
 	public string placename;
 	public DateTime endTime;
 	public PlaceType? placeType;
 	public string placeFbId;
 	public PlaceGroup placeGroup;
 	public Image placeBoxColor;
+
+	[Header("Photos")]
+	public Image[] images;
+	public GameObject imagesGo;
+
+	// Images
+//List<MediaItem> mediaItems;
 
 	string[] activityTypeText = {
 		"Walk",
@@ -71,10 +79,10 @@ public class ActivityUI : MonoBehaviour {
 		this.type = type;
 		this.distance = distance;
 		this.time = time;
+		this.endTime = endTime;
 		if (placeInfo != null) {
 			placeGroup = PlacesRanking.instance.FindPlace(placeInfo, this);
 			this.placename = placeInfo.name;
-			this.endTime = endTime;
 			this.placeType = placeInfo.type;
 			if (placeType == PlaceType.facebook)
 				placeFbId = placeInfo.facebookPlaceId;
@@ -137,7 +145,11 @@ public class ActivityUI : MonoBehaviour {
 		}
 	}
 
-	void SetSize(TimeSpan t) {
+	void SetSize(TimeSpan t, bool hasImages = false) {
+		this.timeSpan = t;
+		int addidtionalHeight = 35;
+		if (!hasImages)
+			addidtionalHeight = 0;
 
 		int[] height = moveHeights;
 		if (this.type == null) {
@@ -150,13 +162,13 @@ public class ActivityUI : MonoBehaviour {
 		}
 
 		if (t.TotalMinutes < 10)
-			GetComponent<RectTransform>().sizeDelta = new Vector2(0, height[0]);
+			GetComponent<RectTransform>().sizeDelta = new Vector2(0, height[0] + addidtionalHeight);
 		else if (t.TotalMinutes < 30)
-			GetComponent<RectTransform>().sizeDelta = new Vector2(0, height[1]);
+			GetComponent<RectTransform>().sizeDelta = new Vector2(0, height[1] + addidtionalHeight);
 		else if (t.TotalMinutes < 60)
-			GetComponent<RectTransform>().sizeDelta = new Vector2(0, height[2]);
+			GetComponent<RectTransform>().sizeDelta = new Vector2(0, height[2] + addidtionalHeight);
 		else
-			GetComponent<RectTransform>().sizeDelta = new Vector2(0, height[3]);
+			GetComponent<RectTransform>().sizeDelta = new Vector2(0, height[3] + addidtionalHeight);
 	}
 
 	public void ClickOnPlace() {
@@ -169,7 +181,23 @@ public class ActivityUI : MonoBehaviour {
 		Destroy(gameObject);
 	}
 
-	public void HideClicked(bool hide) {
-		
+	//public void AddPhotos(List<MediaItem> mediaItems2) {
+	//	Debug.Log($"Adding {mediaItems.Count} images...");
+	//	mediaItems = mediaItems2;
+	//	Debug.Log($"Added {this.mediaItems.Count} images!");
+	//}
+
+	public void DownloadPhotos(List<MediaItem> mediaItems) {
+		Debug.Log($"Num Of images to Download: {mediaItems.Count}!");
+		imagesGo.SetActive(true);
+		SetSize(timeSpan, true);
+		int maxRange = 3;
+		if (mediaItems.Count < 3)
+			maxRange = mediaItems.Count;
+		Debug.Log(string.Format($"Downloading {maxRange} images! (after MaxRange)"));
+		for (int i = 0; i < maxRange; i++) {
+			StartCoroutine(GooglePhotosApi.instance.DownloadImage(mediaItems[i].baseUrl + "=w400-h400-c", images[i]));
+		}
 	}
+
 }
