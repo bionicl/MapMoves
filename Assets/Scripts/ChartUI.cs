@@ -25,7 +25,8 @@ public class ChartUI : MonoBehaviour {
 		double caloriesCount = 0;
 		if (day.summary != null) {
 			foreach (var item in day.summary) {
-				caloriesCount += item.calories;
+				if (item.calories.HasValue)
+					caloriesCount += item.calories.Value;
 			}
 			if (maxCalories < caloriesCount)
 				maxCalories = (int)caloriesCount;

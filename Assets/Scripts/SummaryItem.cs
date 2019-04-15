@@ -61,7 +61,7 @@ public class SummaryItem : MonoBehaviour {
 	}
 	void SetupTexts(bool canChangeWeight) {
 		if (summary.calories > 1) {
-			double caloriesNumber = summary.calories;
+			double caloriesNumber = summary.calories.Value;
 			if (canChangeWeight) {
 				caloriesNumber *= SettingsBox.instance.weight;
 			}

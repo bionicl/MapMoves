@@ -109,41 +109,59 @@ public enum PlaceType {
 	unknown
 }
 
+public enum ActivityGroup {
+	walking,
+	cycling,
+	running,
+	transport
+}
+
 public class FullStoryLine {
 	public MovesJson[] day;
 }
 [Serializable]
 public class MovesJson {
+	public enum ActivityGroup {
+		walking,
+		cycling,
+		running,
+		transport
+	}
+
 	[Serializable]
 	public class SummaryInfo {
 		public double distance;
 		public double duration;
-		public double calories;
+		public double? calories;
 		public double steps;
-		public string group;
+		public ActivityGroup group;
 		public ActivityType activity;
 	}
 	[Serializable]
 	public class SegmentsInfo {
+		public enum SegmentType {
+			place,
+			move
+		}
 		[Serializable]
 		public class ActivitiesInfo {
 			[Serializable]
 			public class TrackPointsInfo {
 				public string time;
-				public float lon;
-				public float lat;
+				public double lon;
+				public double lat;
 			}
 
-			public string startTime;
-			public bool manual;
-			public double distance;
-			public float duration;
-			public double calories;
-			public TrackPointsInfo[] trackPoints;
-			public double steps;
-			public string endTime;
-			public string group;
-			public ActivityType activity;
+			public string startTime; // COMPATIBLE
+			public bool manual = false;  // COMPATIBLE
+			public double distance; // COMPATIBLE
+			public double duration; // COMPATIBLE
+			public double calories; // COMPATIBLE
+			public TrackPointsInfo[] trackPoints; // COMPATIBLE
+			public double steps; // COMPATIBLE
+			public string endTime; // COMPATIBLE
+			public ActivityGroup group; // COMPATIBLE
+			public ActivityType activity; // COMPATIBLE
 		}
 		[Serializable]
 		public class PlaceInfo {
@@ -152,20 +170,20 @@ public class MovesJson {
 				public float lon;
 				public float lat;
 			}
-			public long id;
-			public LocationInfo location;
-			public string name;
-			public PlaceType type;
-			public string facebookPlaceId;
-			public string foursquareId;
+			public long id; // COMPATIBLE
+			public LocationInfo location; // COMPATIBLE
+			public string name; // COMPATIBLE
+			public PlaceType type; // COMPATIBLE
+			public string facebookPlaceId;  // COMPATIBLE
+			public string foursquareId;  // COMPATIBLE
 		}
 
-		public string startTime;
-		public string lastUpdate;
+		public string startTime; // COMPATIBLE
+		public string lastUpdate; // COMPATIBLE
 		public ActivitiesInfo[] activities;
-		public PlaceInfo place;
-		public string endTime;
-		public string type;
+		public PlaceInfo place;   // COMPATIBLE
+		public string endTime; // COMPATIBLE
+		public SegmentType type; // COMPATIBLE
 	}
 
 	public SummaryInfo[] summary;
@@ -502,7 +520,7 @@ public class ReadJson : MonoBehaviour {
 		foreach (var item in m.segments) {
 			if (item.place == null) {
 				for (int i = 0; i < item.activities.Length; i++) {
-					SpawnActivity(item.activities[i].activity, item.activities[i].distance, item.activities[i].duration, ReturnDateTime(item.activities[i].endTime));
+					SpawnActivity(item.activities[i].activity, item.activities[i].distance, (float)item.activities[i].duration, ReturnDateTime(item.activities[i].endTime));
 				}
 			} else {
 				double distance = 0;
@@ -516,7 +534,7 @@ public class ReadJson : MonoBehaviour {
 		ValidateIfNoReapeted();
 	}
 	void SpawnSummary(MovesJson.SummaryInfo summary, bool canChangeWeight) {
-		if (summary.group == "transport" || summary.duration < 60)
+		if (summary.group == MovesJson.ActivityGroup.transport || summary.duration < 60)
 			return;
 		GameObject summaryObject = Instantiate(summaryPrefab, historySpawn.transform.position, historySpawn.transform.rotation);
 		RectTransform summaryObjectRect = summaryObject.GetComponent<RectTransform>();

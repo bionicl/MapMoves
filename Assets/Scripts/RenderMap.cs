@@ -122,7 +122,7 @@ public class RenderMap : MonoBehaviour {
 						// Set Line points 
 						List<Vector3> positions = new List<Vector3>();
 						foreach (var item3 in item2.trackPoints) {
-							positions.Add(Conversion.LatLonToMeters(item3.lat, item3.lon));
+							positions.Add(Conversion.LatLonToMeters((float)item3.lat, (float)item3.lon));
 						}
 						if (item2.activity == ActivityType.walking || item2.activity == ActivityType.cycling || item2.activity == ActivityType.running)
 							positions = SimplifyPath.Simplify(positions, simplifyMultiplayerDetailed);

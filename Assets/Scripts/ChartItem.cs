@@ -39,15 +39,19 @@ public class ChartItem : MonoBehaviour {
 
 	void AddSums() {
 		foreach (var item in summary) {
-			sum += (int)item.calories;
+			if (item.calories.HasValue)
+				sum += (int)item.calories.Value;
 			if (item.activity == ActivityType.walking) {
-				walkingSum += (int)item.calories;
+				if (item.calories.HasValue)
+					walkingSum += (int)item.calories.Value;
 				walkingDistance += (int)item.distance;
 			} else if (item.activity == ActivityType.cycling) {
-				cyclingSum += (int)item.calories;
+				if (item.calories.HasValue)
+					cyclingSum += (int)item.calories.Value;
 				cyclingDistance += (int)item.distance;
 			} else if (item.activity == ActivityType.running || item.activity == ActivityType.dancing)
-				otherSum += (int)item.calories;
+				if (item.calories.HasValue)
+					otherSum += (int)item.calories.Value;
 		}
 	}
 	void SetHeight() {
