@@ -14,6 +14,7 @@ public class GooglePhotosResponse {
 	public void CalculateDates() {
 		foreach (var item in mediaItems) {
 			item.creationDate = DateTime.Parse(item.mediaMetadata.creationTime);
+			Debug.Log($"item creation time : {item.creationDate}, item link: {item.productUrl}");
 		}
 	}
 }
@@ -49,6 +50,7 @@ public class GooglePhotosApi : MonoBehaviour {
 
 	IEnumerator Upload() {
 		DateTime day = ReadJson.instance.selectedDay;
+		Debug.Log("Universal timezone: " + day.ToUniversalTime().ToString());
 		Debug.Log(day);
 		string body = "{\"pageSize\":100,\"filters\":{\"dateFilter\":{\"dates\":[{\"day\":" + day.Day + ",\"month\":" + day.Month + ",\"year\":" + day.Year + "}]}}}";
 		Debug.Log(body);
@@ -108,7 +110,6 @@ public class GooglePhotosApi : MonoBehaviour {
 			if (tempImages.Count > 0) {
 				
 				timeLinesWithPhotos.Add(timeline[i]);
-				Debug.Log($"Adding {tempImages.Count} images...");
 				timeline[i].DownloadPhotos(tempImages);
 
 			}
@@ -129,7 +130,7 @@ public class GooglePhotosApi : MonoBehaviour {
 		// assign the downloaded image to sprite
 		www.LoadImageIntoTexture(texture);
 		Rect rec = new Rect(0, 0, texture.width, texture.height);
-		Sprite spriteToUse = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
+		Sprite spriteToUse = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 200);
 
 		Debug.Log("Downloaded image!");
 		targetImage.sprite = spriteToUse;

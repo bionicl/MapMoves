@@ -35,6 +35,11 @@ public class ActivityUI : MonoBehaviour {
 	public Image[] images;
 	public GameObject imagesGo;
 
+	public GameObject activityGo;
+	public GameObject placeGo;
+
+	string[] imageURL = new string[3];
+
 	// Images
 //List<MediaItem> mediaItems;
 
@@ -96,6 +101,8 @@ public class ActivityUI : MonoBehaviour {
 		string timeShort = string.Format("{0}", t.Minutes);
 		if (type == null) {
 			place.SetActive(true);
+			activityGo.SetActive(false);
+			placeGo.SetActive(true);
 
 			//place.GetComponent<Image>().color = placeGroup.Category.Category.color;
 			//place.GetComponent<Image>().color = Color.white;
@@ -115,6 +122,9 @@ public class ActivityUI : MonoBehaviour {
 				placeIcon.sprite = placeGroup.IconSprite;
 		} else {
 			place.SetActive(false);
+			activityGo.SetActive(true);
+			placeGo.SetActive(false);
+
 			move.gameObject.SetActive(true);
 			move.color = ReadJson.colors[(int)type];
 			Subheader.text = timeShort + distance.ToString() + "m";
@@ -147,7 +157,7 @@ public class ActivityUI : MonoBehaviour {
 
 	void SetSize(TimeSpan t, bool hasImages = false) {
 		this.timeSpan = t;
-		int addidtionalHeight = 35;
+		int addidtionalHeight = 57;
 		if (!hasImages)
 			addidtionalHeight = 0;
 
@@ -188,16 +198,25 @@ public class ActivityUI : MonoBehaviour {
 	//}
 
 	public void DownloadPhotos(List<MediaItem> mediaItems) {
-		Debug.Log($"Num Of images to Download: {mediaItems.Count}!");
+		Debug.Log($"This endtime: {endTime}, Photo time: {mediaItems[0].creationDate}, Photo link: {mediaItems[0].productUrl}");
 		imagesGo.SetActive(true);
 		SetSize(timeSpan, true);
 		int maxRange = 3;
-		if (mediaItems.Count < 3)
+		if (mediaItems.Count < 3) {
 			maxRange = mediaItems.Count;
-		Debug.Log(string.Format($"Downloading {maxRange} images! (after MaxRange)"));
-		for (int i = 0; i < maxRange; i++) {
-			StartCoroutine(GooglePhotosApi.instance.DownloadImage(mediaItems[i].baseUrl + "=w400-h400-c", images[i]));
+			for (int i = 2; i > 0; i--) {
+				if (mediaItems.Count - 1 < i)
+					images[i].gameObject.SetActive(false);
+			}
 		}
+		for (int i = 0; i < maxRange; i++) {
+			StartCoroutine(GooglePhotosApi.instance.DownloadImage(mediaItems[i].baseUrl + "=w100-h100-c", images[i]));
+			imageURL[i] = mediaItems[i].productUrl;
+		}
+	}
+
+	public void OpenProductLink(int imageId) {
+		Application.OpenURL(imageURL[imageId]);
 	}
 
 }
