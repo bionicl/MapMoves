@@ -89,7 +89,7 @@ public class RenderMap : MonoBehaviour {
 
 	List<long> alreadyRenderedPlaces = new List<long>();
 	List<LineRenderer> renderedLines = new List<LineRenderer>();
-	public int RenderDay(MovesJson day) {
+	public int RenderDay(JsonMoves.MovesJson day) {
 		int renderedPoints = 0;
 		GameObject dateGO = Instantiate(new GameObject(), transform.position, transform.rotation);
 		dateGO.transform.SetParent(gameObject.transform);
@@ -98,7 +98,7 @@ public class RenderMap : MonoBehaviour {
 
 		foreach (var item in day.segments) {
 			if (item.place != null && !alreadyRenderedPlaces.Contains(item.place.id)) {
-				Vector2 position = Conversion.LatLonToMeters(item.place.location.lat, item.place.location.lon);
+				Vector2 position = Conversion.LatLonToMeters((float)item.place.location.lat, (float)item.place.location.lon);
 				Vector3 finalPos = new Vector3(position.x, position.y, 0);
 				GameObject placeTemp = Instantiate(PlacePrefab, finalPos, transform.rotation);
 				placeTemp.transform.SetParent(loactionsGO.transform);

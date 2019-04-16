@@ -26,7 +26,7 @@ public class ActivityUI : MonoBehaviour {
 	public TimeSpan timeSpan;
 	public string placename;
 	public DateTime endTime;
-	public PlaceType? placeType;
+	public JsonMoves.PlaceType? placeType;
 	public string placeFbId;
 	public PlaceGroup placeGroup;
 	public Image placeBoxColor;
@@ -75,7 +75,7 @@ public class ActivityUI : MonoBehaviour {
 		"Wheel chair"
 	};
 
-	public void Setup(ActivityType? type, double distance, float time, DateTime endTime, MovesJson.SegmentsInfo.PlaceInfo placeInfo) {
+	public void Setup(ActivityType? type, double distance, float time, DateTime endTime, JsonMoves.MovesJson.SegmentsInfo.PlaceInfo placeInfo) {
 		this.type = type;
 		this.distance = distance;
 		this.time = time;
@@ -84,7 +84,7 @@ public class ActivityUI : MonoBehaviour {
 			placeGroup = PlacesRanking.instance.FindPlace(placeInfo, this);
 			this.placename = placeInfo.name;
 			this.placeType = placeInfo.type;
-			if (placeType == PlaceType.facebook)
+			if (placeType.Value == JsonMoves.PlaceType.facebook)
 				placeFbId = placeInfo.facebookPlaceId;
 		}
 

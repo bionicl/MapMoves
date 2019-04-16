@@ -8,97 +8,6 @@ using UnityEngine.UI;
 using System.IO;
 using System.Linq;
 
-public enum ActivityType {
-	walking,	//00D55A	0
-	transport,	//FBE7B1	1
-	cycling,	//00CDEC	2
-	train,		//FF802D	3
-	dancing,	//F32DFF	4
-	bus,		//F43838	5
-	tram,		//FF802D	6
-	running,	//F32DFF	7
-	car,		//FFC52D	8
-	underground,//FF802D	9
-	airplane,	//6033EE	10
-	boat,
-	escalator,
-	ferry,
-	funicular,
-	motorcycle,
-	sailing,
-	scooter,
-	cross_country_skiing,
-	downhill_skiing,
-	golfing,
-	kayaking,
-	paddling,
-	paintball,
-	riding,
-	roller_skiing,
-	rollerblading,
-	rollerskating,
-	rowing,
-	skateboarding,
-	skating,
-	snowboarding,
-	snowshoeing,
-	wheel_chair,
-	indoor_cycling,
-	running_on_treadmill,
-	walking_on_treadmill,
-	aerobics,
-	american_football,
-	badminton,
-	ballet,
-	bandy,
-	baseball,
-	basketball,
-	beach_volleyball,
-	bodypump,
-	bowling,
-	boxing,
-	circuit_training,
-	cleaning,
-	climbing,
-	cricket,
-	curling,
-	disc_ultimate,
-	elliptical_training,
-	fencing,
-	floorball,
-	gym_training,
-	gymnastics,
-	handball,
-	hockey,
-	kettlebell,
-	kite_surfing,
-	lacrosse,
-	martial_arts,
-	parkour,
-	petanque,
-	pilates,
-	polo,
-	racquetball,
-	rugby,
-	scuba_diving,
-	soccer,
-	spinning,
-	squash,
-	stair_climbing,
-	stretching,
-	surfing,
-	swimming,
-	table_tennis,
-	tennis,
-	volleyball,
-	water_polo,
-	weight_training,
-	windsurfing,
-	wrestling,
-	yoga,
-	zumba,
-}
-
 public enum PlaceType {
 	school,
 	facebook,
@@ -116,93 +25,16 @@ public enum ActivityGroup {
 	transport
 }
 
-public class FullStoryLine {
-	public MovesJson[] day;
-}
-[Serializable]
-public class MovesJson {
-	public enum ActivityGroup {
-		walking,
-		cycling,
-		running,
-		transport
-	}
-
-	[Serializable]
-	public class SummaryInfo {
-		public double distance;
-		public double duration;
-		public double? calories;
-		public double steps;
-		public ActivityGroup group;
-		public ActivityType activity;
-	}
-	[Serializable]
-	public class SegmentsInfo {
-		public enum SegmentType {
-			place,
-			move
-		}
-		[Serializable]
-		public class ActivitiesInfo {
-			[Serializable]
-			public class TrackPointsInfo {
-				public string time;
-				public double lon;
-				public double lat;
-			}
-
-			public string startTime; // COMPATIBLE
-			public bool manual = false;  // COMPATIBLE
-			public double distance; // COMPATIBLE
-			public double duration; // COMPATIBLE
-			public double calories; // COMPATIBLE
-			public TrackPointsInfo[] trackPoints; // COMPATIBLE
-			public double steps; // COMPATIBLE
-			public string endTime; // COMPATIBLE
-			public ActivityGroup group; // COMPATIBLE
-			public ActivityType activity; // COMPATIBLE
-		}
-		[Serializable]
-		public class PlaceInfo {
-			[Serializable]
-			public class LocationInfo {
-				public float lon;
-				public float lat;
-			}
-			public long id; // COMPATIBLE
-			public LocationInfo location; // COMPATIBLE
-			public string name; // COMPATIBLE
-			public PlaceType type; // COMPATIBLE
-			public string facebookPlaceId;  // COMPATIBLE
-			public string foursquareId;  // COMPATIBLE
-		}
-
-		public string startTime; // COMPATIBLE
-		public string lastUpdate; // COMPATIBLE
-		public ActivitiesInfo[] activities;
-		public PlaceInfo place;   // COMPATIBLE
-		public string endTime; // COMPATIBLE
-		public SegmentType type; // COMPATIBLE
-	}
-
-	public SummaryInfo[] summary;
-	public SegmentsInfo[] segments;
-	public string lastUpdate;
-	public string date;
-	public double caloriesIdle;
-}
-
 [Serializable]
 public class DayClass {
 	public DateTime date;
-	public MovesJson day;
+	public JsonMoves.MovesJson day;
 	//public ChartItem chart;
 	public int dayNumber;
 	public bool canChangeWeight;
 
 
-	public DayClass(DateTime date, MovesJson day, int number, bool canChangeWeight) {
+	public DayClass(DateTime date, JsonMoves.MovesJson day, int number, bool canChangeWeight) {
 		this.date = date;
 		this.day = day;
 		dayNumber = number;
@@ -362,7 +194,7 @@ public class ReadJson : MonoBehaviour {
 				UpdateLoadingText(string.Format("Importing {0} GPX file", fileNumer + "/" + paths.Length));
 				yield return new WaitForSeconds(0.1f);
 				try {
-					LoadFiles(TealFire.ArcExportConverter.ConvertGpxToJson(jsonData, 1), true);
+					LoadJsonClass(TealFire.ArcExportConverter.ConvertGpxToJsonClass(jsonData, 1), true);
 					uploadedFiles.Add(GetFileName(tempItem));
 				} catch (Exception ex) {
 					exceptionsWhileLoading.Add("Couldn't open file #" + fileNumer + " : " + tempItem);
@@ -428,7 +260,7 @@ public class ReadJson : MonoBehaviour {
 	public int dayNumber;
 	void LoadFiles(string jsonData, bool canChangeWeight) {
 		string text = "{ day: " + jsonData + "}";
-		FullStoryLine m = JsonConvert.DeserializeObject<FullStoryLine>(text);
+		JsonMoves m = JsonConvert.DeserializeObject<JsonMoves>(text);
 		foreach (var item in m.day) {
 			DateTime timelineDay = ReturnSimpleDate(item.date);
 			if (!days.ContainsKey(timelineDay) && item.summary != null) {
@@ -439,6 +271,18 @@ public class ReadJson : MonoBehaviour {
 		}
 		//RenderMap.instance.ChangeDaysRangeFilter(new DateTime(2018, 03, 01), new DateTime(2018, 03, 10));
 	}
+	void LoadJsonClass(JsonMoves jsonMoves, bool canChangeWeight) {
+		JsonMoves m = jsonMoves;
+		foreach (var item in m.day) {
+			DateTime timelineDay = ReturnSimpleDate(item.date);
+			if (!days.ContainsKey(timelineDay) && item.summary != null) {
+				DayClass tempDay = new DayClass(timelineDay, item, dayNumber++, canChangeWeight);
+				days.Add(timelineDay, tempDay);
+				daysToDraw.Add(tempDay);
+			}
+		}
+	}
+
 	void CalculationAfterLoadedFiles(bool daysToDrawLoaded = true) {
 		if (!daysToDrawLoaded) {
 			foreach (var item in days.Values) {
@@ -500,7 +344,7 @@ public class ReadJson : MonoBehaviour {
 			}
 		}
 	}
-	void DrawTimeline(MovesJson m, bool canChangeWeight) {
+	void DrawTimeline(JsonMoves.MovesJson m, bool canChangeWeight) {
 		animator.SetTrigger("Refresh");
 		foreach (var item in selectedDayDateText) {
 			item.text = ReturnSimpleDate(m.date).ToString("dd MMMMM yyyy");
@@ -508,7 +352,7 @@ public class ReadJson : MonoBehaviour {
 		ChartUI.instance.CheckChartSelected();
 		StartCoroutine(RenderAfterTime(m, canChangeWeight));
 	}
-	IEnumerator RenderAfterTime(MovesJson m, bool canChangeWeight) {
+	IEnumerator RenderAfterTime(JsonMoves.MovesJson m, bool canChangeWeight) {
 		yield return new WaitForSeconds(0.3f);
 
 		// Summary
@@ -533,8 +377,8 @@ public class ReadJson : MonoBehaviour {
 		}
 		ValidateIfNoReapeted();
 	}
-	void SpawnSummary(MovesJson.SummaryInfo summary, bool canChangeWeight) {
-		if (summary.group == MovesJson.ActivityGroup.transport || summary.duration < 60)
+	void SpawnSummary(JsonMoves.MovesJson.SummaryInfo summary, bool canChangeWeight) {
+		if (summary.group == JsonMoves.ActivityGroup.transport || summary.duration < 60)
 			return;
 		GameObject summaryObject = Instantiate(summaryPrefab, historySpawn.transform.position, historySpawn.transform.rotation);
 		RectTransform summaryObjectRect = summaryObject.GetComponent<RectTransform>();
@@ -544,7 +388,7 @@ public class ReadJson : MonoBehaviour {
 		summaryItem.Setup(summary, canChangeWeight);
 		summaries.Add(summaryItem);
 	}
-	void SpawnActivity(ActivityType? type, double distance, float time, DateTime endTime, MovesJson.SegmentsInfo.PlaceInfo placeInfo = null) {
+	void SpawnActivity(ActivityType? type, double distance, float time, DateTime endTime, JsonMoves.MovesJson.SegmentsInfo.PlaceInfo placeInfo = null) {
 		if (time < 60)
 			return;
 		GameObject activity = Instantiate(activityPrefab, historySpawn.transform.position, historySpawn.transform.rotation);

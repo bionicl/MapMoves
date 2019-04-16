@@ -10,7 +10,7 @@ public class Place : MonoBehaviour {
 	public PlaceGroup place;
 	public TextMesh text;
 
-	public void SetupPlace(MovesJson.SegmentsInfo.PlaceInfo placeInfo) {
+	public void SetupPlace(JsonMoves.MovesJson.SegmentsInfo.PlaceInfo placeInfo) {
 		place = PlacesRanking.instance.FindPlace(placeInfo, this);
 		if (placeInfo.name == null)
 			text.text = "???";

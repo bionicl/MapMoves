@@ -21,7 +21,7 @@ public class ChartUI : MonoBehaviour {
 		instance = this;
 	}
 
-	public void CheckMaxCalories(MovesJson day) {
+	public void CheckMaxCalories(JsonMoves.MovesJson day) {
 		double caloriesCount = 0;
 		if (day.summary != null) {
 			foreach (var item in day.summary) {

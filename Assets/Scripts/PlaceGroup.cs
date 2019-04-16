@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlaceGroup {
 	public Place mapObject;
 	public ActivityUI timelineObject;
-	public MovesJson.SegmentsInfo.PlaceInfo placeInfo;
+	public JsonMoves.MovesJson.SegmentsInfo.PlaceInfo placeInfo;
 	public int icon;
 	public int timesVisited;
 	public float scaleNormal = 0.1f;
@@ -24,7 +24,7 @@ public class PlaceGroup {
 	public PlaceGroup() {
 
 	}
-	public PlaceGroup(MovesJson.SegmentsInfo.PlaceInfo placeinfo, DateTime timeStart, DateTime timeStop) {
+	public PlaceGroup(JsonMoves.MovesJson.SegmentsInfo.PlaceInfo placeinfo, DateTime timeStart, DateTime timeStop) {
 		this.placeInfo = placeinfo;
 		GlobalVariables.inst.SetIcon(placeinfo, (int sprite) => RefreshIcons(sprite));
 		CalculateHours(timeStart, timeStop);

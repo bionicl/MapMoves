@@ -28,7 +28,7 @@ public class ChartItem : MonoBehaviour {
 	public Text cyclingText;
 
 	DayClass day;
-	MovesJson.SummaryInfo[] summary;
+	JsonMoves.MovesJson.SummaryInfo[] summary;
 
 	public void Setup (DayClass day) {
 		this.day = day;

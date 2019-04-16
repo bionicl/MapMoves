@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class SummaryItem : MonoBehaviour {
 
-	MovesJson.SummaryInfo summary;
+	JsonMoves.MovesJson.SummaryInfo summary;
 	bool canChangeWeight;
 
 	public Text activityTitle;
@@ -19,7 +19,7 @@ public class SummaryItem : MonoBehaviour {
 	float distanceValue;
 	float caloriesValue;
 
-	public void Setup(MovesJson.SummaryInfo summary, bool canChangeWeight) {
+	public void Setup(JsonMoves.MovesJson.SummaryInfo summary, bool canChangeWeight) {
 		this.summary = summary;
 		this.canChangeWeight = canChangeWeight;
 		
