@@ -26,20 +26,20 @@ public class GlobalVariables : MonoBehaviour {
 		Debug.Log("Exit");
 	}
 
-	public void SetIcon(JsonMoves.MovesJson.SegmentsInfo.PlaceInfo place, SpriteRenderer image) {
+	public void SetIcon(MovesJson.SegmentsInfo.PlaceInfo place, SpriteRenderer image) {
 		LoadIcon(place, (int sprite) => image.sprite = PlacesRanking.instance.categories[sprite].smallIcon);
 	}
-	public void SetIcon(JsonMoves.MovesJson.SegmentsInfo.PlaceInfo place, Image image) {
+	public void SetIcon(MovesJson.SegmentsInfo.PlaceInfo place, Image image) {
 		LoadIcon(place, (int sprite) => image.sprite = PlacesRanking.instance.categories[sprite].smallIcon);
 	}
-	public void SetIcon(JsonMoves.MovesJson.SegmentsInfo.PlaceInfo place, Action<int> action) {
+	public void SetIcon(MovesJson.SegmentsInfo.PlaceInfo place, Action<int> action) {
 		LoadIcon(place, (int sprite) => action.Invoke(sprite));
 	}
-	void LoadIcon(JsonMoves.MovesJson.SegmentsInfo.PlaceInfo place, Action<int> action) {
-		JsonMoves.PlaceType placeType = place.type;
-		if (placeType == JsonMoves.PlaceType.home)
+	void LoadIcon(MovesJson.SegmentsInfo.PlaceInfo place, Action<int> action) {
+		PlaceType placeType = place.type;
+		if (placeType == PlaceType.home)
 			action.Invoke(4);
-		else if (placeType == JsonMoves.PlaceType.school)
+		else if (placeType == PlaceType.school)
 			action.Invoke(9);
 		else
 			action.Invoke(6);

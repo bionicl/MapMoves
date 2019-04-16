@@ -24,7 +24,7 @@ public class PlacesRanking : MonoBehaviour {
 		//categories = categories.OrderBy(c => c.category).ToArray();
 	}
 
-	public void AnalyseDay(JsonMoves.MovesJson day) {
+	public void AnalyseDay(MovesJson day) {
 		foreach (var item in day.segments) {
 			if (item.place != null) {
 				if (item.place.name == null)
@@ -33,7 +33,7 @@ public class PlacesRanking : MonoBehaviour {
 			}
 		}
 	}
-	void AddOrSetupRanking(JsonMoves.MovesJson.SegmentsInfo.PlaceInfo place, JsonMoves.MovesJson day, JsonMoves.MovesJson.SegmentsInfo segmentInfo) {
+	void AddOrSetupRanking(MovesJson.SegmentsInfo.PlaceInfo place, MovesJson day, MovesJson.SegmentsInfo segmentInfo) {
 		PlaceGroup placeTarget = new PlaceGroup();
 		if (places.TryGetValue(place.id, out placeTarget)) {
 			placeTarget.timesVisited += 1;
@@ -46,7 +46,7 @@ public class PlacesRanking : MonoBehaviour {
 
 	}
 
-	public PlaceGroup FindPlace(JsonMoves.MovesJson.SegmentsInfo.PlaceInfo place, Place mapObject) {
+	public PlaceGroup FindPlace(MovesJson.SegmentsInfo.PlaceInfo place, Place mapObject) {
 		PlaceGroup thisPlace = new PlaceGroup();
 		if (places.TryGetValue(place.id, out thisPlace)) {
 			thisPlace.AddMapObject(mapObject);
@@ -54,7 +54,7 @@ public class PlacesRanking : MonoBehaviour {
 		} else
 			return null;
 	}
-	public PlaceGroup FindPlace(JsonMoves.MovesJson.SegmentsInfo.PlaceInfo place, ActivityUI timelineObject) {
+	public PlaceGroup FindPlace(MovesJson.SegmentsInfo.PlaceInfo place, ActivityUI timelineObject) {
 		PlaceGroup thisPlace = new PlaceGroup();
 		if (places.TryGetValue(place.id, out thisPlace)) {
 			thisPlace.AddTimelineObject(timelineObject);

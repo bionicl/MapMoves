@@ -28,7 +28,7 @@ public class ChartItem : MonoBehaviour {
 	public Text cyclingText;
 
 	DayClass day;
-	JsonMoves.MovesJson.SummaryInfo[] summary;
+	MovesJson.SummaryInfo[] summary;
 
 	public void Setup (DayClass day) {
 		this.day = day;
@@ -39,19 +39,15 @@ public class ChartItem : MonoBehaviour {
 
 	void AddSums() {
 		foreach (var item in summary) {
-			if (item.calories.HasValue)
-				sum += (int)item.calories.Value;
+			sum += (int)item.calories;
 			if (item.activity == ActivityType.walking) {
-				if (item.calories.HasValue)
-					walkingSum += (int)item.calories.Value;
+				walkingSum += (int)item.calories;
 				walkingDistance += (int)item.distance;
 			} else if (item.activity == ActivityType.cycling) {
-				if (item.calories.HasValue)
-					cyclingSum += (int)item.calories.Value;
+				cyclingSum += (int)item.calories;
 				cyclingDistance += (int)item.distance;
 			} else if (item.activity == ActivityType.running || item.activity == ActivityType.dancing)
-				if (item.calories.HasValue)
-					otherSum += (int)item.calories.Value;
+				otherSum += (int)item.calories;
 		}
 	}
 	void SetHeight() {
