@@ -61,7 +61,7 @@ public class GooglePhotosApi : MonoBehaviour {
 		request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
 		request.SetRequestHeader("Content-Type", "application/json");
 
-		string accessToken = "???";
+		string accessToken = "ya29.GlzuBoDBmXJLnwzZ_RS0xSNsNyDhJY5OdXGGwde0koq0ZRK5BU5gSYposEOoDTooEm6AXPUqJKguxFiRgsyOuWjjftVUXEjFylz9az_svlA3yuLi1dsutfZNMmPtpg";
 		request.SetRequestHeader("Authorization", "Bearer " + accessToken);
 
 		yield return request.SendWebRequest();

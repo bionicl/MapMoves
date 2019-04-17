@@ -36,6 +36,10 @@ public class RenderMap : MonoBehaviour {
 	Dictionary<DateTime, GameObject> filterDays = new Dictionary<DateTime, GameObject>();
 	GameObject loactionsGO;
 	List<GameObject> shortPaths = new List<GameObject>();
+	bool cursorLocked = false;
+	public Vector3 lastCursorPosition = new Vector2();
+
+	public Vector3 targetPosition;
 
 	void Awake() {
 		instance = this;
@@ -52,17 +56,38 @@ public class RenderMap : MonoBehaviour {
 	}
 
 	void Update()  {
+	//Debug.Log(Input.mousePosition.x / Screen.width - 0.5f);
 		timeSinceLastZoom += Time.deltaTime;
 		if (GlobalVariables.inst.mapControls && timeSinceLastZoom >= 0.03f) {
 			if (Input.mouseScrollDelta.y > 0) {
 				mapScale /= 1.5f;
 				if (mapScale < 0.0625f)
 					mapScale = 0.0625f;
+
+				// Map moving
+				Vector3 tempPostion = transform.position;
+				if (targetPosition != transform.position && cursorLocked)
+					tempPostion = targetPosition;
+				tempPostion.x += (Input.mousePosition.x / Screen.width - 0.5f) * 3.555f /2 * mapScale;
+				tempPostion.y += (Input.mousePosition.y / Screen.height - 0.5f) * 3.555f /2f / 1.8f * mapScale;
+				targetPosition = tempPostion;
+				cursorLocked = true;
+				lastCursorPosition = Input.mousePosition;
 				UpdateMapSize();
 			} else if (Input.mouseScrollDelta.y < 0) {
 				mapScale *= 1.5f;
 				if (mapScale > 64)
 					mapScale = 127;
+				// Map moving
+				Vector3 tempPostion = transform.position;
+				if (targetPosition != transform.position && cursorLocked)
+					tempPostion = targetPosition;
+				tempPostion.x -= (Input.mousePosition.x / Screen.width - 0.5f) * 3.555f / 4 * mapScale;
+				tempPostion.y -= (Input.mousePosition.y / Screen.height - 0.5f) * 3.555f / 4f / 1.8f * mapScale;
+				targetPosition = tempPostion;
+				cursorLocked = true;
+				lastCursorPosition = Input.mousePosition;
+
 				UpdateMapSize();
 			}
 		}
@@ -72,6 +97,28 @@ public class RenderMap : MonoBehaviour {
 			} else if (targetMapScale < Camera.main.orthographicSize) {
 				Camera.main.orthographicSize -= (Camera.main.orthographicSize - targetMapScale) / 3.5f;
 			}
+		}
+		if (targetPosition != transform.position && cursorLocked == true) {
+			Vector3 tempTransform = transform.position;
+			if (targetPosition.x > transform.position.x) {
+				tempTransform.x += (targetPosition.x - transform.position.x) / 3.5f;
+			} else if (targetPosition.x < transform.position.x) {
+				tempTransform.x -= (transform.position.x - targetPosition.x) / 3.5f;
+			}
+			
+			if (targetPosition.y > transform.position.y) {
+				tempTransform.y += (targetPosition.y - transform.position.y) / 3.5f;
+			} else if (targetPosition.x < transform.position.y) {
+				tempTransform.y -= (transform.position.y - targetPosition.y) / 3.5f;
+			}
+			transform.position = tempTransform;
+		}
+	}
+
+	public void MapMoved() {
+		if (cursorLocked) {
+			transform.position = targetPosition;
+			cursorLocked = false;
 		}
 	}
 
@@ -86,6 +133,8 @@ public class RenderMap : MonoBehaviour {
 		}
 		GoogleMapDisplay.instance.ChangeMapZoom();
 	}
+
+
 
 	List<long> alreadyRenderedPlaces = new List<long>();
 	List<LineRenderer> renderedLines = new List<LineRenderer>();

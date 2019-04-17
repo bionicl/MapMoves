@@ -36,6 +36,7 @@ public class CameraDrag : MonoBehaviour {
 			transform.position = dragOrigin + mouseMove * (3.555f / Screen.width) * RenderMap.instance.mapScale;
 
 			GoogleMapDisplay.instance.MapMoved();
+			RenderMap.instance.MapMoved();
 		}
 	}
 
