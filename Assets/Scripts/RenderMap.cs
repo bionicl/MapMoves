@@ -63,30 +63,33 @@ public class RenderMap : MonoBehaviour {
 				mapScale /= 1.5f;
 				if (mapScale < 0.0625f)
 					mapScale = 0.0625f;
-
-				// Map moving
-				Vector3 tempPostion = transform.position;
-				if (targetPosition != transform.position && cursorLocked)
-					tempPostion = targetPosition;
-				tempPostion.x += (Input.mousePosition.x / Screen.width - 0.5f) * 3.555f /2 * mapScale;
-				tempPostion.y += (Input.mousePosition.y / Screen.height - 0.5f) * 3.555f /2f / 1.8f * mapScale;
-				targetPosition = tempPostion;
-				cursorLocked = true;
-				lastCursorPosition = Input.mousePosition;
-				UpdateMapSize();
+				else {
+					// Map moving
+					Vector3 tempPostion = transform.position;
+					if (targetPosition != transform.position && cursorLocked)
+						tempPostion = targetPosition;
+					tempPostion.x += (Input.mousePosition.x / Screen.width - 0.5f) * 3.555f /2 * mapScale;
+					tempPostion.y += (Input.mousePosition.y / Screen.height - 0.5f) * 3.555f /2f / 1.8f * mapScale;
+					targetPosition = tempPostion;
+					cursorLocked = true;
+					lastCursorPosition = Input.mousePosition;
+					UpdateMapSize();
+				}
 			} else if (Input.mouseScrollDelta.y < 0) {
 				mapScale *= 1.5f;
 				if (mapScale > 64)
 					mapScale = 127;
-				// Map moving
-				Vector3 tempPostion = transform.position;
-				if (targetPosition != transform.position && cursorLocked)
-					tempPostion = targetPosition;
-				tempPostion.x -= (Input.mousePosition.x / Screen.width - 0.5f) * 3.555f / 4 * mapScale;
-				tempPostion.y -= (Input.mousePosition.y / Screen.height - 0.5f) * 3.555f / 4f / 1.8f * mapScale;
-				targetPosition = tempPostion;
-				cursorLocked = true;
-				lastCursorPosition = Input.mousePosition;
+				else {
+					// Map moving
+					Vector3 tempPostion = transform.position;
+					if (targetPosition != transform.position && cursorLocked)
+						tempPostion = targetPosition;
+					tempPostion.x -= (Input.mousePosition.x / Screen.width - 0.5f) * 3.555f / 4 * mapScale;
+					tempPostion.y -= (Input.mousePosition.y / Screen.height - 0.5f) * 3.555f / 4f / 1.8f * mapScale;
+					targetPosition = tempPostion;
+					cursorLocked = true;
+					lastCursorPosition = Input.mousePosition;
+				}
 
 				UpdateMapSize();
 			}

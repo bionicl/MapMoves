@@ -35,19 +35,43 @@ public class MediaMetadata {
 
 public class GooglePhotosApi : MonoBehaviour {
 	public static GooglePhotosApi instance;
-
-	public Image imageToDisplay;
+	string clientId;
+	string redirectUrl;
+	bool waitingForToken = false;
 
 	private void Awake() {
 		instance = this;
+		TryToLoadApi();
 	}
 
+
+	private void Update() {
+
+	}
+
+	// Logging in
+	void TryToLoadApi() {
+		UnityEngine.Object textFile;
+		textFile = Resources.Load("API/googlePhotosApi");
+		TextAsset temp = textFile as TextAsset;
+		string[] keys = temp.text.Split('\n');
+		clientId = keys[0];
+		redirectUrl = keys[1];
+		Debug.Log("GooglePhotos api keys loaded!");
+	}
+	public void OpenLoginPage() {
+		if (string.IsNullOrWhiteSpace(clientId) || string.IsNullOrWhiteSpace(redirectUrl))
+			return;
+		string url = $"https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/photoslibrary.readonly&access_type=offline&include_granted_scopes=true&state=state_parameter_passthrough_value&redirect_uri={redirectUrl}&response_type=code&client_id={clientId}";
+		Application.OpenURL(url);
+
+	}
+
+	// Downloading timeline day
 	public void SendRequest() {
 		//OutputTimeLineItems();
 		StartCoroutine(Upload());
 	}
-
-
 	IEnumerator Upload() {
 		DateTime day = ReadJson.instance.selectedDay;
 		Debug.Log("Universal timezone: " + day.ToUniversalTime().ToString());
@@ -76,7 +100,6 @@ public class GooglePhotosApi : MonoBehaviour {
 			ReadJSONResponse(request.downloadHandler.text);
 		}
 	}
-
 	void ReadJSONResponse(string text) {
 		GooglePhotosResponse response = JsonConvert.DeserializeObject<GooglePhotosResponse>(text);
 		response.CalculateDates();
@@ -84,7 +107,6 @@ public class GooglePhotosApi : MonoBehaviour {
 		//StartCoroutine(DownloadImage(response.mediaItems[0].baseUrl + "=w400-h400-c", imageToDisplay));
 
 	}
-
 	void AddPhotosToTimeLineItems(GooglePhotosResponse response) {
 		List<MediaItem> images = response.mediaItems.ToList();
 
@@ -118,7 +140,6 @@ public class GooglePhotosApi : MonoBehaviour {
 		//	item.DownloadPhotos();
 		//}
 	}
-
 	public IEnumerator DownloadImage(string url, Image targetImage) {
 		// Start a download of the given URL
 		var www = new WWW(url);
