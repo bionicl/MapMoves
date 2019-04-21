@@ -23,7 +23,6 @@ public class GlobalVariables : MonoBehaviour {
 
 	public void MouseExit() {
 		mapControls = false;
-		Debug.Log("Exit");
 	}
 
 	public void SetIcon(MovesJson.SegmentsInfo.PlaceInfo place, SpriteRenderer image) {

@@ -198,7 +198,7 @@ public class ActivityUI : MonoBehaviour {
 	//}
 
 	public void DownloadPhotos(List<MediaItem> mediaItems) {
-		Debug.Log($"This endtime: {endTime}, Photo time: {mediaItems[0].creationDate}, Photo link: {mediaItems[0].productUrl}");
+		//Debug.Log($"This endtime: {endTime}, Photo time: {mediaItems[0].creationDate}, Photo link: {mediaItems[0].productUrl}");
 		imagesGo.SetActive(true);
 		SetSize(timeSpan, true);
 		int maxRange = 3;

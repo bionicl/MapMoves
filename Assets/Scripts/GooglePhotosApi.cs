@@ -15,7 +15,7 @@ public class GooglePhotosResponse {
 	public void CalculateDates() {
 		foreach (var item in mediaItems) {
 			item.creationDate = DateTime.Parse(item.mediaMetadata.creationTime);
-			Debug.Log($"item creation time : {item.creationDate}, item link: {item.productUrl}");
+			//Debug.Log($"item creation time : {item.creationDate}, item link: {item.productUrl}");
 		}
 	}
 }
@@ -38,6 +38,11 @@ public class GoogleOauthResponse {
 	public string access_token;
 	public int expires_in;
 	public string refresh_token;
+	public long unixTimeEnd;
+
+	public void SetEndTime() {
+		unixTimeEnd = DateTimeOffset.UtcNow.ToUnixTimeSeconds() + expires_in;
+	}
 }
 
 public class GooglePhotosApi : MonoBehaviour {
@@ -59,28 +64,6 @@ public class GooglePhotosApi : MonoBehaviour {
 		TryToLoadApi();
 	}
 
-	private void OnApplicationFocus(bool focus) {
-		if (focus && waitingForToken) {
-			TryGetTokenJson();
-		}
-	}
-
-	void TryGetTokenJson() {
-		string tempString = EditorGUIUtility.systemCopyBuffer;
-		try {
-			GoogleOauthResponse response = JsonConvert.DeserializeObject<GoogleOauthResponse>(tempString);
-			Debug.Log("REFRESH: " + response.refresh_token);
-			currentResponse = response;
-			waitingForToken = false;
-			animator.SetTrigger("Close");
-			couldNotRecognise.SetActive(false);
-			loggedIn.SetActive(true);
-			SendRequest();
-		} catch (Exception ex) {
-			Debug.Log("Invalid JSON!");
-			couldNotRecognise.SetActive(true);
-		}
-	}
 
 	// Logging in
 	void TryToLoadApi() {
@@ -90,7 +73,10 @@ public class GooglePhotosApi : MonoBehaviour {
 		string[] keys = temp.text.Split('\n');
 		clientId = keys[0];
 		redirectUrl = keys[1];
-		Debug.Log("GooglePhotos api keys loaded!");
+		Debug.Log("<b>GOOGLE PHOTOS</b> - Loaded api keys from file!");
+		if (PlayerPrefs.HasKey("GoogleOauthResponse")) {
+			currentResponse = JsonConvert.DeserializeObject<GoogleOauthResponse>(PlayerPrefs.GetString("GoogleOauthResponse"));
+		}
 	}
 	public void OpenLoginPage() {
 		if (string.IsNullOrWhiteSpace(clientId) || string.IsNullOrWhiteSpace(redirectUrl))
@@ -120,12 +106,61 @@ public class GooglePhotosApi : MonoBehaviour {
 		loggedIn.SetActive(false);
 		animator.gameObject.SetActive(true);
 	}
+	public void Restart() {
+		currentResponse = null;
+		PlayerPrefs.DeleteKey("GoogleOauthResponse");
+	}
+	public void RefreshToken() {
+		//string url = $"http://teal-fire.com/MapMoves/refresh.php?refresh={currentResponse.refresh_token}";
+		//Application.OpenURL(url);
+		StartCoroutine(GetRefreshToken());
+	}
+	IEnumerator GetRefreshToken() {
+		UnityWebRequest webRequest = UnityWebRequest.Get($"http://teal-fire.com/MapMoves/refresh.php?refresh={currentResponse.refresh_token}");
+		yield return webRequest.SendWebRequest();
+
+		if (webRequest.isNetworkError || webRequest.isHttpError) {
+			Debug.Log("<b>GOOGLE PHOTOS</b> - Could not refresh access token");
+		} else {
+			Debug.Log("<b>GOOGLE PHOTOS</b> - Access token refreshed");
+			GoogleOauthResponse response = JsonConvert.DeserializeObject<GoogleOauthResponse>(webRequest.downloadHandler.text);
+			response.SetEndTime();
+			PlayerPrefs.SetString("GoogleOauthResponse", JsonConvert.SerializeObject(response));
+			currentResponse = response;
+			SendRequest();
+		}
+	}
+
+	// Checking copied link
+	private void OnApplicationFocus(bool focus) {
+		if (focus && waitingForToken) {
+			TryGetTokenJson();
+		}
+	}
+	void TryGetTokenJson() {
+		string tempString = EditorGUIUtility.systemCopyBuffer;
+		try {
+			GoogleOauthResponse response = JsonConvert.DeserializeObject<GoogleOauthResponse>(tempString);
+			response.SetEndTime();
+			PlayerPrefs.SetString("GoogleOauthResponse", JsonConvert.SerializeObject(response));
+			Debug.Log("<b>GOOGLE PHOTOS</b> - Recieved api keys");
+			currentResponse = response;
+			waitingForToken = false;
+			animator.SetTrigger("Close");
+			couldNotRecognise.SetActive(false);
+			loggedIn.SetActive(true);
+			SendRequest();
+		} catch (Exception ex) {
+			Debug.Log("Invalid JSON!");
+			couldNotRecognise.SetActive(true);
+		}
+	}
 
 	// Downloading timeline day
 	public void SendRequest() {
 		//OutputTimeLineItems();
 		if (currentResponse == null) {
-			Debug.Log("Google Photos api not connected!");
+			Debug.Log("<b>GOOGLE PHOTOS</b> - api not connected! Opening login window...");
 			OpenLoginDialog();
 			return;
 		}
@@ -133,10 +168,7 @@ public class GooglePhotosApi : MonoBehaviour {
 	}
 	IEnumerator Upload() {
 		DateTime day = ReadJson.instance.selectedDay;
-		Debug.Log("Universal timezone: " + day.ToUniversalTime().ToString());
-		Debug.Log(day);
 		string body = "{\"pageSize\":100,\"filters\":{\"dateFilter\":{\"dates\":[{\"day\":" + day.Day + ",\"month\":" + day.Month + ",\"year\":" + day.Year + "}]}}}";
-		Debug.Log(body);
 
 		var request = new UnityWebRequest("https://photoslibrary.googleapis.com/v1/mediaItems:search", "POST");
 		byte[] bodyRaw = Encoding.UTF8.GetBytes(body);
@@ -148,13 +180,14 @@ public class GooglePhotosApi : MonoBehaviour {
 
 		yield return request.SendWebRequest();
 
-		Debug.Log("Status Code: " + request.responseCode);
+		//Debug.Log("Status Code: " + request.responseCode);
 
 		if (request.isNetworkError || request.isHttpError) {
-			Debug.Log(request.error);
+			Debug.Log("<b>GOOGLE PHOTOS</b> - Could not connect, attempting refresh...");
+			RefreshToken();
 		} else {
-			Debug.Log("Form upload complete!");
-			Debug.Log(request.downloadHandler.text);
+			Debug.Log("<b>GOOGLE PHOTOS</b> - Api connected, downloading photos...!");
+			//Debug.Log(request.downloadHandler.text);
 			ReadJSONResponse(request.downloadHandler.text);
 		}
 	}
@@ -211,7 +244,6 @@ public class GooglePhotosApi : MonoBehaviour {
 		Rect rec = new Rect(0, 0, texture.width, texture.height);
 		Sprite spriteToUse = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 200);
 
-		Debug.Log("Downloaded image!");
 		targetImage.sprite = spriteToUse;
 
 		www.Dispose();
