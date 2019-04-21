@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.Text;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEditor;
 
 public class GooglePhotosResponse {
 	public MediaItem[] mediaItems;
@@ -33,20 +34,52 @@ public class MediaMetadata {
 	public string creationTime;
 }
 
+public class GoogleOauthResponse {
+	public string access_token;
+	public int expires_in;
+	public string refresh_token;
+}
+
 public class GooglePhotosApi : MonoBehaviour {
 	public static GooglePhotosApi instance;
+	GoogleOauthResponse currentResponse;
 	string clientId;
 	string redirectUrl;
 	bool waitingForToken = false;
+
+	[Header("UI")]
+	public GameObject[] afterSignInDisable;
+	public GameObject[] afterSignInEnable;
+	public GameObject couldNotRecognise;
+	public GameObject loggedIn;
+	public Animator animator;
 
 	private void Awake() {
 		instance = this;
 		TryToLoadApi();
 	}
 
+	private void OnApplicationFocus(bool focus) {
+		if (focus && waitingForToken) {
+			TryGetTokenJson();
+		}
+	}
 
-	private void Update() {
-
+	void TryGetTokenJson() {
+		string tempString = EditorGUIUtility.systemCopyBuffer;
+		try {
+			GoogleOauthResponse response = JsonConvert.DeserializeObject<GoogleOauthResponse>(tempString);
+			Debug.Log("REFRESH: " + response.refresh_token);
+			currentResponse = response;
+			waitingForToken = false;
+			animator.SetTrigger("Close");
+			couldNotRecognise.SetActive(false);
+			loggedIn.SetActive(true);
+			SendRequest();
+		} catch (Exception ex) {
+			Debug.Log("Invalid JSON!");
+			couldNotRecognise.SetActive(true);
+		}
 	}
 
 	// Logging in
@@ -62,14 +95,40 @@ public class GooglePhotosApi : MonoBehaviour {
 	public void OpenLoginPage() {
 		if (string.IsNullOrWhiteSpace(clientId) || string.IsNullOrWhiteSpace(redirectUrl))
 			return;
-		string url = $"https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/photoslibrary.readonly&access_type=offline&include_granted_scopes=true&state=state_parameter_passthrough_value&redirect_uri={redirectUrl}&response_type=code&client_id={clientId}";
+		string url = $"https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/photoslibrary.readonly&include_granted_scopes=true&state=state_parameter_passthrough_value&redirect_uri={redirectUrl}&response_type=code&client_id={clientId}&prompt=consent&access_type=offline";
 		Application.OpenURL(url);
-
+		foreach (var item in afterSignInEnable) {
+			item.SetActive(true);
+		}
+		foreach (var item in afterSignInDisable) {
+			item.SetActive(false);
+		}
+		waitingForToken = true;
+	}
+	public void Cancel() {
+		waitingForToken = false;
+		animator.SetTrigger("Close");
+	}
+	public void OpenLoginDialog() {
+		foreach (var item in afterSignInEnable) {
+			item.SetActive(false);
+		}
+		foreach (var item in afterSignInDisable) {
+			item.SetActive(true);
+		}
+		couldNotRecognise.SetActive(false);
+		loggedIn.SetActive(false);
+		animator.gameObject.SetActive(true);
 	}
 
 	// Downloading timeline day
 	public void SendRequest() {
 		//OutputTimeLineItems();
+		if (currentResponse == null) {
+			Debug.Log("Google Photos api not connected!");
+			OpenLoginDialog();
+			return;
+		}
 		StartCoroutine(Upload());
 	}
 	IEnumerator Upload() {
@@ -85,8 +144,7 @@ public class GooglePhotosApi : MonoBehaviour {
 		request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
 		request.SetRequestHeader("Content-Type", "application/json");
 
-		string accessToken = "ya29.GlzuBoDBmXJLnwzZ_RS0xSNsNyDhJY5OdXGGwde0koq0ZRK5BU5gSYposEOoDTooEm6AXPUqJKguxFiRgsyOuWjjftVUXEjFylz9az_svlA3yuLi1dsutfZNMmPtpg";
-		request.SetRequestHeader("Authorization", "Bearer " + accessToken);
+		request.SetRequestHeader("Authorization", "Bearer " + currentResponse.access_token);
 
 		yield return request.SendWebRequest();
 
