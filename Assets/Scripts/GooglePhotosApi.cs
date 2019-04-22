@@ -59,13 +59,16 @@ public class GooglePhotosApi : MonoBehaviour {
 	public GameObject loggedIn;
 	public Animator animator;
 
+	[Header("Settings")]
+	public GameObject unlinkButton;
+	public GameObject linkButton;
+	public GameObject loadPhotosButton;
+
 	private void Awake() {
 		instance = this;
+		OnLogout();
 		TryToLoadApi();
 	}
-
-
-	// Logging in
 	void TryToLoadApi() {
 		UnityEngine.Object textFile;
 		textFile = Resources.Load("API/googlePhotosApi");
@@ -76,8 +79,11 @@ public class GooglePhotosApi : MonoBehaviour {
 		Debug.Log("<b>GOOGLE PHOTOS</b> - Loaded api keys from file!");
 		if (PlayerPrefs.HasKey("GoogleOauthResponse")) {
 			currentResponse = JsonConvert.DeserializeObject<GoogleOauthResponse>(PlayerPrefs.GetString("GoogleOauthResponse"));
+			OnLogin();
 		}
 	}
+
+	// Logging in
 	public void OpenLoginPage() {
 		if (string.IsNullOrWhiteSpace(clientId) || string.IsNullOrWhiteSpace(redirectUrl))
 			return;
@@ -109,6 +115,7 @@ public class GooglePhotosApi : MonoBehaviour {
 	public void Restart() {
 		currentResponse = null;
 		PlayerPrefs.DeleteKey("GoogleOauthResponse");
+		OnLogout();
 	}
 	public void RefreshToken() {
 		//string url = $"http://teal-fire.com/MapMoves/refresh.php?refresh={currentResponse.refresh_token}";
@@ -131,6 +138,18 @@ public class GooglePhotosApi : MonoBehaviour {
 		}
 	}
 
+	// On login change
+	void OnLogin() {
+		unlinkButton.SetActive(true);
+		linkButton.SetActive(false);
+		loadPhotosButton.SetActive(true);
+	}
+	void OnLogout() {
+		unlinkButton.SetActive(false);
+		linkButton.SetActive(true);
+		loadPhotosButton.SetActive(false);
+	}
+
 	// Checking copied link
 	private void OnApplicationFocus(bool focus) {
 		if (focus && waitingForToken) {
@@ -149,6 +168,7 @@ public class GooglePhotosApi : MonoBehaviour {
 			animator.SetTrigger("Close");
 			couldNotRecognise.SetActive(false);
 			loggedIn.SetActive(true);
+			OnLogin();
 			SendRequest();
 		} catch (Exception ex) {
 			Debug.Log("Invalid JSON!");
