@@ -8,6 +8,8 @@ using System.Text;
 using UnityEngine.UI;
 using System.Linq;
 using UnityEditor;
+using System.Security.Cryptography;
+using System.IO;
 
 public class GooglePhotosResponse {
 	public MediaItem[] mediaItems;
@@ -50,6 +52,7 @@ public class GooglePhotosApi : MonoBehaviour {
 	GoogleOauthResponse currentResponse;
 	string clientId;
 	string redirectUrl;
+	string decriptPassword;
 	bool waitingForToken = false;
 
 	[Header("UI")]
@@ -63,11 +66,18 @@ public class GooglePhotosApi : MonoBehaviour {
 	public GameObject unlinkButton;
 	public GameObject linkButton;
 	public GameObject loadPhotosButton;
+	public Text loadPhotosButtonText;
+
+	// Encription
+	SHA256 mySHA256;
+	byte[] key;
+	byte[] iv;
 
 	private void Awake() {
 		instance = this;
 		OnLogout();
 		TryToLoadApi();
+		loadPhotosButtonText.text = "Load photos";
 	}
 	void TryToLoadApi() {
 		UnityEngine.Object textFile;
@@ -76,9 +86,17 @@ public class GooglePhotosApi : MonoBehaviour {
 		string[] keys = temp.text.Split('\n');
 		clientId = keys[0];
 		redirectUrl = keys[1];
+		decriptPassword = keys[2];
+		// Create sha256 hash
+		mySHA256 = SHA256Managed.Create();
+		key = mySHA256.ComputeHash(Encoding.ASCII.GetBytes(decriptPassword));
+
+		// Create secret IV
+		iv = new byte[16] { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 };
 		Debug.Log("<b>GOOGLE PHOTOS</b> - Loaded api keys from file!");
 		if (PlayerPrefs.HasKey("GoogleOauthResponse")) {
-			currentResponse = JsonConvert.DeserializeObject<GoogleOauthResponse>(PlayerPrefs.GetString("GoogleOauthResponse"));
+			string tempString = DecryptString(PlayerPrefs.GetString("GoogleOauthResponse"), key, iv);
+			currentResponse = JsonConvert.DeserializeObject<GoogleOauthResponse>(tempString);
 			OnLogin();
 		}
 	}
@@ -132,7 +150,7 @@ public class GooglePhotosApi : MonoBehaviour {
 			Debug.Log("<b>GOOGLE PHOTOS</b> - Access token refreshed");
 			GoogleOauthResponse response = JsonConvert.DeserializeObject<GoogleOauthResponse>(webRequest.downloadHandler.text);
 			response.SetEndTime();
-			PlayerPrefs.SetString("GoogleOauthResponse", JsonConvert.SerializeObject(response));
+			PlayerPrefs.SetString("GoogleOauthResponse", EncryptString(JsonConvert.SerializeObject(response), key, iv));
 			currentResponse = response;
 			SendRequest();
 		}
@@ -159,9 +177,11 @@ public class GooglePhotosApi : MonoBehaviour {
 	void TryGetTokenJson() {
 		string tempString = EditorGUIUtility.systemCopyBuffer;
 		try {
-			GoogleOauthResponse response = JsonConvert.DeserializeObject<GoogleOauthResponse>(tempString);
+			string decrypted = this.DecryptString(tempString, key, iv);
+			Debug.Log(decrypted);
+			GoogleOauthResponse response = JsonConvert.DeserializeObject<GoogleOauthResponse>(decrypted);
 			response.SetEndTime();
-			PlayerPrefs.SetString("GoogleOauthResponse", JsonConvert.SerializeObject(response));
+			PlayerPrefs.SetString("GoogleOauthResponse", EncryptString(JsonConvert.SerializeObject(response), key, iv));
 			Debug.Log("<b>GOOGLE PHOTOS</b> - Recieved api keys");
 			currentResponse = response;
 			waitingForToken = false;
@@ -175,10 +195,103 @@ public class GooglePhotosApi : MonoBehaviour {
 			couldNotRecognise.SetActive(true);
 		}
 	}
+	public string DecryptString(string cipherText, byte[] key, byte[] iv) {
+		// Instantiate a new Aes object to perform string symmetric encryption
+		Aes encryptor = Aes.Create();
 
+		encryptor.Mode = CipherMode.CBC;
+
+		// Set key and IV
+		byte[] aesKey = new byte[32];
+		Array.Copy(key, 0, aesKey, 0, 32);
+		encryptor.Key = aesKey;
+		encryptor.IV = iv;
+
+		// Instantiate a new MemoryStream object to contain the encrypted bytes
+		MemoryStream memoryStream = new MemoryStream();
+
+		// Instantiate a new encryptor from our Aes object
+		ICryptoTransform aesDecryptor = encryptor.CreateDecryptor();
+
+		// Instantiate a new CryptoStream object to process the data and write it to the 
+		// memory stream
+		CryptoStream cryptoStream = new CryptoStream(memoryStream, aesDecryptor, CryptoStreamMode.Write);
+
+		// Will contain decrypted plaintext
+		string plainText = String.Empty;
+
+		try {
+			// Convert the ciphertext string into a byte array
+			byte[] cipherBytes = Convert.FromBase64String(cipherText);
+
+			// Decrypt the input ciphertext string
+			cryptoStream.Write(cipherBytes, 0, cipherBytes.Length);
+
+			// Complete the decryption process
+			cryptoStream.FlushFinalBlock();
+
+			// Convert the decrypted data from a MemoryStream to a byte array
+			byte[] plainBytes = memoryStream.ToArray();
+
+			// Convert the decrypted byte array to string
+			plainText = Encoding.ASCII.GetString(plainBytes, 0, plainBytes.Length);
+		} finally {
+			// Close both the MemoryStream and the CryptoStream
+			memoryStream.Close();
+			cryptoStream.Close();
+		}
+
+		// Return the decrypted data as a string
+		return plainText;
+	}
+	public string EncryptString(string plainText, byte[] key, byte[] iv) {
+		// Instantiate a new Aes object to perform string symmetric encryption
+		Aes encryptor = Aes.Create();
+
+		encryptor.Mode = CipherMode.CBC;
+
+		// Set key and IV
+		byte[] aesKey = new byte[32];
+		Array.Copy(key, 0, aesKey, 0, 32);
+		encryptor.Key = aesKey;
+		encryptor.IV = iv;
+
+		// Instantiate a new MemoryStream object to contain the encrypted bytes
+		MemoryStream memoryStream = new MemoryStream();
+
+		// Instantiate a new encryptor from our Aes object
+		ICryptoTransform aesEncryptor = encryptor.CreateEncryptor();
+
+		// Instantiate a new CryptoStream object to process the data and write it to the 
+		// memory stream
+		CryptoStream cryptoStream = new CryptoStream(memoryStream, aesEncryptor, CryptoStreamMode.Write);
+
+		// Convert the plainText string into a byte array
+		byte[] plainBytes = Encoding.ASCII.GetBytes(plainText);
+
+		// Encrypt the input plaintext string
+		cryptoStream.Write(plainBytes, 0, plainBytes.Length);
+
+		// Complete the encryption process
+		cryptoStream.FlushFinalBlock();
+
+		// Convert the encrypted data from a MemoryStream to a byte array
+		byte[] cipherBytes = memoryStream.ToArray();
+
+		// Close both the MemoryStream and the CryptoStream
+		memoryStream.Close();
+		cryptoStream.Close();
+
+		// Convert the encrypted byte array to a base64 encoded string
+		string cipherText = Convert.ToBase64String(cipherBytes, 0, cipherBytes.Length);
+
+		// Return the encrypted data as a string
+		return cipherText;
+	}
 	// Downloading timeline day
 	public void SendRequest() {
 		//OutputTimeLineItems();
+		loadPhotosButtonText.text = "Connecting...";
 		if (currentResponse == null) {
 			Debug.Log("<b>GOOGLE PHOTOS</b> - api not connected! Opening login window...");
 			OpenLoginDialog();
@@ -207,6 +320,7 @@ public class GooglePhotosApi : MonoBehaviour {
 			RefreshToken();
 		} else {
 			Debug.Log("<b>GOOGLE PHOTOS</b> - Api connected, downloading photos...!");
+			loadPhotosButtonText.text = "Downloading...";
 			//Debug.Log(request.downloadHandler.text);
 			ReadJSONResponse(request.downloadHandler.text);
 		}
@@ -268,5 +382,8 @@ public class GooglePhotosApi : MonoBehaviour {
 
 		www.Dispose();
 		www = null;
+		loadPhotosButtonText.text = "Load photos";
+
+
 	}
 }

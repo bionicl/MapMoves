@@ -2508,7 +2508,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1764345209}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -18415,7 +18415,7 @@ RectTransform:
   - {fileID: 1602435184}
   - {fileID: 1677901182}
   m_Father: {fileID: 1764345209}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -25699,7 +25699,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0000003921675}
+  m_AnchoredPosition: {x: 0, y: 0.0000004880517}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1371052592
@@ -26384,7 +26384,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 275.221, y: 60}
+  m_AnchoredPosition: {x: 275.22113, y: 60}
   m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1433522477
@@ -27280,6 +27280,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1513884912}
   m_CullTransparentMesh: 0
+--- !u!114 &1518390644 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114824166883957558, guid: 103d1f8304bdb41bea27bcf9b447795c,
+    type: 3}
+  m_PrefabInstance: {fileID: 4961240}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1518510833
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32453,9 +32465,9 @@ RectTransform:
   - {fileID: 1003281121}
   - {fileID: 1410171403}
   - {fileID: 1616544793}
+  - {fileID: 1799183614}
   - {fileID: 967983573}
   - {fileID: 137754539}
-  - {fileID: 1799183614}
   - {fileID: 918711133}
   m_Father: {fileID: 2127403382}
   m_RootOrder: 1
@@ -33213,7 +33225,7 @@ RectTransform:
   - {fileID: 1584369954}
   - {fileID: 573445859}
   m_Father: {fileID: 1764345209}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -40968,6 +40980,7 @@ MonoBehaviour:
   unlinkButton: {fileID: 1206235837}
   linkButton: {fileID: 596010502}
   loadPhotosButton: {fileID: 1799183613}
+  loadPhotosButtonText: {fileID: 1518390644}
 --- !u!1 &2129109460 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1328464336494078, guid: 0f4facaf280fd45fa915ec10eb352abb,
