@@ -175,7 +175,7 @@ public class GooglePhotosApi : MonoBehaviour {
 		}
 	}
 	void TryGetTokenJson() {
-		string tempString = EditorGUIUtility.systemCopyBuffer;
+		string tempString = GUIUtility.systemCopyBuffer;
 		try {
 			string decrypted = this.DecryptString(tempString, key, iv);
 			Debug.Log(decrypted);
