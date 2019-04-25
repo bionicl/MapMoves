@@ -366,24 +366,19 @@ public class GooglePhotosApi : MonoBehaviour {
 		//}
 	}
 	public IEnumerator DownloadImage(string url, Image targetImage) {
-		// Start a download of the given URL
-		var www = new WWW(url);
-		// wait until the download is done
-		yield return www;
-		// Create a texture in DXT1 format
-		Texture2D texture = new Texture2D(www.texture.width, www.texture.height, TextureFormat.DXT1, false);
+		UnityWebRequest www = UnityWebRequestTexture.GetTexture(url);
+		yield return www.SendWebRequest();
 
-		// assign the downloaded image to sprite
-		www.LoadImageIntoTexture(texture);
-		Rect rec = new Rect(0, 0, texture.width, texture.height);
-		Sprite spriteToUse = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 200);
-
-		targetImage.sprite = spriteToUse;
-
-		www.Dispose();
-		www = null;
-		loadPhotosButtonText.text = "Load photos";
-
+		if (www.isNetworkError || www.isHttpError) {
+			Debug.LogError("DOWNLOAD GOOGLE IMAGE ERROR: " + www.error);
+		} else {
+			Texture2D texture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+			Sprite sprite = Sprite.Create(texture,
+										  new Rect(0, 0, texture.width, texture.height),
+										  new Vector2(0.5f, 0.5f), 200);
+			targetImage.sprite = sprite;
+			loadPhotosButtonText.text = "Load photos";
+		}	
 
 	}
 }

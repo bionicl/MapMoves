@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Networking;
 
 public class GoogleMapDisplay : MonoBehaviour {
 	public static GoogleMapDisplay instance;
@@ -154,25 +155,34 @@ public class GoogleMapDisplay : MonoBehaviour {
 	IEnumerator DownloadMap(Action<Sprite, OneRequest> action, OneRequest request) {
 		string url = ReturnApiUrl(request);
 
-		using (WWW www = new WWW(url)) {
-			yield return www;
-			Sprite sprite = Sprite.Create(www.texture,
+		UnityWebRequest www = UnityWebRequestTexture.GetTexture(url);
+		yield return www.SendWebRequest();
+
+		if (www.isNetworkError || www.isHttpError) {
+			Debug.LogError("DOWNLOAD MAP ERROR: " + www.error);
+		} else {
+			Texture2D texture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+			Sprite sprite = Sprite.Create(texture,
 										  new Rect(0, 0, 640, 640),
 										  new Vector2(0.5f, 0.5f));
-
 			action.Invoke(sprite, request);
 		}
 	}
 
 	IEnumerator DownloadMapRetina(Action<Sprite, OneRequest> action, OneRequest request) {
+
 		string url = ReturnApiUrl(request);
 
-		using (WWW www = new WWW(url)) {
-			yield return www;
-			Sprite sprite = Sprite.Create(www.texture,
+		UnityWebRequest www = UnityWebRequestTexture.GetTexture(url);
+		yield return www.SendWebRequest();
+
+		if (www.isNetworkError || www.isHttpError) {
+			Debug.LogError("DOWNLOAD MAP RETINA ERROR: " + www.error);
+		} else {
+			Texture2D texture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+			Sprite sprite = Sprite.Create(texture,
 										  new Rect(0, 0, 1280, 1280),
 										  new Vector2(0.5f, 0.5f), 200);
-
 			action.Invoke(sprite, request);
 		}
 	}
