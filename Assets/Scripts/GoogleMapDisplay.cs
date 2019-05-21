@@ -219,12 +219,16 @@ public class GoogleMapDisplay : MonoBehaviour {
 		Vector2 metersPos = Conversion.MetersToLatLon(new Vector2(tempPos.x, tempPos.y));
 		string output = "";
 		string retinaMultiplayer = "";
+		string positionX = metersPos.x.ToString();
+		positionX = positionX.Replace(',', '.');
+		string positionY = metersPos.y.ToString();
+		positionY = positionY.Replace(',', '.');
 		if (CheckUIScale.isRetina)
 			retinaMultiplayer = "@2x";
 		if (useGoogleMaps)
-			output = string.Format("http://maps.googleapis.com/maps/api/staticmap?center={0},{1}&zoom={2}&size=640x640&key={3}{4}", metersPos.x, metersPos.y, request.zoomLevel, GoogleLocationApi.instance.apiKey, style);
+			output = string.Format("http://maps.googleapis.com/maps/api/staticmap?center={0},{1}&zoom={2}&size=640x640&key={3}{4}", positionX, positionY, request.zoomLevel, GoogleLocationApi.instance.apiKey, style);
 		else
-			output = string.Format("https://api.mapbox.com/styles/v1/bionicl/cjbfocd42b59q2rqasdw3ezwb/static/{1},{0},{2},0,0/640x640{3}?access_token={4}&logo=false&attribution=false", metersPos.x, metersPos.y, request.zoomLevel-1, retinaMultiplayer, GoogleLocationApi.instance.mapBoxApiKey);
+			output = string.Format("https://api.mapbox.com/styles/v1/bionicl/cjbfocd42b59q2rqasdw3ezwb/static/{1},{0},{2},0,0/640x640{3}?access_token={4}&logo=false&attribution=false", positionX, positionY, request.zoomLevel-1, retinaMultiplayer, GoogleLocationApi.instance.mapBoxApiKey);
 		return output;
 	}
 }
