@@ -344,7 +344,7 @@ public class ReadJson : MonoBehaviour {
 				UpdateLoadingText(string.Format("Importing {0} GPX file", fileNumer + "/" + paths.Length));
 				yield return new WaitForSeconds(0.1f);
 				try {
-					LoadFiles(TealFire.ArcExportConverter.ConvertGpxToJson(jsonData, 1), true);
+					LoadFiles(ConverterLibrary.ArcExportConverter.ConvertGpxToJson(jsonData, 1), true);
 					uploadedFiles.Add(GetFileName(tempItem));
 				} catch (Exception ex) {
 					exceptionsWhileLoading.Add("Couldn't open file #" + fileNumer + " : " + tempItem);
