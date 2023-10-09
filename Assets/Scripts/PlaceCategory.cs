@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class PlaceMainCategory {
 	public string name;
-	public Sprite icon;
+	// public Sprite icon;
 	public Color color;
 }
 

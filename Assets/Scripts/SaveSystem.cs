@@ -37,7 +37,7 @@ public class SaveSystem
 		if (File.Exists(destination))
 			file = File.OpenRead(destination);
 		else {
-			Debug.LogError("File not found");
+			Debug.LogError("Save file not found! (controlled error)");
 			return;
 		}
 

@@ -83,6 +83,9 @@ public class GooglePhotosApi : MonoBehaviour {
 		UnityEngine.Object textFile;
 		textFile = Resources.Load("API/googlePhotosApi");
 		TextAsset temp = textFile as TextAsset;
+		if (temp == null) {
+			return;
+		}
 		string[] keys = temp.text.Split('\n');
 		clientId = keys[0];
 		redirectUrl = keys[1];
