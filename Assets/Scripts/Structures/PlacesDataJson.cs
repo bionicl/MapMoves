@@ -41,14 +41,22 @@ namespace PlacesDataJson {
 			get {
 				if (_combined == null) {
 					_combined = new List<string>();
-					_combined.AddRange(english);
-					_combined.AddRange(polish);
-					_combined.AddRange(german);
-					_combined.AddRange(french);
-					_combined.AddRange(spanish);
-					_combined.AddRange(italian);
-					_combined.AddRange(czech);
-					_combined.AddRange(portuguese);
+					if (english != null)
+						_combined.AddRange(english);
+					if (polish != null)
+						_combined.AddRange(polish);
+					if (german != null)
+						_combined.AddRange(german);
+					if (french != null)
+						_combined.AddRange(french);
+					if (spanish != null)
+						_combined.AddRange(spanish);
+					if (italian != null)
+						_combined.AddRange(italian);
+					if (czech != null)
+						_combined.AddRange(czech);
+					if (portuguese != null)
+						_combined.AddRange(portuguese);
 					for (int i = 0; i < _combined.Count; i++) {
 						_combined[i] = _combined[i].ToLower();
 					}
@@ -78,16 +86,27 @@ namespace PlacesDataJson {
 			get {
 				if (_combined == null) {
 					_combined = new List<string>();
-					_combined.AddRange(usa);
-					_combined.AddRange(uk);
-					_combined.AddRange(poland);
-					_combined.AddRange(australia);
-					_combined.AddRange(germany);
-					_combined.AddRange(france);
-					_combined.AddRange(spain);
-					_combined.AddRange(italy);
-					_combined.AddRange(czech);
-					_combined.AddRange(portugal);
+					if (usa != null)
+						_combined.AddRange(usa);
+					if (uk != null)
+						_combined.AddRange(uk);
+					if (poland != null)
+						_combined.AddRange(poland);
+					if (australia != null)
+						_combined.AddRange(australia);
+					if (germany != null)
+						_combined.AddRange(germany);
+					if (france != null)
+						_combined.AddRange(france);
+					if (spain != null)
+						_combined.AddRange(spain);
+					if (italy != null)
+						_combined.AddRange(italy);
+					if (czech != null)
+						_combined.AddRange(czech);
+					if (portugal != null)
+						_combined.AddRange(portugal);
+
 					for (int i = 0; i < _combined.Count; i++) {
 						_combined[i] = _combined[i].ToLower();
 					}

@@ -59,9 +59,9 @@ public class PlacesRanking : MonoBehaviour {
 			placeTarget.AddHoursSplit(ReadJson.ReturnDateTime(segmentInfo.startTime), ReadJson.ReturnDateTime(segmentInfo.endTime));
 		} else {
 			placeTarget = new PlaceGroup(place, ReadJson.ReturnDateTime(segmentInfo.startTime), ReadJson.ReturnDateTime(segmentInfo.endTime));
-			// TryRecogniseCategory(place.name, (categoryId) => {
-			// 	placeTarget.categoryId = categoryId;
-			// });
+			TryRecogniseCategory(place.name, (categoryId) => {
+				placeTarget.categoryId = categoryId;
+			});
 			places.Add(place.id, placeTarget);
 		}
 		placeTarget.lastVisited = ReadJson.ReturnSimpleDate(day.date);
