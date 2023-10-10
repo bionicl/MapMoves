@@ -24,16 +24,12 @@ Assets/JsonDotNet/
 
 Assets/JsonDotNet\.meta
 
-Assets/Resources/
-
-Assets/Resources\.meta
-
-Assets/StandaloneFileBrowser/
-
-Assets/StandaloneFileBrowser\.meta
-
 \.vs/MapMoves/xs/
 
 UserSettings/Layouts/CurrentMaximizeLayout.dwlt
 
 Logs/
+
+Assets/Resources/API/
+
+Assets/Resources/API.meta

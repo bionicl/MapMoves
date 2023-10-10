@@ -7,15 +7,15 @@ using Newtonsoft.Json;
 [System.Serializable]
 public class PlaceIconSave {
 	public long id;
-	public int iconNumber;
+	public string categoryId;
 
 	public override string ToString() {
 		return JsonConvert.SerializeObject(this);
 	}
 
-	public PlaceIconSave(long id, int iconNumber) {
+	public PlaceIconSave(long id, string categoryId) {
 		this.id = id;
-		this.iconNumber = iconNumber;
+		this.categoryId = categoryId;
 	}
 }
 
@@ -23,12 +23,12 @@ public class PlacesSave : MonoBehaviour {
 
 	public static List<PlaceIconSave> iconSaves = new List<PlaceIconSave>();
 
-	public static void IconChange(long id, int iconNumber) {
+	public static void IconChange(long id, string categoryId) {
 		PlaceIconSave loadedSave = FindIconSave(id);
 		if (loadedSave != null) {
-			loadedSave.iconNumber = iconNumber;
+			loadedSave.categoryId = categoryId;
 		} else {
-			iconSaves.Add(new PlaceIconSave(id, iconNumber));
+			iconSaves.Add(new PlaceIconSave(id, categoryId));
 		}
 	}
 
@@ -36,10 +36,10 @@ public class PlacesSave : MonoBehaviour {
 		iconSaves = save;
 	}
 
-	public static int? FindIcon(long placeId) {
+	public static string FindIcon(long placeId) {
 		foreach (var item in iconSaves) {
 			if (item.id == placeId) {
-				return item.iconNumber;
+				return item.categoryId;
 			}
 		}
 		return null;

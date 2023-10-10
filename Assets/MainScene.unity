@@ -6330,8 +6330,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 119, y: 0}
-  m_SizeDelta: {x: 238, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &375883522
 MonoBehaviour:
@@ -26842,7 +26842,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 275.02884, y: 60}
+  m_AnchoredPosition: {x: 234.45218, y: 60}
   m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1433522477
@@ -41423,158 +41423,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d554274c60ce5499d9b762c36a20c782, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCategories:
-  - name: Transport
-    color: {r: 1, g: 0.59607846, b: 0, a: 1}
-  - name: Shopping
-    color: {r: 0.8980392, g: 0.10980392, b: 0.13725491, a: 1}
-  - name: Public place
-    color: {r: 0.6117647, g: 0.15294118, b: 0.6901961, a: 1}
-  - name: Food
-    color: {r: 0.24705882, g: 0.31764707, b: 0.70980394, a: 1}
-  - name: Private place
-    color: {r: 0.011764706, g: 0.6627451, b: 0.95686275, a: 1}
-  - name: Health
-    color: {r: 0, g: 0.5882353, b: 0.53333336, a: 1}
-  - name: Services
-    color: {r: 0.14509805, g: 0.60784316, b: 0.14117648, a: 1}
-  - name: Education
-    color: {r: 0.8039216, g: 0.8627451, b: 0.22352941, a: 1}
-  - name: Entertainment
-    color: {r: 0.4745098, g: 0.33333334, b: 0.28235295, a: 1}
-  - name: Uncategorized
-    color: {r: 0.3764706, g: 0.49019608, b: 0.54509807, a: 1}
-  categories:
-  - name: Airport
-    category: 0
-    smallIcon: {fileID: 21300000, guid: 6f8ab4e3cf4b34440be65d0065dfd733, type: 3}
-    bigIcon: {fileID: 21300000, guid: 79c0ca8837ca748e0b83782d0a2629cd, type: 3}
-    id: 0
-  - name: Store
-    category: 1
-    smallIcon: {fileID: 21300000, guid: 375fd008006e94c5086d17748daa41b6, type: 3}
-    bigIcon: {fileID: 21300000, guid: 50958204b75cb454ba75d34e822e72d1, type: 3}
-    id: 0
-  - name: Official building
-    category: 2
-    smallIcon: {fileID: 21300000, guid: 1bfc3ea7bb5af4a35bd6a4a8aebd757c, type: 3}
-    bigIcon: {fileID: 21300000, guid: 6381e99fc41f840eaa277ea572d284c0, type: 3}
-    id: 0
-  - name: Fastfood
-    category: 3
-    smallIcon: {fileID: 21300000, guid: 59f2531b163af4d9daf2ef4ec6f18cf4, type: 3}
-    bigIcon: {fileID: 21300000, guid: 0b9880804e2a8434a88aca5382011e84, type: 3}
-    id: 0
-  - name: Home
-    category: 4
-    smallIcon: {fileID: 21300000, guid: d48020e3c50a04b5ea2bfc0994e16a1f, type: 3}
-    bigIcon: {fileID: 21300000, guid: a3dc345ecdddb4fb28852756461f5c48, type: 3}
-    id: 0
-  - name: Hospital
-    category: 5
-    smallIcon: {fileID: 21300000, guid: 075b878febe3d472c8773d767fc90df4, type: 3}
-    bigIcon: {fileID: 21300000, guid: 00dbe8c9733ce44da9c73dcfae9c6694, type: 3}
-    id: 0
-  - name: Marker
-    category: 9
-    smallIcon: {fileID: 21300000, guid: 8a5013245c8ea4d02a7f5a7e26f45085, type: 3}
-    bigIcon: {fileID: 21300000, guid: 7c79a7098a286405f862c8ec86e1666a, type: 3}
-    id: 0
-  - name: Petrol station
-    category: 6
-    smallIcon: {fileID: 21300000, guid: 3cb26600cc3d548bba13db8f99150c51, type: 3}
-    bigIcon: {fileID: 21300000, guid: df8a8131918a945de811710b3c75c34c, type: 3}
-    id: 0
-  - name: Printing house
-    category: 6
-    smallIcon: {fileID: 21300000, guid: 84cb762b9b8ec46d582300fab547c5bd, type: 3}
-    bigIcon: {fileID: 21300000, guid: 33ef049645cf8433f92ecf8ce51db066, type: 3}
-    id: 0
-  - name: School
-    category: 7
-    smallIcon: {fileID: 21300000, guid: 3444d29c26df04ac08a616f7cc4ab854, type: 3}
-    bigIcon: {fileID: 21300000, guid: 4529c36710f1e4e97b72f293b54e8ba7, type: 3}
-    id: 0
-  - name: Restaurant
-    category: 3
-    smallIcon: {fileID: 21300000, guid: 77a5527d657eb44ff878302325eb60fd, type: 3}
-    bigIcon: {fileID: 21300000, guid: 9cba623421bb5408db333baafbee061c, type: 3}
-    id: 0
-  - name: Cinema
-    category: 8
-    smallIcon: {fileID: 21300000, guid: 2b31ac9b8c4b44f4db61e3ea76e0394c, type: 3}
-    bigIcon: {fileID: 21300000, guid: 07f51f92be2a84b27a06a4ec5bb3f524, type: 3}
-    id: 0
-  - name: Theater
-    category: 8
-    smallIcon: {fileID: 21300000, guid: 4e21c273afae342b5b7c0e585df32861, type: 3}
-    bigIcon: {fileID: 21300000, guid: 0583e876b1489403f90b70a7edaebd71, type: 3}
-    id: 0
-  - name: Train station
-    category: 0
-    smallIcon: {fileID: 21300000, guid: b4c45a8d79ab44afcbfe212cda9d2e14, type: 3}
-    bigIcon: {fileID: 21300000, guid: a45d3c9a9fb6744f3b73f2544c934e57, type: 3}
-    id: 0
-  - name: Park
-    category: 2
-    smallIcon: {fileID: 21300000, guid: 26c95bc27074948c1adc94882f8fa254, type: 3}
-    bigIcon: {fileID: 21300000, guid: 8d2d4e04e0e0043f690738d5dcde8e19, type: 3}
-    id: 0
-  - name: Cafe
-    category: 3
-    smallIcon: {fileID: 21300000, guid: ee2f306c5025248499d6923ffb670b99, type: 3}
-    bigIcon: {fileID: 21300000, guid: c528cc25f48294052ac2b11048d6cc8f, type: 3}
-    id: 0
-  - name: Pharmacy
-    category: 5
-    smallIcon: {fileID: 21300000, guid: f77d27fc569fc434f9e68d10a62389ff, type: 3}
-    bigIcon: {fileID: 21300000, guid: 02bdbc9c91e3545a9a638016001a3743, type: 3}
-    id: 0
-  - name: Event place
-    category: 8
-    smallIcon: {fileID: 21300000, guid: 4a8e98075fa9c40d49a34ef1c7ece475, type: 3}
-    bigIcon: {fileID: 21300000, guid: 64be2736b0c2045d3bd1aee6405d1054, type: 3}
-    id: 0
-  - name: Landmark
-    category: 2
-    smallIcon: {fileID: 21300000, guid: 7c6a2000f98234b25a013cc81357d078, type: 3}
-    bigIcon: {fileID: 21300000, guid: a0387737f71c24cd380834fd359ec80f, type: 3}
-    id: 0
-  - name: Other
-    category: 9
-    smallIcon: {fileID: 21300000, guid: 8a72b80a3c7b0419d8f9f2f3b079953b, type: 3}
-    bigIcon: {fileID: 21300000, guid: 98e568c9d19994b7d8938125ce9f0d24, type: 3}
-    id: 0
-  - name: Kindergarden
-    category: 7
-    smallIcon: {fileID: 21300000, guid: 74bbcbc7e050d499c92c33e6e7144b88, type: 3}
-    bigIcon: {fileID: 21300000, guid: 7c75e1e8ad69d41a5aeb2f51e93698ee, type: 3}
-    id: 0
-  - name: Work
-    category: 4
-    smallIcon: {fileID: 21300000, guid: c7da077bfbe9147ce8742e2734e7c3cf, type: 3}
-    bigIcon: {fileID: 21300000, guid: 1add8ad1cd79c45faa8b8e795f0354f5, type: 3}
-    id: 0
-  - name: Sport
-    category: 2
-    smallIcon: {fileID: 21300000, guid: 4c055820c2a774ca08dd4040916baca8, type: 3}
-    bigIcon: {fileID: 21300000, guid: 5a4a571a27299405fa01266618b42961, type: 3}
-    id: 0
-  - name: Church
-    category: 2
-    smallIcon: {fileID: 21300000, guid: 32af3531582504d528285540f96261f4, type: 3}
-    bigIcon: {fileID: 21300000, guid: 60b62185ece1c404fb15885e69a49f98, type: 3}
-    id: 0
-  - name: Shopping center
-    category: 1
-    smallIcon: {fileID: 21300000, guid: 25e5824cf300f4e91b4410d583b07820, type: 3}
-    bigIcon: {fileID: 21300000, guid: d338ce643337d4d82a5aff09a86893be, type: 3}
-    id: 0
-  - name: Office
-    category: 4
-    smallIcon: {fileID: 21300000, guid: a8e4562a74a9d4a8cbf9985e0379f864, type: 3}
-    bigIcon: {fileID: 21300000, guid: a7b06580329664b82861fef3442f696f, type: 3}
-    id: 0
   theBiggestPlaceVisits: 80
   maxValue: 0
 --- !u!114 &2127403385

@@ -51,7 +51,7 @@ public class RightListUI : MonoBehaviour {
 
 		if (!clickedOnMap) {
 			RenderMap.instance.UpdateMapSize(0.3f);
-			GlobalVariables.inst.MoveCamera(place.mapObject.gameObject.transform.position);
+			GlobalVariables.instance.MoveCamera(place.mapObject.gameObject.transform.position);
 			place.mapObject.Select(true);
 		}
 		this.place = place;
@@ -68,49 +68,47 @@ public class RightListUI : MonoBehaviour {
 	void TasksAfterWaiting() {
 		placeName.text = place.placeInfo.name;
 		if (placeIcon != null)
-			placeIcon.sprite = PlacesRanking.instance.categories[place.icon].smallIcon;
+			placeIcon.sprite = PlacesRanking.instance.categoriesDictionary[place.categoryId].smallIcon;
 		placeVisitedTimes.text = string.Format("Place visited {0} times", place.timesVisited);
 		placeLastVisited.text = string.Format("Last visited {0}", place.lastVisited.ToShortDateString());
-		ChangeSelectedIcon(place.icon);
+		ChangeSelectedIcon(place.categoryId);
 		place.DisplayTimes(hours, maxChartHeight);
 		place.DisplayWeekDays(weekDays, maxChartHeight);
 
 		TryToGetAddress();
 	}
 
-	void ChangeSelectedIcon(int id) {
+	void ChangeSelectedIcon(string categoryId) {
 		foreach (var item in customIcons) {
 			item.MarkAsDeselected();
 		}
 
-		int finalId = id;;
 		for (int i = 0; i < customIcons.Count; i++) {
-			if (customIcons[i].iconId == id) {
-				finalId = i;
+			if (customIcons[i].categoryId == categoryId) {
+				customIcons[i].MarkAsSelected();
 				break;
 			}
 		}
-		customIcons[finalId].MarkAsSelected();
 
 		// Current category
-		PlaceCategory category = PlacesRanking.instance.categories[id];
-		currentCatCircle.color = category.Category.color;
+		PlacesDataJson.PlaceCategory category = PlacesRanking.instance.categoriesDictionary[categoryId];
+		currentCatCircle.color = category.placeTypeCategory.ColorConverted;
 		currentCatIcon.sprite = category.bigIcon;
-		currentCatText.text = category.name;
-		currentCatTextMain.text = category.Category.name;
+		currentCatText.text = category.displayName;
+		currentCatTextMain.text = category.placeTypeCategory.displayName;
 	}
 
 	void SetupIcons() {
 		int count = 0;
-		PlaceCategory[] tempCategories = PlacesRanking.instance.categories;
-		tempCategories = tempCategories.OrderBy(c => c.category).ToArray();
-		foreach (var item in tempCategories) {
+		List<PlacesDataJson.PlaceCategory> tempCategories = PlacesRanking.instance.categories;
+		for (int i = 0; i < tempCategories.Count; i++) {
+			PlacesDataJson.PlaceCategory item = tempCategories[i];
 			GameObject tempIcon = Instantiate(iconBoxPrefab, transform.position, transform.rotation);
 			tempIcon.transform.SetParent(iconsSpawn);
 			tempIcon.transform.localScale = tempIcon.transform.lossyScale;
 			tempIcon.SetActive(true);
 			IconBox tempIconBox = tempIcon.GetComponent<IconBox>();
-			tempIconBox.SetupIcon(item.smallIcon, item.id, item.Category.color);
+			tempIconBox.SetupIcon(item);
 			customIcons.Add(tempIconBox);
 			count++;
 		}
@@ -126,11 +124,11 @@ public class RightListUI : MonoBehaviour {
 		placeAddress.text = address;
 	}
 
-	public void IconClicked(int id) {
+	public void IconClicked(string id) {
 		ChangeSelectedIcon(id);
 		place.RefreshIcons(id);
 		if (placeIcon != null)
-			placeIcon.sprite = PlacesRanking.instance.categories[place.icon].smallIcon;
+			placeIcon.sprite = PlacesRanking.instance.categoriesDictionary[id].smallIcon;
 		PlacesSave.IconChange(place.placeInfo.id, id);
 	}
 }

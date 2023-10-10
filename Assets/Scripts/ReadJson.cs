@@ -99,7 +99,7 @@ public enum ActivityType {
 	zumba,
 }
 
-public enum PlaceType {
+public enum PlaceSourceType {
 	school,
 	facebook,
 	foursquare,
@@ -155,7 +155,7 @@ public class MovesJson {
 			public long id;
 			public LocationInfo location;
 			public string name;
-			public PlaceType type;
+			public PlaceSourceType type;
 			public string facebookPlaceId;
 			public string foursquareId;
 		}

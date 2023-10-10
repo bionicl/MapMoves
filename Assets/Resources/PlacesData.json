@@ -1,0 +1,535 @@
+{
+  "placeMainCategories": [
+    {
+      "id": "TRANSPORT",
+      "displayName": "Transport",
+      "color": "FF9800"
+    },
+    {
+      "id": "SHOPPING",
+      "displayName": "Shopping",
+      "color": "E51C23"
+    },
+    {
+      "id": "PUBLIC_PLACE",
+      "displayName": "Public place",
+      "color": "9C27B0"
+    },
+    {
+      "id": "FOOD",
+      "displayName": "Food",
+      "color": "3F51B5"
+    },
+    {
+      "id": "PRIVATE_PLACE",
+      "displayName": "Private place",
+      "color": "03A9F4"
+    },
+    {
+      "id": "HEALTH",
+      "displayName": "Health",
+      "color": "009688"
+    },
+    {
+      "id": "SERVICES",
+      "displayName": "Services",
+      "color": "259B24"
+    },
+    {
+      "id": "EDUCATION",
+      "displayName": "Education",
+      "color": "CDDC39"
+    },
+    {
+      "id": "ENTERTAINMENT",
+      "displayName": "Entertainment",
+      "color": "795548"
+    },
+    {
+      "id": "OTHER",
+      "displayName": "Uncategorized",
+      "color": "607D8B"
+    }
+  ],
+  "placeCategories": [
+    {
+      "id": "AIRPORT",
+      "displayName": "Airport",
+      "category": "TRANSPORT",
+      "keywords": {
+        "english": ["airport", "terminal", "airfield", "flight", "boarding", "departure", "arrival", "baggage", "check-in", "customs", "air hub", "air station", "air terminal"],
+        "polish": ["lotnisko", "terminal", "pas startowy", "lot", "odlot", "przylot", "bagaż", "odprawa", "kontrola celna", "hub lotniczy", "stacja lotnicza", "terminal lotniczy"],
+        "german": ["Flughafen", "Terminal", "Flugplatz", "Flug", "Bordkarte", "Abflug", "Ankunft", "Gepäck", "Check-in", "Zoll", "Flughub", "Luftstation", "Flugterminal"],
+        "french": ["aéroport", "terminal", "aérodrome", "vol", "embarquement", "départ", "arrivée", "bagages", "enregistrement", "douanes", "hub aérien", "station aérienne", "terminal aérien"],
+        "spanish": ["aeropuerto", "terminal", "aeródromo", "vuelo", "embarque", "salida", "llegada", "equipaje", "facturación", "aduanas", "centro aéreo", "estación aérea", "terminal aéreo"],
+        "italian": ["aeroporto", "terminal", "campo di volo", "volo", "imbarco", "partenza", "arrivo", "bagagli", "check-in", "dogana", "hub aereo", "stazione aerea", "terminal aereo"],
+        "czech": ["letiště", "terminál", "letiště", "let", "nástup", "odlet", "přílet", "zavazadla", "odbavení", "celní kontrola", "letecký uzel", "letecká stanice", "letecký terminál"],
+        "portuguese": ["aeroporto", "terminal", "campo de aviação", "voo", "embarque", "partida", "chegada", "bagagem", "check-in", "alfândega", "hub aéreo", "estação aérea", "terminal aéreo"]
+      },
+      "chains": null
+    },{
+		"id": "STORE",
+		"displayName": "Store",
+		"category": "SHOPPING",
+		"keywords": {
+			"english": ["store", "shop", "retail", "boutique", "marketplace", "supermarket", "grocery store", "convenience store", "department store", "clothing store", "electronics store", "bookstore", "furniture store", "home goods store", "jewelry store", "shoe store", "pet store", "toy store", "sporting goods store", "hardware store", "beauty store", "pharmacy"],
+			"polish": ["sklep", "sklep", "handel detaliczny", "boutique", "rynek", "supermarket", "sklep spożywczy", "sklep osiedlowy", "dom towarowy", "sklep odzieżowy", "sklep elektroniczny", "księgarnia", "sklep meblowy", "sklep z artykułami do domu", "sklep jubilerski", "sklep obuwniczy", "sklep zoologiczny", "sklep z zabawkami", "sklep z artykułami sportowymi", "sklep budowlany", "sklep kosmetyczny", "apteka"],
+			"german": ["Geschäft", "Laden", "Einzelhandel", "Boutique", "Marktplatz", "Supermarkt", "Lebensmittelgeschäft", "Kiosk", "Kaufhaus", "Bekleidungsgeschäft", "Elektronikgeschäft", "Buchhandlung", "Möbelgeschäft", "Haushaltswarengeschäft", "Schmuckgeschäft", "Schuhgeschäft", "Tierhandlung", "Spielzeugladen", "Sportartikelgeschäft", "Baumarkt", "Kosmetikgeschäft", "Apotheke"],
+			"french": ["magasin", "boutique", "commerce de détail", "boutique", "marché", "supermarché", "épicerie", "supérette", "grand magasin", "magasin de vêtements", "magasin d'électronique", "librairie", "magasin de meubles", "magasin d'articles pour la maison", "bijouterie", "magasin de chaussures", "animalerie", "magasin de jouets", "magasin d'articles de sport", "quincaillerie", "magasin de beauté", "pharmacie"],
+			"spanish": ["tienda", "tienda", "venta al por menor", "boutique", "mercado", "supermercado", "tienda de comestibles", "tienda de conveniencia", "grandes almacenes", "tienda de ropa", "tienda de electrónica", "librería", "tienda de muebles", "tienda de artículos para el hogar", "joyería", "tienda de zapatos", "tienda de mascotas", "tienda de juguetes", "tienda de artículos deportivos", "ferretería", "tienda de belleza", "farmacia"],
+			"italian": ["negozio", "negozio", "vendita al dettaglio", "boutique", "mercato", "supermercato", "negozio di alimentari", "negozio di convenienza", "grandi magazzini", "negozio di abbigliamento", "negozio di elettronica", "libreria", "negozio di mobili", "negozio di articoli per la casa", "gioielleria", "negozio di scarpe", "negozio per animali", "negozio di giocattoli", "negozio di articoli sportivi", "negozio di ferramenta", "negozio di bellezza", "farmacia"],
+			"czech": ["obchod", "obchod", "maloobchod", "butik", "tržiště", "supermarket", "potraviny", "prodejna potravin", "obchodní dům", "obchod s oblečením", "obchod s elektronikou", "knihkupectví", "obchod s nábytkem", "obchod s domácími potřebami", "klenotnictví", "obchod se obuví", "prodejna zvířat", "hračkářství", "obchod s sportovními potřebami", "strojírenský obchod", "kosmetický obchod", "lékárna"],
+			"portuguese": ["loja", "loja", "varejo", "boutique", "mercado", "supermercado", "mercearia", "loja de conveniência", "loja de departamentos", "loja de roupas", "loja de eletrônicos", "livraria", "loja de móveis", "loja de artigos para o lar", "joalheria", "loja de sapatos", "pet shop", "loja de brinquedos", "loja de artigos esportivos", "loja de ferragens", "loja de beleza", "farmácia"]
+		  },
+		  "chains": {
+			"usa": ["Walmart","Amazon Go","Target","Costco","Best Buy","Macy's","Home Depot","Lowe's","Walgreens","CVS Pharmacy","Kohl's","Barnes & Noble","Bed Bath & Beyond","PetSmart","Toys R Us","Dick's Sporting Goods","Ace Hardware","Sephora","Ulta Beauty","GameStop","Office Depot"],
+			"uk": ["Tesco","Sainsbury's","ASDA","Morrisons","Argos","John Lewis","Currys PC World","Boots","Superdrug","H&M","Zara","Primark","Debenhams","Topshop","Waterstones","WHSmith","Sports Direct","B&Q","The Body Shop","Lloyds Pharmacy","GAME"],
+			"poland": ["Biedronka","Lidl","Auchan","Tesco","Carrefour","Pepco","RTV Euro AGD","Empik","Rossmann","Reserved","Zara","Jysk","Smyk","Media Markt","Leroy Merlin","Avon","Polo Market","Kaufland","Neonet","Euroapteka"],
+			"australia": ["Coles","Woolworths","Bunnings","Kmart","Target","JB Hi-Fi","ALDI","Chemist Warehouse","Officeworks","The Good Guys","Myer","Dick Smith","Supercheap Auto","Priceline","Cotton On","Spotlight","Repco","Harris Scarfe","The Reject Shop","EB Games","Harvey Norman"],
+			"germany": ["Aldi","Lidl","Edeka","Rewe","dm-drogerie markt","Müller","Rossmann","Media Markt","Saturn","Zara","H&M","C&A","Douglas","Möbel Martin","Kaufland","Toom Baumarkt","Fressnapf","Fielmann","Thalia","dm-drogerie markt","dm-drogerie markt"],
+			"france": ["Carrefour","Auchan","Leclerc","Intermarché","Super U","Fnac","Darty","Cultura","Boulanger","Decathlon","Zara","H&M","Kiabi","Sephora","Yves Rocher","Monoprix","Marionnaud","Nature et Découvertes","Pharmacie","Pharmacie","Pharmacie"],
+			"spain": ["Mercadona","Carrefour","Aldi","Lidl","Dia","El Corte Inglés","Media Markt","Zara","H&M","C&A","Douglas","Decathlon","Ikea","Leroy Merlin","Eroski","Alcampo","Hipercor","Fnac","Sephora","Farmacia","Farmacia"],
+			"italy": ["Carrefour","Auchan","Coop","Conad","Pam","Esselunga","Eurospin","Unes","Zara","H&M","OVS","Trony","Media Markt","Leroy Merlin","Iper","Decathlon","Sephora","Farmacia","Farmacia","Farmacia"],
+			"czech": ["Albert","Billa","Kaufland","Lidl","Tesco","Penny Market","dm drogerie markt","Rossmann","JYSK","H&M","Zara","Sportisimo","Decathlon","Bauhaus","Obi","Dr. Max","Teta drogerie","Dáme potraviny","Farmacia","Farmacia"],
+			"portugal": ["Pingo Doce","Continente","Lidl","Auchan","Intermarché","Fnac","Worten","Zara","H&M","Primark","Media Markt","Leroy Merlin","Sport Zone","Decathlon","Farmácia","Farmácia","Farmácia","Farmácia","Farmácia","Farmácia","Farmácia"]
+		  }
+	},{
+      "id": "OFFICIAL_BUILDING",
+      "displayName": "Official building",
+      "category": "PUBLIC_PLACE",
+      "keywords": {
+        "english": ["official building", "government building", "municipal building", "city hall", "town hall", "courthouse", "police station", "fire station", "embassy", "consulate", "government office", "public building", "town council"],
+        "polish": ["budynek urzędowy", "budynek rządowy", "budynek miejski", "urząd miasta", "ratusz", "sąd", "komisariat policji", "straż pożarna", "ambasada", "konsulat", "urząd administracji", "budynek publiczny", "rada miejska"],
+        "german": ["Amtsgebäude", "Regierungsgebäude", "Kommunales Gebäude", "Rathaus", "Stadthaus", "Gerichtsgebäude", "Polizeiwache", "Feuerwache", "Botschaft", "Konsulat", "Regierungsbüro", "öffentliches Gebäude", "Stadtrat"],
+        "french": ["bâtiment officiel", "bâtiment gouvernemental", "bâtiment municipal", "hôtel de ville", "mairie", "tribunal", "poste de police", "caserne de pompiers", "ambassade", "consulat", "bureau gouvernemental", "bâtiment public", "conseil municipal"],
+        "spanish": ["edificio oficial", "edificio gubernamental", "edificio municipal", "ayuntamiento", "casa consistorial", "juzgado", "comisaría de policía", "cuerpo de bomberos", "embajada", "consulado", "oficina de gobierno", "edificio público", "consejo municipal"],
+        "italian": ["edificio ufficiale", "edificio governativo", "edificio municipale", "municipio", "municipio", "tribunale", "commissariato di polizia", "caserma dei pompieri", "ambasciata", "consolato", "ufficio governativo", "edificio pubblico", "consiglio comunale"],
+        "czech": ["úřední budova", "vládní budova", "městská budova", "radnice", "radnice", "soudní budova", "policejní stanice", "požární stanice", "ambasáda", "konzulát", "úřad vlády", "veřejná budova", "městská rada"],
+        "portuguese": ["edifício oficial", "edifício do governo", "edifício municipal", "câmara municipal", "sede do município", "tribunal", "esquadra de polícia", "quartel de bombeiros", "embaixada", "consulado", "gabinete do governo", "edifício público", "câmara municipal"]
+      },
+      "chains": null
+    },{
+      "id": "FASTFOOD",
+      "displayName": "Fastfood",
+      "category": "FOOD",
+      "keywords": {
+        "english": ["fast food", "fast-food restaurant", "quick service restaurant", "drive-thru", "takeout", "fast-casual", "burger joint", "pizza place", "fried chicken", "taco shop", "fast eatery", "snack bar", "food on the go"],
+        "polish": ["fast food", "restauracja fast food", "restauracja szybkiej obsługi", "restauracja z okienkiem", "na wynos", "szybka restauracja", "bar burgerowy", "pizzeria", "restauracja z kurczakiem", "taco bar", "szybka restauracja", "bar przekąskowy", "jedzenie na wynos"],
+        "german": ["Fast Food", "Schnellrestaurant", "Schnellimbiss", "Drive-Thru", "Takeout", "Schnellimbiss mit Bedienung", "Burgerladen", "Pizzeria", "Hähnchenrestaurant", "Taco-Laden", "Schnellverpflegung", "Imbissbude", "Essen to go"],
+        "french": ["fast food", "restaurant fast-food", "restaurant à service rapide", "drive-thru", "à emporter", "fast-casual", "restaurant de burgers", "pizzeria", "poulet frit", "taco shop", "restauration rapide", "bar à en-cas", "nourriture à emporter"],
+        "spanish": ["comida rápida", "restaurante de comida rápida", "restaurante de servicio rápido", "drive-thru", "para llevar", "comida rápida informal", "burguería", "pizzería", "pollo frito", "taco bar", "comida rápida", "bar de aperitivos", "comida para llevar"],
+        "italian": ["fast food", "ristorante fast-food", "ristorante a servizio rapido", "drive-thru", "asporto", "fast-casual", "burger joint", "pizzeria", "pollo fritto", "taco shop", "fast eatery", "snack bar", "cibo da asporto"],
+        "czech": ["fast food", "restaurace rychlého občerstvení", "rychlá samoobslužná restaurace", "drive-thru", "sebeprezentace", "rychlé občerstvení", "burger bar", "pizzerie", "smažené kuře", "taco bar", "rychlá stravovací zařízení", "občerstvení", "jídlo na cestu"],
+        "portuguese": ["comida rápida", "restaurante de comida rápida", "restaurante de serviço rápido", "drive-thru", "para viagem", "fast-casual", "hamburgueria", "pizzaria", "frango frito", "taco shop", "comida rápida", "bar de snacks", "comida para levar"]
+      },
+      "chains": {
+        "usa": ["McDonald's", "Burger King", "Wendy's", "Taco Bell", "KFC", "Subway", "Pizza Hut", "Domino's Pizza", "Starbucks", "Dunkin'", "Papa John's", "Arby's", "Sonic Drive-In", "Chick-fil-A", "In-N-Out Burger", "Five Guys", "Whataburger", "Jack in the Box", "Carl's Jr.", "White Castle", "Hardee's"],
+        "uk": ["McDonald's", "Burger King", "KFC", "Subway", "Pizza Hut", "Domino's Pizza", "Greggs", "Costa Coffee", "Starbucks", "Nando's", "Pret a Manger", "Wimpy", "Taco Bell", "Five Guys", "Bella Italia", "Krispy Kreme", "Caffè Nero", "PizzaExpress", "YO! Sushi", "Gourmet Burger Kitchen", "Leon"],
+        "poland": ["McDonald's", "Burger King", "KFC", "Subway", "Pizza Hut", "Domino's Pizza", "Starbucks", "Dunkin'", "Taco Bell", "Biedronka", "Żabka", "Carrefour", "Auchan", "Lidl", "Poczta Polska", "Rossmann", "Pepco", "RTV Euro AGD", "Media Markt", "Castorama", "Empik"],
+        "australia": ["McDonald's", "KFC", "Hungry Jack's", "Subway", "Pizza Hut", "Domino's Pizza", "Starbucks", "Coles Express", "BP", "Oporto", "SumoSalad", "Red Rooster", "Boost Juice", "Guzman y Gomez", "Nando's", "Mad Mex", "Grill'd", "Zambrero", "Schnitz", "Muffin Break", "Hudsons Coffee"],
+        "germany": ["McDonald's", "Burger King", "KFC", "Subway", "Pizza Hut", "Domino's Pizza", "Starbucks", "Backwerk", "Nordsee", "Nando's", "Vapiano", "L'Osteria", "Wienerwald", "Block House", "Maredo", "Joe & The Juice", "Coffee Fellows", "Nur Hier", "Café Extrablatt", "Jim Block", "Hans im Glück"],
+        "france": ["McDonald's", "Burger King", "KFC", "Subway", "Pizza Hut", "Domino's Pizza", "Starbucks", "Quick", "Flunch", "Buffalo Grill", "La Brioche Dorée", "Pret a Manger", "Paul", "Léon de Bruxelles", "Brioche Dorée", "Hippopotamus", "Indiana Café", "Sushi Shop", "Class'Croute", "EXKi", "Bioburger"],
+        "spain": ["McDonald's", "Burger King", "KFC", "Subway", "Pizza Hut", "Domino's Pizza", "Starbucks", "Rodilla", "100 Montaditos", "Pans & Company", "Cien Montaditos", "Vips", "Telepizza", "La Sureña", "Foster's Hollywood", "Taco Bell", "Hamburguesa Nostra", "Lizarran", "Cervecería La Sureña", "Cafetería Jamaica", "Bar Restaurante La Alhambra"],
+        "italy": ["McDonald's", "Burger King", "KFC", "Subway", "Pizza Hut", "Domino's Pizza", "Starbucks", "Autogrill", "Roadhouse Grill", "Old Wild West", "Wienerwald", "Pret a Manger", "Rossopomodoro", "Wiener Haus", "BQ", "Burger King Bar", "Burger King Drive", "Burger King Junior", "Cigierre", "Caffè Pascucci", "La Piazzetta", "McDrive"],
+        "czech": ["McDonald's", "Burger King", "KFC", "Subway", "Pizza Hut", "Domino's Pizza", "Starbucks", "Coffeeshop Company", "Bageterie Boulevard", "Globus", "Albert", "Penny Market", "Billa", "Kaufland", "Tchibo", "dm drogerie markt", "Rossmann", "Sazka", "Česká pošta", "Alza", "Mall.cz"],
+        "portugal": ["McDonald's", "Burger King", "KFC", "Subway", "Pizza Hut", "Domino's Pizza", "Starbucks", "NOS", "Pingo Doce", "Recheio", "Biedronka", "Auchan", "Lidl", "Continente", "Worten", "Fnac", "E.Leclerc", "Radio Popular", "Sport Zone", "Jumbo", "Box Jumbo"]
+      }
+    },{
+      "id": "HOME",
+      "displayName": "Home",
+      "category": "PRIVATE_PLACE",
+      "keywords": {
+        "english": ["home", "house", "residence", "apartment", "dwelling", "living place", "abode", "household", "domestic", "habitat", "shelter", "homestead"],
+        "polish": ["dom", "dom", "mieszkanie", "mieszkanie", "zamieszkanie", "miejsce zamieszkania", "siedziba", "gospodarstwo domowe", "domowy", "siedlisko", "schronienie", "gospodarstwo"],
+        "german": ["Zuhause", "Haus", "Wohnsitz", "Wohnung", "Wohnstätte", "Wohnort", "Behausung", "Haushalt", "hausgemacht", "Lebensraum", "Unterkunft", "Hof"],
+        "french": ["maison", "maison", "résidence", "appartement", "logement", "lieu de vie", "domicile", "foyer", "domestique", "habitat", "abri", "ferme"],
+        "spanish": ["casa", "casa", "residencia", "apartamento", "vivienda", "lugar de vida", "morada", "hogar", "doméstico", "hábitat", "refugio", "casa de campo"],
+        "italian": ["casa", "casa", "residenza", "appartamento", "abitazione", "luogo di vita", "dimora", "famiglia", "domestico", "habitat", "rifugio", "tenuta"],
+        "czech": ["domov", "dům", "rezidence", "byt", "obývání", "obydlí", "obydlí", "domácnost", "domácí", "biotop", "útočiště", "dům"],
+        "portuguese": ["casa", "casa", "residência", "apartamento", "moradia", "local de vida", "morada", "lar", "doméstico", "habitat", "abrigo", "quinta"]
+      },
+      "chains": null
+    },{
+      "id": "HOSPITAL",
+      "displayName": "Hospital",
+      "category": "HEALTH",
+      "keywords": {
+        "english": ["hospital", "clinic", "medical center", "healthcare facility", "emergency room", "doctor's office", "nursing home", "infirmary", "surgery", "health center", "medical clinic", "hospitality", "medical practice"],
+        "polish": ["szpital", "klinika", "centrum medyczne", "placówka opieki zdrowotnej", "sala ratunkowa", "gabinet lekarski", "dom opieki", "szpitalny", "operacja", "centrum zdrowia", "klinika medyczna", "gościnność", "praktyka lekarska"],
+        "german": ["Krankenhaus", "Klinik", "Medizinisches Zentrum", "Gesundheitseinrichtung", "Notaufnahme", "Arztpraxis", "Altenheim", "Krankenstation", "Chirurgie", "Gesundheitszentrum", "Medizinische Klinik", "Gastfreundschaft", "Arztpraxis"],
+        "french": ["hôpital", "clinique", "centre médical", "établissement de soins de santé", "salle d'urgence", "cabinet médical", "maison de retraite", "infirmerie", "chirurgie", "centre de santé", "clinique médicale", "hospitalité", "cabinet médical"],
+        "spanish": ["hospital", "clínica", "centro médico", "instalación de atención médica", "sala de emergencias", "consultorio médico", "residencia de ancianos", "enfermería", "cirugía", "centro de salud", "clínica médica", "hospitalidad", "práctica médica"],
+        "italian": ["ospedale", "clinica", "centro medico", "struttura sanitaria", "pronto soccorso", "ambulatorio medico", "casa di riposo", "infermeria", "chirurgia", "centro sanitario", "clinica medica", "ospitalità", "pratica medica"],
+        "czech": ["nemocnice", "klinika", "lékařské centrum", "zdravotnické zařízení", "pohotovost", "lékařská ordinace", "domov důchodců", "nemocniční oddělení", "chirurgie", "zdravotní středisko", "lékařská klinika", "pohostinnost", "lékařská praxe"],
+        "portuguese": ["hospital", "clínica", "centro médico", "unidade de saúde", "sala de emergência", "consultório médico", "lar de idosos", "enfermaria", "cirurgia", "centro de saúde", "clínica médica", "hospitalidade", "prática médica"]
+      },
+      "chains": null
+    },{
+      "id": "MARKER",
+      "displayName": "Marker",
+      "category": "OTHER",
+      "keywords": {
+        "english": ["marker", "landmark", "point of interest", "monument", "milestone", "guidepost", "waypoint", "reference point", "sighting", "indication", "notation", "signpost", "flag", "symbol"],
+        "polish": ["znacznik", "punkt orientacyjny", "punkt widokowy", "pomnik", "kamień milowy", "drogowskaz", "punkt orientacyjny", "punkt odniesienia", "celowanie", "wskaźnik", "notacja", "drogowskaz", "flaga", "symbol"],
+        "german": ["Markierung", "Wahrzeichen", "Sehenswürdigkeit", "Denkmal", "Meilenstein", "Wegweiser", "Wegpunkt", "Bezugspunkt", "Sichtung", "Indikation", "Notation", "Wegweiser", "Flagge", "Symbol"],
+        "french": ["marqueur", "point de repère", "point d'intérêt", "monument", "jalon", "borne de guidage", "point de cheminement", "point de référence", "sighting", "indication", "notation", "panneau indicateur", "drapeau", "symbole"],
+        "spanish": ["marcador", "punto de referencia", "punto de interés", "monumento", "hitos", "mojón", "punto de referencia", "punto de referencia", "avistamiento", "indicación", "notación", "poste indicador", "bandera", "símbolo"],
+        "italian": ["marcatore", "monumento", "punto di interesse", "monumento", "pietra miliare", "indicatore", "waypoint", "punto di riferimento", "avvistamento", "indicazione", "notazione", "cartello indicatore", "bandiera", "simbolo"],
+        "czech": ["značka", "památník", "zajímavé místo", "památník", "milník", "cestovní značka", "cestovní bod", "odkazný bod", "sledování", "indikace", "notace", "směrovka", "vlajka", "symbol"],
+        "portuguese": ["marcador", "ponto de referência", "ponto de interesse", "monumento", "marco", "ponteiro de guia", "ponto de passagem", "ponto de referência", "visão", "indicação", "notação", "marco", "bandeira", "símbolo"]
+      },
+	  "chains": null
+    },{
+      "id": "PETROL_STATION",
+      "displayName": "Petrol station",
+      "category": "TRANSPORT",
+      "keywords": {
+        "english": ["petrol station", "gas station", "fuel station", "service station", "filling station", "gasoline station", "petrol pump", "fuel pump", "gas pump", "fuel dispenser", "gas dispenser", "fuel nozzle", "gas nozzle", "fuel service", "refueling station"],
+        "polish": ["stacja benzynowa", "stacja paliw", "stacja usługowa", "stacja tankowania", "stacja benzynowa", "pompa benzynowa", "pompa paliw", "pompa gazowa", "dystrybutor paliwa", "dystrybutor gazu", "wąż do tankowania", "wąż do tankowania gazu", "usługi paliwowe", "stacja tankowania"],
+        "german": ["Tankstelle", "Tankstelle", "Tankstelle", "Tankstelle", "Tankstelle", "Benzinpumpe", "Kraftstoffpumpe", "Zapfsäule", "Zapfsäule", "Kraftstoffspender", "Gasspender", "Kraftstoffdüse", "Gasdüse", "Kraftstoffservice", "Tankstelle"],
+        "french": ["station-service", "station-service", "station-service", "station-service", "station-service", "pompe à essence", "pompe à carburant", "pompe à essence", "distributeur de carburant", "distributeur de gaz", "distributeur de carburant", "distributeur de gaz", "buse de carburant", "buse de gaz", "service de ravitaillement"],
+        "spanish": ["gasolinera", "gasolinera", "gasolinera", "gasolinera", "gasolinera", "bomba de gasolina", "bomba de combustible", "bomba de gas", "dispensador de combustible", "dispensador de gas", "boquilla de combustible", "boquilla de gas", "servicio de repostaje", "estación de repostaje"],
+        "italian": ["distributore di benzina", "distributore di benzina", "distributore di benzina", "distributore di benzina", "distributore di benzina", "pompa di benzina", "pompa di carburante", "pompa di benzina", "erogatore di carburante", "erogatore di gas", "ugello di carburante", "ugello di gas", "servizio di rifornimento", "stazione di rifornimento"],
+        "czech": ["benzínová stanice", "benzínová stanice", "benzínová stanice", "benzínová stanice", "benzínová stanice", "benzínová pumpa", "palivová pumpa", "plynová pumpa", "distributor paliva", "distributor plynu", "hadice na palivo", "hadice na plyn", "služba paliva", "čerpací stanice"],
+        "portuguese": ["posto de combustível", "posto de gasolina", "posto de abastecimento de combustível", "posto de serviço", "posto de abastecimento", "bomba de gasolina", "bomba de combustível", "bomba de gasolina", "distribuidor de combustível", "distribuidor de gás", "bico de combustível", "bico de gás", "serviço de abastecimento", "posto de reabastecimento"]
+      },
+      "chains": {
+        "usa": ["Shell", "Exxon", "Chevron", "BP", "Mobil", "Valero", "Marathon Petroleum", "Phillips 66", "Sunoco", "Citgo", "7-Eleven", "Circle K", "Wawa", "QuikTrip", "Speedway", "Sheetz", "Pilot Flying J", "Thorntons", "Racetrac", "Kroger", "Murphy USA"],
+        "uk": ["Shell", "BP", "Esso", "Texaco", "Jet", "Gulf", "Sainsbury's", "Morrisons", "Tesco", "Asda", "Co-op", "Total", "MFG", "Applegreen", "Harvest Energy", "Pace", "Rontec", "Euro Garages", "MRH", "Certas Energy", "Petrogas"],
+        "poland": ["Orlen", "Lotos", "BP", "Shell", "Statoil", "Ole Ole", "Circle K", "Carrefour", "Tesco", "Auchan", "Leclerc", "PKN Orlen", "Lewiatan", "Moya", "Kaufland", "Biedronka", "Żabka", "Orlen Express", "Neste", "Aral", "Q8"],
+        "australia": ["Caltex", "BP", "Shell", "Mobil", "7-Eleven", "Woolworths", "Coles Express", "United Petroleum", "Puma Energy", "Ampol", "Metro Petroleum", "Liberty", "Coles", "X Convenience", "Gull", "Pacific Petroleum", "Z Energy", "Freedom Fuels", "Vibe Petroleum", "Ariston"],
+        "germany": ["Aral", "Shell", "Esso", "Total", "Jet", "Agip", "OMV", "Rewe", "Edeka", "Kaufland", "Lidl", "Aldi", "Fressnapf", "Hagebaumarkt", "Bauhaus", "Obi", "Toom", "Rossmann", "dm-drogerie markt", "Müller", "Euronics"],
+        "france": ["Total", "Carrefour", "Auchan", "Leclerc", "Intermarché", "Casino", "Système U", "E. Leclerc", "Aldi", "Lidl", "Super U", "Auchan Supermarché", "Carrefour Market", "Géant Casino", "Carrefour City", "Carrefour Contact", "Carrefour Express", "Casino Supermarché", "Hyper U", "Carrefour Drive", "Carrefour Contact Marché"],
+        "spain": ["Repsol", "Cepsa", "BP", "Galp", "E. Leclerc", "Aldi", "Carrefour", "Alcampo", "Hipercor", "Bonarea", "Shell", "Esso", "Total", "Gulf", "BP Express", "Eroski", "Valcarce", "Gasexpress", "Campsa", "Petroprix", "Q8"],
+        "italy": ["Eni", "Q8", "Agip", "Esso", "Tamoil", "Tigullio", "IP", "Api", "Carrefour", "Coop", "Despar", "Sisa", "CRAI", "Aliper", "Penny Market", "Gulliver", "Conad", "Esselunga", "Pam Panorama", "Eurospin", "Unieuro"],
+        "czech": ["Benzina", "Shell", "CNG Europe", "Agip", "RWE", "Slovnaft", "Tamoil", "MOL", "OMV", "E. Leclerc", "Albert", "Kaufland", "Lidl", "Aldi", "Billa", "Sazka", "Rossmann", "dm drogerie markt", "Kaufland", "Toom", "Obi"],
+        "portugal": ["Galp", "Repsol", "BP", "CEPSA", "Tamoil", "Prio", "Intermarché", "Minipreço", "Auchan", "Lidl", "Aldi", "Continente", "Pingo Doce", "Jumbo", "Feira Nova", "Leclerc", "El Corte Inglés", "Geronimo Martins", "Amanhecer", "Gasol", "BPN"]
+      }
+    },{
+      "id": "PRINTING_HOUSE",
+      "displayName": "Printing house",
+      "category": "SERVICES",
+      "keywords": {
+        "english": ["printing house", "print shop", "printery", "printworks", "printing company", "print production", "print and copy center", "print service", "printing press", "commercial printing", "offset printing", "digital printing", "large format printing", "graphic design and printing", "printing solutions"],
+        "polish": ["drukarnia", "druk", "drukarnia", "drukarnia", "drukarnia", "produkcja druków", "centrum druku i kopiowania", "usługi drukarskie", "prasa drukarska", "drukowanie komercyjne", "druk offsetowy", "druk cyfrowy", "druk wielkoformatowy", "projektowanie graficzne i druk", "rozwiązania drukarskie"],
+        "german": ["Druckerei", "Druckerei", "Druckerei", "Druckerei", "Druckerei", "Druckproduktion", "Druck- und Kopiezentrum", "Druckdienstleistung", "Druckpresse", "Druckerei", "Offsetdruck", "Digitaldruck", "Großformatdruck", "Grafikdesign und Druck", "Drucklösungen"],
+        "french": ["imprimerie", "imprimerie", "imprimerie", "imprimerie", "imprimerie", "production d'imprimés", "centre d'impression et de copie", "service d'impression", "presse d'impression", "imprimerie commerciale", "impression offset", "impression numérique", "impression grand format", "conception graphique et impression", "solutions d'impression"],
+        "spanish": ["imprenta", "imprenta", "imprenta", "imprenta", "imprenta", "producción de impresiones", "centro de impresión y copia", "servicio de impresión", "prensa de impresión", "impresión comercial", "impresión offset", "impresión digital", "impresión de gran formato", "diseño gráfico e impresión", "soluciones de impresión"],
+        "italian": ["tipografia", "tipografia", "tipografia", "tipografia", "tipografia", "produzione di stampati", "centro di stampa e copia", "servizio di stampa", "stampante", "stampatore commerciale", "stampa offset", "stampa digitale", "stampaggio di grande formato", "progettazione grafica e stampa", "soluzioni di stampa"],
+        "czech": ["tiskárna", "tiskárna", "tiskárna", "tiskárna", "tiskárna", "tisková produkce", "centrum tisku a kopírování", "tiskové služby", "tiskový lis", "komerční tisk", "offsetový tisk", "digitální tisk", "velkoformátový tisk", "grafický design a tisk", "tisková řešení"],
+        "portuguese": ["impressão", "impressão", "impressão", "impressão", "impressão", "produção gráfica", "centro de impressão e cópia", "serviço de impressão", "imprensa de impressão", "impressão comercial", "impressão offset", "impressão digital", "impressão em grande formato", "design gráfico e impressão", "soluções de impressão"]
+      },
+      "chains": {
+        "usa": ["FedEx Office", "Staples Print & Marketing Services", "The UPS Store", "AlphaGraphics", "Sir Speedy", "Minuteman Press", "Fastsigns", "Allegra Marketing Print Mail", "Insty-Prints", "PIP Printing and Marketing Services"],
+        "uk": ["Ryman", "WHSmith", "Timpson", "Sprint Printers", "Mail Boxes Etc.", "The Print Room", "Printpod", "Instant Print", "Kall Kwik", "Printing.com"],
+        "poland": ["Agraf", "Copy General", "Top Druk", "Printbox", "3D Hubs", "Print Star", "Printomat", "Print Point", "Copy Net", "Drukarnia Emka", "Druk-Store", "Drukarnia 24", "e-Drukarnia", "e-Piotr Paweł Kucharzyk", "e-druk.co"],
+        "australia": ["Snap Printing", "Kwik Kopy", "Officeworks", "Vistaprint", "Minuteman Press", "Printing.com", "Allbiz Printing", "Toner Town", "Snap Franchising", "Greenlea Print"],
+        "germany": ["Flyeralarm", "Diedruckerei.de", "CEWE-PRINT.de", "Vistaprint", "WIRmachenDRUCK", "Onlineprinters", "Print24", "PrintPeter", "meinXXL", "posterXXL", "flyerdevil", "DieBestenDrucker.de", "DieDruckdienstleister.de", "Easyprint", "DieOnlineDruckerei.de"],
+        "france": ["Vistaprint", "Flyerzone", "L'imprimerie Generale", "Helloprint", "Clicpostal", "Allostrip", "Lebonprint", "Laposte", "Print24", "Printoclock"],
+        "spain": ["Printoria", "Printcolor", "Cevagraf", "Munadis", "Print 2 Media", "DosImprès", "Sprint Copy", "Ocubo", "Carlin", "Ibaizabal"],
+        "italy": ["Giacomelli", "Francesco Giannini", "Carini", "Zoffoli Stampi", "Carisap", "Printtoprinter", "Piergentili", "Stamperia Carpegna", "Biagiotti", "Bigraf"],
+        "czech": ["Alza", "Rohlík.cz", "Datart", "KASA.cz", "Papírnictví Lampík", "Rossman", "dm drogerie markt", "Kaufland", "Albert", "Billa", "Sazka", "JRC Print", "Vistaprint", "PrintPunk", "PrintPlán"],
+        "portugal": ["Grafimira", "Gráfica Maiadouro", "Imprensa Nacional-Casa da Moeda", "Tipografia Maia", "Gráfica do Bonfim", "Tipografia Araújo & Mesquita", "Gráfica de Coimbra", "Tipografia do Porto", "Gráfica de Lisboa", "Tipografia Braga"]
+      }
+    },{
+      "id": "SCHOOL",
+      "displayName": "School",
+      "category": "EDUCATION",
+      "keywords": {
+        "english": ["school", "educational institution", "learning center", "classroom", "study", "academy", "knowledge", "teaching", "students", "education", "institute", "tutoring", "e-learning", "curriculum", "lesson"],
+        "polish": ["szkoła", "placówka edukacyjna", "centrum nauki", "klasa", "nauka", "akademia", "wiedza", "nauczanie", "uczniowie", "edukacja", "instytut", "korepetycje", "e-learning", "program nauczania", "lekcja"],
+        "german": ["Schule", "Bildungseinrichtung", "Lernzentrum", "Klassenzimmer", "Studium", "Akademie", "Wissen", "Unterricht", "Schüler", "Bildung", "Institut", "Nachhilfe", "E-Learning", "Lehrplan", "Unterrichtsstunde"],
+        "french": ["école", "établissement d'enseignement", "centre d'apprentissage", "salle de classe", "étude", "académie", "connaissance", "enseignement", "étudiants", "éducation", "institut", "tutorat", "e-learning", "programme d'études", "leçon"],
+        "spanish": ["escuela", "institución educativa", "centro de aprendizaje", "aula", "estudio", "academia", "conocimiento", "enseñanza", "estudiantes", "educación", "instituto", "tutoría", "e-learning", "plan de estudios", "lección"],
+        "italian": ["scuola", "istituto educativo", "centro di apprendimento", "aula", "studio", "accademia", "conoscenza", "insegnamento", "studenti", "educazione", "istituto", "ripetizioni", "e-learning", "curriculum", "lezione"],
+        "czech": ["škola", "vzdělávací zařízení", "vzdělávací centrum", "učebna", "studium", "akademie", "znalost", "výuka", "studenti", "vzdělání", "institut", "individuální doučování", "e-learning", "učební plán", "hodina"],
+        "portuguese": ["escola", "instituição educacional", "centro de aprendizado", "sala de aula", "estudo", "academia", "conhecimento", "ensino", "estudantes", "educação", "instituto", "tutoria", "e-learning", "currículo", "lição"]
+      },
+      "chains": null
+    },{
+      "id": "RESTAURANT",
+      "displayName": "Restaurant",
+      "category": "FOOD",
+      "keywords": {
+        "english": ["restaurant", "eatery", "dining establishment", "food place", "cafe", "bistro", "eat-out", "diner", "tavern", "grill", "brasserie", "canteen", "pizzeria", "steakhouse", "sushi bar"],
+        "polish": ["restauracja", "lokal gastronomiczny", "miejsce do jedzenia", "kawiarnia", "bistro", "jedzenie na wynos", "bar", "knajpa", "grill", "brasserie", "stołówka", "pizzeria", "steakhau", "bar sushi"],
+        "german": ["Restaurant", "Gaststätte", "Speisewirtschaft", "Essensort", "Café", "Bistro", "Essen zum Mitnehmen", "Imbiss", "Taverne", "Grill", "Brasserie", "Kantine", "Pizzeria", "Steakhaus", "Sushi-Bar"],
+        "french": ["restaurant", "établissement de restauration", "endroit pour manger", "café", "bistrot", "à emporter", "restaurant", "taverne", "grill", "brasserie", "cantine", "pizzeria", "steakhouse", "bar à sushis"],
+        "spanish": ["restaurante", "lugar para comer", "establecimiento de comida", "café", "bistró", "comida para llevar", "diner", "taberna", "parrilla", "brasería", "cantina", "pizzería", "steakhouse", "bar de sushi"],
+        "italian": ["ristorante", "locale per mangiare", "locale di ristorazione", "café", "bistrot", "cibo da asporto", "tavola calda", "taverna", "griglieria", "brasserie", "mensa", "pizzeria", "steakhouse", "bar di sushi"],
+        "czech": ["restaurace", "jídelní zařízení", "místo na jídlo", "kavárna", "bistro", "jídlo s sebou", "jídelna", "hospoda", "gril", "braserie", "kantýna", "pizzerie", "steakhouse", "sushi bar"],
+        "portuguese": ["restaurante", "local para comer", "estabelecimento de restauração", "café", "bistrô", "comida para levar", "restaurante", "taberna", "churrasqueira", "brasserie", "cantina", "pizzaria", "steakhouse", "bar de sushi"]
+      },
+      "chains": null
+    },{
+      "id": "CINEMA",
+      "displayName": "Cinema",
+      "category": "ENTERTAINMENT",
+      "keywords": {
+        "english": ["cinema", "movie theater", "film", "screening", "blockbuster", "movie", "film show", "cinematography", "film industry", "movie house", "multiplex", "film festival", "cinema hall", "silver screen", "movie palace"],
+        "polish": ["kino", "teatr filmowy", "film", "projekcja", "hit kinowy", "film", "seans filmowy", "kinematografia", "przemysł filmowy", "dom filmowy", "multipleks", "festiwal filmowy", "sala kinowa", "srebrny ekran", "pałac filmowy"],
+        "german": ["Kino", "Filmtheater", "Film", "Vorführung", "Blockbuster", "Film", "Filmvorführung", "Filmkunst", "Filmindustrie", "Filmhaus", "Multiplex", "Filmfestival", "Kinosaal", "Silberleinwand", "Film Palast"],
+        "french": ["cinéma", "salle de cinéma", "film", "projection", "blockbuster", "film", "séance de cinéma", "cinématographie", "industrie du film", "salle de projection", "multiplexe", "festival du film", "salle de cinéma", "grand écran", "palais du film"],
+        "spanish": ["cine", "sala de cine", "película", "proyección", "superproducción", "film", "sesión de cine", "cinematografía", "industria cinematográfica", "cine de autor", "multicine", "festival de cine", "sala de proyecciones", "pantalla grande", "palacio de cine"],
+        "italian": ["cinema", "sala cinematografica", "film", "proiezione", "blockbuster", "film", "spettacolo cinematografico", "cinematografia", "industria cinematografica", "casa di produzione", "multiplex", "festival del cinema", "sala da cinema", "grande schermo", "palazzo del cinema"],
+        "czech": ["kino", "kinosál", "film", "projekce", "blockbuster", "film", "filmové představení", "kinematografie", "filmový průmysl", "kinodům", "multiplex", "filmový festival", "sál kinematografu", "stříbrná plátno", "filmový palác"],
+        "portuguese": ["cinema", "sala de cinema", "filme", "projeção", "blockbuster", "filme", "sessão de cinema", "cinematografia", "indústria cinematográfica", "casa de cinema", "multiplex", "festival de cinema", "sala de cinema", "tela prateada", "palácio do cinema"]
+      },
+      "chains": {
+        "usa": ["AMC Theatres", "Regal Cinemas", "Cinemark Theatres", "Cineplex Entertainment", "Marcus Theatres", "Harkins Theatres", "Bow Tie Cinemas", "Landmark Theatres", "Pacific Theatres", "Alamo Drafthouse Cinema", "Laemmle Theatres", "Angelika Film Center", "Wehrenberg Theatres", "Studio Movie Grill", "ShowBiz Cinemas", "Muvico Theatres", "Santikos Theatres", "Silverspot Cinema", "Celebration Cinema", "Cinema Café", "CineBistro", "Star Cinema Grill"],
+        "uk": ["Vue Cinemas", "Odeon Cinemas", "Cineworld Cinemas", "Everyman Cinemas", "Empire Cinemas", "Showcase Cinemas", "Curzon Cinemas", "Picturehouse Cinemas", "Light Cinemas", "Reel Cinemas", "The Electric Cinema", "The Ritzy Cinema", "The Genesis Cinema", "The Prince Charles Cinema", "The Cameo Cinema", "The Tyneside Cinema", "The Phoenix Cinema", "The Abbeygate Cinema", "The Dukes Cinema", "The Broadway Cinema", "The Cube Cinema", "The Ultimate Picture Palace"],
+        "poland": ["Multikino", "Helios", "Cinema City", "Silver Screen", "IMAX", "Agora", "Kino Światowid", "Neon", "Kino Muza", "Kino Iluzjon", "Kino Praha", "Kino Femina", "Kino Atlantic", "Kino Wisła", "Kino Relax", "Kino Wrocław", "Kino Nowe Horyzonty", "Kino Kijów.Centrum", "Kino Luna", "Kino Muranów", "Kino Helikon", "Kino Pod Baranami"],
+        "australia": ["Hoyts", "Event Cinemas", "Village Cinemas", "Palace Cinemas", "Reading Cinemas", "Dendy Cinemas", "Cineplex Australia", "Wallis Cinemas", "Limelight Cinemas", "HOTA - Home of the Arts Cinema", "Luna Palace Cinemas", "Hayden Orpheum Picture Palace", "Sun Theatre", "Golden Age Cinema & Bar", "Capitol Theatre", "Ritz Cinema", "Randwick Ritz", "Nova Cinema", "Palace Norton Street", "Palace Verona", "Palace Barracks"],
+        "germany": ["Cineplex", "UCI Kinowelt", "CinemaxX", "Kinopolis", "CineStar", "Filmpalast am ZKM", "Cinecitta", "Capitol Theater", "Cinema Paris", "Delphi Filmpalast", "Savoy Theater", "Zoo Palast", "Babylon Kino", "Filmrauschpalast", "Central Kino", "Thalia Theater", "Citydome", "Cineworld", "Rex Kino", "Cinema Ostertor", "Atlantis Kino", "Garbo Filmtheater"],
+        "france": ["Pathé", "Gaumont", "UGC Ciné Cité", "MK2 Cinéma", "Kinepolis", "CGR Cinémas", "Megarama", "Le Grand Rex", "La Cinémathèque Française", "Le Louxor", "L'Arlequin", "La Filmothèque", "Les 7 Parnassiens", "Le Champo - Espace Jacques Tati", "Le Nouvel Odéon", "Le Reflet Médicis", "Le Cinéma des Cinéastes", "Le Brady", "Le Studio des Ursulines", "Le Pagode", "L'Entrepôt"],
+        "spain": ["Yelmo Cines", "Cinesa", "Kinépolis", "Cinebox", "Cinema Parc", "CineSur", "Acec", "Full HD", "Verdi", "Golem", "Albéniz", "Boliche", "Alfonsas", "Cinema Maldà", "Cinema Comedia", "Cinema Texas", "Cinema Mont-Àgora", "Cinema Multicines Norte", "Cinema Multicines Las Salinas", "Cinema Multicines Eivissa", "Cinema Broadway", "Cinema Gran Marbella"],
+        "italy": ["The Space Cinema", "UCI Cinemas", "Cinema Medusa", "Multisala Barberini", "Cinema Odeon", "Cinema The Space", "Cinema UCI", "Cinema Lux", "Cinema Warner Village", "Cinema Cineland", "Cinema King", "Cinema Ariston", "Cinema Luxottica", "Cinema Stasera", "Cinema Nuovo", "Cinema Aurora", "Cinema Apollo", "Cinema Hollywood", "Cinema Nazionale", "Cinema Metropolitan", "Cinema Excelsior", "Cinema Sacher"],
+        "czech": ["Cinema City", "CineStar", "Kino Aero", "Bio Oko", "Kino Atlas", "Kino Evald", "Kino Světozor", "Bio Central", "Kino Lucerna", "Kino Dlabačov", "Kino Kavčí Hory", "Kino Mat", "Kino Mír", "Kino Ponrepo", "Kino Svetozor", "Kino Bechyně", "Kino Otavan", "Kino Měšťanská beseda", "Kino Český Krumlov", "Kino Cikán", "Kino Domažlice", "Kino Česká Třebová"],
+        "portugal": ["NOS Cinemas", "Cineplace", "Cinema City", "Castello Lopes Cinemas", "Cinema UCI", "Cinema Medeia Monumental", "Cinema Ideal", "Cinema Nimas", "Cinema City Campo Pequeno", "Cinema São Jorge", "Cinema City Alvalade", "Cinema UCI El Corte Inglés", "Cinema Medeia Amoreiras", "Cinema Nos Almada Forum", "Cinema City Leiria", "Cinema Norteshopping", "Cinema City Beloura", "Cinema Nos Oeiras Parque", "Cinema UCI Arrábida 20", "Cinema Nos Parque Nascente", "Cinema City Alegro Setúbal", "Cinema Nos Vasco da Gama"]
+      }
+    },{
+      "id": "THEATER",
+      "displayName": "Theater",
+      "category": "ENTERTAINMENT",
+      "keywords": {
+        "english": ["theater", "theatre", "playhouse", "stage", "drama", "performance", "acting", "theatrical", "play", "musical", "comedy", "tragedy", "show", "audience"],
+        "polish": ["teatr", "teatr", "teatr", "scena", "dramat", "spektakl", "aktorstwo", "teatralny", "sztuka", "musical", "komedia", "tragedia", "widowisko", "publiczność"],
+        "german": ["Theater", "Theater", "Schauspielhaus", "Bühne", "Drama", "Aufführung", "Schauspiel", "theatralisch", "Stück", "Musical", "Komödie", "Tragödie", "Show", "Publikum"],
+        "french": ["théâtre", "théâtre", "théâtre", "scène", "drame", "représentation", "acteur", "théâtral", "pièce", "musical", "comédie", "tragédie", "spectacle", "public"],
+        "spanish": ["teatro", "teatro", "teatro", "escenario", "drama", "representación", "actuación", "teatral", "obra de teatro", "musical", "comedia", "tragedia", "espectáculo", "audiencia"],
+        "italian": ["teatro", "teatro", "teatro", "palcoscenico", "dramma", "spettacolo", "recitazione", "teatrale", "opera teatrale", "musical", "commedia", "tragedia", "spettacolo", "pubblico"],
+        "czech": ["divadlo", "divadlo", "divadlo", "jeviště", "drama", "představení", "herec", "divadelní", "hra", "muzikál", "komedie", "tragedie", "show", "diváci"],
+        "portuguese": ["teatro", "teatro", "teatro", "palco", "drama", "espetáculo", "representação", "teatral", "peça de teatro", "musical", "comédia", "tragédia", "espetáculo", "público"]
+      },
+      "chains": null
+    },{
+      "id": "TRANSPORT_STATION",
+      "displayName": "Transport station",
+      "category": "TRANSPORT",
+      "keywords": {
+        "english": ["transport station", "train station", "bus station", "subway station", "metro station", "tram station", "railway station", "transit station", "transportation hub", "transit hub", "terminal", "depot", "platform", "station", "stop"],
+        "polish": ["stacja transportowa", "stacja kolejowa", "stacja autobusowa", "stacja metra", "stacja metra", "stacja tramwajowa", "stacja kolejowa", "stacja przesiadkowa", "węzeł transportowy", "węzeł przesiadkowy", "terminal", "depo", "peron", "stacja", "przystanek"],
+        "german": ["Verkehrsknotenpunkt", "Bahnhof", "Busbahnhof", "U-Bahn-Station", "U-Bahn-Station", "Straßenbahnstation", "Bahnhof", "Verkehrsknotenpunkt", "Verkehrsknotenpunkt", "Transit-Hub", "Terminal", "Depot", "Bahnsteig", "Station", "Haltestelle"],
+        "french": ["gare", "gare", "gare routière", "gare de métro", "gare de métro", "station de tramway", "gare ferroviaire", "gare de transit", "nœud de transport", "nœud de transit", "terminal", "dépôt", "plate-forme", "gare", "arrêt"],
+        "spanish": ["estación de transporte", "estación de tren", "estación de autobuses", "estación de metro", "estación de metro", "estación de tranvía", "estación de ferrocarril", "estación de tránsito", "nudo de transporte", "nudo de tránsito", "terminal", "depósito", "plataforma", "estación", "parada"],
+        "italian": ["stazione di trasporto", "stazione ferroviaria", "stazione degli autobus", "stazione della metropolitana", "stazione della metropolitana", "stazione del tram", "stazione ferroviaria", "stazione di transito", "hub di trasporto", "hub di transito", "terminale", "deposito", "piattaforma", "stazione", "fermata"],
+        "czech": ["dopravní stanice", "nádraží", "autobusové nádraží", "stanice metra", "stanice metra", "tramvajová zastávka", "železniční stanice", "přestupní stanice", "dopravní uzel", "přestupní uzel", "terminál", "depo", "nástupiště", "stanice", "zastávka"],
+        "portuguese": ["estação de transporte", "estação de trem", "estação de ônibus", "estação de metrô", "estação de metrô", "estação de bonde", "estação ferroviária", "estação de trânsito", "nó de transporte", "nó de trânsito", "terminal", "depósito", "plataforma", "estação", "parar"]
+      },
+      "chains": null
+    },{
+      "id": "PARK",
+      "displayName": "Park",
+      "category": "PUBLIC_PLACE",
+      "keywords": {
+        "english": ["park", "public park", "green space", "recreation area", "picnic area", "playground", "nature reserve", "urban park", "city park", "wildlife park", "botanical garden", "national park", "state park", "local park", "parkland"],
+        "polish": ["park", "park publiczny", "teren rekreacyjny", "miejsce na piknik", "plac zabaw", "rezerwat przyrody", "park miejski", "park miejski", "park miejski", "park przyrodniczy", "ogród botaniczny", "park narodowy", "park stanowy", "park lokalny", "teren parkowy"],
+        "german": ["Park", "Stadtpark", "Grünanlage", "Erholungsgebiet", "Picknickplatz", "Spielplatz", "Naturschutzgebiet", "Stadtpark", "Stadtpark", "Wildpark", "Botanischer Garten", "Nationalpark", "Staatspark", "Lokaler Park", "Parkland"],
+        "french": ["parc", "parc public", "espace vert", "zone de loisirs", "aire de pique-nique", "aire de jeux", "réserve naturelle", "parc urbain", "parc municipal", "parc animalier", "jardin botanique", "parc national", "parc d'État", "parc local", "espace boisé"],
+        "spanish": ["parque", "parque público", "espacio verde", "área de recreación", "área de picnic", "parque infantil", "reserva natural", "parque urbano", "parque de la ciudad", "parque de vida silvestre", "jardín botánico", "parque nacional", "parque estatal", "parque local", "parque"],
+        "italian": ["parco", "parco pubblico", "area verde", "area ricreativa", "area picnic", "parco giochi", "riserva naturale", "parco urbano", "parco cittadino", "parco faunistico", "giardino botanico", "parco nazionale", "parco statale", "parco locale", "terreno del parco"],
+        "czech": ["park", "veřejný park", "zelená plocha", "rekreační oblast", "místo na piknik", "dětské hřiště", "přírodní rezervace", "městský park", "městský park", "divoký park", "botanická zahrada", "národní park", "státní park", "místní park", "parková plocha"],
+        "portuguese": ["parque", "parque público", "espaço verde", "área de recreação", "área de piquenique", "parque infantil", "reserva natural", "parque urbano", "parque da cidade", "parque natural", "jardim botânico", "parque nacional", "parque estadual", "parque local", "parque"]
+      },
+      "chains": null
+    },{
+      "id": "CAFE",
+      "displayName": "Cafe",
+      "category": "FOOD",
+      "keywords": {
+        "english": ["cafe", "coffee shop", "cafeteria", "espresso bar", "coffeehouse", "java joint", "café", "coffee shop", "tearoom", "coffeeshop", "java house", "brewpub", "coffea", "café au lait", "cappuccino"],
+        "polish": ["kawiarnia", "kawiarnia", "kawiarnia", "kawiarnia", "kawiarnia", "kawiarnia", "kawiarnia", "kawiarnia", "herbaciarnia", "herbaciarnia", "kawiarnia", "piwiarnia", "kawiarnia", "kawa z mlekiem", "kapucyno"],
+        "german": ["Café", "Café", "Café", "Espressobar", "Kaffeehaus", "Kaffeehaus", "Café", "Café", "Teehaus", "Kaffeestube", "Kaffeehaus", "Brauereigaststätte", "Kaffee", "Milchkaffee", "Kapuziner"],
+        "french": ["café", "café", "café", "bar à expresso", "café", "café", "café", "café", "salon de thé", "café", "café", "brasserie", "café", "café au lait", "cappuccino"],
+        "spanish": ["cafetería", "cafetería", "cafetería", "bar de espresso", "cafetería", "cafetería", "cafetería", "cafetería", "salón de té", "cafetería", "cafetería", "cervecería", "café", "café con leche", "cappuccino"],
+        "italian": ["caffetteria", "bar del caffè", "caffetteria", "bar dell'espresso", "casa del caffè", "casa del caffè", "caffè", "bar del caffè", "salone da tè", "casa del caffè", "casa del caffè", "birreria", "caffè", "caffellatte", "cappuccino"],
+        "czech": ["kavárna", "kavárna", "kavárna", "espresso bar", "kavárna", "kavárna", "kavárna", "kavárna", "čajovna", "kavárna", "kavárna", "pivovar", "káva", "cappuccino"],
+        "portuguese": ["café", "cafetaria", "cafetaria", "bar de espresso", "casa de café", "casa de café", "café", "café", "salão de chá", "casa de café", "casa de café", "cervejaria", "café", "café com leite", "cappuccino"]
+      },
+      "chains": {
+        "usa": ["Starbucks", "Dunkin'", "Peet's Coffee", "The Coffee Bean & Tea Leaf", "Caribou Coffee", "Seattle's Best Coffee", "Tim Hortons", "Dutch Bros. Coffee", "Biggby Coffee", "Einstein Bros. Bagels", "PJ's Coffee", "It's A Grind Coffee House", "Coffee Culture Cafe & Eatery", "Port City Java", "Gloria Jean's Coffees", "Saxbys", "Tully's Coffee", "Coffee Time", "Krispy Kreme", "Cinnabon", "Au Bon Pain", "Cafe du Monde"],
+        "uk": ["Costa Coffee", "Starbucks", "Caffè Nero", "Pret A Manger", "Greggs", "Bettys", "John Lewis", "Muffin Break", "Coffee Republic", "Insomnia Coffee Company", "AMT Coffee", "Harris + Hoole", "SOHO Coffee Co.", "Notes Coffee Roasters & Wine Bar", "Taylor St. Baristas", "GAIL's Bakery", "Grind", "PAUL Bakery", "Leon", "Benugo", "Tim Hortons", "Café Rouge"],
+        "poland": ["Costa Coffee", "Starbucks", "Green Caffè Nero", "Costa Coffee", "Coffee Heaven", "Coffee Heaven", "Coffee Heaven", "Coffee Heaven", "Coffee Heaven", "Coffee Heaven", "Costa Coffee", "Costa Coffee", "Costa Coffee", "Costa Coffee", "Green Caffè Nero", "Green Caffè Nero", "Green Caffè Nero", "Green Caffè Nero", "Green Caffè Nero", "Green Caffè Nero", "Green Caffè Nero", "Green Caffè Nero"],
+        "australia": ["Gloria Jean's Coffees", "The Coffee Club", "Michel's Patisserie", "The Coffee Emporium", "Gloria Jean's Coffees", "The Coffee Club", "Michel's Patisserie", "The Coffee Emporium", "Gloria Jean's Coffees", "The Coffee Club", "Michel's Patisserie", "The Coffee Emporium", "Gloria Jean's Coffees", "The Coffee Club", "Michel's Patisserie", "The Coffee Emporium", "Gloria Jean's Coffees", "The Coffee Club", "Michel's Patisserie", "The Coffee Emporium", "Gloria Jean's Coffees", "The Coffee Club"],
+        "germany": ["Café Extrablatt", "NORDSEE", "San Francisco Coffee Company", "Balzac Coffee", "Coffee Fellows", "Die Meisterbäckerei", "Tchibo", "McDonald's McCafé", "Starbucks", "Dunkin'"],
+        "france": ["Café de Flore", "Les Deux Magots", "Le Procope", "Ladurée", "Angelina", "La Palette", "Le Select", "Café des Arts", "Café de la Paix", "Le Consulat", "Le Café du Commerce", "Le Saint Régis", "Le Petit Zinc", "Le Bonaparte", "Le Moulin de la Vierge", "Café de la Rotonde", "Le Dôme", "Café de la Fontaine", "Le Père Claude", "Le Buci", "Le Conti", "Café Tournon"],
+        "spain": ["Café de Oriente", "Chocolatería San Ginés", "Café Gijón", "Café de Oriente", "Chocolatería San Ginés", "Café Gijón", "Café de Oriente", "Chocolatería San Ginés", "Café Gijón", "Café de Oriente", "Chocolatería San Ginés", "Café Gijón", "Café de Oriente", "Chocolatería San Ginés", "Café Gijón", "Café de Oriente", "Chocolatería San Ginés", "Café Gijón", "Café de Oriente", "Chocolatería San Ginés", "Café Gijón", "Café de Oriente"],
+        "italy": ["Caffè Greco", "Caffè Sant'Eustachio", "Caffè della Pace", "Caffè Tazza d'Oro", "Caffè Rosati", "Caffè Greco", "Caffè Sant'Eustachio", "Caffè della Pace", "Caffè Tazza d'Oro", "Caffè Rosati", "Caffè Greco", "Caffè Sant'Eustachio", "Caffè della Pace", "Caffè Tazza d'Oro", "Caffè Rosati", "Caffè Greco", "Caffè Sant'Eustachio", "Caffè della Pace", "Caffè Tazza d'Oro", "Caffè Rosati", "Caffè Greco", "Caffè Sant'Eustachio"],
+        "czech": ["Café Slavia", "Grand Café Orient", "Café Imperial", "Café Louvre", "Café Savoy", "Kavárna Obecní dům", "Kavárna Černá Madona", "Kavárna Mánes", "Cafe Elefant", "Kavárna CoCafe", "Momoichi Café", "Café Neustadt", "Café Slavia", "Grand Café Orient", "Café Imperial", "Café Louvre", "Café Savoy", "Kavárna Obecní dům", "Kavárna Černá Madona", "Kavárna Mánes", "Cafe Elefant"],
+        "portugal": ["A Brasileira", "Café Majestic", "A Brasileira", "Café Majestic", "A Brasileira", "Café Majestic", "A Brasileira", "Café Majestic", "A Brasileira", "Café Majestic", "A Brasileira", "Café Majestic", "A Brasileira", "Café Majestic", "A Brasileira", "Café Majestic", "A Brasileira", "Café Majestic", "A Brasileira", "Café Majestic", "A Brasileira", "Café Majestic", "A Brasileira"]
+      }
+    },{
+      "id": "PHARMACY",
+      "displayName": "Pharmacy",
+      "category": "HEALTH",
+      "keywords": {
+        "english": ["cafe", "coffee shop", "cafeteria", "espresso bar", "coffeehouse", "java joint", "café", "coffee shop", "tearoom", "coffeeshop", "java house", "brewpub", "coffea", "café au lait", "cappuccino"],
+        "polish": ["kawiarnia", "kawiarnia", "kawiarnia", "kawiarnia", "kawiarnia", "kawiarnia", "kawiarnia", "kawiarnia", "herbaciarnia", "herbaciarnia", "kawiarnia", "piwiarnia", "kawiarnia", "kawa z mlekiem", "kapucyno"],
+        "german": ["Café", "Café", "Café", "Espressobar", "Kaffeehaus", "Kaffeehaus", "Café", "Café", "Teehaus", "Kaffeestube", "Kaffeehaus", "Brauereigaststätte", "Kaffee", "Milchkaffee", "Kapuziner"],
+        "french": ["café", "café", "café", "bar à expresso", "café", "café", "café", "café", "salon de thé", "café", "café", "brasserie", "café", "café au lait", "cappuccino"],
+        "spanish": ["cafetería", "cafetería", "cafetería", "bar de espresso", "cafetería", "cafetería", "cafetería", "cafetería", "salón de té", "cafetería", "cafetería", "cervecería", "café", "café con leche", "cappuccino"],
+        "italian": ["caffetteria", "bar del caffè", "caffetteria", "bar dell'espresso", "casa del caffè", "casa del caffè", "caffè", "bar del caffè", "salone da tè", "casa del caffè", "casa del caffè", "birreria", "caffè", "caffellatte", "cappuccino"],
+        "czech": ["kavárna", "kavárna", "kavárna", "espresso bar", "kavárna", "kavárna", "kavárna", "kavárna", "čajovna", "kavárna", "kavárna", "pivovar", "káva", "cappuccino"],
+        "portuguese": ["café", "cafetaria", "cafetaria", "bar de espresso", "casa de café", "casa de café", "café", "café", "salão de chá", "casa de café", "casa de café", "cervejaria", "café", "café com leite", "cappuccino"]
+      },
+      "chains": {
+        "usa": ["Starbucks", "Dunkin'", "Peet's Coffee", "The Coffee Bean & Tea Leaf", "Caribou Coffee", "Seattle's Best Coffee", "Tim Hortons", "Dutch Bros. Coffee", "Biggby Coffee", "Einstein Bros. Bagels", "PJ's Coffee", "It's A Grind Coffee House", "Coffee Culture Cafe & Eatery", "Port City Java", "Gloria Jean's Coffees", "Saxbys", "Tully's Coffee", "Coffee Time", "Krispy Kreme", "Cinnabon", "Au Bon Pain", "Cafe du Monde"],
+        "uk": ["Costa Coffee", "Starbucks", "Caffè Nero", "Pret A Manger", "Greggs", "Bettys", "John Lewis", "Muffin Break", "Coffee Republic", "Insomnia Coffee Company", "AMT Coffee", "Harris + Hoole", "SOHO Coffee Co.", "Notes Coffee Roasters & Wine Bar", "Taylor St. Baristas", "GAIL's Bakery", "Grind", "PAUL Bakery", "Leon", "Benugo", "Tim Hortons", "Café Rouge"],
+        "poland": ["Costa Coffee", "Starbucks", "Green Caffè Nero", "Costa Coffee", "Coffee Heaven", "Coffee Heaven", "Coffee Heaven", "Coffee Heaven", "Coffee Heaven", "Coffee Heaven", "Costa Coffee", "Costa Coffee", "Costa Coffee", "Costa Coffee", "Green Caffè Nero", "Green Caffè Nero", "Green Caffè Nero", "Green Caffè Nero", "Green Caffè Nero", "Green Caffè Nero", "Green Caffè Nero", "Green Caffè Nero"],
+        "australia": ["Gloria Jean's Coffees", "The Coffee Club", "Michel's Patisserie", "The Coffee Emporium", "Gloria Jean's Coffees", "The Coffee Club", "Michel's Patisserie", "The Coffee Emporium", "Gloria Jean's Coffees", "The Coffee Club", "Michel's Patisserie", "The Coffee Emporium", "Gloria Jean's Coffees", "The Coffee Club", "Michel's Patisserie", "The Coffee Emporium", "Gloria Jean's Coffees", "The Coffee Club", "Michel's Patisserie", "The Coffee Emporium", "Gloria Jean's Coffees", "The Coffee Club"],
+        "germany": ["Café Extrablatt", "NORDSEE", "San Francisco Coffee Company", "Balzac Coffee", "Coffee Fellows", "Die Meisterbäckerei", "Tchibo", "McDonald's McCafé", "Starbucks", "Dunkin'"],
+        "france": ["Café de Flore", "Les Deux Magots", "Le Procope", "Ladurée", "Angelina", "La Palette", "Le Select", "Café des Arts", "Café de la Paix", "Le Consulat", "Le Café du Commerce", "Le Saint Régis", "Le Petit Zinc", "Le Bonaparte", "Le Moulin de la Vierge", "Café de la Rotonde", "Le Dôme", "Café de la Fontaine", "Le Père Claude", "Le Buci", "Le Conti", "Café Tournon"],
+        "spain": ["Café de Oriente", "Chocolatería San Ginés", "Café Gijón", "Café de Oriente", "Chocolatería San Ginés", "Café Gijón", "Café de Oriente", "Chocolatería San Ginés", "Café Gijón", "Café de Oriente", "Chocolatería San Ginés", "Café Gijón", "Café de Oriente", "Chocolatería San Ginés", "Café Gijón", "Café de Oriente", "Chocolatería San Ginés", "Café Gijón", "Café de Oriente", "Chocolatería San Ginés", "Café Gijón", "Café de Oriente"],
+        "italy": ["Caffè Greco", "Caffè Sant'Eustachio", "Caffè della Pace", "Caffè Tazza d'Oro", "Caffè Rosati", "Caffè Greco", "Caffè Sant'Eustachio", "Caffè della Pace", "Caffè Tazza d'Oro", "Caffè Rosati", "Caffè Greco", "Caffè Sant'Eustachio", "Caffè della Pace", "Caffè Tazza d'Oro", "Caffè Rosati", "Caffè Greco", "Caffè Sant'Eustachio", "Caffè della Pace", "Caffè Tazza d'Oro", "Caffè Rosati", "Caffè Greco", "Caffè Sant'Eustachio"],
+        "czech": ["Café Slavia", "Grand Café Orient", "Café Imperial", "Café Louvre", "Café Savoy", "Kavárna Obecní dům", "Kavárna Černá Madona", "Kavárna Mánes", "Cafe Elefant", "Kavárna CoCafe", "Momoichi Café", "Café Neustadt", "Café Slavia", "Grand Café Orient", "Café Imperial", "Café Louvre", "Café Savoy", "Kavárna Obecní dům", "Kavárna Černá Madona", "Kavárna Mánes", "Cafe Elefant"],
+        "portugal": ["A Brasileira", "Café Majestic", "A Brasileira", "Café Majestic", "A Brasileira", "Café Majestic", "A Brasileira", "Café Majestic", "A Brasileira", "Café Majestic", "A Brasileira", "Café Majestic", "A Brasileira", "Café Majestic", "A Brasileira", "Café Majestic", "A Brasileira", "Café Majestic", "A Brasileira", "Café Majestic", "A Brasileira", "Café Majestic", "A Brasileira"]
+      }
+    },{
+      "id": "EVENT_PLACE",
+      "displayName": "Event place",
+      "category": "ENTERTAINMENT",
+      "keywords": {
+        "english": ["event place", "event venue", "event hall", "convention center", "exhibition center", "concert hall", "stadium", "arena", "auditorium", "amphitheater", "theater", "conference center", "music venue", "sports venue", "fairgrounds"],
+        "polish": ["miejsce wydarzenia", "miejsce imprezy", "hala imprezowa", "centrum konferencyjne", "centrum wystawiennicze", "sala koncertowa", "stadion", "arena", "audytorium", "amfiteatr", "teatr", "centrum konferencyjne", "miejsce muzyczne", "obiekt sportowy", "tereny targowe"],
+        "german": ["Veranstaltungsort", "Veranstaltungsort", "Veranstaltungshalle", "Kongresszentrum", "Messezentrum", "Konzertsaal", "Stadion", "Arena", "Auditorium", "Amphitheater", "Theater", "Konferenzzentrum", "Musikveranstaltungsort", "Sportveranstaltungsort", "Messegelände"],
+        "french": ["lieu d'événement", "salle de réception", "salle de concert", "centre de congrès", "centre d'exposition", "salle de spectacle", "stade", "arène", "auditorium", "amphithéâtre", "théâtre", "centre de conférences", "salle de musique", "lieu sportif", "foire"],
+        "spanish": ["lugar de eventos", "salón de eventos", "sala de conciertos", "centro de convenciones", "centro de exposiciones", "sala de espectáculos", "estadio", "arena", "auditorio", "anfiteatro", "teatro", "centro de conferencias", "lugar de música", "lugar deportivo", "recinto ferial"],
+        "italian": ["luogo dell'evento", "sala per eventi", "sala da concerto", "centro congressi", "centro espositivo", "sala da concerto", "stadio", "arena", "auditorium", "anfiteatro", "teatro", "centro congressi", "luogo per musica", "luogo sportivo", "fiera"],
+        "czech": ["místo události", "místo události", "událostní hala", "kongresové centrum", "výstaviště", "koncertní síň", "stadión", "aréna", "auditorium", "amfiteátr", "divadlo", "konferenční centrum", "místo hudby", "sportovní místo", "veletržní areál"],
+        "portuguese": ["local de evento", "local de evento", "salão de eventos", "centro de convenções", "centro de exposições", "sala de concertos", "estádio", "arena", "auditório", "anfiteatro", "teatro", "centro de conferências", "local de música", "local desportivo", "recinto de feiras"]
+      },
+      "chains": {
+        "usa": ["Madison Square Garden", "Staples Center", "Barclays Center", "American Airlines Center", "United Center", "Oracle Arena", "Amway Center", "Wells Fargo Center", "Scotiabank Arena", "TD Garden", "Smoothie King Center", "Capital One Arena", "Prudential Center", "Bridgestone Arena", "Talking Stick Resort Arena", "Spectrum Center", "Vivint Arena", "Chase Center", "Fiserv Forum", "Little Caesars Arena", "Rocket Mortgage FieldHouse", "Moda Center", "AT&T Center", "PNC Arena", "Golden 1 Center", "Xcel Energy Center", "PPG Paints Arena", "AmericanAirlines Arena", "T-Mobile Arena"],
+        "uk": ["The O2", "Manchester Arena", "The SSE Hydro", "Wembley Arena", "Utilita Arena Birmingham", "Resorts World Arena", "Motorpoint Arena Nottingham", "SSE Arena, Belfast", "First Direct Arena", "The SSE Arena, Wembley", "M&S Bank Arena Liverpool", "P&J Live", "FlyDSA Arena", "Bonus Arena, Hull", "Glasgow Royal Concert Hall", "Royal Albert Hall", "Camden Roundhouse", "O2 Apollo Manchester", "Bournemouth International Centre", "The Forum, London", "Brighton Centre", "Eventim Apollo", "Hammersmith Apollo", "Cardiff Motorpoint Arena", "Edinburgh Playhouse", "SSE Arena, Belfast", "Motorpoint Arena Nottingham", "SSE Arena, Belfast", "First Direct Arena"],
+        "poland": ["Hala Stulecia", "TAURON Arena Kraków", "Spodek", "Atlas Arena", "Hala Orbita", "Tauron Arena Kraków", "Hala Stulecia", "Centennial Hall", "Tauron Arena Kraków", "Hala Orbita", "TAURON Arena Kraków", "Atlas Arena", "Spodek", "Atlas Arena", "Hala Orbita", "Hala Stulecia", "Tauron Arena Kraków", "Spodek", "Hala Stulecia", "Centennial Hall", "Hala Orbita", "TAURON Arena Kraków"],
+        "australia": ["Sydney Opera House", "Qudos Bank Arena", "Rod Laver Arena", "AAMI Park", "Brisbane Entertainment Centre", "Adelaide Entertainment Centre", "RAC Arena", "ICC Sydney Theatre", "Gold Coast Convention and Exhibition Centre", "Melbourne Convention and Exhibition Centre", "Perth Convention and Exhibition Centre", "Hordern Pavilion", "Brisbane Convention & Exhibition Centre", "Crown Perth", "Adelaide Convention Centre", "Adelaide Oval", "Margaret Court Arena", "The Star Event Centre", "The Tivoli", "Cairns Convention Centre", "The Fortitude Music Hall", "QPAC Concert Hall", "Enmore Theatre", "Riverstage", "Hamer Hall", "HBF Stadium", "Win Entertainment Centre", "Te Pae Christchurch Convention Centre", "Cairns Convention Centre", "The Fortitude Music Hall"],
+        "germany": ["O2 World Berlin", "Lanxess Arena", "Mercedes-Benz Arena", "Hallenstadion", "SAP Arena", "Festhalle Frankfurt", "Messe Dresden", "Stadthalle Graz", "Wiener Stadthalle", "Westfalenhallen", "Max-Schmeling-Halle", "Hamburg Messe", "Arena Leipzig", "Messe München", "Messe Stuttgart", "Hanns-Martin-Schleyer-Halle", "Messe Karlsruhe", "Messe Düsseldorf", "Messe Köln", "Messe Essen", "Messe Frankfurt", "Messe Berlin", "Messe Nürnberg", "Messe Bremen", "Messe Augsburg", "Messe Friedrichshafen", "Messe Freiburg", "Messe Offenburg", "Messe Pirmasens", "Messe Baden-Baden", "Messe Singen"],
+        "france": ["AccorHotels Arena", "Zénith de Paris", "Le Dôme de Paris - Palais des Sports", "Olympia", "Zénith de Toulouse", "Zénith de Strasbourg", "Zénith de Nantes Métropole", "Zénith de Rouen", "Le Zénith de Lille", "Zénith de Dijon", "Le Zénith de Saint-Étienne", "Le Zénith de Caen", "Le Zénith de Clermont-Ferrand", "Le Zénith de Nancy", "Le Zénith de Limoges", "Le Zénith de Pau", "Le Zénith de Montpellier", "Le Zénith de Brest", "Le Zénith de Rouen", "Le Zénith de Nantes Métropole", "Le Zénith de Strasbourg", "Le Zénith de Lille", "Le Zénith de Dijon", "Le Zénith de Saint-Étienne", "Le Zénith de Caen", "Le Zénith de Clermont-Ferrand", "Le Zénith de Nancy", "Le Zénith de Limoges", "Le Zénith de Pau", "Le Zénith de Montpellier"],
+        "spain": ["WiZink Center", "Palau Sant Jordi", "Palacio Vistalegre", "WiZink Center", "Palau Sant Jordi", "Palacio Vistalegre", "WiZink Center", "Palau Sant Jordi", "Palacio Vistalegre", "WiZink Center", "Palau Sant Jordi", "Palacio Vistalegre", "WiZink Center", "Palau Sant Jordi", "Palacio Vistalegre", "WiZink Center", "Palau Sant Jordi", "Palacio Vistalegre", "WiZink Center", "Palau Sant Jordi", "Palacio Vistalegre", "WiZink Center", "Palau Sant Jordi", "Palacio Vistalegre", "WiZink Center", "Palau Sant Jordi", "Palacio Vistalegre", "WiZink Center", "Palau Sant Jordi", "Palacio Vistalegre"],
+        "italy": ["Fiera Milano", "BolognaFiere", "VeronaFiere", "Fiera Roma", "Palaexpo", "Fieramilano Rho", "MiCo - Milano Congressi", "Fiera di Rimini", "Fiera di Genova", "Fiera del Levante", "Fiera di Padova", "Fiera di Vicenza", "Fiera di Bergamo"],
+        "czech": ["Prague Congress Centre", "Brno Exhibition Centre", "PVA Expo Prague", "Výstaviště Praha", "Letňany Exhibition Centre", "BVV Trade Fairs Brno", "PVA Letňany", "PVA Expo Letňany", "O2 arena", "Tipsport Arena", "Forum Karlín", "PVA Expo Praha Letňany", "PVA Expo Letnany"],
+        "portugal": ["Altice Arena", "Lisbon Congress Centre", "Estoril Congress Centre", "Exponor", "FIL - Feira Internacional de Lisboa", "Lisbon Exhibition and Congress Centre (LX)", "Pavilhão Carlos Lopes", "Centro de Congressos do Estoril", "Centro de Congressos da Alfândega do Porto", "Centro de Congressos de Lisboa", "Pavilhão Atlântico", "Centro de Congressos do Arade", "Centro de Congressos de Tróia"]
+      }
+    },{
+      "id": "LANDMARK",
+      "displayName": "Landmark",
+      "category": "PUBLIC_PLACE",
+      "keywords": {
+        "english": ["landmark", "monument", "historic site", "tourist attraction", "point of interest", "iconic", "sightseeing", "memorial", "statue", "archaeological site", "natural wonder", "scenic view", "world heritage site", "famous place", "heritage site"],
+        "polish": ["punkt orientacyjny", "pomnik", "miejsce historyczne", "atrakcja turystyczna", "punkt zainteresowania", "ikona", "zwiedzanie", "miejsce pamięci", "posąg", "miejsce archeologiczne", "cud natury", "widok malowniczy", "światowe dziedzictwo", "słynne miejsce", "miejsce dziedzictwa"],
+        "german": ["Wahrzeichen", "Denkmal", "historische Stätte", "Touristenattraktion", "Sehenswürdigkeit", "ikonisch", "Besichtigung", "Denkmal", "Statue", "archäologische Stätte", "Naturwunder", "Aussichtspunkt", "Weltkulturerbe", "berühmter Ort", "Kulturerbestätte"],
+        "french": ["point de repère", "monument", "site historique", "attraction touristique", "point d'intérêt", "emblématique", "visite touristique", "mémorial", "statue", "site archéologique", "merveille naturelle", "vue panoramique", "site du patrimoine mondial", "site célèbre", "site du patrimoine"],
+        "spanish": ["punto de referencia", "monumento", "lugar histórico", "atracción turística", "punto de interés", "icónico", "turismo", "memorial", "estatua", "sitio arqueológico", "maravilla natural", "vista panorámica", "sitio de patrimonio mundial", "lugar famoso", "sitio de patrimonio"],
+        "italian": ["punto di riferimento", "monumento", "sito storico", "attrazione turistica", "punto di interesse", "iconico", "visita turistica", "monumento", "statua", "sito archeologico", "meraviglia naturale", "vista panoramica", "sito del patrimonio mondiale", "luogo famoso", "sito del patrimonio"],
+        "czech": ["orientační bod", "památník", "historické místo", "turistická atrakce", "místo zájmu", "ikona", "prohlídka", "památník", "socha", "archeologické naleziště", "přírodní div", "výhled", "světové dědictví", "slavné místo", "místo dědictví"],
+        "portuguese": ["ponto de referência", "monumento", "local histórico", "atração turística", "ponto de interesse", "ícone", "visita turística", "memorial", "estátua", "local arqueológico", "maravilha natural", "vista panorâmica", "local de património mundial", "local famoso", "local de património"]
+      },
+      "chains": null
+    },{
+      "id": "OTHER",
+      "displayName": "Other",
+      "category": "OTHER",
+      "keywords": {
+        "english": ["other", "miscellaneous", "various", "different", "assorted", "misc", "varied", "various types", "diverse", "many", "several", "various categories", "various items", "various options", "various choices"],
+        "polish": ["inny", "różny", "rozmaity", "różne rodzaje", "różnorodny", "wiele", "kilka", "różne kategorie", "różne rzeczy", "różne opcje", "różne wybory"],
+        "german": ["andere", "verschiedene", "verschieden", "verschieden", "sortiert", "verschiedenartig", "vielfältig", "verschiedene Typen", "verschieden", "viele", "mehrere", "verschiedene Kategorien", "verschiedene Gegenstände", "verschiedene Optionen", "verschiedene Auswahlmöglichkeiten"],
+        "french": ["autre", "divers", "différent", "diversifié", "varié", "différentes sortes", "variées", "divers types", "divers", "plusieurs", "plusieurs", "diverses catégories", "divers articles", "diverses options", "divers choix"],
+        "spanish": ["otro", "variado", "diferente", "variado", "variado", "diverso", "variado", "diferentes tipos", "diverso", "muchos", "varios", "diferentes categorías", "diversos elementos", "diversas opciones", "diversas elecciones"],
+        "italian": ["altro", "vario", "diverso", "variegato", "vario", "miscellaneo", "vario", "diversi tipi", "diversificato", "molti", "alcuni", "diverse categorie", "diversi articoli", "diverse opzioni", "diverse scelte"],
+        "czech": ["jiný", "různý", "rozmanitý", "různé druhy", "různorodý", "mnoho", "několik", "různé kategorie", "různé věci", "různé možnosti", "různé volby"],
+        "portuguese": ["outro", "diversos", "diferente", "diversificado", "variado", "várias espécies", "variados", "vários tipos", "diverso", "muitos", "várias", "várias categorias", "diversos itens", "diversas opções", "diversas escolhas"]
+      },
+      "chains": null
+    },{
+      "id": "KINDERGARTEN",
+      "displayName": "Kindergarten",
+      "category":"EDUCATION",
+      "keywords": {
+        "english": ["kindergarten", "preschool", "childcare center", "nursery school", "early education", "pre-primary school", "toddler care", "playgroup", "daycare", "child development", "early childhood education", "children's center", "pre-kinder", "pre-school", "early learning center", "kids daycare", "nursery care", "childcare services", "child enrichment", "educational play"],
+        "polish": ["przedszkole", "żłobek", "placówka opieki nad dziećmi", "szkoła przedszkolna", "edukacja wczesnodziecięca", "szkoła wczesnoszkolna", "opieka nad niemowlętami", "grupa zabaw", "opieka nad dziećmi", "rozwój dziecka", "edukacja wczesnodziecięca", "centrum dziecięce", "przedszkole przedszkolne", "przedszkole", "centrum wczesnego uczenia się", "opieka nad dziećmi", "opieka nad niemowlętami", "usługi opieki nad dziećmi", "wzbogacenie dziecka", "edukacyjna zabawa"],
+        "german": ["Kindergarten", "Vorschule", "Kinderbetreuungszentrum", "Kindergarten", "frühkindliche Bildung", "Vorschule", "Kleinkinderbetreuung", "Spielgruppe", "Tagesbetreuung", "Kinderentwicklung", "frühkindliche Bildung", "Kinderzentrum", "Vorschule", "Vorschule", "frühkindliches Lernzentrum", "Kinderbetreuung", "Kleinkinderbetreuung", "Kinderbetreuungsdienste", "Kinderförderung", "pädagogisches Spielen"],
+        "french": ["jardin d'enfants", "préscolaire", "centre de garde d'enfants", "école maternelle", "éducation précoce", "école pré-primaire", "soins aux tout-petits", "groupe de jeu", "garderie", "développement de l'enfant", "éducation de la petite enfance", "centre pour enfants", "prématernelle", "préscolaire", "centre d'apprentissage précoce", "garderie pour enfants", "soins en garderie", "services de garde d'enfants", "enrichissement des enfants", "jeux éducatifs"],
+        "spanish": ["jardín de infantes", "preescolar", "centro de cuidado infantil", "escuela infantil", "educación temprana", "escuela preprimaria", "cuidado de niños pequeños", "grupo de juegos", "guardería", "desarrollo infantil", "educación infantil temprana", "centro infantil", "pre-jardín de infantes", "preescolar", "centro de aprendizaje temprano", "guardería para niños", "cuidado de guardería", "servicios de cuidado infantil", "enriquecimiento infantil", "juegos educativos"],
+        "italian": ["asilo nido", "scuola materna", "centro per la cura dei bambini", "scuola dell'infanzia", "educazione infantile", "scuola pre-primaria", "cura dei bambini piccoli", "gruppo di gioco", "asilo", "sviluppo infantile", "educazione dell'infanzia", "centro per bambini", "pre-scuola materna", "pre-scuola", "centro di apprendimento precoce", "asilo per bambini", "cura del nido", "servizi di cura dei bambini", "arricchimento infantile", "giochi educativi"],
+        "czech": ["mateřská škola", "jesle", "dětské centrum", "školka", "raná výchova", "předškolní škola", "starostlivost o batolata", "hrací skupina", "denní péče", "rozvoj dítěte", "raná dětská výchova", "dětské centrum", "předškolní", "předškolní", "centrum raného učení", "dětská péče", "pečování o kojence", "dětské vzdělávání", "rozvoj dítěte", "vzdělávací hry"],
+        "portuguese": ["jardim de infância", "pré-escola", "centro de cuidados infantis", "jardim de infância", "educação infantil", "escola pré-primária", "cuidados com bebês", "grupo de brincadeira", "creche", "desenvolvimento infantil", "educação na primeira infância", "centro infantil", "pré-jardim de infância", "pré-escola", "centro de aprendizado infantil precoce", "creche infantil", "cuidados na creche", "serviços de cuidados infantis", "enriquecimento infantil", "jogos educativos"]
+      },
+      "chains": null
+    },{
+      "id": "WORK",
+      "displayName": "Work",
+      "category": "PRIVATE_PLACE",
+      "keywords": {
+        "english": ["work", "job", "employment", "career", "occupation", "profession", "labor", "workplace", "job search", "employment opportunity", "workplace culture", "job interview", "work ethic", "job satisfaction", "work-life balance", "job market", "career development", "employment agency", "remote work", "flexible work"],
+        "polish": ["praca", "stanowisko pracy", "zatrudnienie", "kariera", "zajęcie", "zawód", "praca", "miejsce pracy", "poszukiwanie pracy", "możliwość zatrudnienia", "kultura pracy", "rozmowa kwalifikacyjna", "etyka pracy", "zadowolenie z pracy", "równowaga między pracą a życiem prywatnym", "rynek pracy", "rozwój kariery", "agencja pracy", "praca zdalna", "praca elastyczna"],
+        "german": ["Arbeit", "Job", "Beschäftigung", "Karriere", "Beruf", "Beruf", "Arbeit", "Arbeitsplatz", "Jobsuche", "Beschäftigungsmöglichkeit", "Arbeitsplatzkultur", "Bewerbungsgespräch", "Arbeitsmoral", "Arbeitszufriedenheit", "Work-Life-Balance", "Arbeitsmarkt", "Karriereentwicklung", "Arbeitsvermittlung", "Fernarbeit", "flexible Arbeit"],
+        "french": ["travail", "emploi", "emploi", "carrière", "occupation", "profession", "travail", "lieu de travail", "recherche d'emploi", "opportunité d'emploi", "culture du lieu de travail", "entretien d'embauche", "éthique de travail", "satisfaction au travail", "équilibre travail-vie personnelle", "marché de l'emploi", "développement de carrière", "agence d'emploi", "travail à distance", "travail flexible"],
+        "spanish": ["trabajo", "empleo", "empleo", "carrera", "ocupación", "profesión", "trabajo", "lugar de trabajo", "búsqueda de trabajo", "oportunidad de empleo", "cultura laboral", "entrevista de trabajo", "ética laboral", "satisfacción laboral", "equilibrio entre trabajo y vida personal", "mercado laboral", "desarrollo profesional", "agencia de empleo", "trabajo remoto", "trabajo flexible"],
+        "italian": ["lavoro", "lavoro", "impiego", "carriera", "occupazione", "professione", "lavoro", "posto di lavoro", "ricerca di lavoro", "opportunità di lavoro", "cultura aziendale", "colloquio di lavoro", "etica del lavoro", "soddisfazione lavorativa", "equilibrio tra lavoro e vita privata", "mercato del lavoro", "sviluppo della carriera", "agenzia di collocamento", "lavoro remoto", "lavoro flessibile"],
+        "czech": ["práce", "práce", "zaměstnání", "kariéra", "zaměstnání", "profese", "práce", "pracoviště", "hledání práce", "možnost zaměstnání", "firemní kultura", "pohovor o práci", "pracovní etika", "spokojenost s prací", "rovnováha mezi prací a osobním životem", "pracovní trh", "rozvoj kariéry", "zaměstnanecká agentura", "dálková práce", "flexibilní práce"],
+        "portuguese": ["trabalho", "emprego", "emprego", "carreira", "ocupação", "profissão", "trabalho", "local de trabalho", "busca de emprego", "oportunidade de emprego", "cultura no local de trabalho", "entrevista de emprego", "ética de trabalho", "satisfação no trabalho", "equilíbrio entre trabalho e vida pessoal", "mercado de trabalho", "desenvolvimento de carreira", "agência de emprego", "trabalho remoto", "trabalho flexível"]
+      },
+      "chains": null
+    },{
+      "id": "SPORT",
+      "displayName": "Sport",
+      "category": "PUBLIC_PLACE",
+      "keywords": {
+        "english": ["sport", "athletics", "exercise", "physical activity", "fitness", "sports equipment", "sports gear", "team sports", "individual sports", "sporting events", "sports stadium", "sports club", "sports training", "sportsmanship", "professional athletes", "sports fan", "sports nutrition", "sports apparel", "sports league", "sports competition"],
+        "polish": ["sport", "lekkoatletyka", "ćwiczenia", "aktywność fizyczna", "forma fizyczna", "sprzęt sportowy", "ubrania sportowe", "sporty zespołowe", "sporty indywidualne", "wydarzenia sportowe", "stadiony sportowe", "klub sportowy", "trening sportowy", "fair play", "sportowcy zawodowi", "kibice sportowi", "odżywianie sportowe", "odzież sportowa", "liga sportowa", "rywalizacja sportowa"],
+        "german": ["Sport", "Leichtathletik", "Übungen", "körperliche Aktivität", "Fitness", "Sportausrüstung", "Sportbekleidung", "Teamsportarten", "Einzelsportarten", "Sportveranstaltungen", "Sportstätten", "Sportverein", "Sporttraining", "Sportsgeist", "professionelle Athleten", "Sportfans", "Sporternährung", "Sportbekleidung", "Sportliga", "Sportwettbewerb"],
+        "french": ["sport", "athlétisme", "exercice", "activité physique", "forme physique", "équipement de sport", "vêtements de sport", "sports d'équipe", "sports individuels", "événements sportifs", "stade de sport", "club de sport", "entraînement sportif", "fair-play", "athlètes professionnels", "fans de sport", "nutrition sportive", "vêtements de sport", "ligue sportive", "compétition sportive"],
+        "spanish": ["deporte", "atletismo", "ejercicio", "actividad física", "forma física", "equipo deportivo", "ropa deportiva", "deportes de equipo", "deportes individuales", "eventos deportivos", "estadio deportivo", "club deportivo", "entrenamiento deportivo", "espíritu deportivo", "atletas profesionales", "fanáticos del deporte", "nutrición deportiva", "ropa deportiva", "liga deportiva", "competición deportiva"],
+        "italian": ["sport", "atletica", "esercizio", "attività fisica", "fitness", "attrezzatura sportiva", "abbigliamento sportivo", "sport di squadra", "sport individuali", "eventi sportivi", "stadio sportivo", "club sportivo", "allenamento sportivo", "fair play", "atleti professionisti", "tifosi sportivi", "nutrizione sportiva", "abbigliamento sportivo", "lega sportiva", "competizione sportiva"],
+        "czech": ["sport", "atletika", "cvičení", "fyzická aktivita", "fitness", "sportovní vybavení", "sportovní oblečení", "týmové sporty", "individuální sporty", "sportovní události", "sportovní stadion", "sportovní klub", "sportovní trénink", "sportovní duch", "profesionální sportovci", "sportovní fanoušci", "sportovní výživa", "sportovní oděvy", "sportovní liga", "sportovní soutěž"],
+        "portuguese": ["esporte", "atletismo", "exercício", "atividade física", "condicionamento físico", "equipamento esportivo", "roupas esportivas", "esportes em equipe", "esportes individuais", "eventos esportivos", "estádio esportivo", "clube esportivo", "treinamento esportivo", "espírito esportivo", "atletas profissionais", "fãs de esporte", "nutrição esportiva", "vestuário esportivo", "liga esportiva", "competição esportiva"]
+      },
+      "chains": null
+    },{
+      "id": "CHURCH",
+      "displayName": "Church",
+      "category": "PUBLIC_PLACE",
+      "keywords": {
+        "english": ["church", "cathedral", "basilica", "chapel", "religious", "worship", "parish", "faith", "Christianity", "religion", "spirituality", "sacred", "holy", "prayer", "god"],
+        "polish": ["kościół", "katedra", "bazylika", "kaplica", "religijny", "nabożeństwo", "parafia", "wiara", "chrześcijaństwo", "religia", "duchowość", "święty", "święty", "modlitwa", "bóg"],
+        "german": ["Kirche", "Kathedrale", "Basilika", "Kapelle", "religiös", "Anbetung", "Pfarrei", "Glaube", "Christentum", "Religion", "Spiritualität", "heilig", "heilig", "Gebet", "Gott"],
+        "french": ["église", "cathédrale", "basilique", "chapelle", "religieux", "culte", "paroisse", "foi", "christianisme", "religion", "spiritualité", "sacré", "saint", "prière", "dieu"],
+        "spanish": ["iglesia", "catedral", "basílica", "capilla", "religioso", "adoración", "parroquia", "fe", "cristianismo", "religión", "espiritualidad", "sagrado", "santo", "oración", "dios"],
+        "italian": ["chiesa", "cattedrale", "basilica", "cappella", "religioso", "culto", "parrocchia", "fede", "cristianesimo", "religione", "spiritualità", "sacro", "santo", "preghiera", "dio"],
+        "czech": ["kostel", "katedrála", "bazilika", "kaple", "náboženský", "úcta", "farnost", "víra", "křesťanství", "náboženství", "spiritualita", "svatý", "svatý", "modlitba", "bůh"],
+        "portuguese": ["igreja", "catedral", "basílica", "capela", "religioso", "culto", "paróquia", "fé", "cristianismo", "religião", "espiritualidade", "sagrado", "santo", "oração", "deus"]
+      },
+      "chains": null
+    },{
+      "id": "SHOPPING_CENTER",
+      "displayName": "Shopping center",
+      "category": "SHOPPING",
+      "keywords": {
+        "english": ["shopping center", "mall", "retail", "shopping mall", "plaza", "shopping district", "shopping complex", "shopping area", "mall center", "shopping arcade", "mall plaza", "retail hub", "shopping precinct", "mall district", "shopping destination"],
+        "polish": ["centrum handlowe", "galeria", "handel detaliczny", "centrum handlowe", "plac", "dzielnica handlowa", "kompleks handlowy", "obszar handlowy", "centrum handlowe", "arkada handlowa", "plac centrum handlowego", "hub handlowy", "dzielnica handlowa", "cel podróży zakupowej", "dzielnica handlowa"],
+        "german": ["Einkaufszentrum", "Einkaufszentrum", "Einzelhandel", "Einkaufszentrum", "Platz", "Einkaufsviertel", "Einkaufskomplex", "Einkaufsbereich", "Einkaufszentrum", "Einkaufspassage", "Einkaufszentrum", "Einkaufsziel", "Einkaufsbereich", "Einkaufsviertel", "Einkaufsdestination"],
+        "french": ["centre commercial", "centre commercial", "détail", "centre commercial", "place", "quartier commerçant", "complexe commercial", "zone commerciale", "centre commercial", "arcade commerciale", "place du centre commercial", "pôle de détail", "quartier commercial", "destination shopping"],
+        "spanish": ["centro comercial", "centro comercial", "venta al por menor", "centro comercial", "plaza", "distrito comercial", "complejo comercial", "área comercial", "centro comercial", "arcada comercial", "plaza del centro comercial", "núcleo comercial", "distrito comercial", "destino de compras"],
+        "italian": ["centro commerciale", "centro commerciale", "dettaglio", "centro commerciale", "piazza", "quartiere commerciale", "complesso commerciale", "area commerciale", "centro commerciale", "arcade commerciale", "piazza del centro commerciale", "hub al dettaglio", "quartiere commerciale", "destinazione per lo shopping"],
+        "czech": ["nákupní centrum", "nákupní centrum", "maloobchod", "nákupní centrum", "náměstí", "nákupní čtvrť", "nákupní komplex", "nákupní oblast", "nákupní centrum", "nákupní pasáž", "náměstí nákupního centra", "nákupní centrum", "nákupní čtvrť", "cíl nakupování"],
+        "portuguese": ["centro comercial", "centro comercial", "varejo", "centro comercial", "praça", "distrito comercial", "complexo comercial", "área comercial", "centro comercial", "arcada comercial", "praça do centro comercial", "hub de varejo", "distrito comercial", "destino de compras"]
+      },
+      "chains": null
+    },{
+      "id": "OFFICE",
+      "displayName": "Office",
+      "category": "PRIVATE_PLACE",
+      "keywords": {
+        "english": ["office", "workspace", "workplace", "corporate", "professional", "business", "desk", "cubicle", "meeting room", "workstation", "office supplies", "office equipment", "office furniture", "office space", "office building", "office hours", "office manager", "office culture", "office environment", "office attire"],
+        "polish": ["biuro", "miejsce pracy", "stanowisko pracy", "firmowe", "zawodowe", "biznes", "biurko", "boks biurowy", "sala konferencyjna", "stanowisko pracy", "materiały biurowe", "sprzęt biurowy", "meble biurowe", "przestrzeń biurowa", "budynek biurowy", "godziny pracy", "kierownik biura", "kultura biurowa", "środowisko biurowe", "strój biurowy"],
+        "german": ["Büro", "Arbeitsplatz", "Arbeitsplatz", "Unternehmens", "professionell", "Geschäft", "Schreibtisch", "Kabine", "Besprechungsraum", "Arbeitsplatz", "Büromaterial", "Büroausstattung", "Büromöbel", "Bürofläche", "Bürogebäude", "Bürozeiten", "Büroleiter", "Bürokultur", "Büroumgebung", "Bürokleidung"],
+        "french": ["bureau", "espace de travail", "lieu de travail", "d'entreprise", "professionnel", "affaires", "bureau", "cubicle", "salle de réunion", "poste de travail", "fournitures de bureau", "matériel de bureau", "mobilier de bureau", "espace de bureau", "bâtiment de bureau", "heures de bureau", "directeur de bureau", "culture de bureau", "environnement de bureau", "tenue de bureau"],
+        "spanish": ["oficina", "espacio de trabajo", "lugar de trabajo", "corporativo", "profesional", "negocios", "escritorio", "cubículo", "sala de reuniones", "estación de trabajo", "suministros de oficina", "equipo de oficina", "muebles de oficina", "espacio de oficina", "edificio de oficinas", "horario de oficina", "gerente de oficina", "cultura de oficina", "entorno de oficina", "vestimenta de oficina"],
+        "italian": ["ufficio", "spazio di lavoro", "posto di lavoro", "aziendale", "professionale", "business", "scrivania", "cubicle", "sala riunioni", "postazione di lavoro", "forniture per ufficio", "attrezzature per ufficio", "mobili per ufficio", "spazio d'ufficio", "edificio per uffici", "orario d'ufficio", "responsabile d'ufficio", "cultura d'ufficio", "ambiente d'ufficio", "abbigliamento d'ufficio"],
+        "czech": ["kancelář", "pracovní prostor", "pracoviště", "firemní", "profesionální", "podnikání", "stůl", "kancelářský box", "zasedací místnost", "pracovní stanoviště", "kancelářské potřeby", "kancelářské vybavení", "kancelářský nábytek", "kancelářský prostor", "kancelářský dům", "kancelářská doba", "vedoucí kanceláře", "kancelářská kultura", "kancelářské prostředí", "kancelářský oděv"],
+        "portuguese": ["escritório", "espaço de trabalho", "local de trabalho", "corporativo", "profissional", "negócios", "escrivaninha", "cubículo", "sala de reunião", "estação de trabalho", "materiais de escritório", "equipamento de escritório", "móveis de escritório", "espaço de escritório", "edifício de escritórios", "horário de escritório", "gerente de escritório", "cultura de escritório", "ambiente de escritório", "traje de escritório"]
+      },
+      "chains": null
+    }
+  ]
+}

@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using PlacesDataJson;
+using Newtonsoft.Json;
 
 public class PlacesRanking : MonoBehaviour {
 	public static PlacesRanking instance;
 
-	public PlaceMainCategory[] mainCategories;
-	public PlaceCategory[] categories;
+	[HideInInspector] public List<PlaceMainCategory> mainCategories;
+	[HideInInspector] public List<PlaceCategory> categories;
+	[HideInInspector] public Dictionary<string, PlaceCategory> categoriesDictionary = new Dictionary<string, PlaceCategory>();
 
 	public int theBiggestPlaceVisits = 110;
 	[HideInInspector]
@@ -18,10 +21,26 @@ public class PlacesRanking : MonoBehaviour {
 
 	void Awake() {
 		instance = this;
-		for (int i = 0; i < categories.Length; i++) {
-			categories[i].id = i;
+
+		// Load categories
+		UnityEngine.Object textFile;
+		textFile = Resources.Load("PlacesData");
+		TextAsset temp = textFile as TextAsset;
+		PlacesDataJsonRoot root = JsonConvert.DeserializeObject<PlacesDataJsonRoot>(temp.text);
+		mainCategories = root.placeMainCategories;
+		Debug.Log("Loaded " + mainCategories.Count + " main categories");
+		categories = root.placeCategories;
+		Debug.Log("Loaded " + categories.Count + " categories");
+		categories = categories.OrderBy(c => c.category).ToList();
+		foreach (var item in categories) {
+			categoriesDictionary.Add(item.id, item);
 		}
-		//categories = categories.OrderBy(c => c.category).ToArray();
+
+		// Setup categories and icons
+		for (int i = 0; i < categories.Count; i++) {
+			categories[i].SetupPlaceTypeCategory(mainCategories);
+			categories[i].SetupIcons();
+		}
 	}
 
 	public void AnalyseDay(MovesJson day) {
@@ -40,6 +59,9 @@ public class PlacesRanking : MonoBehaviour {
 			placeTarget.AddHoursSplit(ReadJson.ReturnDateTime(segmentInfo.startTime), ReadJson.ReturnDateTime(segmentInfo.endTime));
 		} else {
 			placeTarget = new PlaceGroup(place, ReadJson.ReturnDateTime(segmentInfo.startTime), ReadJson.ReturnDateTime(segmentInfo.endTime));
+			// TryRecogniseCategory(place.name, (categoryId) => {
+			// 	placeTarget.categoryId = categoryId;
+			// });
 			places.Add(place.id, placeTarget);
 		}
 		placeTarget.lastVisited = ReadJson.ReturnSimpleDate(day.date);
@@ -106,11 +128,30 @@ public class PlacesRanking : MonoBehaviour {
 		foreach (var item in places.Values) {
 			item.RefreshSize();
 		}
-		GlobalVariables.inst.MoveCamera(ranking.First().Key.mapObject.transform.position);
+		GlobalVariables.instance.MoveCamera(ranking.First().Key.mapObject.transform.position);
 	}
 	public void ChangePlacesSize(float mapSize) {
 		foreach (var item in places) {
 			item.Value.SetZoomSize(mapSize);
+		}
+	}
+
+	// Helpers
+	public void TryRecogniseCategory(string placeName, Action<string> onSuccess) {
+		string placeNameLower = placeName.ToLower();
+		foreach (var item in categories) {
+			string outputCategory = item.CheckIfMatchesKeywords(placeNameLower);
+			if (outputCategory != null) {
+				onSuccess(outputCategory);
+				return;
+			}
+		}
+		foreach (var item in categories) {
+			string outputCategory = item.CheckIfMatchesChains(placeNameLower);
+			if (outputCategory != null) {
+				onSuccess(outputCategory);
+				return;
+			}
 		}
 	}
 }

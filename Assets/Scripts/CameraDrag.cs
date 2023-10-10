@@ -15,14 +15,14 @@ public class CameraDrag : MonoBehaviour {
 		if (blocked)
 			return;
 
-		if (Input.GetMouseButtonDown(0) && GlobalVariables.inst.mapControls) {
+		if (Input.GetMouseButtonDown(0) && GlobalVariables.instance.mapControls) {
 			dragOrigin = transform.position;
 			dragMouseOrigin = Input.mousePosition;
 			ButtonTabs.instance.ClearCalendarView();
 			return;
 		}
 
-		if (!Input.GetMouseButton(0) || !GlobalVariables.inst.mapControls) {
+		if (!Input.GetMouseButton(0) || !GlobalVariables.instance.mapControls) {
 			return;
 		}
 

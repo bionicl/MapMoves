@@ -9,19 +9,20 @@ public class IconBox : MonoBehaviour {
 	public Color selectedColor;
 	public Image box;
 	public Image icon;
-	[HideInInspector]
-	public int iconId;
 
-	public void SetupIcon(Sprite icon, int id, Color boxColor) {
-		this.icon.sprite = icon;
-		Color tempColor = boxColor;
+	// Cache
+	[HideInInspector] public string categoryId;
+
+	public void SetupIcon(PlacesDataJson.PlaceCategory placeType) {
+		icon.sprite = placeType.smallIcon;
+		Color tempColor = placeType.placeTypeCategory.ColorConverted;
 		tempColor.a = 0.75f;
 		box.color = tempColor;
-		iconId = id;
+		categoryId = placeType.id;
 	}
 
 	public void IconClicked() {
-		RightListUI.instance.IconClicked(iconId);
+		RightListUI.instance.IconClicked(categoryId);
 	}
 
 	public void MarkAsSelected() {

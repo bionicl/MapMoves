@@ -58,7 +58,7 @@ public class RenderMap : MonoBehaviour {
 	void Update()  {
 	//Debug.Log(Input.mousePosition.x / Screen.width - 0.5f);
 		timeSinceLastZoom += Time.deltaTime;
-		if (GlobalVariables.inst.mapControls && timeSinceLastZoom >= 0.03f) {
+		if (GlobalVariables.instance.mapControls && timeSinceLastZoom >= 0.03f) {
 			if (Input.mouseScrollDelta.y > 0) {
 				mapScale /= 1.5f;
 				if (mapScale < 0.0625f)

@@ -44,7 +44,7 @@ public class Place : MonoBehaviour {
 				currentlySelected.Deselect();
 			currentlySelected = this;
 			float currentAlpha = circle.color.a;
-			Color tempColor = GlobalVariables.inst.accentColor;
+			Color tempColor = GlobalVariables.instance.accentColor;
 			tempColor.a = currentAlpha;
 			circle.color = tempColor;
 		}

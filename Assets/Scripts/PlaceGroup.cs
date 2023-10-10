@@ -2,13 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using PlacesDataJson;
 using UnityEngine;
 
 public class PlaceGroup {
 	public Place mapObject;
 	public ActivityUI timelineObject;
 	public MovesJson.SegmentsInfo.PlaceInfo placeInfo;
-	public int icon;
+	public string categoryId;
 	public int timesVisited;
 	public float scaleNormal = 0.1f;
 	public DateTime lastVisited;
@@ -17,7 +18,7 @@ public class PlaceGroup {
 
 	public PlaceCategory Category {
 		get {
-			return PlacesRanking.instance.categories[icon];
+			return PlacesRanking.instance.categoriesDictionary[categoryId];
 		}
 	}
 
@@ -26,7 +27,7 @@ public class PlaceGroup {
 	}
 	public PlaceGroup(MovesJson.SegmentsInfo.PlaceInfo placeinfo, DateTime timeStart, DateTime timeStop) {
 		this.placeInfo = placeinfo;
-		GlobalVariables.inst.SetIcon(placeinfo, (int sprite) => RefreshIcons(sprite));
+		GlobalVariables.instance.SetIcon(placeinfo, (sprite) => RefreshIcons(sprite));
 		CalculateHours(timeStart, timeStop);
 	}
 
@@ -83,14 +84,14 @@ public class PlaceGroup {
 			mapObject.ChangeIconVisible(zoom);
 		}
 	}
-	public void RefreshIcons(int? sprite = null) {
-		if (sprite.HasValue)
-			icon = sprite.Value;
+	public void RefreshIcons(string sprite = null) {
+		if (!string.IsNullOrWhiteSpace(sprite))
+			categoryId = sprite;
 		if (mapObject != null) {
-			mapObject.icon.sprite = PlacesRanking.instance.categories[icon].smallIcon;
+			mapObject.icon.sprite = PlacesRanking.instance.categoriesDictionary[categoryId].smallIcon;
 		}
 		if (timelineObject != null) {
-			timelineObject.placeIcon.sprite = PlacesRanking.instance.categories[icon].smallIcon;
+			timelineObject.placeIcon.sprite = PlacesRanking.instance.categoriesDictionary[categoryId].smallIcon;
 		}
 	}
 	void CalculateHours(DateTime timeStart, DateTime timeStop) { // 3:30 - 5:10
@@ -121,7 +122,7 @@ public class PlaceGroup {
 	}
 
 	int CheckIfMondayFirst(int dayOfWeek) {
-		if (!GlobalVariables.inst.firstWeekMonday)
+		if (!GlobalVariables.instance.firstWeekMonday)
 			return dayOfWeek;
 		int output = dayOfWeek;
 		output--;
@@ -152,7 +153,7 @@ public class PlaceGroup {
 
 	public Sprite IconSprite {
 		get {
-			return PlacesRanking.instance.categories[icon].smallIcon;
+			return PlacesRanking.instance.categoriesDictionary[categoryId].smallIcon;
 		}
 	}
 }

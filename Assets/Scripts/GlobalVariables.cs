@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GlobalVariables : MonoBehaviour {
-	public static GlobalVariables inst;
+	public static GlobalVariables instance;
 
 	public Color accentColor;
 	public Color disabledColor;
@@ -14,7 +14,7 @@ public class GlobalVariables : MonoBehaviour {
 	public bool mapControls = false;
 
 	void Awake() {
-		inst = this;
+		instance = this;
 	}
 
 	public void MouseEnter() {
@@ -26,26 +26,26 @@ public class GlobalVariables : MonoBehaviour {
 	}
 
 	public void SetIcon(MovesJson.SegmentsInfo.PlaceInfo place, SpriteRenderer image) {
-		LoadIcon(place, (int sprite) => image.sprite = PlacesRanking.instance.categories[sprite].smallIcon);
+		LoadIcon(place, (categoryId) => image.sprite = PlacesRanking.instance.categoriesDictionary[categoryId].smallIcon);
 	}
 	public void SetIcon(MovesJson.SegmentsInfo.PlaceInfo place, Image image) {
-		LoadIcon(place, (int sprite) => image.sprite = PlacesRanking.instance.categories[sprite].smallIcon);
+		LoadIcon(place, (categoryId) => image.sprite = PlacesRanking.instance.categoriesDictionary[categoryId].smallIcon);
 	}
-	public void SetIcon(MovesJson.SegmentsInfo.PlaceInfo place, Action<int> action) {
-		LoadIcon(place, (int sprite) => action.Invoke(sprite));
+	public void SetIcon(MovesJson.SegmentsInfo.PlaceInfo place, Action<string> action) {
+		LoadIcon(place, (categoryId) => action.Invoke(categoryId));
 	}
-	void LoadIcon(MovesJson.SegmentsInfo.PlaceInfo place, Action<int> action) {
-		PlaceType placeType = place.type;
-		if (placeType == PlaceType.home)
-			action.Invoke(4);
-		else if (placeType == PlaceType.school)
-			action.Invoke(9);
+	void LoadIcon(MovesJson.SegmentsInfo.PlaceInfo place, Action<string> action) {
+		PlaceSourceType placeType = place.type;
+		if (placeType == PlaceSourceType.home)
+			action.Invoke("HOME");
+		else if (placeType == PlaceSourceType.school)
+			action.Invoke("SCHOOL");
 		else
-			action.Invoke(6);
+			action.Invoke("MARKER");
 
-		int? customIcon = PlacesSave.FindIcon(place.id);
-		if (customIcon != null) {
-			action.Invoke(customIcon.Value);
+		string customIcon = PlacesSave.FindIcon(place.id);
+		if (!string.IsNullOrEmpty(customIcon)) {
+			action.Invoke(customIcon);
 		}
 		
 	}

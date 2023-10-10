@@ -14,7 +14,7 @@ public class WeekDayText : MonoBehaviour {
 	}
 
 	void Start () {
-		if (GlobalVariables.inst.firstWeekMonday)
+		if (GlobalVariables.instance.firstWeekMonday)
 			text.text = dayIfFirstMonday;
 		else
 			text.text = dayIfFirstSunday;

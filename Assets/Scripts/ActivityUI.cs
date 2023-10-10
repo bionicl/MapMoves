@@ -26,7 +26,7 @@ public class ActivityUI : MonoBehaviour {
 	public TimeSpan timeSpan;
 	public string placename;
 	public DateTime endTime;
-	public PlaceType? placeType;
+	public PlaceSourceType? placeType;
 	public string placeFbId;
 	public PlaceGroup placeGroup;
 	public Image placeBoxColor;
@@ -89,7 +89,7 @@ public class ActivityUI : MonoBehaviour {
 			placeGroup = PlacesRanking.instance.FindPlace(placeInfo, this);
 			this.placename = placeInfo.name;
 			this.placeType = placeInfo.type;
-			if (placeType == PlaceType.facebook)
+			if (placeType == PlaceSourceType.facebook)
 				placeFbId = placeInfo.facebookPlaceId;
 		}
 
@@ -110,7 +110,7 @@ public class ActivityUI : MonoBehaviour {
 			move.gameObject.SetActive(false);
 			Header.text = placename;
 			Subheader.gameObject.SetActive(true);
-			Subheader.text = placeGroup.Category.Category.name;
+			Subheader.text = placeGroup.Category.placeTypeCategory.displayName;
 			Subheader.text += " - " + String.Format("{0}:{1}", Mathf.Round(Convert.ToSingle(t.TotalHours)), Convert.ToSingle(t.Minutes).ToString().PadLeft(2, '0'));
 			Subheader.text += "<size=7> min</size>";
 			MoveType.gameObject.SetActive(false);
@@ -167,7 +167,7 @@ public class ActivityUI : MonoBehaviour {
 			//Debug
 			if (t.TotalMinutes >= 75) {
 				placeBoxColor.gameObject.SetActive(true);
-				placeBoxColor.color = placeGroup.Category.Category.color;
+				placeBoxColor.color = placeGroup.Category.placeTypeCategory.ColorConverted;
 			}
 		}
 
