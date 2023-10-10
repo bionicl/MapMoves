@@ -6330,8 +6330,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 119, y: 0}
+  m_SizeDelta: {x: 238, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &375883522
 MonoBehaviour:
@@ -26842,7 +26842,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 234.45218, y: 60}
+  m_AnchoredPosition: {x: 234.45204, y: 60}
   m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1433522477
@@ -34373,9 +34373,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: d4c8abbcc83a64902ba6c4fb33bf1aa5, type: 2}
   targetMapScale: 0
   mapScale: 1
-  maxMetersForShortPath: 3000
+  maxMetersForShortPath: 1000
   simplifyMultiplayer: 0.0045
   simplifyMultiplayerDetailed: 0.0008
+  linesSizeMultiplyer: 0.006
   filterState: 00000000000000000000
   lastCursorPosition: {x: 0, y: 0, z: 0}
   targetPosition: {x: 0, y: 0, z: 0}

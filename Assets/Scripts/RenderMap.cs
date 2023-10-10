@@ -28,11 +28,13 @@ public class RenderMap : MonoBehaviour {
 	public int maxMetersForShortPath = 3000;
 	public double simplifyMultiplayer = 1;
 	public double simplifyMultiplayerDetailed;
+	public float linesSizeMultiplyer = 0.006f;
 	float timeSinceLastZoom;
 
 	public bool[] filterState = new bool[10];
 
 	List<GameObject>[] filterLines = new List<GameObject>[10];
+	List<GameObject>[] filterLinesMoreDetailed = new List<GameObject>[10];
 	Dictionary<DateTime, GameObject> filterDays = new Dictionary<DateTime, GameObject>();
 	GameObject loactionsGO;
 	List<GameObject> shortPaths = new List<GameObject>();
@@ -46,6 +48,7 @@ public class RenderMap : MonoBehaviour {
 		targetMapScale = GetComponent<Camera>().orthographicSize;
 		for (int i = 0; i < filterLines.Length; i++) {
 			filterLines[i] = new List<GameObject>();
+			filterLinesMoreDetailed[i] = new List<GameObject>();
 		}
 		loactionsGO = Instantiate(new GameObject(), new Vector3(0, 0, 0), transform.rotation);
 		loactionsGO.name = "Loactions";
@@ -56,6 +59,12 @@ public class RenderMap : MonoBehaviour {
 	}
 
 	void Update()  {
+		if (Input.GetKeyDown(KeyCode.Alpha1)) {
+			EnableShortPaths();
+		} else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+			DisableShortPaths();
+		}
+
 	//Debug.Log(Input.mousePosition.x / Screen.width - 0.5f);
 		timeSinceLastZoom += Time.deltaTime;
 		if (GlobalVariables.instance.mapControls && timeSinceLastZoom >= 0.03f) {
@@ -127,14 +136,30 @@ public class RenderMap : MonoBehaviour {
 
 	public void UpdateMapSize(float? newMapScale = null) {
 		timeSinceLastZoom = 0;
-		if (newMapScale.HasValue)
+		if (newMapScale.HasValue) {
 			mapScale = newMapScale.Value;
+		}
 		targetMapScale = mapScale;
 		PlacesRanking.instance.ChangePlacesSize(mapScale);
 		foreach (var item in renderedLines) {
-			item.widthMultiplier = 0.006f + (mapScale - 1) * 0.006f;
+			item.widthMultiplier = 0.006f + (mapScale - 1) * linesSizeMultiplyer;
 		}
 		GoogleMapDisplay.instance.ChangeMapZoom();
+
+		// Show or hide more detailed lines
+		ShowDetailedLines(mapScale <= 0.15f);
+		
+
+	}
+	void ShowDetailedLines(bool show) {
+		for (int i = 0; i < filterLinesMoreDetailed.Length; i++)
+		{
+			bool filterEnabled = filterState[i];
+			foreach (var item in filterLinesMoreDetailed[i])
+			{
+				item.SetActive(filterEnabled && show);
+			}
+		}
 	}
 
 
@@ -166,12 +191,8 @@ public class RenderMap : MonoBehaviour {
 			} else if (item.place == null) {
 				foreach (var item2 in item.activities) {
 					if (item2.trackPoints.Length > 0) {
-						GameObject lineTempGo = Instantiate(LinePrefab, transform.position, transform.rotation);
-						lineTempGo.transform.SetParent(dateGO.transform);
-						lineTempGo.name = item2.activity.ToString();
-						LineRenderer lineTemp = lineTempGo.GetComponent<LineRenderer>();
 
-						// Set Line points 
+						// 1. Set Line points 
 						List<Vector3> positions = new List<Vector3>();
 						foreach (var item3 in item2.trackPoints) {
 							positions.Add(Conversion.LatLonToMeters(item3.lat, item3.lon));
@@ -182,14 +203,24 @@ public class RenderMap : MonoBehaviour {
 							positions = SimplifyPath.Simplify(positions, simplifyMultiplayer);
 						renderedPoints += positions.Count;
 						Vector3[] positionsArray = positions.ToArray();
+
+						// 2. Check common path
+						CommonPath commonPath = new CommonPath(positionsArray[0], positionsArray[positionsArray.Length - 1], item2.activity);
+						bool canBeIgnored = CommonPathChecker.CheckIfPathCanBeIgnored(commonPath);
+						
+						// 3. Setup line renderer
+						GameObject lineTempGo = Instantiate(LinePrefab, transform.position, transform.rotation);
+						lineTempGo.transform.SetParent(dateGO.transform);
+						lineTempGo.name = item2.activity.ToString();
+						LineRenderer lineTemp = lineTempGo.GetComponent<LineRenderer>();
+
+						// 4. Set lines color and positions
+						lineTempGo.GetComponent<Renderer>().material = SetMaterial(item2.activity);
 						lineTemp.positionCount = positionsArray.Length;
 						lineTemp.SetPositions(positionsArray);
 
-						// Set lines color
-						lineTempGo.GetComponent<Renderer>().material = SetMaterial(item2.activity);
-
-						// Add line to filters
-						AddToFilterList(item2.activity, lineTempGo);
+						// 5. Add line to filters
+						AddToFilterList(item2.activity, lineTempGo, canBeIgnored);
 						renderedLines.Add(lineTemp);
 						lineTempGo.SetActive(filterState[(int)TranslateActivityToFilter(item2.activity)]);
 						if (item2.distance < maxMetersForShortPath)
@@ -243,31 +274,63 @@ public class RenderMap : MonoBehaviour {
 		}
 	}
 
-	void AddToFilterList(ActivityType activity, GameObject line) {
+	void AddToFilterList(ActivityType activity, GameObject line, bool canBeIgnored) {
 		switch (activity) {
 			case ActivityType.walking:
-				filterLines[0].Add(line);
+				if (canBeIgnored) {
+					filterLines[0].Add(line);
+				} else {
+					filterLinesMoreDetailed[0].Add(line);
+				}
 				break;
 			case ActivityType.cycling:
-				filterLines[1].Add(line);
+				if (canBeIgnored) {
+					filterLines[1].Add(line);
+				} else {
+					filterLinesMoreDetailed[1].Add(line);
+				}
 				break;
 			case ActivityType.running:
-				filterLines[2].Add(line);
+				if (canBeIgnored) {
+					filterLines[2].Add(line);
+				} else {
+					filterLinesMoreDetailed[2].Add(line);
+				}
 				break;
 			case ActivityType.car:
-				filterLines[5].Add(line);
+				if (canBeIgnored) {
+					filterLines[5].Add(line);
+				} else {
+					filterLinesMoreDetailed[5].Add(line);
+				}
 				break;
 			case ActivityType.bus:
-				filterLines[6].Add(line);
+				if (canBeIgnored) {
+					filterLines[6].Add(line);
+				} else {
+					filterLinesMoreDetailed[6].Add(line);
+				}
 				break;
 			case ActivityType.train:
-				filterLines[7].Add(line);
+				if (canBeIgnored) {
+					filterLines[7].Add(line);
+				} else {
+					filterLinesMoreDetailed[7].Add(line);
+				}
 				break;
 			case ActivityType.airplane:
-				filterLines[8].Add(line);
+				if (canBeIgnored) {
+					filterLines[8].Add(line);
+				} else {
+					filterLinesMoreDetailed[8].Add(line);
+				}
 				break;
 			default:
-				filterLines[9].Add(line);
+				if (canBeIgnored) {
+					filterLines[9].Add(line);
+				} else {
+					filterLinesMoreDetailed[9].Add(line);
+				}
 				break;
 		}
 	}
