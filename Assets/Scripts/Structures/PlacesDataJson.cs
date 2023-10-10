@@ -9,6 +9,7 @@ namespace PlacesDataJson {
 		public string id { get; set; }
 		public string displayName { get; set; }
 		public string color { get; set; }
+		public int order { get; set; }
 		[JsonIgnore]
 		Color? _colorConverted = null;
 		[JsonIgnore]

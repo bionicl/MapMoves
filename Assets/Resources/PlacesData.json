@@ -3,52 +3,62 @@
     {
       "id": "TRANSPORT",
       "displayName": "Transport",
-      "color": "FF9800"
+      "color": "FFFFFF",
+	  "order": 4
     },
     {
       "id": "SHOPPING",
       "displayName": "Shopping",
-      "color": "E51C23"
+      "color": "F7B500",
+	  "order": 1
     },
     {
       "id": "PUBLIC_PLACE",
       "displayName": "Public place",
-      "color": "9C27B0"
+      "color": "6DD400",
+	  "order": 3
     },
     {
       "id": "FOOD",
       "displayName": "Food",
-      "color": "3F51B5"
+      "color": "FA6400",
+	  "order": 2
     },
     {
       "id": "PRIVATE_PLACE",
       "displayName": "Private place",
-      "color": "03A9F4"
+      "color": "029BE0",
+	  "order": 0
     },
     {
       "id": "HEALTH",
       "displayName": "Health",
-      "color": "009688"
+      "color": "E02020",
+	  "order": 8
     },
     {
       "id": "SERVICES",
       "displayName": "Services",
-      "color": "259B24"
+      "color": "B620E0",
+	  "order": 6
     },
     {
       "id": "EDUCATION",
       "displayName": "Education",
-      "color": "CDDC39"
+      "color": "6236FF",
+	  "order": 5
     },
     {
       "id": "ENTERTAINMENT",
       "displayName": "Entertainment",
-      "color": "795548"
+      "color": "00761C",
+	  "order": 7
     },
     {
       "id": "OTHER",
       "displayName": "Uncategorized",
-      "color": "607D8B"
+      "color": "607D8B",
+	  "order": 9
     }
   ],
   "placeCategories": [

@@ -31,7 +31,6 @@ public class PlacesRanking : MonoBehaviour {
 		Debug.Log("Loaded " + mainCategories.Count + " main categories");
 		categories = root.placeCategories;
 		Debug.Log("Loaded " + categories.Count + " categories");
-		categories = categories.OrderBy(c => c.category).ToList();
 		foreach (var item in categories) {
 			categoriesDictionary.Add(item.id, item);
 		}
@@ -41,6 +40,7 @@ public class PlacesRanking : MonoBehaviour {
 			categories[i].SetupPlaceTypeCategory(mainCategories);
 			categories[i].SetupIcons();
 		}
+		categories = categories.OrderBy(c => c.placeTypeCategory.order).ToList();
 	}
 
 	public void AnalyseDay(MovesJson day) {
