@@ -14,14 +14,22 @@ public class FilesBox : MonoBehaviour {
 	}
 
 	public void SetupTexts(List<string> files) {
-		for (int i = 0; i < textSpawner.transform.childCount; i++) {
+		try
+		{
+			for (int i = 0; i < textSpawner.transform.childCount; i++) {
 			Destroy(textSpawner.transform.GetChild(i).gameObject);
+			}
+			foreach (var item in files) {
+				GameObject go = Instantiate(fileNamePrefab, textSpawner.transform.position, textSpawner.transform.rotation);
+				go.transform.SetParent(textSpawner.transform);
+				go.transform.localScale = go.transform.lossyScale;
+				go.GetComponent<Text>().text = item;
+			}
 		}
-		foreach (var item in files) {
-			GameObject go = Instantiate(fileNamePrefab, textSpawner.transform.position, textSpawner.transform.rotation);
-			go.transform.SetParent(textSpawner.transform);
-			go.transform.localScale = go.transform.lossyScale;
-			go.GetComponent<Text>().text = item;
+		catch (System.Exception)
+		{
+			Debug.Log("Error in FilesBox.cs");
 		}
+		
 	}
 }
